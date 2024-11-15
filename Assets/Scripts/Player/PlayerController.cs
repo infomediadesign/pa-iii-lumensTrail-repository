@@ -6,40 +6,56 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInput playerInput;
     private StateMachine playerStateMachine;
-    private CharacterController characterController;
+    private Rigidbody2D rb;
+    public PlayerScriptableObject data;
 
     private float horizontalMovement;
-    public float moveSpeed = 5f;
-    public float gravity = 0.1f;
     private bool isMoving = false;
+
+    public Vector2 footBoxSize;
+    public Vector2 leftSideBoxSize;
+    public Vector2 rightSideBoxSize;
+    public float castDistance;
+    public LayerMask groundLayer;
+    public LayerMask wallLayer;
+
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
     }
 
     private void Update()
     {
-        if (isMoving)
-        {
-            playerStateMachine.OnMove(horizontalMovement * moveSpeed * Time.deltaTime);
-        }
+        isGrounded();
+        isTouchingWall();
     }
 
     private void FixedUpdate()
     {
-        characterController.Move(Vector3.down * gravity);
+        if (isMoving)
+        {
+            playerStateMachine.OnMove(horizontalMovement);
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            Debug.Log("Jump");
+            data.jumpButtonPressed = true;
+            if (data.isGrounded || data.isTouchingWall)
+            {
+                playerStateMachine.ChangeState(StateMachine.StateKey.Jumping);
+            }
+            
         }
-        
+        else if (context.canceled)
+        {
+            data.jumpButtonPressed = false;
+        }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -62,5 +78,36 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = false;
         }
+    }
+
+    private void isGrounded()
+    {
+        if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
+        {
+            data.isGrounded = true;
+        }
+        else
+        {
+            data.isGrounded = false;
+        }
+    }
+
+    private void isTouchingWall()
+    {
+        if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
+        {
+            data.isTouchingWall = true;
+        }
+        else
+        {
+            data.isTouchingWall = false;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
+        Gizmos.DrawWireCube(transform.position + transform.right * castDistance, rightSideBoxSize);
+        Gizmos.DrawWireCube(transform.position - transform.right * castDistance, leftSideBoxSize);
     }
 }
