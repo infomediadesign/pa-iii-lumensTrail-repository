@@ -17,9 +17,14 @@ public class AirborneState : BaseState
             sm.rb.gravityScale = rbGravityScale * sm.data.fallGravityMultiplier;
         }
 
+        if (sm.data.isTouchingWall)
+        {
+            sm.ChangeState(StateMachine.StateKey.WallClinging);
+        }
+
         if (sm.data.isGrounded)
         {
-            sm.ChangeState(StateMachine.StateKey.Grounded); 
+            sm.ChangeState(StateMachine.StateKey.Grounded);
         }
     }
 

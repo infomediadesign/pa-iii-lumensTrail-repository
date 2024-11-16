@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalMovement;
     private bool isMoving = false;
+    private bool canDash = true;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isMoving)
         {
+            if (data.isDashing) return;
             playerStateMachine.OnMove(horizontalMovement);
         }
     }
@@ -78,6 +81,23 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = false;
         }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (canDash) StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        Debug.Log("Start Dashing");
+        canDash = false;
+        playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
+        yield return new WaitForSeconds(data.dashCooldown);
+        canDash = true;
     }
 
     private void isGrounded()

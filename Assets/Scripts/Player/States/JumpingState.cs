@@ -21,6 +21,11 @@ public class JumpingState : BaseState
         {
             sm.ChangeState(StateMachine.StateKey.Airborne);
         }
+
+        if (sm.data.isTouchingWall && sm.lastState != sm.wallClState)
+        {
+            sm.ChangeState(StateMachine.StateKey.WallClinging);
+        }
     }
 
     protected override void OnExit()

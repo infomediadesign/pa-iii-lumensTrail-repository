@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 243641385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 7.32, y: -0.64, z: 0}
+  m_LocalPosition: {x: -11.41, y: -2.6, z: 0}
   m_LocalScale: {x: 27.693232, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -697,6 +697,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1d12f78c-b982-49ae-ab35-41d65b1c8d88
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1231235020}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 65e34ce3-3c9a-4316-a709-6aca716d00db
+    m_ActionName: Player/Dash[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -898,7 +914,7 @@ Transform:
   m_GameObject: {fileID: 1548362912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 10.37, y: -0.64, z: 0}
+  m_LocalPosition: {x: 10.87, y: -1.71, z: 0}
   m_LocalScale: {x: 27.693232, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

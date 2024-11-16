@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class BaseState
 {
     protected StateMachine sm;
-    protected float horizontalMovement;
 
     public void OnStateEnter(StateMachine stateMachine)
     {
@@ -29,15 +28,14 @@ public abstract class BaseState
 
     }
 
-    public void OnStateMove(float _horizontalMovement)
+    public void OnStateMove()
     {
-        horizontalMovement = _horizontalMovement;
         OnMove();
     }
 
     protected virtual void OnMove()
     {
-        float targetSpeed = horizontalMovement * sm.data.moveSpeed;
+        float targetSpeed = sm.horizontalMovement * sm.data.moveSpeed;
         float speedDif = targetSpeed - sm.rb.velocity.x;
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? sm.data.acceleration : sm.data.decceleration;
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, sm.data.velPower) * Mathf.Sign(speedDif);
