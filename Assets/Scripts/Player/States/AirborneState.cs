@@ -31,6 +31,5 @@ public class AirborneState : BaseState
     protected override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
-        Debug.Log("Change state to grounded");
     }
 }

@@ -30,6 +30,6 @@ public class JumpingState : BaseState
 
     protected override void OnExit()
     {
-        Debug.Log("Change state to airborne");
+
     }
 }

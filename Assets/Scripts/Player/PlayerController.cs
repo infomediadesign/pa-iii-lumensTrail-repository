@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        Debug.Log("Start Dashing");
         canDash = false;
         playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
         yield return new WaitForSeconds(data.dashCooldown);

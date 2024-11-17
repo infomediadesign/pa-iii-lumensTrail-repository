@@ -19,6 +19,8 @@ public class StateMachine : MonoBehaviour
     public BaseState lastState { get; private set; }
     [HideInInspector]
     public Rigidbody2D rb;
+    [HideInInspector]
+    public TrailRenderer tr;
 
     public PlayerScriptableObject data;
 
@@ -36,6 +38,7 @@ public class StateMachine : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        tr = GetComponent<TrailRenderer>();
     }
 
     private void Start()

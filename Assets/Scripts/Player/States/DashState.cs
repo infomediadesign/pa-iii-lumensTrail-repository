@@ -8,7 +8,6 @@ public class DashState : BaseState
     private float timer = 0;
     protected override void OnEnter()
     {
-        Debug.Log("Dashing");
         // if dash should go horizontally
         sm.rb.velocity = Vector2.zero;
 
@@ -19,6 +18,7 @@ public class DashState : BaseState
         // dashingForce
         sm.rb.AddForce(Vector2.right * sm.horizontalMovement * sm.data.dashForce, ForceMode2D.Impulse);
         sm.data.isDashing = true;
+        sm.tr.emitting = true;
     }
 
     protected override void OnUpdate()
@@ -35,5 +35,6 @@ public class DashState : BaseState
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;
         sm.data.isDashing = false;
+        sm.tr.emitting = false;
     }
 }

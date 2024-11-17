@@ -38,6 +38,5 @@ public class WallClingState : BaseState
     {
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;
-        Debug.Log("Leaving WallCling State");
     }
 }
