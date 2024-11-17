@@ -22,7 +22,8 @@ public class StateMachine : MonoBehaviour
     [HideInInspector]
     public TrailRenderer tr;
 
-    public PlayerScriptableObject data;
+    public DesignerPlayerScriptableObject dData;
+    public ProgrammerPlayerScriptableObject pData;
 
     public GroundedState groundedState = new GroundedState();
     public JumpingState jumpingState = new JumpingState();
@@ -54,7 +55,7 @@ public class StateMachine : MonoBehaviour
             currentState.OnStateUpdate();
         }
 
-        if (!hasLeftWallClState && !data.isTouchingWall) hasLeftWallClState = true;
+        if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
     }
 
     public void ChangeState(StateKey stateKey)

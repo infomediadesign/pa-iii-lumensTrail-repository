@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private StateMachine playerStateMachine;
     private Rigidbody2D rb;
-    public PlayerScriptableObject data;
+    public DesignerPlayerScriptableObject dData;
+    public ProgrammerPlayerScriptableObject pData;
 
     private float horizontalMovement;
     private bool isMoving = false;
@@ -24,13 +25,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask wallLayer;
 
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
-        lastTimeDashed = -data.dashCooldown;
+        lastTimeDashed = -dData.dashCooldown;
     }
 
     private void Update()
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isMoving)
         {
-            if (data.isDashing) return;
+            if (pData.isDashing) return;
             playerStateMachine.OnMove(horizontalMovement);
         }
         
@@ -55,16 +55,19 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            data.jumpButtonPressed = true;
-            if (data.isGrounded || data.isTouchingWall)
+            pData.jumpButtonPressed = true;
+            if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
             {
                 playerStateMachine.ChangeState(StateMachine.StateKey.Jumping);
+
+                pData.groundCoyoteTimeCounter = 0;
+                pData.wallCoyoteTimeCounter = 0;
             }
             
         }
         else if (context.canceled)
         {
-            data.jumpButtonPressed = false;
+            pData.jumpButtonPressed = false;
         }
     }
 
@@ -95,7 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (Time.time < lastTimeDashed + data.dashCooldown) return;
+            if (Time.time < lastTimeDashed + dData.dashCooldown) return;
 
             lastTimeDashed = Time.time;
             playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
@@ -107,7 +110,7 @@ public class PlayerController : MonoBehaviour
     private void DashOnCooldown()
     {
         float timeSinceDashed = Time.time - lastTimeDashed;
-        float cooldownProgress = timeSinceDashed / data.dashCooldown;
+        float cooldownProgress = timeSinceDashed / dData.dashCooldown;
         dashCooldownImage.fillAmount = cooldownProgress;
 
         if (cooldownProgress >= 1f)
@@ -121,11 +124,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
         {
-            data.isGrounded = true;
+            pData.isGrounded = true;
+            pData.groundCoyoteTimeCounter = dData.coyoteTime;
         }
         else
         {
-            data.isGrounded = false;
+            pData.isGrounded = false;
+            pData.groundCoyoteTimeCounter -= Time.deltaTime;
         }
     }
 
@@ -133,11 +138,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
         {
-            data.isTouchingWall = true;
+            pData.isTouchingWall = true;
+            pData.wallCoyoteTimeCounter = dData.coyoteTime;
         }
         else
         {
-            data.isTouchingWall = false;
+            pData.isTouchingWall = false;
+            pData.wallCoyoteTimeCounter -= Time.deltaTime;
         }
     }
 
