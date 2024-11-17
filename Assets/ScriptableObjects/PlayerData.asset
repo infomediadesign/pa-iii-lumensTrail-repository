@@ -21,8 +21,8 @@ MonoBehaviour:
   isDashing: 0
   dashingTime: 0.3
   dashCooldown: 5
-  isGrounded: 1
-  isTouchingWall: 0
+  isGrounded: 0
+  isTouchingWall: 1
   jumpButtonPressed: 0
   jumpForce: 10
   jumpCutMultiplier: 0.7
