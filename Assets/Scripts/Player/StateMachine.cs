@@ -47,7 +47,7 @@ public class StateMachine : MonoBehaviour
         ChangeState(StateKey.Grounded);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (currentState != null)
         {

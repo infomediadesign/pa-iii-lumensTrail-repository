@@ -12,6 +12,14 @@ public class AirborneState : BaseState
 
     protected override void OnUpdate()
     {
+        // friction while in air
+        if (!sm.data.isGrounded && sm.rb.velocity.x < sm.data.moveSpeed)
+        {
+            float amount = Mathf.Min(Mathf.Abs(sm.rb.velocity.x), Mathf.Abs(sm.data.airFrictionAmount));
+            amount *= Mathf.Sign(sm.rb.velocity.x);
+            sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
+        }
+
         if (sm.rb.velocity.y <= 0)
         {
             sm.rb.gravityScale = rbGravityScale * sm.data.fallGravityMultiplier;
