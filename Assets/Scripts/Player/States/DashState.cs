@@ -16,15 +16,15 @@ public class DashState : BaseState
         sm.rb.gravityScale = 0;
 
         // dashingForce
-        sm.rb.AddForce(Vector2.right * sm.horizontalMovement * sm.data.dashForce, ForceMode2D.Impulse);
-        sm.data.isDashing = true;
+        sm.rb.AddForce(Vector2.right * sm.horizontalMovement * sm.dData.dashForce, ForceMode2D.Impulse);
+        sm.pData.isDashing = true;
         sm.tr.emitting = true;
     }
 
     protected override void OnUpdate()
     {
         timer = timer + Time.deltaTime;
-        if (timer > sm.data.dashingTime)
+        if (timer > sm.dData.dashingTime)
         {
             sm.ChangeToLastState();
         }
@@ -35,7 +35,7 @@ public class DashState : BaseState
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;
         sm.rb.velocity = Vector2.zero;
-        sm.data.isDashing = false;
+        sm.pData.isDashing = false;
         sm.tr.emitting = false;
     }
 }

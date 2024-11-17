@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07a5d9ce42ac5e541b55f3eb95208eda, type: 3}
-  m_Name: PlayerData
+  m_Name: DesigenrPlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 15
   acceleration: 15
@@ -22,9 +22,10 @@ MonoBehaviour:
   isDashing: 0
   dashingTime: 0.3
   dashCooldown: 5
-  isGrounded: 0
+  isGrounded: 1
   isTouchingWall: 0
   jumpButtonPressed: 0
   jumpForce: 10
+  coyoteTime: 0.2
   jumpCutMultiplier: 0.7
   fallGravityMultiplier: 1.5

@@ -16,7 +16,7 @@ public class WallClingState : BaseState
     protected override void OnUpdate()
     {
         timer = timer + Time.deltaTime;
-        if (sm.data.isTouchingWall)
+        if (sm.pData.wallCoyoteTimeCounter > 0)
         {
             if (timer >= 1)
             {
@@ -28,7 +28,7 @@ public class WallClingState : BaseState
             sm.ChangeState(StateMachine.StateKey.Airborne);
         }
 
-        if (sm.data.isGrounded)
+        if (sm.pData.isGrounded)
         {
             sm.ChangeState(StateMachine.StateKey.Grounded);
         }

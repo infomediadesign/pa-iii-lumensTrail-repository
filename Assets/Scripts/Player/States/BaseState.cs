@@ -35,7 +35,7 @@ public abstract class BaseState
 
     protected virtual void OnMove()
     {
-        float targetSpeed = sm.horizontalMovement * sm.data.moveSpeed;
+        float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed;
         // for acceleration and decceleration, but currently not used
         //float speedDif = targetSpeed - sm.rb.velocity.x;
         //float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? sm.data.acceleration : sm.data.decceleration;
