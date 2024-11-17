@@ -17,7 +17,8 @@ MonoBehaviour:
   decceleration: 15
   velPower: 1
   dashForce: 25
-  frictionAmount: 0.05
+  frictionAmount: 0.6
+  airFrictionAmount: 0.4
   isDashing: 0
   dashingTime: 0.3
   dashCooldown: 5

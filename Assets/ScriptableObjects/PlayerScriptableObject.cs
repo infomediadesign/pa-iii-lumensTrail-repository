@@ -8,7 +8,8 @@ public class PlayerScriptableObject : ScriptableObject
     public float decceleration = 7f;
     public float velPower = 0.9f;
     public float dashForce = 20f;
-    public float frictionAmount = 0.5f;
+    public float frictionAmount = 0.6f;
+    public float airFrictionAmount = 0.5f;
     public bool isDashing = false;
     public float dashingTime = 1f;
     public float dashCooldown = 5f;
