@@ -36,11 +36,12 @@ public abstract class BaseState
     protected virtual void OnMove()
     {
         float targetSpeed = sm.horizontalMovement * sm.data.moveSpeed;
-        float speedDif = targetSpeed - sm.rb.velocity.x;
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? sm.data.acceleration : sm.data.decceleration;
-        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, sm.data.velPower) * Mathf.Sign(speedDif);
+        // for acceleration and decceleration, but currently not used
+        //float speedDif = targetSpeed - sm.rb.velocity.x;
+        //float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? sm.data.acceleration : sm.data.decceleration;
+        //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, sm.data.velPower) * Mathf.Sign(speedDif);
 
-        sm.rb.AddForce(movement * Vector2.right);
+        sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
     }
 
     public void OnStateExit()

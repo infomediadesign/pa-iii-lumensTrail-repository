@@ -22,7 +22,7 @@ MonoBehaviour:
   isDashing: 0
   dashingTime: 0.3
   dashCooldown: 5
-  isGrounded: 1
+  isGrounded: 0
   isTouchingWall: 0
   jumpButtonPressed: 0
   jumpForce: 10

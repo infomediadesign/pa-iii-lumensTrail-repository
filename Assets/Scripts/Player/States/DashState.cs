@@ -34,6 +34,7 @@ public class DashState : BaseState
     {
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;
+        sm.rb.velocity = Vector2.zero;
         sm.data.isDashing = false;
         sm.tr.emitting = false;
     }

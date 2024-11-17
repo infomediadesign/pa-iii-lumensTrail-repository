@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalMovement;
     private bool isMoving = false;
-    private bool canDash = true;
+    private float lastTimeDashed;
+    private bool isDashOnCooldown;
+    public Image dashCooldownImage;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -27,12 +30,15 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
+        lastTimeDashed = -data.dashCooldown;
     }
 
     private void Update()
     {
         isGrounded();
         isTouchingWall();
+
+        if (isDashOnCooldown) DashOnCooldown();
     }
 
     private void FixedUpdate()
@@ -42,6 +48,7 @@ public class PlayerController : MonoBehaviour
             if (data.isDashing) return;
             playerStateMachine.OnMove(horizontalMovement);
         }
+        
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -80,6 +87,7 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             isMoving = false;
+            rb.velocity = Vector2.up * rb.velocity;
         }
     }
 
@@ -87,17 +95,27 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (canDash) StartCoroutine(Dash());
+            if (Time.time < lastTimeDashed + data.dashCooldown) return;
+
+            lastTimeDashed = Time.time;
+            playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
+            isDashOnCooldown = true;
+            dashCooldownImage.fillAmount = 0;
         }
     }
 
-    private IEnumerator Dash()
+    private void DashOnCooldown()
     {
-        canDash = false;
-        playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
-        yield return new WaitForSeconds(data.dashCooldown);
-        canDash = true;
-    }
+        float timeSinceDashed = Time.time - lastTimeDashed;
+        float cooldownProgress = timeSinceDashed / data.dashCooldown;
+        dashCooldownImage.fillAmount = cooldownProgress;
+
+        if (cooldownProgress >= 1f)
+        {
+            isDashOnCooldown = false;
+            dashCooldownImage.fillAmount = 1f;
+        }
+        }
 
     private void isGrounded()
     {
