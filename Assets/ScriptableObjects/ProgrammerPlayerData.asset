@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200aa197cc419664ebf054cb81da43b5, type: 3}
+  m_Name: ProgrammerPlayerData
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  acceleration: 7
+  decceleration: 7
+  velPower: 0.9
+  dashForce: 20
+  frictionAmount: 0.6
+  airFrictionAmount: 0.5
+  isDashing: 0
+  dashingTime: 1
+  dashCooldown: 5
+  isGrounded: 0
+  isTouchingWall: 0
+  jumpButtonPressed: 0
+  jumpForce: 9
+  coyoteTime: 0.2
+  jumpCutMultiplier: 0.5
+  fallGravityMultiplier: 1.2
