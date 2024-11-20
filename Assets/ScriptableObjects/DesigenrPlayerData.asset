@@ -19,13 +19,9 @@ MonoBehaviour:
   dashForce: 25
   frictionAmount: 0.6
   airFrictionAmount: 0.4
-  isDashing: 0
   dashingTime: 0.3
   dashCooldown: 5
-  isGrounded: 1
-  isTouchingWall: 0
-  jumpButtonPressed: 0
   jumpForce: 10
-  coyoteTime: 0.2
+  coyoteTime: 0.1
   jumpCutMultiplier: 0.7
   fallGravityMultiplier: 1.5
