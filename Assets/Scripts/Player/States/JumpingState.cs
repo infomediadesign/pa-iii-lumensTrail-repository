@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class JumpingState : BaseState
 {
+    private bool wallFlag=false;
     protected override void OnEnter()
     {
         sm.rb.AddForce(Vector2.up * sm.dData.jumpForce, ForceMode2D.Impulse);
+        if(sm.pData.isTouchingWall) wallFlag=true;
     }
 
     protected override void OnUpdate()
@@ -18,6 +20,8 @@ public class JumpingState : BaseState
             amount *= Mathf.Sign(sm.rb.velocity.x);
             sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
         }
+
+        if (wallFlag && !sm.pData.isTouchingWall) wallFlag=false;
 
         if (sm.rb.velocity.y > 0 && !sm.pData.jumpButtonPressed)
         {
@@ -32,7 +36,7 @@ public class JumpingState : BaseState
 
         if (sm.pData.isTouchingWall && sm.lastState != sm.wallClState)
         {
-            sm.ChangeState(StateMachine.StateKey.WallClinging);
+            if(!wallFlag)sm.ChangeState(StateMachine.StateKey.WallClinging);
         }
     }
 
