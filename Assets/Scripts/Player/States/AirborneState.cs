@@ -5,6 +5,18 @@ using UnityEngine;
 public class AirborneState : BaseState
 {
     private float rbGravityScale;
+
+    public AirborneState(StateMachine p_sm) : base(p_sm) 
+    {
+        stateKey = StateMachine.StateKey.Airborne;
+    }
+
+    public override void SwitchTo()
+    {
+        if (sm.currentState.stateKey == StateMachine.StateKey.Landing) return;
+        base.SwitchTo();
+    }
+
     protected override void OnEnter()
     {
         rbGravityScale = sm.rb.gravityScale;
@@ -27,12 +39,12 @@ public class AirborneState : BaseState
 
         if (sm.pData.isTouchingWall)
         {
-            sm.ChangeState(StateMachine.StateKey.WallClinging);
+            sm.states[(int)StateMachine.StateKey.WallClinging].SwitchTo();
         }
 
         if (sm.pData.isGrounded)
         {
-            sm.ChangeState(StateMachine.StateKey.Grounded);
+            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
         }
     }
 

@@ -6,11 +6,24 @@ public class WallClingState : BaseState
 {
     private float rbGravityScale;
     private float timer = 0;
-    protected override void OnEnter()
+
+    public WallClingState(StateMachine stateMachine) : base(stateMachine) 
     {
-       rbGravityScale = sm.rb.gravityScale;
+        stateKey = StateMachine.StateKey.WallClinging;
+    }
+
+    public override void SwitchTo()
+    {
+        if (!sm.hasLeftWallClState) return;
+        base.SwitchTo();
+    }
+
+    protected override void OnEnter()
+    { 
+        rbGravityScale = sm.rb.gravityScale;
         sm.rb.gravityScale = 0;
         sm.rb.velocity = Vector2.zero;
+        sm.hasLeftWallClState = false;
     }
 
     protected override void OnUpdate()
@@ -25,12 +38,12 @@ public class WallClingState : BaseState
         }
         else
         {
-            sm.ChangeState(StateMachine.StateKey.Airborne);
+            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
 
         if (sm.pData.isGrounded)
         {
-            sm.ChangeState(StateMachine.StateKey.Grounded);
+            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
         }
     }
 

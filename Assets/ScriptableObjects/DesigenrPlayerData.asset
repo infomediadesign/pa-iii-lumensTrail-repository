@@ -23,5 +23,5 @@ MonoBehaviour:
   dashCooldown: 5
   jumpForce: 10
   coyoteTime: 0.1
-  jumpCutMultiplier: 0.7
+  jumpCutMultiplier: 0.5
   fallGravityMultiplier: 1.5

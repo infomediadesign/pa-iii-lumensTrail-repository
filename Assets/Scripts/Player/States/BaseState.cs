@@ -5,11 +5,22 @@ using UnityEngine;
 public abstract class BaseState
 {
     protected StateMachine sm;
+    public StateMachine.StateKey stateKey { get; protected set; }
 
-    public void OnStateEnter(StateMachine stateMachine)
+    public BaseState(StateMachine p_sm)
+    {
+        this.sm = p_sm;
+    }
+
+    public virtual void SwitchTo()
+    {
+        sm.ChangeState(stateKey);
+    }
+
+    public void OnStateEnter()
     {
         // this code will always be called
-        sm = stateMachine;
+        
         OnEnter();
     }
 

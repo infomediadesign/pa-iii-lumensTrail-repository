@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             pData.jumpButtonPressed = true;
             if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
             {
-                playerStateMachine.ChangeState(StateMachine.StateKey.Jumping);
+                playerStateMachine.states[(int)StateMachine.StateKey.Jumping].SwitchTo();
 
                 pData.groundCoyoteTimeCounter = 0;
                 pData.wallCoyoteTimeCounter = 0;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             if (Time.time < lastTimeDashed + dData.dashCooldown) return;
 
             lastTimeDashed = Time.time;
-            playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
+            playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
             isDashOnCooldown = true;
             dashCooldownImage.fillAmount = 0;
         }

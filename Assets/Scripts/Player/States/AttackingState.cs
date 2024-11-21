@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class AttackingState : BaseState
 {
+    public AttackingState(StateMachine p_sm) : base(p_sm)
+    {
+        stateKey = StateMachine.StateKey.Attacking;
+    }
+
+    public override void SwitchTo()
+    {
+        base.SwitchTo();
+    }
+
     protected override void OnEnter()
     {
 

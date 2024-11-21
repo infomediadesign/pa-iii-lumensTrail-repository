@@ -5,6 +5,16 @@ using UnityEngine.InputSystem;
 
 public class GroundedState : BaseState
 {
+    public GroundedState(StateMachine p_sm) : base(p_sm) 
+    { 
+        stateKey = StateMachine.StateKey.Grounded;
+    }
+
+    public override void SwitchTo()
+    {
+        base.SwitchTo();
+    }
+
     protected override void OnEnter()
     {
 
@@ -23,7 +33,7 @@ public class GroundedState : BaseState
         // change to airborne (falling) in case of suddenly ungrounded, but has coyoteTime
         if (sm.pData.groundCoyoteTimeCounter < 0)
         {
-            sm.ChangeState(StateMachine.StateKey.Airborne);
+            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
     }
 

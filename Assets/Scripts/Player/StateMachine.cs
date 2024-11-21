@@ -6,16 +6,16 @@ public class StateMachine : MonoBehaviour
 {
     public enum StateKey
     {
-        Grounded,
-        Jumping,
-        Airborne,
-        Landing,
-        Attacking,
-        Dashing,
-        WallClinging
+        Grounded = 0,
+        Jumping = 1,
+        Airborne = 2,
+        Landing = 3,
+        Attacking = 4,
+        Dashing = 5,
+        WallClinging = 6
     }
 
-    private BaseState currentState;
+    public BaseState currentState { get; private set; }
     public BaseState lastState { get; private set; }
     [HideInInspector]
     public Rigidbody2D rb;
@@ -25,13 +25,15 @@ public class StateMachine : MonoBehaviour
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
 
-    public GroundedState groundedState = new GroundedState();
-    public JumpingState jumpingState = new JumpingState();
-    public AirborneState airborneState = new AirborneState();
-    public LandingState landingState = new LandingState();
-    public AttackingState attackingState = new AttackingState();
-    public DashState dashState = new DashState();
-    public WallClingState wallClState = new WallClingState();
+    public List<BaseState> states { get; private set; } = new List<BaseState>();
+
+    //public GroundedState groundedState = new GroundedState();
+    //public JumpingState jumpingState = new JumpingState();
+    //public AirborneState airborneState = new AirborneState();
+    //public LandingState landingState = new LandingState();
+    //public AttackingState attackingState = new AttackingState();
+    //public DashState dashState = new DashState();
+    //public WallClingState wallClState = new WallClingState();
 
     public float horizontalMovement { get; private set; } = 0;
     public bool hasLeftWallClState = true;
@@ -40,11 +42,12 @@ public class StateMachine : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
+        states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this) }); 
     }
 
     private void Start()
     {
-        lastState = groundedState;
+        lastState = states[0];
         ChangeState(StateKey.Grounded);
     }
 
@@ -60,46 +63,49 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(StateKey stateKey)
     {
-        switch(stateKey)
-        {
-            case StateKey.Grounded:
-                lastState = currentState;
-                currentState = groundedState;
-                break;
-            case StateKey.Jumping:
-                if (currentState == airborneState) return;
-                lastState = currentState;
-                currentState = jumpingState; 
-                break;
-            case StateKey.Airborne:
-                if (currentState != landingState)
-                {
-                    lastState = currentState;
-                    currentState = airborneState;
-                }
-                else return;
-                break;
-            case StateKey.Landing:
-                lastState = currentState;
-                currentState = landingState;
-                break;
-            case StateKey.Attacking:
-                lastState = currentState;
-                currentState = attackingState;
-                break;
-            case StateKey.Dashing:
-                lastState = currentState;
-                currentState = dashState;
-                break;
-            case StateKey.WallClinging:
-                if (!hasLeftWallClState) return;
-                lastState = currentState;
-                currentState = wallClState;
-                hasLeftWallClState = false;
-                break;
-        }
+        lastState = currentState;
+        currentState = states[(int)stateKey];
+        
+        //switch(stateKey)
+        //{
+        //    case StateKey.Grounded:
+        //        lastState = currentState;
+        //        currentState = groundedState;
+        //        break;
+        //    case StateKey.Jumping:
+        //        if (currentState == airborneState) return;
+        //        lastState = currentState;
+        //        currentState = jumpingState; 
+        //        break;
+        //    case StateKey.Airborne:
+        //        if (currentState != landingState)
+        //        {
+        //            lastState = currentState;
+        //            currentState = airborneState;
+        //        }
+        //        else return;
+        //        break;
+        //    case StateKey.Landing:
+        //        lastState = currentState;
+        //        currentState = landingState;
+        //        break;
+        //    case StateKey.Attacking:
+        //        lastState = currentState;
+        //        currentState = attackingState;
+        //        break;
+        //    case StateKey.Dashing:
+        //        lastState = currentState;
+        //        currentState = dashState;
+        //        break;
+        //    case StateKey.WallClinging:
+        //        if (!hasLeftWallClState) return;
+        //        lastState = currentState;
+        //        currentState = wallClState;
+        //        hasLeftWallClState = false;
+        //        break;
+        //}
         lastState?.OnStateExit();
-        currentState.OnStateEnter(this);
+        currentState.OnStateEnter();
     }
 
     public void ChangeToLastState()

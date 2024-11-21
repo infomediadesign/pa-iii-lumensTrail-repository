@@ -1,11 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class DashState : BaseState
 {
     private float rbGravityScale;
     private float timer = 0;
+
+    public DashState(StateMachine p_sm) : base(p_sm) 
+    { 
+        stateKey = StateMachine.StateKey.Dashing;
+    }
+
+    public override void SwitchTo() 
+    {
+        base.SwitchTo();
+    }
+
     protected override void OnEnter()
     {
         // if dash should go horizontally

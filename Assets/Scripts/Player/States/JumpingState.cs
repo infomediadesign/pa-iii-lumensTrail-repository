@@ -5,6 +5,18 @@ using UnityEngine;
 public class JumpingState : BaseState
 {
     private bool wallFlag=false;
+
+    public JumpingState(StateMachine sm) : base(sm) 
+    {
+        stateKey = StateMachine.StateKey.Jumping;
+    }
+
+    public override void SwitchTo()
+    {
+        if (sm.currentState.stateKey == StateMachine.StateKey.Airborne) return;
+        base.SwitchTo();
+    }
+
     protected override void OnEnter()
     {
         sm.rb.AddForce(Vector2.up * sm.dData.jumpForce, ForceMode2D.Impulse);
@@ -26,17 +38,17 @@ public class JumpingState : BaseState
         if (sm.rb.velocity.y > 0 && !sm.pData.jumpButtonPressed)
         {
             sm.rb.AddForce(Vector2.down * sm.rb.velocity.y * (1 - sm.dData.jumpCutMultiplier), ForceMode2D.Impulse);
-            sm.ChangeState(StateMachine.StateKey.Airborne);
+            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
 
         if (sm.rb.velocity.y <= 0)
         {
-            sm.ChangeState(StateMachine.StateKey.Airborne);
+            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
 
-        if (sm.pData.isTouchingWall && sm.lastState != sm.wallClState)
+        if (sm.pData.isTouchingWall && sm.lastState != sm.states[(int)StateMachine.StateKey.WallClinging])
         {
-            if(!wallFlag)sm.ChangeState(StateMachine.StateKey.WallClinging);
+            if(!wallFlag)sm.states[(int)StateMachine.StateKey.WallClinging].SwitchTo();
         }
     }
 
