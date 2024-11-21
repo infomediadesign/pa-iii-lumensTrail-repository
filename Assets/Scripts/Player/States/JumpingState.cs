@@ -6,6 +6,7 @@ public class JumpingState : BaseState
 {
     private bool wallFlag=false;
 
+
     public JumpingState(StateMachine sm) : base(sm) 
     {
         stateKey = StateMachine.StateKey.Jumping;

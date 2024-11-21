@@ -15,6 +15,7 @@ public class StateMachine : MonoBehaviour
         WallClinging = 6
     }
 
+    
     public BaseState currentState { get; private set; }
     public BaseState lastState { get; private set; }
     [HideInInspector]
@@ -106,6 +107,7 @@ public class StateMachine : MonoBehaviour
         //}
         lastState?.OnStateExit();
         currentState.OnStateEnter();
+        pData.stateKey = stateKey;
     }
 
     public void ChangeToLastState()

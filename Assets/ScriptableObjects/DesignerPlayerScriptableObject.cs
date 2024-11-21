@@ -18,4 +18,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Range(0f, 1f)]
     public float jumpCutMultiplier = 0.5f;
     public float fallGravityMultiplier = 1.2f;
+    [Range(0f, 1f)]
+    public float fastFallingMultiplier = 1f;
+
 }

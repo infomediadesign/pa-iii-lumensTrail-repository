@@ -5,6 +5,7 @@ using UnityEngine;
 public class AirborneState : BaseState
 {
     private float rbGravityScale;
+    private float fastFallingMultiplier;
 
     public AirborneState(StateMachine p_sm) : base(p_sm) 
     {
@@ -20,6 +21,7 @@ public class AirborneState : BaseState
     protected override void OnEnter()
     {
         rbGravityScale = sm.rb.gravityScale;
+        fastFallingMultiplier = sm.dData.fastFallingMultiplier;
     }
 
     protected override void OnUpdate()
@@ -36,6 +38,13 @@ public class AirborneState : BaseState
         {
             sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;
         }
+
+        
+        
+        sm.rb.AddForce(Vector2.down * fastFallingMultiplier, ForceMode2D.Impulse);
+        
+        sm.pData.fallingVelocity = sm.rb.velocity.y;
+
 
         if (sm.pData.isTouchingWall)
         {
