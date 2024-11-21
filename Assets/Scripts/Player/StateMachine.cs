@@ -34,7 +34,7 @@ public class StateMachine : MonoBehaviour
     public WallClingState wallClState = new WallClingState();
 
     public float horizontalMovement { get; private set; } = 0;
-    private bool hasLeftWallClState = true;
+    public bool hasLeftWallClState = true;
 
     private void Awake()
     {
