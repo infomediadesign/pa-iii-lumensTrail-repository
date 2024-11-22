@@ -19,7 +19,7 @@ public class WallClingState : BaseState
         base.SwitchTo();
     }
 
-    protected override void OnEnter()
+    public override void OnEnter()
     { 
         rbGravityScale = sm.rb.gravityScale;
         sm.rb.gravityScale = 0;
@@ -29,7 +29,7 @@ public class WallClingState : BaseState
         wallSlideGravityReduction = sm.dData.wallClingSlideGravityReduction;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         timer -= Time.deltaTime;
         if (sm.pData.wallCoyoteTimeCounter > 0)
@@ -50,7 +50,7 @@ public class WallClingState : BaseState
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;

@@ -18,13 +18,13 @@ public class JumpingState : BaseState
         base.SwitchTo();
     }
 
-    protected override void OnEnter()
+    public override void OnEnter()
     {
         sm.rb.AddForce(Vector2.up * sm.dData.jumpForce, ForceMode2D.Impulse);
         if(sm.pData.isTouchingWall) wallFlag=true;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         // friction while in air
         if (!sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
@@ -53,7 +53,7 @@ public class JumpingState : BaseState
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
 
     }

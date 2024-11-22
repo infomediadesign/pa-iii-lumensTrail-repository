@@ -17,34 +17,20 @@ public abstract class BaseState
         sm.ChangeState(stateKey);
     }
 
-    public void OnStateEnter()
-    {
-        // this code will always be called
-        
-        OnEnter();
-    }
+    
 
-    protected virtual void OnEnter()
+    public virtual void OnEnter()
     {
         // this code can be overwritten in the derived classes
     }
 
-    public void OnStateUpdate()
-    {
-        OnUpdate();
-    }
 
-    protected virtual void OnUpdate()
+    public virtual void OnUpdate()
     {
 
     }
 
-    public void OnStateMove()
-    {
-        OnMove();
-    }
-
-    protected virtual void OnMove()
+    public virtual void OnMove()
     {
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed;
         // for acceleration and decceleration, but currently not used
@@ -55,13 +41,11 @@ public abstract class BaseState
         sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
     }
 
-    public void OnStateExit()
+    
+    public virtual void OnExit()
     {
-        OnExit();
+        
     }
 
-    protected virtual void OnExit() 
-    {
     
-    }
 }

@@ -15,13 +15,17 @@ MonoBehaviour:
   moveSpeed: 15
   acceleration: 15
   decceleration: 15
-  velPower: 1
-  dashForce: 25
   frictionAmount: 0.6
-  airFrictionAmount: 0.4
-  dashingTime: 0.3
-  dashCooldown: 5
-  jumpForce: 10
+  velPower: 1
+  generalGravityMultiplier: 1.7
+  fallGravityMultiplier: 2.2
+  fastFallingMultiplier: 0
   coyoteTime: 0.1
+  airFrictionAmount: 0.4
+  jumpForce: 13
   jumpCutMultiplier: 0.5
-  fallGravityMultiplier: 1.5
+  dashForce: 25
+  dashingTime: 0.3
+  dashCooldown: 1.74
+  wallClingSlideGravityReduction: 1.59
+  wallClingAirFreezeTime: 0.07

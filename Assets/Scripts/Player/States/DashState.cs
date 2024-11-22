@@ -13,12 +13,7 @@ public class DashState : BaseState
         stateKey = StateMachine.StateKey.Dashing;
     }
 
-    public override void SwitchTo() 
-    {
-        base.SwitchTo();
-    }
-
-    protected override void OnEnter()
+    public override void OnEnter()
     {
         // if dash should go horizontally
         sm.rb.velocity = Vector2.zero;
@@ -33,7 +28,7 @@ public class DashState : BaseState
         sm.tr.emitting = true;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         timer = timer + Time.deltaTime;
         if (timer > sm.dData.dashingTime)
@@ -42,7 +37,7 @@ public class DashState : BaseState
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;

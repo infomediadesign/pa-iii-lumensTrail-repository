@@ -56,7 +56,7 @@ public class StateMachine : MonoBehaviour
     {
         if (currentState != null)
         {
-            currentState.OnStateUpdate();
+            currentState.OnUpdate();
         }
 
         if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
@@ -105,20 +105,20 @@ public class StateMachine : MonoBehaviour
         //        hasLeftWallClState = false;
         //        break;
         //}
-        lastState?.OnStateExit();
-        currentState.OnStateEnter();
+        lastState?.OnExit();
+        currentState.OnEnter();
         pData.stateKey = stateKey;
     }
 
     public void ChangeToLastState()
     {
-        currentState.OnStateExit();
+        currentState.OnExit();
         currentState = lastState;
     }
 
     public void OnMove(float _horizontalMovement)
     {
         horizontalMovement = _horizontalMovement;
-        currentState.OnStateMove();
+        currentState.OnMove();
     }
 }

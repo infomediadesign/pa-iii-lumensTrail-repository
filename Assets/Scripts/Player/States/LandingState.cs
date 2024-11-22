@@ -16,22 +16,22 @@ public class LandingState : BaseState
         base.SwitchTo();
     }
 
-    protected override void OnEnter()
+    public override void OnEnter()
     {
 
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
 
     }
 
-    protected override void OnMove()
+    public override void OnMove()
     {
 
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
 
     }

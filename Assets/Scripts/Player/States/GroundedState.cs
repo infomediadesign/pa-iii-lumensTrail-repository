@@ -10,17 +10,13 @@ public class GroundedState : BaseState
         stateKey = StateMachine.StateKey.Grounded;
     }
 
-    public override void SwitchTo()
-    {
-        base.SwitchTo();
-    }
 
-    protected override void OnEnter()
+    public override void OnEnter()
     {
 
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         // friction while on ground
         if (sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
@@ -37,7 +33,7 @@ public class GroundedState : BaseState
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
 
     } 

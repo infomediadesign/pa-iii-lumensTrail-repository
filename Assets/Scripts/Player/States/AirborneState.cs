@@ -18,13 +18,13 @@ public class AirborneState : BaseState
         base.SwitchTo();
     }
 
-    protected override void OnEnter()
+    public override void OnEnter()
     {
         rbGravityScale = sm.rb.gravityScale;
         fastFallingMultiplier = sm.dData.fastFallingMultiplier;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         // friction while in air
         if (!sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
@@ -34,10 +34,9 @@ public class AirborneState : BaseState
             sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
         }
 
-        if (sm.rb.velocity.y <= 0)
-        {
+        
             sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;
-        }
+        
 
         
         
@@ -57,7 +56,7 @@ public class AirborneState : BaseState
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
     }
