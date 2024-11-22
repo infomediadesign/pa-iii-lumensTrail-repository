@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
+        rb.gravityScale = dData.generalGravityMultiplier;
     }
 
     private void Update()
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour
         isGrounded();
         isTouchingWall();
 
+        /*
+         * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
+         */
+        //rb.gravityScale = dData.generalGravityMultiplier;
         if (isDashOnCooldown) DashOnCooldown();
     }
 
@@ -58,7 +63,7 @@ public class PlayerController : MonoBehaviour
             pData.jumpButtonPressed = true;
             if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
             {
-                playerStateMachine.ChangeState(StateMachine.StateKey.Jumping);
+                playerStateMachine.states[(int)StateMachine.StateKey.Jumping].SwitchTo();
 
                 pData.groundCoyoteTimeCounter = 0;
                 pData.wallCoyoteTimeCounter = 0;
@@ -101,7 +106,7 @@ public class PlayerController : MonoBehaviour
             if (Time.time < lastTimeDashed + dData.dashCooldown) return;
 
             lastTimeDashed = Time.time;
-            playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
+            playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
             isDashOnCooldown = true;
             dashCooldownImage.fillAmount = 0;
         }

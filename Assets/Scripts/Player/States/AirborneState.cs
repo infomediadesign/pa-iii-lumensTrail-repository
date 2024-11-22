@@ -5,12 +5,26 @@ using UnityEngine;
 public class AirborneState : BaseState
 {
     private float rbGravityScale;
-    protected override void OnEnter()
+    private float fastFallingMultiplier;
+
+    public AirborneState(StateMachine p_sm) : base(p_sm) 
     {
-        rbGravityScale = sm.rb.gravityScale;
+        stateKey = StateMachine.StateKey.Airborne;
     }
 
-    protected override void OnUpdate()
+    public override void SwitchTo()
+    {
+        if (sm.currentState.stateKey == StateMachine.StateKey.Landing) return;
+        base.SwitchTo();
+    }
+
+    public override void OnEnter()
+    {
+        rbGravityScale = sm.rb.gravityScale;
+        fastFallingMultiplier = sm.dData.fastFallingMultiplier;
+    }
+
+    public override void OnUpdate()
     {
         // friction while in air
         if (!sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
@@ -20,23 +34,29 @@ public class AirborneState : BaseState
             sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
         }
 
-        if (sm.rb.velocity.y <= 0)
-        {
+        
             sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;
-        }
+        
+
+        
+        
+        sm.rb.AddForce(Vector2.down * fastFallingMultiplier, ForceMode2D.Impulse);
+        
+        sm.pData.fallingVelocity = sm.rb.velocity.y;
+
 
         if (sm.pData.isTouchingWall)
         {
-            sm.ChangeState(StateMachine.StateKey.WallClinging);
+            sm.states[(int)StateMachine.StateKey.WallClinging].SwitchTo();
         }
 
         if (sm.pData.isGrounded)
         {
-            sm.ChangeState(StateMachine.StateKey.Grounded);
+            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
     }

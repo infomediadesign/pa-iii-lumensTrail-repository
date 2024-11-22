@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class LandingState : BaseState
 {
-    protected override void OnEnter()
+    
+    public LandingState(StateMachine p_sm) : base(p_sm) 
+    {
+        stateKey = StateMachine.StateKey.Landing;
+    }
+
+    public override void SwitchTo()
+    {
+        if (sm.currentState.stateKey != StateMachine.StateKey.Airborne) return;
+        base.SwitchTo();
+    }
+
+    public override void OnEnter()
     {
 
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
 
     }
 
-    protected override void OnMove()
+    public override void OnMove()
     {
 
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
 
     }

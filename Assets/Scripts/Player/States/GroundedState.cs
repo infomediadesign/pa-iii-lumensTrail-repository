@@ -5,12 +5,18 @@ using UnityEngine.InputSystem;
 
 public class GroundedState : BaseState
 {
-    protected override void OnEnter()
+    public GroundedState(StateMachine p_sm) : base(p_sm) 
+    { 
+        stateKey = StateMachine.StateKey.Grounded;
+    }
+
+
+    public override void OnEnter()
     {
 
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         // friction while on ground
         if (sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
@@ -23,11 +29,11 @@ public class GroundedState : BaseState
         // change to airborne (falling) in case of suddenly ungrounded, but has coyoteTime
         if (sm.pData.groundCoyoteTimeCounter < 0)
         {
-            sm.ChangeState(StateMachine.StateKey.Airborne);
+            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
 
     } 
