@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
+        rb.gravityScale = dData.generalGravityMultiplier;
     }
 
     private void Update()
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour
         isGrounded();
         isTouchingWall();
 
+        /*
+         * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
+         */
+        //rb.gravityScale = dData.generalGravityMultiplier;
         if (isDashOnCooldown) DashOnCooldown();
     }
 

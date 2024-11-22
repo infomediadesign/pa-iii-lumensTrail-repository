@@ -5,7 +5,8 @@ using UnityEngine;
 public class WallClingState : BaseState
 {
     private float rbGravityScale;
-    private float timer = 0;
+    private float timer = 1f;
+    private float wallSlideGravityReduction = 2f;
 
     public WallClingState(StateMachine stateMachine) : base(stateMachine) 
     {
@@ -24,16 +25,18 @@ public class WallClingState : BaseState
         sm.rb.gravityScale = 0;
         sm.rb.velocity = Vector2.zero;
         sm.hasLeftWallClState = false;
+        timer = sm.dData.wallClingAirFreezeTime;
+        wallSlideGravityReduction = sm.dData.wallClingSlideGravityReduction;
     }
 
     protected override void OnUpdate()
     {
-        timer = timer + Time.deltaTime;
+        timer -= Time.deltaTime;
         if (sm.pData.wallCoyoteTimeCounter > 0)
         {
-            if (timer >= 1)
+            if (timer <= 0)
             {
-                sm.rb.gravityScale = rbGravityScale / 2;
+                sm.rb.gravityScale = rbGravityScale / wallSlideGravityReduction;
             }
         }
         else
