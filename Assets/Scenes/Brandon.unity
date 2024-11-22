@@ -972,6 +972,7 @@ MonoBehaviour:
   target: {fileID: 1231235023}
   cameraSpeed: 5
   cameraOffset: {x: 0, y: 3, z: -1}
+  maxDistance: 6
 --- !u!1 &1014146519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,6 +1727,7 @@ MonoBehaviour:
   tr: {fileID: 0}
   dData: {fileID: 11400000, guid: 00d47f52f3012004093393a679123adb, type: 2}
   pData: {fileID: 11400000, guid: bd531fca99f8aca429ae53841c2c2014, type: 2}
+  hasLeftWallClState: 1
 --- !u!114 &1231235027
 MonoBehaviour:
   m_ObjectHideFlags: 0
