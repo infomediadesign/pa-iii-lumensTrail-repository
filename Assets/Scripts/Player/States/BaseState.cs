@@ -27,7 +27,7 @@ public abstract class BaseState
 
     public virtual void OnUpdate()
     {
-
+        // this code can be overwritten in the derived classes
     }
 
     public virtual void OnMove()
@@ -44,8 +44,8 @@ public abstract class BaseState
     
     public virtual void OnExit()
     {
-        
+        // this code can be overwritten in the derived classes
     }
 
-    
+
 }
