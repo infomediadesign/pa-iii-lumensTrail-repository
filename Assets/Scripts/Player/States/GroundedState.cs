@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GroundedState : BaseState
 {
+
     public GroundedState(StateMachine p_sm) : base(p_sm) 
     { 
         stateKey = StateMachine.StateKey.Grounded;
@@ -13,7 +14,7 @@ public class GroundedState : BaseState
 
     public override void OnEnter()
     {
-
+        sm.rb.gravityScale = sm.dData.generalGravityMultiplier;
     }
 
     public override void OnUpdate()

@@ -11,6 +11,9 @@ public class WallClingState : BaseState
     public WallClingState(StateMachine stateMachine) : base(stateMachine) 
     {
         stateKey = StateMachine.StateKey.WallClinging;
+
+        timer = sm.dData.wallClingAirFreezeTime;
+        wallSlideGravityReduction = sm.dData.wallClingSlideGravityReduction;
     }
 
     public override void SwitchTo()
@@ -25,8 +28,6 @@ public class WallClingState : BaseState
         sm.rb.gravityScale = 0;
         sm.rb.velocity = Vector2.zero;
         sm.hasLeftWallClState = false;
-        timer = sm.dData.wallClingAirFreezeTime;
-        wallSlideGravityReduction = sm.dData.wallClingSlideGravityReduction;
     }
 
     public override void OnUpdate()

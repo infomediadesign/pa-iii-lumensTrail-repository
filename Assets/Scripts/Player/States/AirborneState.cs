@@ -10,6 +10,8 @@ public class AirborneState : BaseState
     public AirborneState(StateMachine p_sm) : base(p_sm) 
     {
         stateKey = StateMachine.StateKey.Airborne;
+        //fastFallingMultiplier = sm.dData.fastFallingMultiplier;
+
     }
 
     public override void SwitchTo()
@@ -21,7 +23,7 @@ public class AirborneState : BaseState
     public override void OnEnter()
     {
         rbGravityScale = sm.rb.gravityScale;
-        fastFallingMultiplier = sm.dData.fastFallingMultiplier;
+        sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;
     }
 
     public override void OnUpdate()
@@ -35,12 +37,7 @@ public class AirborneState : BaseState
         }
 
         
-            sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;
-        
-
-        
-        
-        sm.rb.AddForce(Vector2.down * fastFallingMultiplier, ForceMode2D.Impulse);
+        //sm.rb.AddForce(Vector2.down * fastFallingMultiplier, ForceMode2D.Impulse);
         
         sm.pData.fallingVelocity = sm.rb.velocity.y;
 
