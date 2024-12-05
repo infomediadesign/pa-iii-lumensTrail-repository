@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightThrowState : BaseState
 {
     float lightThrowButtonHoldTimer;
+    private float rbGravityScale;
     public LightThrowState(StateMachine stateMachine) : base(stateMachine) 
     {
         stateKey = StateMachine.StateKey.LightThrow;
@@ -18,6 +19,8 @@ public class LightThrowState : BaseState
     public override void OnEnter()
     {
         lightThrowButtonHoldTimer = Time.time;
+        rbGravityScale = sm.rb.gravityScale;
+        sm.rb.gravityScale = sm.dData.lightThrowGravityMultiplier;
     }
 
     public override void OnUpdate()
@@ -34,20 +37,27 @@ public class LightThrowState : BaseState
         }
         else
         {
-            // after the time passed, automatically switch to light wave state
-            sm.states[(int)StateMachine.StateKey.LightWave].SwitchTo();
+            if (sm.pData.isGrounded)
+            {
+                // after the time passed, automatically switch to light wave state
+                sm.states[(int)StateMachine.StateKey.LightWave].SwitchTo();
+            }
+            else
+            {
+                sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+            }
         }
     }
 
     public override void OnExit()
     {
-
+        sm.rb.gravityScale = rbGravityScale;
     }
 
     public override void OnMove()
     {
         // let the player move until charging is starting
-        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay) 
+        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && sm.pData.isGrounded) 
         {
             sm.rb.velocity = Vector2.zero;
             return;
