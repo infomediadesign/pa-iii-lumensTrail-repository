@@ -35,4 +35,10 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Wall-Cling")]
     public float wallClingSlideGravityReduction = 2f;
     public float wallClingAirFreezeTime = 0.5f;
+
+    [Space(15)]
+    [Header("Light Mechanics")]
+    [Header("Light Throw")]
+    public float lightThrowProjectileSpeed = 5f;
+    public float lightThrowCooldown = 3f;
 }

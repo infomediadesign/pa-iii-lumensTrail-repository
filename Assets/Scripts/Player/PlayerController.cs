@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -13,10 +14,12 @@ public class PlayerController : MonoBehaviour
     public ProgrammerPlayerScriptableObject pData;
 
     private float horizontalMovement;
+    private bool isFacingRight = true;
     private bool isMoving = false;
     private float lastTimeDashed;
     private bool isDashOnCooldown;
     public Image dashCooldownImage;
+    private float lastTimeLightThrown;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -31,13 +34,14 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
+        lastTimeLightThrown = -dData.lightThrowCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
     }
 
     private void Update()
     {
-        isGrounded();
-        isTouchingWall();
+        IsGrounded();
+        IsTouchingWall();
 
         /*
          * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
@@ -90,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = true;
             horizontalMovement = context.ReadValue<Vector2>().x;
-            
+            if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) Flip(); 
         }
         else if (context.canceled)
         {
@@ -112,6 +116,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnLightThrow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
+            lastTimeLightThrown = Time.time;
+            playerStateMachine.states[(int)StateMachine.StateKey.LightThrow].SwitchTo();
+        }
+    }
+
     private void DashOnCooldown()
     {
         float timeSinceDashed = Time.time - lastTimeDashed;
@@ -125,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
         }
 
-    private void isGrounded()
+    private void IsGrounded()
     {
         if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
         {
@@ -139,7 +153,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void isTouchingWall()
+    private void IsTouchingWall()
     {
         if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
         {
@@ -151,6 +165,12 @@ public class PlayerController : MonoBehaviour
             pData.isTouchingWall = false;
             pData.wallCoyoteTimeCounter -= Time.deltaTime;
         }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
     private void OnDrawGizmos()
