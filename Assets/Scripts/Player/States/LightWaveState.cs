@@ -21,7 +21,10 @@ public class LightWaveState : BaseState
 
     public override void OnUpdate()
     {
-        sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+        if (!sm.pData.lightThrowButtonPressed)
+        {
+            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+        }
     }
 
     public override void OnExit()
