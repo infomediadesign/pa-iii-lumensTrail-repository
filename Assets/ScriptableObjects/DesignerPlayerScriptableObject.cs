@@ -44,4 +44,5 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float lightThrowCooldown = 3f;
     public float startChargingDelay = 0.5f;
     public float switchToLightWaveTime = 1f;
+    public float lightThrowGravityMultiplier = 1f;
 }
