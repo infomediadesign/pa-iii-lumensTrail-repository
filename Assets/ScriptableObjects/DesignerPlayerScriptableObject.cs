@@ -41,4 +41,6 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Light Throw")]
     public float lightThrowProjectileSpeed = 5f;
     public float lightThrowCooldown = 3f;
+    public float startChargingDelay = 0.5f;
+    public float switchToLightWaveTime = 1f;
 }

@@ -94,7 +94,8 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = true;
             horizontalMovement = context.ReadValue<Vector2>().x;
-            if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) Flip(); 
+            // To flip the player when changing direction
+            if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) FlipPlayerCharacter(); 
         }
         else if (context.canceled)
         {
@@ -120,9 +121,14 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            pData.lightThrowButtonPressed = true;
             if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
             lastTimeLightThrown = Time.time;
             playerStateMachine.states[(int)StateMachine.StateKey.LightThrow].SwitchTo();
+        }
+        else if (context.canceled) 
+        {
+            pData.lightThrowButtonPressed = false;
         }
     }
 
@@ -167,7 +173,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Flip()
+    private void FlipPlayerCharacter()
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);

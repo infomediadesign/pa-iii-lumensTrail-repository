@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightThrowState : BaseState
 {
-    float timer = 0;
+    float lightThrowButtonHoldTimer;
     public LightThrowState(StateMachine stateMachine) : base(stateMachine) 
     {
         stateKey = StateMachine.StateKey.LightThrow;
@@ -17,20 +17,32 @@ public class LightThrowState : BaseState
 
     public override void OnEnter()
     {
-        sm.ltm.LightThrow();
+        lightThrowButtonHoldTimer = Time.time;
     }
 
     public override void OnUpdate()
     {
-        timer++;
-        if (timer > 120)
+        if (Time.time < lightThrowButtonHoldTimer + sm.dData.startChargingDelay)
         {
-            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+            if (!sm.pData.lightThrowButtonPressed)
+            {
+                sm.ltm.LightThrow();
+                sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+            }
+        }
+        else
+        {
+            sm.states[(int)StateMachine.StateKey.LightWave].SwitchTo();
         }
     }
 
     public override void OnExit()
     {
 
+    }
+
+    public override void OnMove()
+    {
+        if (Time.time < lightThrowButtonHoldTimer + sm.dData.startChargingDelay) base.OnMove();
     }
 }
