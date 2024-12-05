@@ -29,3 +29,4 @@ MonoBehaviour:
   dashCooldown: 1.74
   wallClingSlideGravityReduction: 1.59
   wallClingAirFreezeTime: 0.07
+  lightThrowProjectileSpeed: 20

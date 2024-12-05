@@ -12,7 +12,9 @@ public class StateMachine : MonoBehaviour
         Landing = 3,
         Attacking = 4,
         Dashing = 5,
-        WallClinging = 6
+        WallClinging = 6,
+        LightThrow = 7,
+        LightWave = 8
     }
 
     
@@ -22,6 +24,8 @@ public class StateMachine : MonoBehaviour
     public Rigidbody2D rb;
     [HideInInspector]
     public TrailRenderer tr;
+    [HideInInspector]
+    public PlayerLightThrowManager ltm;
 
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
@@ -43,7 +47,8 @@ public class StateMachine : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
-        states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this) }); 
+        ltm = GetComponent<PlayerLightThrowManager>();
+        states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this)}); 
     }
 
     private void Start()
