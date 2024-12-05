@@ -22,16 +22,19 @@ public class LightThrowState : BaseState
 
     public override void OnUpdate()
     {
-        if (Time.time < lightThrowButtonHoldTimer + sm.dData.startChargingDelay)
+        // Checking if enough time has passed to switch to light wave mechanic
+        if (Time.time < lightThrowButtonHoldTimer + sm.dData.switchToLightWaveTime)
         {
             if (!sm.pData.lightThrowButtonPressed)
             {
+                // Calling the LightThrowManager to create an instance of the projectile
                 sm.ltm.LightThrow();
                 sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
             }
         }
         else
         {
+            // after the time passed, automatically switch to light wave state
             sm.states[(int)StateMachine.StateKey.LightWave].SwitchTo();
         }
     }
@@ -43,6 +46,12 @@ public class LightThrowState : BaseState
 
     public override void OnMove()
     {
-        if (Time.time < lightThrowButtonHoldTimer + sm.dData.startChargingDelay) base.OnMove();
+        // let the player move until charging is starting
+        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay) 
+        {
+            sm.rb.velocity = Vector2.zero;
+            return;
+        }
+        base.OnMove();
     }
 }
