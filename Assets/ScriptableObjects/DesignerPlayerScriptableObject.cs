@@ -45,4 +45,11 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float startChargingDelay = 0.5f;
     public float switchToLightWaveTime = 1f;
     public float lightThrowGravityMultiplier = 1f;
+
+    [Space(10)]
+    [Header("Light Wave")]
+    public float lightWaveSpeed = 6f;
+    public float lightWaveMaxTravelDistance = 6f;
+    public float lightWaveStartingSizeMultiplier = 0.4f;
+    public float lightWaveMaxSizeAtDistance = 2f;
 }

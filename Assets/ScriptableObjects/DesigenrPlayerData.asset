@@ -30,3 +30,12 @@ MonoBehaviour:
   wallClingSlideGravityReduction: 1.59
   wallClingAirFreezeTime: 0.07
   lightThrowProjectileSpeed: 20
+  lightThrowProjectileMaxTravelTime: 10
+  lightThrowCooldown: 3
+  startChargingDelay: 0.5
+  switchToLightWaveTime: 1
+  lightThrowGravityMultiplier: 1
+  lightWaveSpeed: 12
+  lightWaveMaxTravelDistance: 10
+  lightWaveStartingSizeMultiplier: 0.4
+  lightWaveMaxSizeAtDistance: 4

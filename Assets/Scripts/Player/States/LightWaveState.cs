@@ -16,13 +16,14 @@ public class LightWaveState : BaseState
 
     public override void OnEnter()
     {
-        Debug.Log("LightWave");
+        
     }
 
     public override void OnUpdate()
     {
         if (!sm.pData.lightThrowButtonPressed)
         {
+            sm.ltm.LightWave();
             sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
         }
     }

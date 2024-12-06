@@ -36,10 +36,10 @@ public class LightProjectile : MonoBehaviour
         /*
          * Code for projectile interacting with Objects here 
          */
-        StartCoroutine(DestoryProjectile());
+        StartCoroutine(DestroyProjectile());
     }
 
-    IEnumerator DestoryProjectile()
+    IEnumerator DestroyProjectile()
     {
         // possible behavior of projectile when getting destroyed
         sr.enabled = false;
