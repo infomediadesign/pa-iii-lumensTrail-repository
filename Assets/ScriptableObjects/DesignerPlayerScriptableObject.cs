@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DesignerPlayerData", menuName = "ScriptableObjects/DesignerPlayerScriptableObject")]
@@ -35,4 +36,27 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Wall-Cling")]
     public float wallClingSlideGravityReduction = 2f;
     public float wallClingAirFreezeTime = 0.5f;
+
+    [Space(15)]
+    [Header("Light Mechanics")]
+    [Header("Light Throw")]
+    public float lightThrowProjectileSpeed = 5f;
+    public float lightThrowProjectileMaxTravelTime = 10f;
+    public float lightThrowCooldown = 3f;
+    public float startChargingDelay = 0.5f;
+    public float switchToLightWaveTime = 1f;
+    public float lightThrowGravityMultiplier = 1f;
+
+    [Space(10)]
+    [Header("Light Wave")]
+    public float lightWaveSpeed = 6f;
+    public float lightWaveMaxTravelDistance = 6f;
+    public float lightWaveStartingSizeMultiplier = 0.4f;
+    public float lightWaveMaxSizeAtDistance = 2f;
+
+    [Space(15)]
+    [Header("Interactable Objects")]
+    [Header("Propeller Flower")]
+    public float propellerFlowerActiveTime = 8f;
+    public float maxWindStrength = 30f;
 }
