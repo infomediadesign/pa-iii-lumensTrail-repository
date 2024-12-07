@@ -54,6 +54,13 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float lightWaveStartingSizeMultiplier = 0.4f;
     public float lightWaveMaxSizeAtDistance = 2f;
 
+    [Space(10)]
+    [Header("Light Impulse")]
+    public float impulseCooldown = 10f;
+    public float maxImpulseRadius = 15f;
+    public float impulseSpeed = 3f;
+    public float highlightTime = 6f;
+
     [Space(15)]
     [Header("Interactable Objects")]
     [Header("Propeller Flower")]

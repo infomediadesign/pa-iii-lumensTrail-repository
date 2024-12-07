@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashOnCooldown;
     public Image dashCooldownImage;
     private float lastTimeLightThrown;
+    private float lastTimeLigthImpulse;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
         lastTimeLightThrown = -dData.lightThrowCooldown;
+        lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
     }
 
@@ -129,6 +131,18 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled) 
         {
             pData.lightThrowButtonPressed = false;
+        }
+    }
+
+    public void OnLightImpulse(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (Time.time < lastTimeLigthImpulse + dData.impulseCooldown) return;
+            lastTimeLigthImpulse = Time.time;
+            LightImpuls lI = GetComponentInChildren<LightImpuls>();
+            if (lI != null) lI.LightImpulse();
+            else Debug.Log("LightImpulse Component is null");
         }
     }
 
