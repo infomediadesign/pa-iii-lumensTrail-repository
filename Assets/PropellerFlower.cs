@@ -7,14 +7,16 @@ public class PropellerFlower : BaseInteractableObject
     [SerializeField] DesignerPlayerScriptableObject dData;
     private SpriteRenderer sr;
     private float activationTime;
-    [Header("If you don't know why it's 0, keep it 0!")] 
+    [Header("If you don't know why they're 0, keep em 0!")] 
     [SerializeField] private float maxWindStrength;
+    [SerializeField] private float propellerFlowerActiveTime;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         // incase this specific flowers shall have another blowing height than all the others
         if (maxWindStrength == 0) maxWindStrength = dData.maxWindStrength;
+        if (propellerFlowerActiveTime == 0) propellerFlowerActiveTime = dData.propellerFlowerActiveTime;
         isActive = false;
         isGlowing = false;
     }
@@ -24,7 +26,7 @@ public class PropellerFlower : BaseInteractableObject
     {
         if (isActive)
         {
-            if (Time.time > activationTime + dData.propellerFlowerActiveTime)
+            if (Time.time > activationTime + propellerFlowerActiveTime)
             {
                 this.Deactivate();
                 return;
