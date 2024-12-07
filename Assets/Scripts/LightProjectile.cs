@@ -32,10 +32,19 @@ public class LightProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player") return;
-        /*
-         * Code for projectile interacting with Objects here 
-         */
+        if (collision.CompareTag("Player")) return;
+
+        // code for activating InteractableObjects
+        if (collision.CompareTag("LightThrowInteractable"))
+        {
+            BaseInteractableObject interactable = collision.GetComponent<BaseInteractableObject>();
+
+            if (interactable != null)
+            {
+                interactable.Activate();
+            }
+        }
+        // destory Projectile
         StartCoroutine(DestroyProjectile());
     }
 

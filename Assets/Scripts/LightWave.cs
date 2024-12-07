@@ -60,10 +60,19 @@ public class LightWave : MonoBehaviour
         // this mf thinks it has to collide before even being instanciated completly
         if (rb == null) return;
         
-        if (collision.tag == "Player") return;
-        /*
-         * Code for projectile interacting with Objects here 
-         */
+        if (collision.CompareTag("Player")) return;
+
+        // code for activating InteractableObjects
+        if (collision.CompareTag("LightWaveInteractable"))
+        {
+            BaseInteractableObject interactable = collision.GetComponent<BaseInteractableObject>();
+
+            if (interactable != null)
+            {
+                interactable.Activate();
+            }
+        }
+        // destory Projectile
         StartCoroutine(DestroyLightWave());
     }
 
