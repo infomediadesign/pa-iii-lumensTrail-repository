@@ -39,3 +39,5 @@ MonoBehaviour:
   lightWaveMaxTravelDistance: 10
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  propellerFlowerActiveTime: 8
+  maxWindStrength: 50

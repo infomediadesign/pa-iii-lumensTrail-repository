@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DesignerPlayerData", menuName = "ScriptableObjects/DesignerPlayerScriptableObject")]
@@ -52,4 +53,10 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float lightWaveMaxTravelDistance = 6f;
     public float lightWaveStartingSizeMultiplier = 0.4f;
     public float lightWaveMaxSizeAtDistance = 2f;
+
+    [Space(15)]
+    [Header("Interactable Objects")]
+    [Header("Propeller Flower")]
+    public float propellerFlowerActiveTime = 8f;
+    public float maxWindStrength = 30f;
 }
