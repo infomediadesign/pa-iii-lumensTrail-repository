@@ -27,6 +27,10 @@ public class PickupState : BaseState
 
     public override void OnEnter()
     {
+        arcHeight = sm.dData.pickupArcHeight;
+        duration = sm.dData.pickupArcSpeed;
+        heightGap = sm.dData.aboveHeadCarryGap;
+
         carriedObject = sm.im.carriedItem;
         float endHeight = sm.transform.position.y + sm.sr.bounds.size.y / 2 + carriedObject.GetComponent<SpriteRenderer>().bounds.size.y / 2 + heightGap;
         endPoint = new Vector2(sm.transform.position.x, endHeight);

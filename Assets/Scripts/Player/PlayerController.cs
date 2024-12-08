@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         playerStateMachine.im = itemManager;
 
         //to be designer stuff
-        pickupRadius = 5f;
+        pickupRadius = dData.pickupRange;
     }
 
     private void Update()

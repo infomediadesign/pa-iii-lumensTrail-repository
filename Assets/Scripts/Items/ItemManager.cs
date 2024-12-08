@@ -40,7 +40,7 @@ public class ItemManager : MonoBehaviour
     public GameObject GetNearestPickupItem(Transform playerPos, float pickupRadius, bool facingRight, ref bool pickup)
     {
         GameObject returnItem = null;
-        float returnDistance = 12;
+        float returnDistance = pickupRadius;
         foreach (var item in items)
         {
             if (Vector2.Distance(item.transform.position, playerPos.position) > pickupRadius) continue;

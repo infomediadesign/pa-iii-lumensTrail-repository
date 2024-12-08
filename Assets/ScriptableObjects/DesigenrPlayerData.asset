@@ -41,3 +41,8 @@ MonoBehaviour:
   lightWaveMaxSizeAtDistance: 4
   propellerFlowerActiveTime: 8
   maxWindStrength: 50
+  pickupRange: 2
+  pickupArcHeight: 0.75
+  pickupArcSpeed: 0.55
+  aboveHeadCarryGap: 0.29
+  speedModWhileCarrying: 0.18
