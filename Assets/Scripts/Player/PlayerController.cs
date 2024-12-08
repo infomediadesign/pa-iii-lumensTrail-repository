@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
+    public ItemManager itemManager;
 
     private float horizontalMovement;
     private bool isFacingRight = true;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashOnCooldown;
     public Image dashCooldownImage;
     private float lastTimeLightThrown;
+    private float pickupRadius;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -36,6 +38,10 @@ public class PlayerController : MonoBehaviour
         lastTimeDashed = -dData.dashCooldown;
         lastTimeLightThrown = -dData.lightThrowCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
+        playerStateMachine.im = itemManager;
+
+        //to be designer stuff
+        pickupRadius = 5f;
     }
 
     private void Update()
@@ -129,6 +135,20 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled) 
         {
             pData.lightThrowButtonPressed = false;
+        }
+    }
+
+    public void OnPickupItem(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            bool canPickup = true;
+            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+            if(canPickup)
+            {
+                itemManager.carriedItem = pickupItem;
+                playerStateMachine.states[(int)StateMachine.StateKey.PickUp].SwitchTo();
+            }
         }
     }
 
