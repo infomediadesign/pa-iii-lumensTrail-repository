@@ -31,7 +31,7 @@ public class CarryingState : BaseState
         carriedRb = carriedObject.GetComponent<Rigidbody2D>();
         
         //to be changed to design SO
-        speedMod = 0.5f;
+        speedMod = sm.dData.speedModWhileCarrying;
     }
 
     public override void OnUpdate()
