@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
+    public ItemManager itemManager;
 
     private float horizontalMovement;
     private bool isFacingRight = true;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashOnCooldown;
     public Image dashCooldownImage;
     private float lastTimeLightThrown;
-    private float lastTimeLigthImpulse;
+    private float pickupRadius;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -36,8 +37,11 @@ public class PlayerController : MonoBehaviour
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
         lastTimeLightThrown = -dData.lightThrowCooldown;
-        lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
+        playerStateMachine.im = itemManager;
+
+        //to be designer stuff
+        pickupRadius = dData.pickupRange;
     }
 
     private void Update()
@@ -134,15 +138,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnLightImpulse(InputAction.CallbackContext context)
+    public void OnPickupItem(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (Time.time < lastTimeLigthImpulse + dData.impulseCooldown) return;
-            lastTimeLigthImpulse = Time.time;
-            LightImpuls lI = GetComponentInChildren<LightImpuls>();
-            if (lI != null) lI.LightImpulse();
-            else Debug.Log("LightImpulse Component is null");
+            bool canPickup = true;
+            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+            if(canPickup)
+            {
+                itemManager.carriedItem = pickupItem;
+                playerStateMachine.states[(int)StateMachine.StateKey.PickUp].SwitchTo();
+            }
         }
     }
 

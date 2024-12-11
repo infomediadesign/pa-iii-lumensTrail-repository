@@ -70,4 +70,12 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float propellerFlowerActiveTime = 8f;
     [Tooltip("The strength of the wind that pushes the player upwards")]
     public float maxWindStrength = 30f;
+
+    [Space(10)]
+    [Header("Items")]
+    public float pickupRange = 2f;
+    public float pickupArcHeight = 1f;
+    public float pickupArcSpeed = 1f;
+    public float aboveHeadCarryGap = 0.5f;
+    public float speedModWhileCarrying = 0.5f;
 }

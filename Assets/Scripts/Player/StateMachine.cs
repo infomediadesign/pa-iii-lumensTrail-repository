@@ -14,7 +14,9 @@ public class StateMachine : MonoBehaviour
         Dashing = 5,
         WallClinging = 6,
         LightThrow = 7,
-        LightWave = 8
+        LightWave = 8,
+        PickUp = 9,
+        Carrying = 10
     }
 
     
@@ -23,9 +25,14 @@ public class StateMachine : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
     [HideInInspector]
+    public SpriteRenderer sr;
+    [HideInInspector]
     public TrailRenderer tr;
     [HideInInspector]
     public PlayerLightThrowManager ltm;
+    [HideInInspector]
+    public ItemManager im;
+    
 
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
@@ -46,9 +53,10 @@ public class StateMachine : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
         ltm = GetComponent<PlayerLightThrowManager>();
-        states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this)}); 
+        states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this), new PickupState(this), new CarryingState(this) });
     }
 
     private void Start()
