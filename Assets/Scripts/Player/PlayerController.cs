@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     private float lastTimeDashed;
     private bool isDashOnCooldown;
-    public Image dashCooldownImage;
     private float lastTimeLightThrown;
+    private float lastTimeLigthImpulse;
     private float pickupRadius;
 
     public Vector2 footBoxSize;
@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
         lastTimeLightThrown = -dData.lightThrowCooldown;
+        lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
         playerStateMachine.im = itemManager;
 
@@ -119,7 +120,6 @@ public class PlayerController : MonoBehaviour
             lastTimeDashed = Time.time;
             playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
             isDashOnCooldown = true;
-            dashCooldownImage.fillAmount = 0;
         }
     }
 
@@ -152,18 +152,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnLightImpulse(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (Time.time < lastTimeLigthImpulse + dData.impulseCooldown) return;
+            lastTimeLigthImpulse = Time.time;
+            LightImpuls lI = GetComponentInChildren<LightImpuls>();
+            if (lI != null) lI.LightImpulse();
+            else Debug.Log("LightImpulse Component is null");
+        }
+    }
+
     private void DashOnCooldown()
     {
-        float timeSinceDashed = Time.time - lastTimeDashed;
-        float cooldownProgress = timeSinceDashed / dData.dashCooldown;
-        dashCooldownImage.fillAmount = cooldownProgress;
-
-        if (cooldownProgress >= 1f)
-        {
-            isDashOnCooldown = false;
-            dashCooldownImage.fillAmount = 1f;
-        }
-        }
+        if (Time.time < lastTimeDashed + dData.dashCooldown) return;
+        isDashOnCooldown = false;    }
 
     private void IsGrounded()
     {

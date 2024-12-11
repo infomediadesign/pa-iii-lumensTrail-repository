@@ -39,6 +39,10 @@ MonoBehaviour:
   lightWaveMaxTravelDistance: 10
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  impulseCooldown: 10
+  maxImpulseRadius: 25
+  impulseSpeed: 1
+  highlightTime: 6
   propellerFlowerActiveTime: 8
   maxWindStrength: 50
   pickupRange: 2
