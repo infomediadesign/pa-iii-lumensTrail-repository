@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a5d9ce42ac5e541b55f3eb95208eda, type: 3}
   m_Name: DesigenrPlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  acceleration: 15
-  decceleration: 15
+  moveSpeed: 5
+  acceleration: 5
+  decceleration: 5
   frictionAmount: 0.6
   velPower: 1
   generalGravityMultiplier: 1.7
@@ -22,7 +22,7 @@ MonoBehaviour:
   fastFallingMultiplier: 0
   coyoteTime: 0.1
   airFrictionAmount: 0.4
-  jumpForce: 13
+  jumpForce: 9
   jumpCutMultiplier: 0.5
   dashForce: 25
   dashingTime: 0.3
