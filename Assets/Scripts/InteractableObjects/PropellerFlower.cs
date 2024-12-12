@@ -5,7 +5,6 @@ using UnityEngine;
 public class PropellerFlower : BaseInteractableObject
 {
     [SerializeField] DesignerPlayerScriptableObject dData;
-    private SpriteRenderer sr;
     private float activationTime;
     [Header("If you don't know why they're 0, keep em 0!")] 
     [SerializeField] private float maxWindStrength;
@@ -13,7 +12,7 @@ public class PropellerFlower : BaseInteractableObject
 
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+        this.sr = GetComponent<SpriteRenderer>();
         // incase this specific flowers shall have another blowing height than all the others
         if (maxWindStrength == 0) maxWindStrength = dData.maxWindStrength;
         if (propellerFlowerActiveTime == 0) propellerFlowerActiveTime = dData.propellerFlowerActiveTime;
@@ -31,8 +30,15 @@ public class PropellerFlower : BaseInteractableObject
                 this.Deactivate();
                 return;
             }
-            // code for hochpusten here
-            
+        }
+
+        if (isGlowing)
+        {
+            if (Time.time > this.glowOnTime + dData.highlightTime)
+            {
+                this.GlowOff(); 
+                return;
+            }
         }
     }
 
@@ -43,7 +49,7 @@ public class PropellerFlower : BaseInteractableObject
         sr.color = Color.red;
     }
 
-    public override void Deactivate()
+    protected override void Deactivate()
     {
         this.isActive = false;
         sr.color = Color.white;
