@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,12 +12,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
+    public ItemManager itemManager;
 
     private float horizontalMovement;
+    private bool isFacingRight = true;
     private bool isMoving = false;
     private float lastTimeDashed;
     private bool isDashOnCooldown;
     public Image dashCooldownImage;
+    private float lastTimeLightThrown;
+    private float pickupRadius;
 
     public Vector2 footBoxSize;
     public Vector2 leftSideBoxSize;
@@ -31,13 +36,23 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
         lastTimeDashed = -dData.dashCooldown;
+        lastTimeLightThrown = -dData.lightThrowCooldown;
+        rb.gravityScale = dData.generalGravityMultiplier;
+        playerStateMachine.im = itemManager;
+
+        //to be designer stuff
+        pickupRadius = dData.pickupRange;
     }
 
     private void Update()
     {
-        isGrounded();
-        isTouchingWall();
+        IsGrounded();
+        IsTouchingWall();
 
+        /*
+         * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
+         */
+        //rb.gravityScale = dData.generalGravityMultiplier;
         if (isDashOnCooldown) DashOnCooldown();
     }
 
@@ -58,7 +73,7 @@ public class PlayerController : MonoBehaviour
             pData.jumpButtonPressed = true;
             if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
             {
-                playerStateMachine.ChangeState(StateMachine.StateKey.Jumping);
+                playerStateMachine.states[(int)StateMachine.StateKey.Jumping].SwitchTo();
 
                 pData.groundCoyoteTimeCounter = 0;
                 pData.wallCoyoteTimeCounter = 0;
@@ -85,7 +100,8 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = true;
             horizontalMovement = context.ReadValue<Vector2>().x;
-            
+            // To flip the player when changing direction
+            if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) FlipPlayerCharacter(); 
         }
         else if (context.canceled)
         {
@@ -101,9 +117,38 @@ public class PlayerController : MonoBehaviour
             if (Time.time < lastTimeDashed + dData.dashCooldown) return;
 
             lastTimeDashed = Time.time;
-            playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
+            playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
             isDashOnCooldown = true;
             dashCooldownImage.fillAmount = 0;
+        }
+    }
+
+    public void OnLightThrow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            pData.lightThrowButtonPressed = true;
+            if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
+            lastTimeLightThrown = Time.time;
+            playerStateMachine.states[(int)StateMachine.StateKey.LightThrow].SwitchTo();
+        }
+        else if (context.canceled) 
+        {
+            pData.lightThrowButtonPressed = false;
+        }
+    }
+
+    public void OnPickupItem(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            bool canPickup = true;
+            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+            if(canPickup)
+            {
+                itemManager.carriedItem = pickupItem;
+                playerStateMachine.states[(int)StateMachine.StateKey.PickUp].SwitchTo();
+            }
         }
     }
 
@@ -120,7 +165,7 @@ public class PlayerController : MonoBehaviour
         }
         }
 
-    private void isGrounded()
+    private void IsGrounded()
     {
         if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
         {
@@ -134,7 +179,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void isTouchingWall()
+    private void IsTouchingWall()
     {
         if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
         {
@@ -146,6 +191,12 @@ public class PlayerController : MonoBehaviour
             pData.isTouchingWall = false;
             pData.wallCoyoteTimeCounter -= Time.deltaTime;
         }
+    }
+
+    private void FlipPlayerCharacter()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
     private void OnDrawGizmos()

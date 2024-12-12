@@ -5,36 +5,53 @@ using UnityEngine;
 public class WallClingState : BaseState
 {
     private float rbGravityScale;
-    private float timer = 0;
-    protected override void OnEnter()
+    private float timer = 1f;
+    private float wallSlideGravityReduction = 2f;
+
+    public WallClingState(StateMachine stateMachine) : base(stateMachine) 
     {
-       rbGravityScale = sm.rb.gravityScale;
-        sm.rb.gravityScale = 0;
-        sm.rb.velocity = Vector2.zero;
+        stateKey = StateMachine.StateKey.WallClinging;
+
+        timer = sm.dData.wallClingAirFreezeTime;
+        wallSlideGravityReduction = sm.dData.wallClingSlideGravityReduction;
     }
 
-    protected override void OnUpdate()
+    public override void SwitchTo()
     {
-        timer = timer + Time.deltaTime;
+        if (!sm.hasLeftWallClState) return;
+        base.SwitchTo();
+    }
+
+    public override void OnEnter()
+    { 
+        rbGravityScale = sm.rb.gravityScale;
+        sm.rb.gravityScale = 0;
+        sm.rb.velocity = Vector2.zero;
+        sm.hasLeftWallClState = false;
+    }
+
+    public override void OnUpdate()
+    {
+        timer -= Time.deltaTime;
         if (sm.pData.wallCoyoteTimeCounter > 0)
         {
-            if (timer >= 1)
+            if (timer <= 0)
             {
-                sm.rb.gravityScale = rbGravityScale / 2;
+                sm.rb.gravityScale = rbGravityScale / wallSlideGravityReduction;
             }
         }
         else
         {
-            sm.ChangeState(StateMachine.StateKey.Airborne);
+            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
 
         if (sm.pData.isGrounded)
         {
-            sm.ChangeState(StateMachine.StateKey.Grounded);
+            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;

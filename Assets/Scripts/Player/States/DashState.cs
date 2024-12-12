@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class DashState : BaseState
 {
     private float rbGravityScale;
     private float timer = 0;
-    protected override void OnEnter()
+
+    public DashState(StateMachine p_sm) : base(p_sm) 
+    { 
+        stateKey = StateMachine.StateKey.Dashing;
+    }
+
+    public override void OnEnter()
     {
         // if dash should go horizontally
         sm.rb.velocity = Vector2.zero;
@@ -21,7 +28,7 @@ public class DashState : BaseState
         sm.tr.emitting = true;
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
         timer = timer + Time.deltaTime;
         if (timer > sm.dData.dashingTime)
@@ -30,7 +37,7 @@ public class DashState : BaseState
         }
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
         sm.rb.gravityScale = rbGravityScale;
         timer = 0;

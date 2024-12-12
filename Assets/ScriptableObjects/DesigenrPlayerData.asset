@@ -15,17 +15,34 @@ MonoBehaviour:
   moveSpeed: 15
   acceleration: 15
   decceleration: 15
-  velPower: 1
-  dashForce: 25
   frictionAmount: 0.6
+  velPower: 1
+  generalGravityMultiplier: 1.7
+  fallGravityMultiplier: 2.2
+  fastFallingMultiplier: 0
+  coyoteTime: 0.1
   airFrictionAmount: 0.4
-  isDashing: 0
+  jumpForce: 13
+  jumpCutMultiplier: 0.5
+  dashForce: 25
   dashingTime: 0.3
-  dashCooldown: 5
-  isGrounded: 1
-  isTouchingWall: 0
-  jumpButtonPressed: 0
-  jumpForce: 10
-  coyoteTime: 0.2
-  jumpCutMultiplier: 0.7
-  fallGravityMultiplier: 1.5
+  dashCooldown: 1.74
+  wallClingSlideGravityReduction: 1.59
+  wallClingAirFreezeTime: 0.07
+  lightThrowProjectileSpeed: 20
+  lightThrowProjectileMaxTravelTime: 10
+  lightThrowCooldown: 3
+  startChargingDelay: 0.5
+  switchToLightWaveTime: 1
+  lightThrowGravityMultiplier: 1
+  lightWaveSpeed: 12
+  lightWaveMaxTravelDistance: 10
+  lightWaveStartingSizeMultiplier: 0.4
+  lightWaveMaxSizeAtDistance: 4
+  propellerFlowerActiveTime: 8
+  maxWindStrength: 50
+  pickupRange: 2
+  pickupArcHeight: 0.75
+  pickupArcSpeed: 0.55
+  aboveHeadCarryGap: 0.29
+  speedModWhileCarrying: 0.18
