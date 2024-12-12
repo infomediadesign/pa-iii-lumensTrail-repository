@@ -23,18 +23,19 @@ public class LightWave : MonoBehaviour
         col = GetComponent<CapsuleCollider2D>();
         // Get directional vector by subtracting current position from mouse pointer position
         Vector3 moveDirVec3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        // moving projectile
-        rb.velocity = new Vector2(moveDirVec3.x, moveDirVec3.y).normalized * dData.lightWaveSpeed;
+        // calculating angle of mouse
+        float angle = Mathf.Atan2(moveDirVec3.y, moveDirVec3.x) * Mathf.Rad2Deg;
+        float directionalFloat;
+        // setting directionFloat to 1 or -1 depending on angle so wave goes left or right
+        if (angle < 90 && angle > -90) directionalFloat = 1;
+        else directionalFloat = -1;
+        // moving light wave
+        rb.velocity = Vector2.right * directionalFloat * dData.lightWaveSpeed;
         // Reduced size at start
         startScale = dData.lightWaveStartingSizeMultiplier;
         desiredLocalScale = transform.localScale;
         transform.localScale = desiredLocalScale * startScale;
         startPos = transform.position;
-
-        // rotate wave to destination
-        float angle = Mathf.Atan2(moveDirVec3.y, moveDirVec3.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-
     }
 
     // Update is called once per frame
