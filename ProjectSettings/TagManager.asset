@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Wall
+  - LightThrowInteractable
+  - LightWaveInteractable
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - Platform
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - InteractableObjects
+  - Item
   - 
   - 
   - 

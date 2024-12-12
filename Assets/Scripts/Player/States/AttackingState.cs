@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class AttackingState : BaseState
 {
-    protected override void OnEnter()
+    public AttackingState(StateMachine p_sm) : base(p_sm)
+    {
+        stateKey = StateMachine.StateKey.Attacking;
+    }
+
+
+    public override void OnEnter()
     {
 
     }
 
-    protected override void OnUpdate()
+    public override void OnUpdate()
     {
 
     }
 
-    protected override void OnMove()
+    public override void OnMove()
     {
 
     }
 
-    protected override void OnExit()
+    public override void OnExit()
     {
 
     }
