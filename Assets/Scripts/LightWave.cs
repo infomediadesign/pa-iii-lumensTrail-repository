@@ -13,7 +13,7 @@ public class LightWave : MonoBehaviour
     private Vector3 startPos;
     private float startScale;
     private float maxScale = 1f;
-    private Vector3 desiredLocalScale;
+    public Vector3 desiredLocalScale { get; private set; }
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class LightWave : MonoBehaviour
         // calculating angle of mouse
         float angle = Mathf.Atan2(moveDirVec3.y, moveDirVec3.x) * Mathf.Rad2Deg;
         float directionalFloat;
-        // setting directionFloat to 1 or -1 depending on angle so wave goes left or right
+        // setting directionFloat to 1 or -1 depending on angle so wave goes in correct direction
         if (angle < 90 && angle > -90) directionalFloat = 1;
         else directionalFloat = -1;
         // moving light wave
@@ -55,29 +55,7 @@ public class LightWave : MonoBehaviour
         if (distance > dData.lightWaveMaxTravelDistance) StartCoroutine(DestroyLightWave());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // need to check if Start() has already been called or nah, cause sometimes
-        // this mf thinks it has to collide before even being instanciated completly
-        if (rb == null) return;
-        
-        if (collision.CompareTag("Player")) return;
-
-        // code for activating InteractableObjects
-        if (collision.CompareTag("LightWaveInteractable"))
-        {
-            BaseInteractableObject interactable = collision.GetComponent<BaseInteractableObject>();
-
-            if (interactable != null)
-            {
-                interactable.Activate();
-            }
-        }
-        // destory Projectile
-        StartCoroutine(DestroyLightWave());
-    }
-
-    IEnumerator DestroyLightWave()
+    public IEnumerator DestroyLightWave()
     {
         // possible behavior of projectile when getting destroyed
         //sr.enabled = false;

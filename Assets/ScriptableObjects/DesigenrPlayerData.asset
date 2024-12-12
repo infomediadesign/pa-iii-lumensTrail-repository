@@ -39,6 +39,7 @@ MonoBehaviour:
   lightWaveMaxTravelDistance: 5
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
   maxImpulseRadius: 25
   impulseSpeed: 1
