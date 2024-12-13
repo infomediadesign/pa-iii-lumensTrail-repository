@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirborneState : BaseState
+public class AirborneState : PhysicsBaseState
 {
     private float rbGravityScale;
     private float fastFallingMultiplier;
 
     public AirborneState(StateMachine p_sm) : base(p_sm) 
     {
-        stateKey = StateMachine.StateKey.Airborne;
+        ownState = PhysicsBaseState.StateKey.Airborne;
         //fastFallingMultiplier = sm.dData.fastFallingMultiplier;
 
     }
 
     public override void SwitchTo()
     {
-        if (sm.currentState.stateKey == StateMachine.StateKey.Landing) return;
+        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Landing) return;
         base.SwitchTo();
     }
 

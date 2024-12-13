@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GroundedState : BaseState
+public class GroundedState : PhysicsBaseState
 {
 
     public GroundedState(StateMachine p_sm) : base(p_sm) 
     { 
-        stateKey = StateMachine.StateKey.Grounded;
+        ownState = PhysicsBaseState.StateKey.Grounded;
+    }
+
+    public override void SwitchTo()
+    {
+        base.SwitchTo();
     }
 
 

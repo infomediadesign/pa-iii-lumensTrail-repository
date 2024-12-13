@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightThrowState : BaseState
+public class LightThrowState : ActionBaseState
 {
     float lightThrowButtonHoldTimer;
     private float rbGravityScale;
     public LightThrowState(StateMachine stateMachine) : base(stateMachine) 
     {
-        stateKey = StateMachine.StateKey.LightThrow;
+        ownState = ActionBaseState.StateKey.LightThrow;
     }
 
     public override void SwitchTo()

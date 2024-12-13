@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class PickupState : BaseState
+public class PickupState : ActionBaseState
 {
     private GameObject carriedObject;
     private float arcHeight = 1f;
@@ -16,12 +16,12 @@ public class PickupState : BaseState
     
     public PickupState(StateMachine sm): base(sm) 
     {
-        stateKey = StateMachine.StateKey.PickUp;
+        ownState = ActionBaseState.StateKey.PickUp;
     }
 
     public override void SwitchTo()
     {
-        if (sm.currentState.stateKey != StateMachine.StateKey.Grounded) return;    
+        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState != PhysicsBaseState.StateKey.Grounded) return;    
         base.SwitchTo();
     }
 

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class LightWaveState : BaseState
+public class LightWaveState : ActionBaseState
 {
     private Light2D light;
     private Color lightOriginalColor;
     public LightWaveState(StateMachine stateMachine) : base(stateMachine) 
     {
-        stateKey = StateMachine.StateKey.LightWave;
+        ownState = ActionBaseState.StateKey.LightWave;
     }
 
     public override void SwitchTo()

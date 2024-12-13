@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarryingState : BaseState
+public class CarryingState : ActionBaseState
 {
     private GameObject carriedObject;
     private Rigidbody2D carriedRb;
@@ -12,13 +12,13 @@ public class CarryingState : BaseState
     
     public CarryingState(StateMachine sm):base (sm)
     {
-        stateKey = StateMachine.StateKey.Carrying;
+        ownState = ActionBaseState.StateKey.Carrying;
     }
 
 
     public override void SwitchTo()
     {
-        if (sm.currentState.stateKey != StateMachine.StateKey.PickUp) return;
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.PickUp) return;
         base.SwitchTo();
     }
 

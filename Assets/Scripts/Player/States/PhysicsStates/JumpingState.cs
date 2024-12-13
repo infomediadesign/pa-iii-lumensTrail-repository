@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpingState : BaseState
+public class JumpingState : PhysicsBaseState
 {
     private bool wallFlag=false;
 
 
     public JumpingState(StateMachine sm) : base(sm) 
     {
-        stateKey = StateMachine.StateKey.Jumping;
+        ownState = PhysicsBaseState.StateKey.Jumping;
     }
 
     public override void SwitchTo()
     {
-        if (sm.currentState.stateKey == StateMachine.StateKey.Airborne) return;
+        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Airborne) return;
         base.SwitchTo();
     }
 

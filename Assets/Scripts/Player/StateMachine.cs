@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public enum StateKey
+    /*public enum StateKey
     {
         Grounded = 0,
         Jumping = 1,
@@ -17,11 +18,24 @@ public class StateMachine : MonoBehaviour
         LightWave = 8,
         PickUp = 9,
         Carrying = 10
-    }
+    }*/
 
     
-    public BaseState currentState { get; private set; }
+    /*public BaseState currentState { get; private set; }
     public BaseState lastState { get; private set; }
+*/
+    public MovementBaseState currentMovementState { get; private set; }
+    public MovementBaseState lastMovementState { get; private set; }
+
+    public PhysicsBaseState currentPhysicsState { get; private set; }
+    public PhysicsBaseState lastPhysicsState { get; private set; }
+
+    public ActionBaseState currentActionState { get; private set; }
+    public ActionBaseState lastActionState { get; private set; }
+
+
+
+
     [HideInInspector]
     public Rigidbody2D rb;
     [HideInInspector]
@@ -37,7 +51,12 @@ public class StateMachine : MonoBehaviour
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
 
-    public List<BaseState> states { get; private set; } = new List<BaseState>();
+    /*public List<BaseState> states { get; private set; } = new List<BaseState>();*/
+
+    public List<MovementBaseState> movementStates { get; private set; } = new List<MovementBaseState>();
+    public List<PhysicsBaseState> physicsStates { get; private set; } = new List<PhysicsBaseState>();
+    public List<ActionBaseState> actionStates { get; private set; } = new List<ActionBaseState>();
+
 
     //public GroundedState groundedState = new GroundedState();
     //public JumpingState jumpingState = new JumpingState();
@@ -75,52 +94,45 @@ public class StateMachine : MonoBehaviour
         if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
     }
 
-    public void ChangeState(StateKey stateKey)
+    public void SwitchToState(Enum stateKey)
+    {
+        if (stateKey.GetType() == typeof(MovementBaseState.StateKey))
+        {
+            movementStates[Convert.ToInt32(stateKey)].SwitchTo();
+        } 
+        else if (stateKey.GetType() == typeof(PhysicsBaseState.StateKey))
+        {
+            physicsStates[Convert.ToInt32(stateKey)].SwitchTo();
+        }
+        else if (stateKey.GetType() == typeof(ActionBaseState.StateKey))
+        {
+            actionStates[Convert.ToInt32(stateKey)].SwitchTo();
+        }
+        else
+        {
+            throw new System.Exception("Invalid state key");
+        }
+    }
+
+    public void ChangeState(Enum stateKey)
     {
         lastState = currentState;
-        currentState = states[(int)stateKey];
-        
-        //switch(stateKey)
-        //{
-        //    case StateKey.Grounded:
-        //        lastState = currentState;
-        //        currentState = groundedState;
-        //        break;
-        //    case StateKey.Jumping:
-        //        if (currentState == airborneState) return;
-        //        lastState = currentState;
-        //        currentState = jumpingState; 
-        //        break;
-        //    case StateKey.Airborne:
-        //        if (currentState != landingState)
-        //        {
-        //            lastState = currentState;
-        //            currentState = airborneState;
-        //        }
-        //        else return;
-        //        break;
-        //    case StateKey.Landing:
-        //        lastState = currentState;
-        //        currentState = landingState;
-        //        break;
-        //    case StateKey.Attacking:
-        //        lastState = currentState;
-        //        currentState = attackingState;
-        //        break;
-        //    case StateKey.Dashing:
-        //        lastState = currentState;
-        //        currentState = dashState;
-        //        break;
-        //    case StateKey.WallClinging:
-        //        if (!hasLeftWallClState) return;
-        //        lastState = currentState;
-        //        currentState = wallClState;
-        //        hasLeftWallClState = false;
-        //        break;
-        //}
+        currentState = states[Convert.ToInt32(stateKey)];
+
         lastState?.OnExit();
         currentState.OnEnter();
-        pData.stateKey = stateKey;
+        if (stateKey.GetType() == typeof(MovementBaseState.StateKey))
+        {
+            pData.movementStateKey = (MovementBaseState.StateKey)stateKey;
+        }
+        else if (stateKey.GetType() == typeof(PhysicsBaseState.StateKey))
+        {
+            pData.physicsStateKey = (PhysicsBaseState.StateKey)stateKey;
+        }
+        else if (stateKey.GetType() == typeof(ActionBaseState.StateKey))
+        {
+            pData.actionStateKey = (ActionBaseState.StateKey)stateKey;
+        }
     }
 
     public void ChangeToLastState()

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BaseState
 {
     protected StateMachine sm;
-    public StateMachine.StateKey stateKey { get; protected set; }
+    public System.Enum ownState { get; protected set; }
 
     public BaseState(StateMachine p_sm)
     {
@@ -14,7 +14,7 @@ public abstract class BaseState
 
     public virtual void SwitchTo()
     {
-        sm.ChangeState(stateKey);
+        sm.ChangeState(ownState);
     }
 
     
@@ -30,7 +30,7 @@ public abstract class BaseState
         // this code can be overwritten in the derived classes
     }
 
-    public virtual void OnMove()
+    /*public virtual void OnMove()
     {
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed;
         // for acceleration and decceleration, but currently not used
@@ -39,9 +39,11 @@ public abstract class BaseState
         //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, sm.data.velPower) * Mathf.Sign(speedDif);
 
         sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
-    }
+    }*/
 
-    
+
+
+
     public virtual void OnExit()
     {
         // this code can be overwritten in the derived classes
