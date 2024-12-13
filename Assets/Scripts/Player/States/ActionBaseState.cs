@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ActionBaseState : BaseState
 {
-    public enum StateKey { Idle, PickUp, Carrying, LightThrow, LightWave };
+    public enum StateKey { Idle = 0, PickUp = 1, Carrying = 2, LightThrow = 3, LightWave = 4 };
 
-    public ActionBaseState(StateMachine stateMachine) : base(stateMachine) { ownState = StateKey.Idle; /*standartimplement to be sure*/ }
+    public ActionBaseState(StateMachine stateMachine) : base(stateMachine) 
+    {
+        ownState = StateKey.Idle; /*standartimplement to be sure*/
+        stateType = BaseState.StateType.Action;
+    }
 
 
 }

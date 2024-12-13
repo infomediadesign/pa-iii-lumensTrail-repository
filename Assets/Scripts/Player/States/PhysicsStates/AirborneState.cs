@@ -22,25 +22,36 @@ public class AirborneState : PhysicsBaseState
 
     public override void OnEnter()
     {
-        rbGravityScale = sm.rb.gravityScale;
-        sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;
+       /* rbGravityScale = sm.rb.gravityScale;
+        sm.rb.gravityScale = rbGravityScale * sm.dData.fallGravityMultiplier;*/
+
+        gravityModifier = gravityModifier * sm.dData.fallGravityMultiplier;
+        MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
     }
 
     public override void OnUpdate()
     {
-        // friction while in air
+        /*
+         * @outdated: instead uses MovementSpeedModifier now
+         */
+        
+        /*// friction while in air
         if (!sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
         {
             float amount = Mathf.Min(Mathf.Abs(sm.rb.velocity.x), Mathf.Abs(sm.dData.airFrictionAmount));
             amount *= Mathf.Sign(sm.rb.velocity.x);
             sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
-        }
+        }*/
 
         
         //sm.rb.AddForce(Vector2.down * fastFallingMultiplier, ForceMode2D.Impulse);
         
         sm.pData.fallingVelocity = sm.rb.velocity.y;
 
+
+        /*
+         * @outdated and to be removed
+         **/
 
         if (sm.pData.isTouchingWall)
         {
@@ -55,6 +66,8 @@ public class AirborneState : PhysicsBaseState
 
     public override void OnExit()
     {
-        sm.rb.gravityScale = rbGravityScale;
+        //sm.rb.gravityScale = rbGravityScale;
+        gravityModifier = gravityModifier / sm.dData.fallGravityMultiplier;
+        MovementBaseState.movementSpeedModifier /= sm.dData.airFrictionAmount;
     }
 }

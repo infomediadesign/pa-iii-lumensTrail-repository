@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditorInternal.VersionControl.ListControl;
 
 public class StateMachine : MonoBehaviour
 {
@@ -75,21 +76,26 @@ public class StateMachine : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
         ltm = GetComponent<PlayerLightThrowManager>();
-        states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this), new PickupState(this), new CarryingState(this) });
+        //states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this), new PickupState(this), new CarryingState(this) });
+        
+        movementStates.AddRange(new MovementBaseState[] { new StillState(this), new MovingState(this) });
+        physicsStates.AddRange(new PhysicsBaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this) });
+        actionStates.AddRange(new ActionBaseState[] { new IdleState(this), new PickupState(this), new CarryingState(this), new LightThrowState(this), new LightWaveState(this) });
     }
 
     private void Start()
     {
-        lastState = states[0];
-        ChangeState(StateKey.Grounded);
+        lastMovementState = currentMovementState = movementStates[0];
+        lastPhysicsState = currentPhysicsState = physicsStates[0];
+        lastActionState = currentActionState = actionStates[0];
+        
     }
 
     private void FixedUpdate()
     {
-        if (currentState != null)
-        {
-            currentState.OnUpdate();
-        }
+        currentMovementState?.OnUpdate();
+        currentPhysicsState?.OnUpdate();
+        currentActionState?.OnUpdate();
 
         if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
     }
@@ -116,34 +122,66 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(Enum stateKey)
     {
-        lastState = currentState;
-        currentState = states[Convert.ToInt32(stateKey)];
-
-        lastState?.OnExit();
-        currentState.OnEnter();
         if (stateKey.GetType() == typeof(MovementBaseState.StateKey))
         {
+            lastMovementState = currentMovementState;
+            currentMovementState = movementStates[Convert.ToInt32(stateKey)];
+            lastMovementState?.OnExit();
+            currentMovementState?.OnEnter();
             pData.movementStateKey = (MovementBaseState.StateKey)stateKey;
         }
         else if (stateKey.GetType() == typeof(PhysicsBaseState.StateKey))
         {
+            lastPhysicsState = currentPhysicsState;
+            currentPhysicsState = physicsStates[Convert.ToInt32(stateKey)];
+            lastPhysicsState?.OnExit();
+            currentPhysicsState?.OnEnter();
             pData.physicsStateKey = (PhysicsBaseState.StateKey)stateKey;
         }
         else if (stateKey.GetType() == typeof(ActionBaseState.StateKey))
         {
+            lastActionState = currentActionState;
+            currentActionState = actionStates[Convert.ToInt32(stateKey)];
+            lastActionState?.OnExit();
+            currentActionState?.OnEnter();
             pData.actionStateKey = (ActionBaseState.StateKey)stateKey;
+        }
+        else
+        {
+            throw new System.Exception("Invalid state key");
         }
     }
 
-    public void ChangeToLastState()
+    public void ChangeToLastState(BaseState.StateType stateType)
     {
-        currentState.OnExit();
-        currentState = lastState;
+        switch (stateType)
+        {
+            case BaseState.StateType.Movement:
+                MovementBaseState movementTransition = lastMovementState;
+                lastMovementState = currentMovementState;
+                currentMovementState = movementTransition;
+                lastMovementState?.OnExit();
+                currentMovementState?.OnEnter();
+                break;
+            case BaseState.StateType.Physics:
+                PhysicsBaseState physicsTransition = lastPhysicsState;
+                lastPhysicsState = currentPhysicsState;
+                currentPhysicsState = physicsTransition;
+                lastPhysicsState?.OnExit();
+                currentPhysicsState?.OnEnter();
+                break;
+            case BaseState.StateType.Action:
+                ActionBaseState actionTransition = lastActionState;
+                lastActionState = currentActionState;
+                currentActionState = actionTransition;
+                lastActionState?.OnExit();
+                currentActionState?.OnEnter();
+                break;
+        }
     }
 
-    public void OnMove(float _horizontalMovement)
+    public void SetHorizontalMovement(float _horizontalMovement)
     {
         horizontalMovement = _horizontalMovement;
-        currentState.OnMove();
     }
 }

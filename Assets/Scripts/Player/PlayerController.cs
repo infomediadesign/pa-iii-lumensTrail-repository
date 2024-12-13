@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         if (isMoving)
         {
             if (pData.isDashing) return;
-            playerStateMachine.OnMove(horizontalMovement);
+            playerStateMachine.SetHorizontalMovement(horizontalMovement);
         }
         
     }

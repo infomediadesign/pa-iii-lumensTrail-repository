@@ -7,6 +7,9 @@ public abstract class BaseState
     protected StateMachine sm;
     public System.Enum ownState { get; protected set; }
 
+    public enum StateType { Movement = 0, Physics = 1, Action = 2 }
+    public StateType stateType { get; protected set; }
+
     public BaseState(StateMachine p_sm)
     {
         this.sm = p_sm;

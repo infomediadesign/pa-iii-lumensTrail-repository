@@ -19,18 +19,22 @@ public class GroundedState : PhysicsBaseState
 
     public override void OnEnter()
     {
-        sm.rb.gravityScale = sm.dData.generalGravityMultiplier;
+        MovementBaseState.movementSpeedModifier *= sm.dData.frictionAmount;
     }
 
     public override void OnUpdate()
     {
-        // friction while on ground
+        /**
+         * @outdated: now uses MovementSpeedModifier
+         **/
+        
+        /*// friction while on ground
         if (sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
         {
             float amount = Mathf.Min(Mathf.Abs(sm.rb.velocity.x), Mathf.Abs(sm.dData.frictionAmount));
             amount *= Mathf.Sign(sm.rb.velocity.x);
             sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
-        }
+        }*/
 
         // change to airborne (falling) in case of suddenly ungrounded, but has coyoteTime
         if (sm.pData.groundCoyoteTimeCounter < 0)
@@ -42,5 +46,6 @@ public class GroundedState : PhysicsBaseState
     public override void OnExit()
     {
 
+        MovementBaseState.movementSpeedModifier /= sm.dData.frictionAmount;
     } 
 }

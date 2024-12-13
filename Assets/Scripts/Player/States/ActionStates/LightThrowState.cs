@@ -19,8 +19,7 @@ public class LightThrowState : ActionBaseState
     public override void OnEnter()
     {
         lightThrowButtonHoldTimer = Time.time;
-        rbGravityScale = sm.rb.gravityScale;
-        sm.rb.gravityScale = sm.dData.lightThrowGravityMultiplier;
+        PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
     }
 
     public override void OnUpdate()
@@ -51,7 +50,7 @@ public class LightThrowState : ActionBaseState
 
     public override void OnExit()
     {
-        sm.rb.gravityScale = rbGravityScale;
+        PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
     }
 
     public override void OnMove()

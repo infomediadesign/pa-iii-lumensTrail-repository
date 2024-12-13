@@ -21,20 +21,29 @@ public class JumpingState : PhysicsBaseState
     public override void OnEnter()
     {
         sm.rb.AddForce(Vector2.up * sm.dData.jumpForce, ForceMode2D.Impulse);
-        if(sm.pData.isTouchingWall) wallFlag=true;
+        if(sm.pData.isTouchingWall) wallFlag=true; //outdated, to be removed
+
+        MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
     }
 
     public override void OnUpdate()
     {
-        // friction while in air
+        /*
+         * @outdated: instead uses MovementSpeedModifier now
+         */
+
+        /*// friction while in air
         if (!sm.pData.isGrounded && sm.rb.velocity.x < sm.dData.moveSpeed)
         {
             float amount = Mathf.Min(Mathf.Abs(sm.rb.velocity.x), Mathf.Abs(sm.dData.airFrictionAmount));
             amount *= Mathf.Sign(sm.rb.velocity.x);
             sm.rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
-        }
+        }*/
 
-        if (wallFlag && !sm.pData.isTouchingWall) wallFlag=false;
+
+
+
+        if (wallFlag && !sm.pData.isTouchingWall) wallFlag=false; //outdated and to be removed
 
         if (sm.rb.velocity.y > 0 && !sm.pData.jumpButtonPressed)
         {
@@ -47,6 +56,10 @@ public class JumpingState : PhysicsBaseState
             sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
         }
 
+        /**
+         * @outdated and to be removed
+         **/
+
         if (sm.pData.isTouchingWall && sm.lastState != sm.states[(int)StateMachine.StateKey.WallClinging])
         {
             if(!wallFlag)sm.states[(int)StateMachine.StateKey.WallClinging].SwitchTo();
@@ -55,6 +68,6 @@ public class JumpingState : PhysicsBaseState
 
     public override void OnExit()
     {
-
+        MovementBaseState.movementSpeedModifier /= sm.dData.airFrictionAmount;
     }
 }
