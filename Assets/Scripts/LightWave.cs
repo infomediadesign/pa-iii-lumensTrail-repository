@@ -13,7 +13,7 @@ public class LightWave : MonoBehaviour
     private Vector3 startPos;
     private float startScale;
     private float maxScale = 1f;
-    private Vector3 desiredLocalScale;
+    public Vector3 desiredLocalScale { get; private set; }
 
     void Start()
     {
@@ -23,18 +23,19 @@ public class LightWave : MonoBehaviour
         col = GetComponent<CapsuleCollider2D>();
         // Get directional vector by subtracting current position from mouse pointer position
         Vector3 moveDirVec3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        // moving projectile
-        rb.velocity = new Vector2(moveDirVec3.x, moveDirVec3.y).normalized * dData.lightWaveSpeed;
+        // calculating angle of mouse
+        float angle = Mathf.Atan2(moveDirVec3.y, moveDirVec3.x) * Mathf.Rad2Deg;
+        float directionalFloat;
+        // setting directionFloat to 1 or -1 depending on angle so wave goes in correct direction
+        if (angle < 90 && angle > -90) directionalFloat = 1;
+        else directionalFloat = -1;
+        // moving light wave
+        rb.velocity = Vector2.right * directionalFloat * dData.lightWaveSpeed;
         // Reduced size at start
         startScale = dData.lightWaveStartingSizeMultiplier;
         desiredLocalScale = transform.localScale;
         transform.localScale = desiredLocalScale * startScale;
         startPos = transform.position;
-
-        // rotate wave to destination
-        float angle = Mathf.Atan2(moveDirVec3.y, moveDirVec3.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-
     }
 
     // Update is called once per frame
@@ -54,29 +55,7 @@ public class LightWave : MonoBehaviour
         if (distance > dData.lightWaveMaxTravelDistance) StartCoroutine(DestroyLightWave());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // need to check if Start() has already been called or nah, cause sometimes
-        // this mf thinks it has to collide before even being instanciated completly
-        if (rb == null) return;
-        
-        if (collision.CompareTag("Player")) return;
-
-        // code for activating InteractableObjects
-        if (collision.CompareTag("LightWaveInteractable"))
-        {
-            BaseInteractableObject interactable = collision.GetComponent<BaseInteractableObject>();
-
-            if (interactable != null)
-            {
-                interactable.Activate();
-            }
-        }
-        // destory Projectile
-        StartCoroutine(DestroyLightWave());
-    }
-
-    IEnumerator DestroyLightWave()
+    public IEnumerator DestroyLightWave()
     {
         // possible behavior of projectile when getting destroyed
         //sr.enabled = false;

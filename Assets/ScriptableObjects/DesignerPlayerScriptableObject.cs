@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DesignerPlayerData", menuName = "ScriptableObjects/DesignerPlayerScriptableObject")]
 public class DesignerPlayerScriptableObject : ScriptableObject
 {
+    //[Header("Hover over the variable name or value field to see tooltips")]
+
     [Header("Movement")]
     public float moveSpeed = 10f;
     public float acceleration = 7f;
@@ -53,11 +55,21 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float lightWaveMaxTravelDistance = 6f;
     public float lightWaveStartingSizeMultiplier = 0.4f;
     public float lightWaveMaxSizeAtDistance = 2f;
+    public Vector2 lightWaveColliderSize = Vector2.zero;
+
+    [Space(10)]
+    [Header("Light Impulse")]
+    public float impulseCooldown = 10f;
+    public float maxImpulseRadius = 15f;
+    public float impulseSpeed = 3f;
+    public float highlightTime = 6f;
 
     [Space(15)]
     [Header("Interactable Objects")]
     [Header("Propeller Flower")]
+    [Tooltip("The time the flower is actively pushing the player upwards in seconds")]
     public float propellerFlowerActiveTime = 8f;
+    [Tooltip("The strength of the wind that pushes the player upwards")]
     public float maxWindStrength = 30f;
 
     [Space(10)]

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a5d9ce42ac5e541b55f3eb95208eda, type: 3}
   m_Name: DesigenrPlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  acceleration: 15
-  decceleration: 15
+  moveSpeed: 5
+  acceleration: 5
+  decceleration: 5
   frictionAmount: 0.6
   velPower: 1
   generalGravityMultiplier: 1.7
@@ -22,23 +22,28 @@ MonoBehaviour:
   fastFallingMultiplier: 0
   coyoteTime: 0.1
   airFrictionAmount: 0.4
-  jumpForce: 13
+  jumpForce: 9
   jumpCutMultiplier: 0.5
   dashForce: 25
   dashingTime: 0.3
   dashCooldown: 1.74
   wallClingSlideGravityReduction: 1.59
   wallClingAirFreezeTime: 0.07
-  lightThrowProjectileSpeed: 20
-  lightThrowProjectileMaxTravelTime: 10
-  lightThrowCooldown: 3
+  lightThrowProjectileSpeed: 12
+  lightThrowProjectileMaxTravelTime: 2
+  lightThrowCooldown: 0.4
   startChargingDelay: 0.5
   switchToLightWaveTime: 1
   lightThrowGravityMultiplier: 1
-  lightWaveSpeed: 12
-  lightWaveMaxTravelDistance: 10
+  lightWaveSpeed: 5
+  lightWaveMaxTravelDistance: 5
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  lightWaveColliderSize: {x: 0.5, y: 0.5}
+  impulseCooldown: 10
+  maxImpulseRadius: 25
+  impulseSpeed: 1
+  highlightTime: 6
   propellerFlowerActiveTime: 8
   maxWindStrength: 50
   pickupRange: 2
