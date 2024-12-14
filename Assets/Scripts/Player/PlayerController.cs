@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             pData.jumpButtonPressed = true;
             if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
             {
-                playerStateMachine.states[(int)StateMachine.StateKey.Jumping].SwitchTo();
+                playerStateMachine.SwitchToState(PhysicsBaseState.StateKey.Jumping);
 
                 pData.groundCoyoteTimeCounter = 0;
                 pData.wallCoyoteTimeCounter = 0;
@@ -103,11 +103,12 @@ public class PlayerController : MonoBehaviour
             horizontalMovement = context.ReadValue<Vector2>().x;
             // To flip the player when changing direction
             if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) FlipPlayerCharacter(); 
+            playerStateMachine.SwitchToState(MovementBaseState.StateKey.Moving);
         }
         else if (context.canceled)
         {
             isMoving = false;
-            rb.velocity = Vector2.up * rb.velocity;
+            playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
         }
     }
 
@@ -115,11 +116,15 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (Time.time < lastTimeDashed + dData.dashCooldown) return;
+            /**
+             * @outdated: not a mechanic anymore
+             **/
+            
+            /*if (Time.time < lastTimeDashed + dData.dashCooldown) return;
 
             lastTimeDashed = Time.time;
             playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
-            isDashOnCooldown = true;
+            isDashOnCooldown = true;*/
         }
     }
 
@@ -130,7 +135,7 @@ public class PlayerController : MonoBehaviour
             pData.lightThrowButtonPressed = true;
             if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
             lastTimeLightThrown = Time.time;
-            playerStateMachine.states[(int)StateMachine.StateKey.LightThrow].SwitchTo();
+            playerStateMachine.SwitchToState(ActionBaseState.StateKey.LightThrow);
         }
         else if (context.canceled) 
         {
@@ -142,12 +147,19 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            bool canPickup = true;
-            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-            if(canPickup)
+            if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
             {
-                itemManager.carriedItem = pickupItem;
-                playerStateMachine.states[(int)StateMachine.StateKey.PickUp].SwitchTo();
+                playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
+            }
+            else
+            {
+                bool canPickup = true;
+                GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+                if (canPickup)
+                {
+                    itemManager.carriedItem = pickupItem;
+                    playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
+                }
             }
         }
     }

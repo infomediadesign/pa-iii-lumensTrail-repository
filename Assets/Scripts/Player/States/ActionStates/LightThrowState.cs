@@ -31,7 +31,7 @@ public class LightThrowState : ActionBaseState
             {
                 // Calling the LightThrowManager to create an instance of the projectile
                 sm.ltm.LightThrow();
-                sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+                sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
         else
@@ -39,21 +39,35 @@ public class LightThrowState : ActionBaseState
             if (sm.pData.isGrounded)
             {
                 // after the time passed, automatically switch to light wave state
-                sm.states[(int)StateMachine.StateKey.LightWave].SwitchTo();
+                sm.SwitchToState(ActionBaseState.StateKey.LightWave);
             }
             else
             {
-                sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+                sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
+
+        /***
+         * @attention: should probably be looked into, the charge is not really implemented, it just disables movement, as far as i can tell 
+         ***/
+        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
+        {
+            MovementBaseState.movementEnabled = false;
+        }
+
     }
 
     public override void OnExit()
     {
         PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
+        MovementBaseState.movementEnabled = true;
     }
 
-    public override void OnMove()
+    /***
+     * @outdated: now in OnUpdate() 
+     ***/
+    
+    /*public override void OnMove()
     {
         // let the player move until charging is starting
         if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && sm.pData.isGrounded) 
@@ -62,5 +76,5 @@ public class LightThrowState : ActionBaseState
             return;
         }
         base.OnMove();
-    }
+    }*/
 }

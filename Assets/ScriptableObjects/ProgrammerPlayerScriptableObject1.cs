@@ -22,8 +22,8 @@ public class ProgrammerPlayerScriptableObject : ScriptableObject
     public float wallCoyoteTimeCounter = 0;
     [Unity.Collections.ReadOnly]
     public float fallingVelocity = 0;
-    [Unity.Collections.ReadOnly]
-    public StateMachine.StateKey stateKey = StateMachine.StateKey.Grounded;
+   // [Unity.Collections.ReadOnly]
+    //public StateMachine.StateKey stateKey = StateMachine.StateKey.Grounded;
     
     [Unity.Collections.ReadOnly]
     public MovementBaseState.StateKey movementStateKey = MovementBaseState.StateKey.Still;

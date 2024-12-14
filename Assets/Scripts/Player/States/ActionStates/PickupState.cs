@@ -21,7 +21,8 @@ public class PickupState : ActionBaseState
 
     public override void SwitchTo()
     {
-        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState != PhysicsBaseState.StateKey.Grounded) return;    
+        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState != PhysicsBaseState.StateKey.Grounded) return;  
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
@@ -36,6 +37,8 @@ public class PickupState : ActionBaseState
         endPoint = new Vector2(sm.transform.position.x, endHeight);
         startPoint = carriedObject.transform.position;
         elapsedTime = 0;
+
+        MovementBaseState.movementEnabled = false;
     }
 
     public override void OnUpdate()
@@ -49,13 +52,13 @@ public class PickupState : ActionBaseState
         if (t >= 1)
         {
             carriedObject.transform.position = endPoint;
-            sm.states[(int)StateMachine.StateKey.Carrying].SwitchTo();
+            sm.SwitchToState(ActionBaseState.StateKey.Carrying);
         }
     }
 
-    public override void OnMove()
+    public override void OnExit()
     {
-       
+        MovementBaseState.movementEnabled = true;
     }
 
     private Vector2 CalculateArcPosition(Vector2 start, Vector2 end, float arcHeight, float t)

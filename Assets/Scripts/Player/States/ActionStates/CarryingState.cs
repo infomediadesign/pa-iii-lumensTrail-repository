@@ -32,6 +32,7 @@ public class CarryingState : ActionBaseState
         
         //to be changed to design SO
         speedMod = sm.dData.speedModWhileCarrying;
+        MovementBaseState.movementSpeedModifier *= speedMod;
     }
 
     public override void OnUpdate()
@@ -39,16 +40,21 @@ public class CarryingState : ActionBaseState
        carriedObject.transform.position = new Vector2(transform.position.x, transform.position.y + carryHeight);
     }
 
-    public override void OnMove()
+    /**
+     * @outdated: uses speedModifier instead
+     **/
+    
+    /*public override void OnMove()
     {
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed * speedMod;
         sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
         carriedRb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
-    }
+    }*/
 
     public override void OnExit()
     {
         carriedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
         sm.im.carriedItem = null;
+        MovementBaseState.movementSpeedModifier /= speedMod;
     }
 }

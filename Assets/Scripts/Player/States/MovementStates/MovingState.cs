@@ -25,11 +25,12 @@ public class MovingState : MovementBaseState
         if (!movementEnabled) return;
 
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed * movementSpeedModifier;
-        sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
+        rigidbody.velocity = (Vector2.right * targetSpeed + Vector2.up * rigidbody.velocity);
     }
 
     public override void OnExit()
     {
 
+        rigidbody.velocity = Vector2.up * rigidbody.velocity;
     }
 }

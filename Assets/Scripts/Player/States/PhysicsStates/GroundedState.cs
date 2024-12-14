@@ -39,7 +39,7 @@ public class GroundedState : PhysicsBaseState
         // change to airborne (falling) in case of suddenly ungrounded, but has coyoteTime
         if (sm.pData.groundCoyoteTimeCounter < 0)
         {
-            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
+            sm.SwitchToState(PhysicsBaseState.StateKey.Airborne);
         }
     }
 

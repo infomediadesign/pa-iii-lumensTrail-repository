@@ -15,6 +15,7 @@ public class JumpingState : PhysicsBaseState
     public override void SwitchTo()
     {
         if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Airborne) return;
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState == ActionBaseState.StateKey.LightWave) return; //should disable jumping during lightwave charge
         base.SwitchTo();
     }
 
@@ -48,22 +49,22 @@ public class JumpingState : PhysicsBaseState
         if (sm.rb.velocity.y > 0 && !sm.pData.jumpButtonPressed)
         {
             sm.rb.AddForce(Vector2.down * sm.rb.velocity.y * (1 - sm.dData.jumpCutMultiplier), ForceMode2D.Impulse);
-            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
+            sm.SwitchToState(PhysicsBaseState.StateKey.Airborne);
         }
 
         if (sm.rb.velocity.y <= 0)
         {
-            sm.states[(int)StateMachine.StateKey.Airborne].SwitchTo();
+            sm.SwitchToState(PhysicsBaseState.StateKey.Airborne);
         }
 
         /**
          * @outdated and to be removed
          **/
 
-        if (sm.pData.isTouchingWall && sm.lastState != sm.states[(int)StateMachine.StateKey.WallClinging])
+        /*if (sm.pData.isTouchingWall && sm.lastState != sm.states[(int)StateMachine.StateKey.WallClinging])
         {
             if(!wallFlag)sm.states[(int)StateMachine.StateKey.WallClinging].SwitchTo();
-        }
+        }*/
     }
 
     public override void OnExit()

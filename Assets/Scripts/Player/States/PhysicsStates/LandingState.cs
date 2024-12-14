@@ -26,10 +26,10 @@ public class LandingState : PhysicsBaseState
 
     }
 
-    public override void OnMove()
+    /*public override void OnMove()
     {
 
-    }
+    }*/
 
     public override void OnExit()
     {

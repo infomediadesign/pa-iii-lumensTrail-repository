@@ -53,14 +53,14 @@ public class AirborneState : PhysicsBaseState
          * @outdated and to be removed
          **/
 
-        if (sm.pData.isTouchingWall)
+        /*if (sm.pData.isTouchingWall)
         {
             sm.states[(int)StateMachine.StateKey.WallClinging].SwitchTo();
-        }
+        }*/
 
         if (sm.pData.isGrounded)
         {
-            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+            sm.SwitchToState(PhysicsBaseState.StateKey.Grounded);
         }
     }
 

@@ -23,6 +23,7 @@ public class LightWaveState : ActionBaseState
         if (light == null) Debug.Log("Light is null");
         lightOriginalColor = light.color;
         light.color = Color.blue;
+        MovementBaseState.movementEnabled = false;
     }
 
     public override void OnUpdate()
@@ -30,17 +31,15 @@ public class LightWaveState : ActionBaseState
         if (!sm.pData.lightThrowButtonPressed)
         {
             sm.ltm.LightWave();
-            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+            sm.SwitchToState(ActionBaseState.StateKey.Idle);
         }
     }
 
     public override void OnExit()
     {
         light.color = lightOriginalColor;
+        MovementBaseState.movementEnabled = true;
     }
 
-    public override void OnMove()
-    {
-
-    }
+    
 }
