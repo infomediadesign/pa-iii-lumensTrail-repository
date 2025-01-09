@@ -79,4 +79,9 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float pickupArcSpeed = 1f;
     public float aboveHeadCarryGap = 0.5f;
     public float speedModWhileCarrying = 0.5f;
+
+    [Space(10)]
+    [Header("Vines")]
+    public float stayActiveTime = 5f;
+    public float expandDistance = 5f;
 }

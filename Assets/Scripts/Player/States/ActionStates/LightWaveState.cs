@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class LightWaveState : BaseState
+public class LightWaveState : ActionBaseState
 {
     private Light2D light;
     private Color lightOriginalColor;
     public LightWaveState(StateMachine stateMachine) : base(stateMachine) 
     {
-        stateKey = StateMachine.StateKey.LightWave;
+        ownState = ActionBaseState.StateKey.LightWave;
     }
 
     public override void SwitchTo()
@@ -23,6 +23,7 @@ public class LightWaveState : BaseState
         if (light == null) Debug.Log("Light is null");
         lightOriginalColor = light.color;
         light.color = Color.blue;
+        MovementBaseState.movementEnabled = false;
     }
 
     public override void OnUpdate()
@@ -30,17 +31,15 @@ public class LightWaveState : BaseState
         if (!sm.pData.lightThrowButtonPressed)
         {
             sm.ltm.LightWave();
-            sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+            sm.SwitchToState(ActionBaseState.StateKey.Idle);
         }
     }
 
     public override void OnExit()
     {
         light.color = lightOriginalColor;
+        MovementBaseState.movementEnabled = true;
     }
 
-    public override void OnMove()
-    {
-
-    }
+    
 }

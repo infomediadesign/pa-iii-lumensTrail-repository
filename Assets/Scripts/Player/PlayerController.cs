@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
     private float pickupRadius;
 
     public Vector2 footBoxSize;
-    public Vector2 leftSideBoxSize;
-    public Vector2 rightSideBoxSize;
     public float castDistance;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
@@ -48,21 +46,18 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
-        IsTouchingWall();
 
         /*
          * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
          */
         //rb.gravityScale = dData.generalGravityMultiplier;
-        if (isDashOnCooldown) DashOnCooldown();
     }
 
     private void FixedUpdate()
     {
         if (isMoving)
         {
-            if (pData.isDashing) return;
-            playerStateMachine.OnMove(horizontalMovement);
+            playerStateMachine.SetHorizontalMovement(horizontalMovement);
         }
         
     }
@@ -72,12 +67,11 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             pData.jumpButtonPressed = true;
-            if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
+            if (pData.groundCoyoteTimeCounter > 0)
             {
-                playerStateMachine.states[(int)StateMachine.StateKey.Jumping].SwitchTo();
+                playerStateMachine.SwitchToState(PhysicsBaseState.StateKey.Jumping);
 
                 pData.groundCoyoteTimeCounter = 0;
-                pData.wallCoyoteTimeCounter = 0;
             }
             
         }
@@ -103,23 +97,12 @@ public class PlayerController : MonoBehaviour
             horizontalMovement = context.ReadValue<Vector2>().x;
             // To flip the player when changing direction
             if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) FlipPlayerCharacter(); 
+            playerStateMachine.SwitchToState(MovementBaseState.StateKey.Moving);
         }
         else if (context.canceled)
         {
             isMoving = false;
-            rb.velocity = Vector2.up * rb.velocity;
-        }
-    }
-
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (Time.time < lastTimeDashed + dData.dashCooldown) return;
-
-            lastTimeDashed = Time.time;
-            playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
-            isDashOnCooldown = true;
+            playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
         }
     }
 
@@ -130,7 +113,7 @@ public class PlayerController : MonoBehaviour
             pData.lightThrowButtonPressed = true;
             if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
             lastTimeLightThrown = Time.time;
-            playerStateMachine.states[(int)StateMachine.StateKey.LightThrow].SwitchTo();
+            playerStateMachine.SwitchToState(ActionBaseState.StateKey.LightThrow);
         }
         else if (context.canceled) 
         {
@@ -142,12 +125,19 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            bool canPickup = true;
-            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-            if(canPickup)
+            if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
             {
-                itemManager.carriedItem = pickupItem;
-                playerStateMachine.states[(int)StateMachine.StateKey.PickUp].SwitchTo();
+                playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
+            }
+            else
+            {
+                bool canPickup = true;
+                GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+                if (canPickup)
+                {
+                    itemManager.carriedItem = pickupItem;
+                    playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
+                }
             }
         }
     }
@@ -164,11 +154,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void DashOnCooldown()
-    {
-        if (Time.time < lastTimeDashed + dData.dashCooldown) return;
-        isDashOnCooldown = false;    }
-
     private void IsGrounded()
     {
         if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
@@ -182,20 +167,7 @@ public class PlayerController : MonoBehaviour
             pData.groundCoyoteTimeCounter -= Time.deltaTime;
         }
     }
-
-    private void IsTouchingWall()
-    {
-        if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
-        {
-            pData.isTouchingWall = true;
-            pData.wallCoyoteTimeCounter = dData.coyoteTime;
-        }
-        else
-        {
-            pData.isTouchingWall = false;
-            pData.wallCoyoteTimeCounter -= Time.deltaTime;
-        }
-    }
+    
 
     private void FlipPlayerCharacter()
     {
@@ -206,7 +178,5 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
-        Gizmos.DrawWireCube(transform.position + transform.right * castDistance, rightSideBoxSize);
-        Gizmos.DrawWireCube(transform.position - transform.right * castDistance, leftSideBoxSize);
     }
 }
