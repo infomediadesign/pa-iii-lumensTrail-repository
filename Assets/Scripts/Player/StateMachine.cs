@@ -97,7 +97,7 @@ public class StateMachine : MonoBehaviour
         currentPhysicsState?.OnUpdate();
         currentActionState?.OnUpdate();
 
-        if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
+        //if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
     }
 
     public void SwitchToState(Enum stateKey)

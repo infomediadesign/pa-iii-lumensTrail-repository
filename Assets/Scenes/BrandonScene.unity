@@ -2420,6 +2420,30 @@ PrefabInstance:
       propertyPath: itemManager
       value: 
       objectReference: {fileID: 1221113508}
+    - target: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: footBoxSize.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: footBoxSize.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: leftSideBoxSize.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: leftSideBoxSize.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: rightSideBoxSize.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: rightSideBoxSize.y
+      value: 0.66
+      objectReference: {fileID: 0}
     - target: {fileID: 5490058894795788361, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2582,6 +2606,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1231235023}
+    - target: {fileID: 8320748189608573184, guid: 28c97e14a3b230e449a224310d97a7b0, type: 3}
+      propertyPath: cameraSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

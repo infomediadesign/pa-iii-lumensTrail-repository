@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
     private float pickupRadius;
 
     public Vector2 footBoxSize;
-    public Vector2 leftSideBoxSize;
-    public Vector2 rightSideBoxSize;
     public float castDistance;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
@@ -48,20 +46,17 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
-        IsTouchingWall();
 
         /*
          * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
          */
         //rb.gravityScale = dData.generalGravityMultiplier;
-        if (isDashOnCooldown) DashOnCooldown();
     }
 
     private void FixedUpdate()
     {
         if (isMoving)
         {
-            if (pData.isDashing) return;
             playerStateMachine.SetHorizontalMovement(horizontalMovement);
         }
         
@@ -72,12 +67,11 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             pData.jumpButtonPressed = true;
-            if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
+            if (pData.groundCoyoteTimeCounter > 0)
             {
                 playerStateMachine.SwitchToState(PhysicsBaseState.StateKey.Jumping);
 
                 pData.groundCoyoteTimeCounter = 0;
-                pData.wallCoyoteTimeCounter = 0;
             }
             
         }
@@ -109,22 +103,6 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = false;
             playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
-        }
-    }
-
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            /**
-             * @outdated: not a mechanic anymore
-             **/
-            
-            /*if (Time.time < lastTimeDashed + dData.dashCooldown) return;
-
-            lastTimeDashed = Time.time;
-            playerStateMachine.states[(int)StateMachine.StateKey.Dashing].SwitchTo();
-            isDashOnCooldown = true;*/
         }
     }
 
@@ -176,11 +154,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void DashOnCooldown()
-    {
-        if (Time.time < lastTimeDashed + dData.dashCooldown) return;
-        isDashOnCooldown = false;    }
-
     private void IsGrounded()
     {
         if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
@@ -194,20 +167,7 @@ public class PlayerController : MonoBehaviour
             pData.groundCoyoteTimeCounter -= Time.deltaTime;
         }
     }
-
-    private void IsTouchingWall()
-    {
-        if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
-        {
-            pData.isTouchingWall = true;
-            pData.wallCoyoteTimeCounter = dData.coyoteTime;
-        }
-        else
-        {
-            pData.isTouchingWall = false;
-            pData.wallCoyoteTimeCounter -= Time.deltaTime;
-        }
-    }
+    
 
     private void FlipPlayerCharacter()
     {
@@ -218,7 +178,5 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
-        Gizmos.DrawWireCube(transform.position + transform.right * castDistance, rightSideBoxSize);
-        Gizmos.DrawWireCube(transform.position - transform.right * castDistance, leftSideBoxSize);
     }
 }
