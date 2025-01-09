@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class JumpingState : PhysicsBaseState
 {
-    private bool wallFlag=false;
-
-
     public JumpingState(StateMachine sm) : base(sm) 
     {
         ownState = PhysicsBaseState.StateKey.Jumping;
