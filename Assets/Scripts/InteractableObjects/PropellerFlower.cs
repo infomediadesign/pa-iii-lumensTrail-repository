@@ -44,6 +44,7 @@ public class PropellerFlower : BaseInteractableObject
 
     public override void Activate()
     {
+        if (isActive) return;
         this.isActive = true;
         activationTime = Time.time;
         sr.color = Color.red;

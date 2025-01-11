@@ -29,16 +29,17 @@ MonoBehaviour:
   dashCooldown: 1.74
   wallClingSlideGravityReduction: 1.59
   wallClingAirFreezeTime: 0.07
-  lightThrowProjectileSpeed: 20
-  lightThrowProjectileMaxTravelTime: 10
-  lightThrowCooldown: 3
+  lightThrowProjectileSpeed: 12
+  lightThrowProjectileMaxTravelTime: 2
+  lightThrowCooldown: 0.4
   startChargingDelay: 0.5
   switchToLightWaveTime: 1
   lightThrowGravityMultiplier: 1
-  lightWaveSpeed: 12
-  lightWaveMaxTravelDistance: 10
+  lightWaveSpeed: 5
+  lightWaveMaxTravelDistance: 5
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
   maxImpulseRadius: 25
   impulseSpeed: 1

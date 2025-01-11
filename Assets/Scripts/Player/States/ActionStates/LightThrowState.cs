@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightThrowState : BaseState
+public class LightThrowState : ActionBaseState
 {
     float lightThrowButtonHoldTimer;
     private float rbGravityScale;
     public LightThrowState(StateMachine stateMachine) : base(stateMachine) 
     {
-        stateKey = StateMachine.StateKey.LightThrow;
+        ownState = ActionBaseState.StateKey.LightThrow;
     }
 
     public override void SwitchTo()
@@ -19,8 +19,7 @@ public class LightThrowState : BaseState
     public override void OnEnter()
     {
         lightThrowButtonHoldTimer = Time.time;
-        rbGravityScale = sm.rb.gravityScale;
-        sm.rb.gravityScale = sm.dData.lightThrowGravityMultiplier;
+        PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
     }
 
     public override void OnUpdate()
@@ -32,7 +31,7 @@ public class LightThrowState : BaseState
             {
                 // Calling the LightThrowManager to create an instance of the projectile
                 sm.ltm.LightThrow();
-                sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+                sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
         else
@@ -40,21 +39,35 @@ public class LightThrowState : BaseState
             if (sm.pData.isGrounded)
             {
                 // after the time passed, automatically switch to light wave state
-                sm.states[(int)StateMachine.StateKey.LightWave].SwitchTo();
+                sm.SwitchToState(ActionBaseState.StateKey.LightWave);
             }
             else
             {
-                sm.states[(int)StateMachine.StateKey.Grounded].SwitchTo();
+                sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
+
+        /***
+         * @attention: should probably be looked into, the charge is not really implemented, it just disables movement, as far as i can tell 
+         ***/
+        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
+        {
+            MovementBaseState.movementEnabled = false;
+        }
+
     }
 
     public override void OnExit()
     {
-        sm.rb.gravityScale = rbGravityScale;
+        PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
+        MovementBaseState.movementEnabled = true;
     }
 
-    public override void OnMove()
+    /***
+     * @outdated: now in OnUpdate() 
+     ***/
+    
+    /*public override void OnMove()
     {
         // let the player move until charging is starting
         if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && sm.pData.isGrounded) 
@@ -63,5 +76,5 @@ public class LightThrowState : BaseState
             return;
         }
         base.OnMove();
-    }
+    }*/
 }
