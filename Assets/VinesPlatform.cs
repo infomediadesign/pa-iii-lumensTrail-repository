@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class VinesPlatform : BaseInteractableObject
 {
-    [SerializeField] private DesignerPlayerScriptableObject dData;
     private Transform childTransform;
 
     void Start()
     {
+        base.Init();
         this.childTransform = this.gameObject.transform.GetChild(0);
         if (this.childTransform == null) Debug.Log("children transform null");
     }

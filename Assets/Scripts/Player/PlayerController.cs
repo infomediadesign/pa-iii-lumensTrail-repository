@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     private float horizontalMovement;
     private bool isFacingRight = true;
     private bool isMoving = false;
-    private float lastTimeDashed;
-    private bool isDashOnCooldown;
     private float lastTimeLightThrown;
     private float lastTimeLigthImpulse;
     private float pickupRadius;
@@ -33,7 +31,6 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
-        lastTimeDashed = -dData.dashCooldown;
         lastTimeLightThrown = -dData.lightThrowCooldown;
         lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
