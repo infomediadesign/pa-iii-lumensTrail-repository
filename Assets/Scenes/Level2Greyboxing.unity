@@ -3039,11 +3039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5985574118180437264, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.47
+      value: -7.448
       objectReference: {fileID: 0}
     - target: {fileID: 5985574118180437264, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.42
+      value: -3.647
       objectReference: {fileID: 0}
     - target: {fileID: 5985574118180437264, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4481,7 +4481,7 @@ GameObject:
   - component: {fileID: 1525443819}
   - component: {fileID: 1525443818}
   m_Layer: 0
-  m_Name: Trico
+  m_Name: Keke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4547,13 +4547,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525443817}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.8248, y: -1.97, z: 0}
-  m_LocalScale: {x: 1.9304202, y: 1.9304202, z: 1.9304202}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0.7064053, w: 0.70780766}
+  m_LocalPosition: {x: 78.93, y: -3.3, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.886}
 --- !u!1 &1532965479
 GameObject:
   m_ObjectHideFlags: 0
