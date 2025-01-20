@@ -84,4 +84,8 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Vines")]
     public float stayActiveTime = 5f;
     public float expandDistance = 5f;
+
+    [Space(10)]
+    [Header("Statue")]
+    public float statueVelocityMultiplier = 2f;
 }
