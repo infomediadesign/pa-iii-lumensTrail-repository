@@ -32,6 +32,11 @@ public class BaseInteractableObject : MonoBehaviour
 
     }
 
+    public virtual void Activate(GameObject activationObject)
+    {
+
+    }
+
     protected virtual void Deactivate()
     {
 
