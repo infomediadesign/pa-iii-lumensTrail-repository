@@ -5487,6 +5487,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2660530290490052171, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
+      propertyPath: playMusicOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660530290490052171, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
+      propertyPath: soundList.Array.data[0].sounds.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660530290490052171, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
+      propertyPath: soundList.Array.data[2].sounds.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660530290490052171, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
+      propertyPath: soundList.Array.data[0].sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e77e437b4494b9f4886eb226c358a6aa, type: 3}
+    - target: {fileID: 2660530290490052171, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
+      propertyPath: soundList.Array.data[2].sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d85e4ec1db3f7a44990bad5ff36f6201, type: 3}
+    - target: {fileID: 2660530290490052171, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
+      propertyPath: soundList.Array.data[2].sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 05904cc126b326e4dad1f6abd6011d0e, type: 3}
     - target: {fileID: 4507616012707427728, guid: 56a67ca66b889d44fb24ba1ead71e608, type: 3}
       propertyPath: m_Name
       value: SoundManager
