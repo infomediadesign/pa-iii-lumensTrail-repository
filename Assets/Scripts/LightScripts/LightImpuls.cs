@@ -23,10 +23,18 @@ public class LightImpuls : MonoBehaviour
     {
         if (isActive)
         {
+            // Erhalte die relative Skalierung des Kreises basierend auf der lossyScale des Spielers
+            Vector3 playerScale = transform.parent.lossyScale; // Spieler ist das Elternobjekt des Kreises
+            float scaleFactorX = 1f / playerScale.x;
+            float scaleFactorY = 1f / playerScale.y;
+
             if (transform.localScale.x < dData.maxImpulseRadius)
             {
                 currentLerpTime += Time.deltaTime * dData.impulseSpeed;
-                transform.localScale = Vector3.Lerp(initialScale, targetScale, currentLerpTime);
+                float lerpValue = Mathf.Lerp(0, dData.maxImpulseRadius, currentLerpTime);
+
+                // Setze die relative Skalierung, um die Verzerrung auszugleichen
+                transform.localScale = new Vector3(lerpValue * scaleFactorX, lerpValue * scaleFactorY, transform.localScale.z);
             }
             else
             {
