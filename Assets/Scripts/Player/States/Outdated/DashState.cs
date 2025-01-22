@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class DashState : BaseState
+/*public class DashState : BaseState
 {
     private float rbGravityScale;
     private float timer = 0;
@@ -46,3 +46,4 @@ public class DashState : BaseState
         sm.tr.emitting = false;
     }
 }
+*/

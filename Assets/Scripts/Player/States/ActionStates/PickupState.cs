@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class PickupState : BaseState
+public class PickupState : ActionBaseState
 {
     private GameObject carriedObject;
     private float arcHeight = 1f;
@@ -16,12 +16,13 @@ public class PickupState : BaseState
     
     public PickupState(StateMachine sm): base(sm) 
     {
-        stateKey = StateMachine.StateKey.PickUp;
+        ownState = ActionBaseState.StateKey.PickUp;
     }
 
     public override void SwitchTo()
     {
-        if (sm.currentState.stateKey != StateMachine.StateKey.Grounded) return;    
+        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState != PhysicsBaseState.StateKey.Grounded) return;  
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
@@ -36,6 +37,8 @@ public class PickupState : BaseState
         endPoint = new Vector2(sm.transform.position.x, endHeight);
         startPoint = carriedObject.transform.position;
         elapsedTime = 0;
+
+        MovementBaseState.movementEnabled = false;
     }
 
     public override void OnUpdate()
@@ -49,13 +52,13 @@ public class PickupState : BaseState
         if (t >= 1)
         {
             carriedObject.transform.position = endPoint;
-            sm.states[(int)StateMachine.StateKey.Carrying].SwitchTo();
+            sm.SwitchToState(ActionBaseState.StateKey.Carrying);
         }
     }
 
-    public override void OnMove()
+    public override void OnExit()
     {
-       
+        MovementBaseState.movementEnabled = true;
     }
 
     private Vector2 CalculateArcPosition(Vector2 start, Vector2 end, float arcHeight, float t)
