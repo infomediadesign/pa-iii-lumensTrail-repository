@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PropellerFlower : BaseInteractableObject
 {
-    [SerializeField] DesignerPlayerScriptableObject dData;
     private float activationTime;
     [Header("If you don't know why they're 0, keep em 0!")] 
     [SerializeField] private float maxWindStrength;
@@ -12,41 +11,25 @@ public class PropellerFlower : BaseInteractableObject
 
     void Start()
     {
-        this.sr = GetComponent<SpriteRenderer>();
+        base.Init();
         // incase this specific flowers shall have another blowing height than all the others
         if (maxWindStrength == 0) maxWindStrength = dData.maxWindStrength;
         if (propellerFlowerActiveTime == 0) propellerFlowerActiveTime = dData.propellerFlowerActiveTime;
-        isActive = false;
-        isGlowing = false;
     }
 
 
     void Update()
     {
-        if (isActive)
-        {
-            if (Time.time > activationTime + propellerFlowerActiveTime)
-            {
-                this.Deactivate();
-                return;
-            }
-        }
-
-        if (isGlowing)
-        {
-            if (Time.time > this.glowOnTime + dData.highlightTime)
-            {
-                this.GlowOff(); 
-                return;
-            }
-        }
+        
     }
 
     public override void Activate()
     {
+        if (isActive) return;
         this.isActive = true;
         activationTime = Time.time;
         sr.color = Color.red;
+        this.StartCoroutine(PropellerFlowerActive());
     }
 
     protected override void Deactivate()
@@ -67,5 +50,11 @@ public class PropellerFlower : BaseInteractableObject
                 playerRb.AddForce(Vector2.up * maxWindStrength, ForceMode2D.Force);
             }
         }
+    }
+
+    private IEnumerator PropellerFlowerActive()
+    {
+        yield return new WaitForSeconds(dData.propellerFlowerActiveTime);
+        this.Deactivate();
     }
 }

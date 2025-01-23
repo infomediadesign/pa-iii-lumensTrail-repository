@@ -39,9 +39,10 @@ MonoBehaviour:
   lightWaveMaxTravelDistance: 5
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
-  maxImpulseRadius: 25
-  impulseSpeed: 1
+  maxImpulseRadius: 40
+  impulseSpeed: 0.5
   highlightTime: 6
   propellerFlowerActiveTime: 8
   maxWindStrength: 50
@@ -50,3 +51,5 @@ MonoBehaviour:
   pickupArcSpeed: 0.55
   aboveHeadCarryGap: 0.29
   speedModWhileCarrying: 0.18
+  stayActiveTime: 5
+  expandDistance: 3

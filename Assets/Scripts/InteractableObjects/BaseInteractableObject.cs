@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseInteractableObject : MonoBehaviour
 {
+    [SerializeField] protected DesignerPlayerScriptableObject dData;
     protected bool isActive;
     protected bool isGlowing;
     protected SpriteRenderer sr;
@@ -14,12 +15,24 @@ public class BaseInteractableObject : MonoBehaviour
         
     }
 
+    protected void Init()
+    {
+        this.sr = GetComponent<SpriteRenderer>();
+        this.isActive = false;
+        this.isGlowing = false;
+    }
+
     void Update()
     {
         
     }
 
     public virtual void Activate()
+    {
+
+    }
+
+    public virtual void Activate(GameObject activationObject)
     {
 
     }
@@ -37,6 +50,7 @@ public class BaseInteractableObject : MonoBehaviour
             this.glowOnTime = Time.time;
             this.orginColor = this.sr.color;
             this.sr.color = Color.yellow;
+            this.StartCoroutine(Glowing());
         }
     }
 
@@ -44,6 +58,12 @@ public class BaseInteractableObject : MonoBehaviour
     {
         this.isGlowing = false;
         this.sr.color = orginColor;
+    }
+
+    protected IEnumerator Glowing()
+    {
+        yield return new WaitForSeconds(dData.highlightTime);
+        this.GlowOff();
     }
 
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallClingState : BaseState
+/*public class WallClingState : BaseState
 {
     private float rbGravityScale;
     private float timer = 1f;
@@ -57,3 +57,4 @@ public class WallClingState : BaseState
         timer = 0;
     }
 }
+*/
