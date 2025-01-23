@@ -62,6 +62,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float maxImpulseRadius = 15f;
     public float impulseSpeed = 3f;
     public float highlightTime = 6f;
+    public float increasedLightRadiusTime = 5f;
 
     [Space(15)]
     [Header("Interactable Objects")]
