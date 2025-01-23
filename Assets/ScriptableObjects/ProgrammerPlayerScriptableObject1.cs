@@ -7,19 +7,13 @@ using UnityEngine;
 public class ProgrammerPlayerScriptableObject : ScriptableObject
 {
     [Unity.Collections.ReadOnly]
-    public bool isDashing = false;
-    [Unity.Collections.ReadOnly]
     public bool isGrounded = false;
-    [Unity.Collections.ReadOnly]
-    public bool isTouchingWall = false;
     [Unity.Collections.ReadOnly]
     public bool jumpButtonPressed = false;
     [Unity.Collections.ReadOnly]
     public bool lightThrowButtonPressed = false;
     [Unity.Collections.ReadOnly]
     public float groundCoyoteTimeCounter = 0;
-    [Unity.Collections.ReadOnly]
-    public float wallCoyoteTimeCounter = 0;
     [Unity.Collections.ReadOnly]
     public float fallingVelocity = 0;
    // [Unity.Collections.ReadOnly]

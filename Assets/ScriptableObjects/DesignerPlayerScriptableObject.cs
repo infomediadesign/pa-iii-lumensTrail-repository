@@ -43,7 +43,6 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Light Mechanics")]
     [Header("Light Throw")]
     public float lightThrowProjectileSpeed = 5f;
-    public float lightThrowProjectileMaxTravelTime = 10f;
     public float lightThrowCooldown = 3f;
     public float startChargingDelay = 0.5f;
     public float switchToLightWaveTime = 1f;
@@ -63,6 +62,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float maxImpulseRadius = 15f;
     public float impulseSpeed = 3f;
     public float highlightTime = 6f;
+    public float increasedLightRadiusTime = 5f;
 
     [Space(15)]
     [Header("Interactable Objects")]
@@ -79,4 +79,13 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float pickupArcSpeed = 1f;
     public float aboveHeadCarryGap = 0.5f;
     public float speedModWhileCarrying = 0.5f;
+
+    [Space(10)]
+    [Header("Vines")]
+    public float stayActiveTime = 5f;
+    public float expandDistance = 5f;
+
+    [Space(10)]
+    [Header("Statue")]
+    public float statueVelocityMultiplier = 2f;
 }

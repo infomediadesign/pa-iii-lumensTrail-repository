@@ -45,7 +45,7 @@ public class StateMachine : MonoBehaviour
     public TrailRenderer tr;
     [HideInInspector]
     public PlayerLightThrowManager ltm;
-    [HideInInspector]
+    
     public ItemManager im;
     
 
@@ -97,7 +97,7 @@ public class StateMachine : MonoBehaviour
         currentPhysicsState?.OnUpdate();
         currentActionState?.OnUpdate();
 
-        if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
+        //if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
     }
 
     public void SwitchToState(Enum stateKey)

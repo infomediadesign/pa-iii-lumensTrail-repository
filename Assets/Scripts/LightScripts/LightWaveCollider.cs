@@ -31,18 +31,22 @@ public class LightWaveCollider : MonoBehaviour
         // this mf thinks it has to collide before even being instanciated completly
         if (parent == null) return;
 
-        //if (collision.CompareTag("Player")) return;
+        string collisionTag = collision.tag;
+
+        // ignore if light throw interactable to ignore propellerflower
+        if (collisionTag == "LightThrowInteractable") return;
 
         // code for activating InteractableObjects
-        if (collision.CompareTag("LightWaveInteractable"))
+        if (collisionTag == "LightWaveInteractable")
         {
             BaseInteractableObject interactable = collision.GetComponent<BaseInteractableObject>();
 
             if (interactable != null)
             {
-                interactable.Activate();
+                interactable.Activate(parent.gameObject);
             }
         }
+
         // destory Projectile
         StartCoroutine(parent.DestroyLightWave());
     }

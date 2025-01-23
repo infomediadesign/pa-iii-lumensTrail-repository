@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class JumpingState : PhysicsBaseState
 {
-    private bool wallFlag=false;
-
-
     public JumpingState(StateMachine sm) : base(sm) 
     {
         ownState = PhysicsBaseState.StateKey.Jumping;
@@ -22,7 +19,7 @@ public class JumpingState : PhysicsBaseState
     public override void OnEnter()
     {
         sm.rb.AddForce(Vector2.up * sm.dData.jumpForce, ForceMode2D.Impulse);
-        if(sm.pData.isTouchingWall) wallFlag=true; //outdated, to be removed
+        //if(sm.pData.isTouchingWall) wallFlag=true; //outdated, to be removed
 
         MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
     }
@@ -44,7 +41,7 @@ public class JumpingState : PhysicsBaseState
 
 
 
-        if (wallFlag && !sm.pData.isTouchingWall) wallFlag=false; //outdated and to be removed
+        //if (wallFlag && !sm.pData.isTouchingWall) wallFlag=false; //outdated and to be removed
 
         if (sm.rb.velocity.y > 0 && !sm.pData.jumpButtonPressed)
         {
