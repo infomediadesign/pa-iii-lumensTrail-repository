@@ -23,6 +23,7 @@ public class LightWaveState : ActionBaseState
         if (light == null) Debug.Log("Light is null");
         lightOriginalColor = light.color;
         light.color = Color.blue;
+        sm.rb.velocity = Vector2.zero;
         MovementBaseState.movementEnabled = false;
     }
 
