@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class LightImpuls : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class LightImpuls : MonoBehaviour
     private Vector3 initialScale;
     private Vector3 targetScale;
     private float currentLerpTime;
+    private Light2D lt;
+    private float ltOuterRadiusOriginal;
+    private float ltOuterRadiusMax;
+    private bool reduceLightRadius = false;
 
     void Start()
     {
@@ -17,6 +23,8 @@ public class LightImpuls : MonoBehaviour
         targetScale = new Vector3(dData.maxImpulseRadius, dData.maxImpulseRadius, 0);
         isActive = false;
         currentLerpTime = 0;
+        lt = GetComponentInParent<Light2D>();
+        ltOuterRadiusOriginal = lt.pointLightOuterRadius;
     }
 
     void Update()
@@ -35,14 +43,39 @@ public class LightImpuls : MonoBehaviour
 
                 // Setze die relative Skalierung, um die Verzerrung auszugleichen
                 transform.localScale = new Vector3(lerpValue * scaleFactorX, lerpValue * scaleFactorY, transform.localScale.z);
+                if (lerpValue > lt.pointLightOuterRadius) lt.pointLightOuterRadius = lerpValue;
             }
             else
             {
                 transform.localScale = initialScale;
                 currentLerpTime = 0;
                 isActive = false;
+                StartCoroutine(ReduceLightEmittingRadius());
             }
         }
+
+        if (reduceLightRadius)
+        {
+            if (lt.pointLightOuterRadius > ltOuterRadiusOriginal)
+            {
+                currentLerpTime += Time.deltaTime * dData.impulseSpeed;
+                float lerpValue = Mathf.Lerp(ltOuterRadiusMax, ltOuterRadiusOriginal, currentLerpTime);
+                lt.pointLightOuterRadius = lerpValue;
+            }
+            else
+            {
+                lt.pointLightOuterRadius = ltOuterRadiusOriginal;
+                currentLerpTime = 0;
+                reduceLightRadius = false;
+            }
+        }
+    }
+
+    private IEnumerator ReduceLightEmittingRadius()
+    {
+        yield return new WaitForSeconds(dData.increasedLightRadiusTime);
+        ltOuterRadiusMax = lt.pointLightOuterRadius;
+        reduceLightRadius = true;
     }
 
     public void LightImpulse()
