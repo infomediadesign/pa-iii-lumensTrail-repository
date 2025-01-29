@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DesignerPlayerData", menuName = "ScriptableObjects/DesignerPlayerScriptableObject")]
 public class DesignerPlayerScriptableObject : ScriptableObject
 {
-    [Header("Hover over the variable name or value field to see tooltips")]
+    //[Header("Hover over the variable name or value field to see tooltips")]
 
     [Header("Movement")]
     public float moveSpeed = 10f;
@@ -55,6 +55,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float lightWaveMaxTravelDistance = 6f;
     public float lightWaveStartingSizeMultiplier = 0.4f;
     public float lightWaveMaxSizeAtDistance = 2f;
+    public Vector2 lightWaveColliderSize = Vector2.zero;
 
     [Space(10)]
     [Header("Light Impulse")]
@@ -78,4 +79,13 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float pickupArcSpeed = 1f;
     public float aboveHeadCarryGap = 0.5f;
     public float speedModWhileCarrying = 0.5f;
+
+    [Space(10)]
+    [Header("Vines")]
+    public float stayActiveTime = 5f;
+    public float expandDistance = 5f;
+
+    [Space(10)]
+    [Header("Statue")]
+    public float statueVelocityMultiplier = 2f;
 }
