@@ -85,6 +85,7 @@ public class LightImpuls : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!isActive) return;
         BaseInteractableObject interactable = collision.GetComponent<BaseInteractableObject>();
         if (interactable != null) interactable.GlowOn();
         else Debug.Log("Interactable is null");

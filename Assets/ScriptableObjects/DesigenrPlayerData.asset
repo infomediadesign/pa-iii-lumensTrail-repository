@@ -30,7 +30,6 @@ MonoBehaviour:
   wallClingSlideGravityReduction: 1.59
   wallClingAirFreezeTime: 0.07
   lightThrowProjectileSpeed: 12
-  lightThrowProjectileMaxTravelTime: 2
   lightThrowCooldown: 0.4
   startChargingDelay: 0.5
   switchToLightWaveTime: 1
@@ -44,6 +43,7 @@ MonoBehaviour:
   maxImpulseRadius: 40
   impulseSpeed: 0.5
   highlightTime: 6
+  increasedLightRadiusTime: 5
   propellerFlowerActiveTime: 8
   maxWindStrength: 50
   pickupRange: 2
@@ -51,5 +51,5 @@ MonoBehaviour:
   pickupArcSpeed: 0.55
   aboveHeadCarryGap: 0.29
   speedModWhileCarrying: 0.18
-  stayActiveTime: 5
-  expandDistance: 3
+  stayActiveTime: 10
+  statueVelocityMultiplier: 2
