@@ -34,7 +34,7 @@ MonoBehaviour:
   startChargingDelay: 0.5
   switchToLightWaveTime: 1
   lightThrowGravityMultiplier: 1
-  lightWaveSpeed: 5
+  lightWaveSpeed: 6
   lightWaveMaxTravelDistance: 5
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
