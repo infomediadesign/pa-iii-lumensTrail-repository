@@ -5,19 +5,19 @@ using UnityEngine;
 public class FallThroughPlatform : MonoBehaviour
 {
 
-    private Collider2D collider;
+    private Collider2D col;
     private bool playerOnPlatform;
-    [SerializeField] private float platformDeactiveTime;
+    [SerializeField] private float platformDeactiveTime = 0.5f;
 
     void Start()
     {
-        collider = GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
     }
     void Update()
     {
         if (playerOnPlatform && Input.GetAxisRaw("Vertical") < 0)
         {
-            collider.enabled = false;
+            col.enabled = false;
             StartCoroutine(EnablePlatformCollider());
         }
     }
@@ -25,7 +25,7 @@ public class FallThroughPlatform : MonoBehaviour
     private IEnumerator EnablePlatformCollider()
     {
         yield return new WaitForSeconds(platformDeactiveTime);
-        collider.enabled = true;
+        col.enabled = true;
     }
 
     private void SetPlayerOnPlatform(Collision2D other, bool value)

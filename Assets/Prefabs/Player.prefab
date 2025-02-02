@@ -140,10 +140,8 @@ MonoBehaviour:
   dData: {fileID: 11400000, guid: 00d47f52f3012004093393a679123adb, type: 2}
   pData: {fileID: 11400000, guid: bd531fca99f8aca429ae53841c2c2014, type: 2}
   itemManager: {fileID: 4815239015357041777, guid: 55b822d5f15563942b30254d76bd760c, type: 3}
-  footBoxSize: {x: 1, y: 0.2}
-  leftSideBoxSize: {x: 0.2, y: 1}
-  rightSideBoxSize: {x: 0.2, y: 1}
-  castDistance: 0.5
+  footBoxSize: {x: 0.3, y: 0.1}
+  castDistance: 0.4
   groundLayer:
     serializedVersion: 2
     m_Bits: 4544

@@ -27,6 +27,7 @@ public class ItemManager : MonoBehaviour
             Debug.Log("Found object in layer: " + obj.name);
         }
         items.AddRange(objectsInLayer);
+        return;
     }
 
 
