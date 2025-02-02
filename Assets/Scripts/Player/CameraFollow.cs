@@ -8,12 +8,12 @@ public class CameraFollow : MonoBehaviour
     public Vector3 cameraOffset;
     public float maxDistance = 6f;
     public float followPlayerAtScreenPercentage = 80f;
-    private Camera camera;
+    private Camera cam;
     private bool playerPos = false;
 
     private void Start()
     {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
     }
     /*
     private void LateUpdate()
@@ -33,7 +33,7 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
         float desiredYPos;
-        if (target.transform.position.y < camera.orthographicSize * (followPlayerAtScreenPercentage / 100))
+        if (target.transform.position.y < cam.orthographicSize * (followPlayerAtScreenPercentage / 100))
         {
             desiredYPos = cameraOffset.y;
             playerPos = false;
