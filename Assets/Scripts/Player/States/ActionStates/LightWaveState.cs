@@ -7,6 +7,8 @@ public class LightWaveState : ActionBaseState
 {
     private Light2D light;
     private Color lightOriginalColor;
+    private bool lightWaveFired;
+    private float timer;
     public LightWaveState(StateMachine stateMachine) : base(stateMachine) 
     {
         ownState = ActionBaseState.StateKey.LightWave;
@@ -24,23 +26,35 @@ public class LightWaveState : ActionBaseState
         lightOriginalColor = light.color;
         light.color = Color.blue;
         sm.rb.velocity = Vector2.zero;
+        this.timer = 0;
+        lightWaveFired = false;
         MovementBaseState.movementEnabled = false;
     }
 
     public override void OnUpdate()
     {
-        if (!sm.pData.lightThrowButtonPressed)
+        if (!lightWaveFired)
         {
-            sm.ltm.LightWave();
-            sm.SwitchToState(ActionBaseState.StateKey.Idle);
+            if (!sm.pData.lightThrowButtonPressed)
+            {
+                sm.ltm.LightWave();
+                timer = Time.time;
+                this.lightWaveFired = true;
+                // so light instantly returns to original color, instead of when player leaves the state
+                this.light.color = this.lightOriginalColor;
+            }
+        }
+        else
+        {
+            if (Time.time > timer + sm.dData.lightWaveMovementDisabledTime) sm.SwitchToState(ActionBaseState.StateKey.Idle);
         }
     }
 
     public override void OnExit()
     {
-        light.color = lightOriginalColor;
+        // change color as soon as leaving state
+        //light.color = lightOriginalColor;
+        lightWaveFired = false;
         MovementBaseState.movementEnabled = true;
-    }
-
-    
+    }  
 }
