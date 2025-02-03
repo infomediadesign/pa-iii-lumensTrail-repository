@@ -152,5 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   cameraSpeed: 5
-  cameraOffset: {x: 0, y: 3, z: -1}
+  cameraOffset: {x: 0, y: 0, z: -1}
   maxDistance: 6
+  followPlayerAtScreenPercentage: 80

@@ -54,6 +54,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float lightWaveMaxTravelDistance = 6f;
     public float lightWaveStartingSizeMultiplier = 0.4f;
     public float lightWaveMaxSizeAtDistance = 2f;
+    public float lightWaveMovementDisabledTime = 2f;
     public Vector2 lightWaveColliderSize = Vector2.zero;
 
     [Space(10)]
@@ -82,8 +83,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
 
     [Space(10)]
     [Header("Vines")]
-    public float stayActiveTime = 5f;
-    public float expandDistance = 5f;
+    public float stayActiveTime = 10f;
 
     [Space(10)]
     [Header("Statue")]
