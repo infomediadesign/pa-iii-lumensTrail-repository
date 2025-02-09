@@ -54,3 +54,6 @@ MonoBehaviour:
   speedModWhileCarrying: 0.18
   stayActiveTime: 10
   statueVelocityMultiplier: 2
+  trunkVelocityMultiplier: 0.5
+  thoughtBubbleFadeTime: 2
+  movingSpeed: 1
