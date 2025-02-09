@@ -55,5 +55,5 @@ MonoBehaviour:
   stayActiveTime: 10
   statueVelocityMultiplier: 2
   trunkVelocityMultiplier: 0.5
-  thoughtBubbleFadeTime: 2
-  movingSpeed: 1
+  thoughtBubbleFadeTime: 70
+  bonsaiMovingTime: 20

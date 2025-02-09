@@ -122,21 +122,32 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
+            this.PerformPickUp();
+        }
+    }
+
+    private void PerformPickUp()
+    {
+        if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
+        {
+            playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
+        }
+        else
+        {
+            bool canPickup = true;
+            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+            if (canPickup)
             {
-                playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
-            }
-            else
-            {
-                bool canPickup = true;
-                GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-                if (canPickup)
-                {
-                    itemManager.carriedItem = pickupItem;
-                    playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
-                }
+                itemManager.carriedItem = pickupItem;
+                playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
             }
         }
+    }
+
+    public void TriggerPickupManually()
+    {
+
+        this.PerformPickUp();
     }
 
     public void OnLightImpulse(InputAction.CallbackContext context)

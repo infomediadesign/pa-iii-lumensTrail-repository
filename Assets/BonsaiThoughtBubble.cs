@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BonsaiThoughtBubble : MonoBehaviour
 {
+    private Bonsai parent;
+
     private SpriteRenderer spriteRenderer;
     private float targetAlpha;       
     private float fadeDuration = 1f; 
@@ -14,6 +16,7 @@ public class BonsaiThoughtBubble : MonoBehaviour
 
     void Awake()
     {
+        parent = GetComponentInParent<Bonsai>();
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         Color color = spriteRenderer.color;
         color.a = 0f;
@@ -55,6 +58,10 @@ public class BonsaiThoughtBubble : MonoBehaviour
         {
             StartFade(1f, dData.thoughtBubbleFadeTime); // Fade-In mit 1 Sekunde Dauer
         }
+        if (other.gameObject == parent.GetCurrentDesiredItem())
+        {
+            parent.ItemAccepted();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -62,6 +69,11 @@ public class BonsaiThoughtBubble : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             StartFade(0f, dData.thoughtBubbleFadeTime); // Fade-Out mit 1 Sekunde Dauer
-        }
+        } 
+    }
+
+    public float GetCurrentAlpha()
+    {
+        return this.spriteRenderer.color.a;
     }
 }
