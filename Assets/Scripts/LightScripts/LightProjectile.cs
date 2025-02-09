@@ -21,13 +21,12 @@ public class LightProjectile : MonoBehaviour
         Vector3 moveDirVec3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         // moving projectile
         rb.velocity = new Vector2(moveDirVec3.x, moveDirVec3.y).normalized * dData.lightThrowProjectileSpeed;
-        projectileTravelTimeStart = Time.time;
     }
 
-    private void Update()
+    private void OnBecameInvisible()
     {
-        // Destory projectile after a certain amount of time, in case it never hits anything
-        if (Time.time > projectileTravelTimeStart + dData.lightThrowProjectileMaxTravelTime) Destroy(gameObject);
+        // Destroy projectile as soon as out of (camera) view
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
