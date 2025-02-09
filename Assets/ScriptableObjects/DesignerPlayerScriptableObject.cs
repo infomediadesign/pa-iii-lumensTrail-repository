@@ -88,4 +88,16 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Space(10)]
     [Header("Statue")]
     public float statueVelocityMultiplier = 2f;
+
+    [Space(10)]
+    [Header("Trunk")]
+    public float trunkVelocityMultiplier = 0.5f;
+
+    [Space(15)]
+    [Header("NPCs")]
+    public float thoughtBubbleFadeTime = 2f;
+
+    [Space(10)]
+    [Header("Bonsai")]
+    public float movingSpeed = 1f;
 }
