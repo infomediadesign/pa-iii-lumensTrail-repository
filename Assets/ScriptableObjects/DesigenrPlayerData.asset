@@ -38,6 +38,7 @@ MonoBehaviour:
   lightWaveMaxTravelDistance: 5
   lightWaveStartingSizeMultiplier: 0.4
   lightWaveMaxSizeAtDistance: 4
+  lightWaveMovementDisabledTime: 2
   lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
   maxImpulseRadius: 40
@@ -52,4 +53,4 @@ MonoBehaviour:
   aboveHeadCarryGap: 0.29
   speedModWhileCarrying: 0.18
   stayActiveTime: 10
-  statueVelocityMultiplier: 2
+  statueVelocityMultiplier: 1
