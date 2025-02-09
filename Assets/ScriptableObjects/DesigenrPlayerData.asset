@@ -51,6 +51,6 @@ MonoBehaviour:
   pickupArcHeight: 0.75
   pickupArcSpeed: 0.55
   aboveHeadCarryGap: 0.29
-  speedModWhileCarrying: 0.18
+  speedModWhileCarrying: 1
   stayActiveTime: 10
   statueVelocityMultiplier: 2
