@@ -1,28 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class StatueWeakPoint : BaseInteractableObject
+public class TrunkWeakPoint : BaseInteractableObject
 {
-    StatueMainBody parent;
+    TrunkMainBody parent;
     Rigidbody2D lightWaveRB;
 
     void Start()
     {
         base.Init();
-        parent = GetComponentInParent<StatueMainBody>();
+        parent = GetComponentInParent<TrunkMainBody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public override void Activate(GameObject activationObject)
     {
         lightWaveRB = activationObject.GetComponent<Rigidbody2D>();
-        parent.LightWaveHit(lightWaveRB.velocity * dData.statueVelocityMultiplier);
+        parent.LightWaveHit(lightWaveRB.velocity * dData.trunkVelocityMultiplier);
+        this.gameObject.SetActive(false);
     }
 }
