@@ -212,21 +212,31 @@ public class KekeAI : MonoBehaviour
             rb.velocity= new Vector2((Vector2.left * jumpSpeed).x, rb.velocity.y);
         }
         jumpTimer = 0;
-        coll.enabled = false;
-    }
+        int kekelayer = LayerMask.NameToLayer("Keke");
+        int platformLayer = LayerMask.NameToLayer("Platform");
+        
+        Physics2D.IgnoreLayerCollision(kekelayer, platformLayer, true);
+        collisionResolved = false;
+    } 
 
     private IEnumerator JumpUnblock(float jumpUnblockTime)
     {
         yield return new WaitForSeconds(jumpUnblockTime);
         jumpBlocked = false;
     }
-    
+
+
+    bool collisionResolved = false;
     private void ExecuteJump()
     {
         jumpTimer = jumpTimer + Time.deltaTime;
 
         if (jumpTimer < jumpTime/2) return;
-        coll.enabled = true;
+        if (!collisionResolved)
+        {
+            collisionResolved = true;
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Keke"), LayerMask.NameToLayer("Platform"), false);
+        }
 
         CheckGrounded();
         
