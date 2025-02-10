@@ -9,6 +9,7 @@ public class StatueMainBody : MonoBehaviour
     Rigidbody2D rb;
     private bool activated;
     [SerializeField] StatueMainBody otherStatue;
+    private float forceMultiplier;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,8 @@ public class StatueMainBody : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
-        rb.velocity = lightWaveVelocity;
+        rb.velocity = lightWaveVelocity * forceMultiplier;
+
     }
 
     private void OnBecameInvisible()
@@ -45,5 +47,10 @@ public class StatueMainBody : MonoBehaviour
     {
         gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public void SetForceMultiplier(float value)
+    {
+        this.forceMultiplier = value;
     }
 }
