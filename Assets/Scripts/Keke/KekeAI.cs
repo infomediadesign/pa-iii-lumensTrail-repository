@@ -8,24 +8,42 @@ using Unity.VisualScripting;
 
 public class KekeAI : MonoBehaviour
 {
+
+
     public enum KekeState {Following, Jumping, Falling}
     
+    [Header("Designer Variables")]
     [Header("Pathfinding")]
     public Transform target;
-    public float pathUpdateRate = 0.5f;
     public float activationDistance = 50f;
+
+
 
     [Header("Physics")]
     public float speed = 2f;
+    public float jumpForce = 0.3f;
+    public float jumpUnblockTime = 0.3f;
+    public int jumpFragments = 4;
+
+
+
+    
+    [Header("Programmer Variables")]
+    [Header("Pathfinding")]
+    
+    public float pathUpdateRate = 0.5f;
+    
+
+    [Header("Physics")]
     private float jumpSpeed;
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.5f;
-    public float jumpForce = 0.3f;
     public float jumpCheckOffset = 0.1f;
     public float dropCheckOffset = 30f;
     private bool pathDrops=false;
 
-    public float jumpUnblockTime = 0.1f;
+
+
 
     [Header("Custom Behaviour")]
     
@@ -310,7 +328,7 @@ public class KekeAI : MonoBehaviour
     private Vector2[] points = new Vector2[(int)jumpSimulationDepth+10];
     private Vector2 hitPoint;
 
-    public float jumpOffsetBuffer = 10f;
+    public float jumpOffsetBuffer = 2f;
     private float jumpTime;
     
     
