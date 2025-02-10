@@ -20,7 +20,10 @@ public class StatueMainBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (activated)
+        {
+            MovementBaseState.movementEnabled = false;
+        }
     }
 
     public void LightWaveHit(Vector2 lightWaveVelocity)
@@ -33,6 +36,7 @@ public class StatueMainBody : MonoBehaviour
     private void OnBecameInvisible()
     {
         if (!activated) return;
+        MovementBaseState.movementEnabled = true;
         otherStatue.ActivateStatue();
         Destroy(gameObject);
     }
