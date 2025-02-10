@@ -12,6 +12,7 @@ public class StatueWeakPoint : BaseInteractableObject
     {
         base.Init();
         parent = GetComponentInParent<StatueMainBody>();
+        parent.SetForceMultiplier(dData.statueVelocityMultiplier);
     }
 
     // Update is called once per frame
