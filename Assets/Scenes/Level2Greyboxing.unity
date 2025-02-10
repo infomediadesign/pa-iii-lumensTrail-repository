@@ -452,10 +452,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 9.442444, y: 2.3189876}
+    - - {x: 10.9021, y: 1.0848033}
+      - {x: 10.82135, y: 2.3099487}
+      - {x: 9.550095, y: 2.3545585}
       - {x: 9.228409, y: 2.7151947}
       - {x: 7.0327053, y: 3.6605337}
-      - {x: 7.755055, y: 2.5539262}
+      - {x: 6.081784, y: 1.1179998}
   m_UseDelaunayMesh: 0
 --- !u!1 &76968012
 GameObject:
@@ -6114,6 +6116,7 @@ MonoBehaviour:
     m_Bits: 0
   isGrounded: 0
   coll: {fileID: 1594880088}
+  jumpOffsetBuffer: 10
 --- !u!212 &1594880091
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6729,7 +6732,7 @@ MonoBehaviour:
   speed: 4
   jumpForce: 9
   jumpUnblockTime: 0.2
-  jumpFragments: 10
+  jumpFragments: 4
   pathUpdateRate: 0.5
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.5
@@ -6744,6 +6747,7 @@ MonoBehaviour:
     m_Bits: 0
   isGrounded: 0
   coll: {fileID: 1795913514}
+  jumpOffsetBuffer: 10
 --- !u!212 &1795913517
 SpriteRenderer:
   m_ObjectHideFlags: 0
