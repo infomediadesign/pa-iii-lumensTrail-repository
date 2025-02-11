@@ -21,16 +21,14 @@ public abstract class CollectableReceiver : MonoBehaviour
 
     [SerializeField] protected DesignerPlayerScriptableObject dData;
 
-    
-
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         totalItems = items.transform.childCount;
         deliveredItems = 0;
         this.endPoint = this.transform.position;
     }
 
-    protected virtual void Update()
+    protected void Update()
     {
         if (delivering)
         {
@@ -45,19 +43,6 @@ public abstract class CollectableReceiver : MonoBehaviour
                 carriedObject.transform.position = endPoint;
             }
         }
-
-        //
-
-        if (deliveredItems == totalItems)
-        {
-            this.ItemsDeliveredTrigger();
-        }
-    }
-
-    protected virtual void OnBecameInvisible()
-    {
-        if (deliveredItems != totalItems) return;
-        Destroy(gameObject);
     }
 
     protected virtual void ItemsDeliveredTrigger()
@@ -65,7 +50,7 @@ public abstract class CollectableReceiver : MonoBehaviour
         
     }
 
-    public virtual void DeliverItem(GameObject carriedItem)
+    public void DeliverItem(GameObject carriedItem)
     {
         this.elapsedTime = 0;
         this.carriedObject = carriedItem;
@@ -89,12 +74,30 @@ public abstract class CollectableReceiver : MonoBehaviour
     {
         if (collision.gameObject == carriedObject && delivering)
         {
+            this.transform.GetChild(0).GetComponent<ThoughtBubble>().SetItemDeliveredFadeTrue();
             carriedObject.GetComponent<Collider2D>().enabled = false;
             carriedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             carriedObject.GetComponent<SpriteRenderer>().enabled = false;
             carriedObject.transform.position = endPoint;
             this.delivering = false;
             this.deliveredItems++;
+            if (deliveredItems == totalItems) this.ItemsDeliveredTrigger();
         }
+    }
+
+    protected void DestroyReceiver()
+    {
+        Destroy(items);
+        Destroy(this.gameObject);
+    }
+
+    public int GetTotalItems()
+    {
+        return this.totalItems;
+    }
+
+    public int GetDeliveredItems()
+    {
+        return this.deliveredItems;
     }
 }

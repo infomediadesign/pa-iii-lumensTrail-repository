@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float lastTimeLightThrown;
     private float lastTimeLigthImpulse;
     private float pickupRadius;
+    private CollectableReceiver receiver;
 
     public Vector2 footBoxSize;
     public float castDistance;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
         playerStateMachine.im = itemManager;
+        receiver = FindObjectOfType<CollectableReceiver>();
 
         //to be designer stuff
         pickupRadius = dData.pickupRange;
@@ -121,11 +123,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickupItem(InputAction.CallbackContext context)
     {
+        if (receiver == null) return;
         if (context.performed)
         {
             if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
-                CollectableReceiver receiver = FindObjectOfType<CollectableReceiver>();
                 receiver.DeliverItem(itemManager.carriedItem);
                 pData.actionStateSwitchAllowed = true;
                 playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
