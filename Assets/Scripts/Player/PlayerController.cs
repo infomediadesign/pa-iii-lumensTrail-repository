@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,16 +12,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
+    public ItemManager itemManager;
 
     private float horizontalMovement;
+    private bool isFacingRight = true;
     private bool isMoving = false;
-    private float lastTimeDashed;
-    private bool isDashOnCooldown;
-    public Image dashCooldownImage;
+    private float lastTimeLightThrown;
+    private float lastTimeLigthImpulse;
+    private float pickupRadius;
 
     public Vector2 footBoxSize;
-    public Vector2 leftSideBoxSize;
-    public Vector2 rightSideBoxSize;
     public float castDistance;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
@@ -30,23 +31,30 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
         playerStateMachine = GetComponent<StateMachine>();
-        lastTimeDashed = -dData.dashCooldown;
+        lastTimeLightThrown = -dData.lightThrowCooldown;
+        lastTimeLigthImpulse = -dData.impulseCooldown;
+        rb.gravityScale = dData.generalGravityMultiplier;
+        playerStateMachine.im = itemManager;
+
+        //to be designer stuff
+        pickupRadius = dData.pickupRange;
     }
 
     private void Update()
     {
-        isGrounded();
-        isTouchingWall();
+        IsGrounded();
 
-        if (isDashOnCooldown) DashOnCooldown();
+        /*
+         * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
+         */
+        //rb.gravityScale = dData.generalGravityMultiplier;
     }
 
     private void FixedUpdate()
     {
         if (isMoving)
         {
-            if (pData.isDashing) return;
-            playerStateMachine.OnMove(horizontalMovement);
+            playerStateMachine.SetHorizontalMovement(horizontalMovement);
         }
         
     }
@@ -56,12 +64,11 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             pData.jumpButtonPressed = true;
-            if (pData.groundCoyoteTimeCounter > 0 || pData.wallCoyoteTimeCounter > 0)
+            if (pData.groundCoyoteTimeCounter > 0)
             {
-                playerStateMachine.ChangeState(StateMachine.StateKey.Jumping);
+                playerStateMachine.SwitchToState(PhysicsBaseState.StateKey.Jumping);
 
                 pData.groundCoyoteTimeCounter = 0;
-                pData.wallCoyoteTimeCounter = 0;
             }
             
         }
@@ -85,42 +92,77 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = true;
             horizontalMovement = context.ReadValue<Vector2>().x;
-            
+            // To flip the player when changing direction
+            if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0)) FlipPlayerCharacter(); 
+            playerStateMachine.SwitchToState(MovementBaseState.StateKey.Moving);
         }
         else if (context.canceled)
         {
             isMoving = false;
-            rb.velocity = Vector2.up * rb.velocity;
+            playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
         }
     }
 
-    public void OnDash(InputAction.CallbackContext context)
+    public void OnLightThrow(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (Time.time < lastTimeDashed + dData.dashCooldown) return;
-
-            lastTimeDashed = Time.time;
-            playerStateMachine.ChangeState(StateMachine.StateKey.Dashing);
-            isDashOnCooldown = true;
-            dashCooldownImage.fillAmount = 0;
+            pData.lightThrowButtonPressed = true;
+            if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
+            lastTimeLightThrown = Time.time;
+            playerStateMachine.SwitchToState(ActionBaseState.StateKey.LightThrow);
+        }
+        else if (context.canceled) 
+        {
+            pData.lightThrowButtonPressed = false;
         }
     }
 
-    private void DashOnCooldown()
+    public void OnPickupItem(InputAction.CallbackContext context)
     {
-        float timeSinceDashed = Time.time - lastTimeDashed;
-        float cooldownProgress = timeSinceDashed / dData.dashCooldown;
-        dashCooldownImage.fillAmount = cooldownProgress;
-
-        if (cooldownProgress >= 1f)
+        if (context.performed)
         {
-            isDashOnCooldown = false;
-            dashCooldownImage.fillAmount = 1f;
+            this.PerformPickUp();
         }
-        }
+    }
 
-    private void isGrounded()
+    private void PerformPickUp()
+    {
+        if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
+        {
+            playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
+        }
+        else
+        {
+            bool canPickup = true;
+            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+            if (canPickup)
+            {
+                itemManager.carriedItem = pickupItem;
+                playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
+            }
+        }
+    }
+
+    public void TriggerPickupManually()
+    {
+
+        this.PerformPickUp();
+    }
+
+    public void OnLightImpulse(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (Time.time < lastTimeLigthImpulse + dData.impulseCooldown) return;
+            lastTimeLigthImpulse = Time.time;
+            LightImpuls lI = GetComponentInChildren<LightImpuls>();
+            if (lI != null) lI.LightImpulse();
+            else Debug.Log("LightImpulse Component is null");
+        }
+    }
+
+    private void IsGrounded()
     {
         if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
         {
@@ -133,25 +175,16 @@ public class PlayerController : MonoBehaviour
             pData.groundCoyoteTimeCounter -= Time.deltaTime;
         }
     }
+    
 
-    private void isTouchingWall()
+    private void FlipPlayerCharacter()
     {
-        if (Physics2D.BoxCast(transform.position, leftSideBoxSize, 0, -transform.right, castDistance, wallLayer) || Physics2D.BoxCast(transform.position, rightSideBoxSize, 0, transform.right, castDistance, wallLayer))
-        {
-            pData.isTouchingWall = true;
-            pData.wallCoyoteTimeCounter = dData.coyoteTime;
-        }
-        else
-        {
-            pData.isTouchingWall = false;
-            pData.wallCoyoteTimeCounter -= Time.deltaTime;
-        }
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
-        Gizmos.DrawWireCube(transform.position + transform.right * castDistance, rightSideBoxSize);
-        Gizmos.DrawWireCube(transform.position - transform.right * castDistance, leftSideBoxSize);
     }
 }

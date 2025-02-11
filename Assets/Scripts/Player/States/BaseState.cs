@@ -5,35 +5,35 @@ using UnityEngine;
 public abstract class BaseState
 {
     protected StateMachine sm;
+    public System.Enum ownState { get; protected set; }
 
-    public void OnStateEnter(StateMachine stateMachine)
+    public enum StateType { Movement = 0, Physics = 1, Action = 2 }
+    public StateType stateType { get; protected set; }
+
+    public BaseState(StateMachine p_sm)
     {
-        // this code will always be called
-        sm = stateMachine;
-        OnEnter();
+        this.sm = p_sm;
     }
 
-    protected virtual void OnEnter()
+    public virtual void SwitchTo()
+    {
+        sm.ChangeState(ownState);
+    }
+
+    
+
+    public virtual void OnEnter()
     {
         // this code can be overwritten in the derived classes
     }
 
-    public void OnStateUpdate()
+
+    public virtual void OnUpdate()
     {
-        OnUpdate();
+        // this code can be overwritten in the derived classes
     }
 
-    protected virtual void OnUpdate()
-    {
-
-    }
-
-    public void OnStateMove()
-    {
-        OnMove();
-    }
-
-    protected virtual void OnMove()
+    /*public virtual void OnMove()
     {
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed;
         // for acceleration and decceleration, but currently not used
@@ -42,15 +42,15 @@ public abstract class BaseState
         //float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, sm.data.velPower) * Mathf.Sign(speedDif);
 
         sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
+    }*/
+
+
+
+
+    public virtual void OnExit()
+    {
+        // this code can be overwritten in the derived classes
     }
 
-    public void OnStateExit()
-    {
-        OnExit();
-    }
 
-    protected virtual void OnExit() 
-    {
-    
-    }
 }
