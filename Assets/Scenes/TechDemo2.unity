@@ -2452,7 +2452,7 @@ GameObject:
   - component: {fileID: 626790680}
   - component: {fileID: 626790681}
   - component: {fileID: 626790682}
-  - component: {fileID: 626790683}
+  - component: {fileID: 626790684}
   m_Layer: 0
   m_Name: Bonsai
   m_TagString: Untagged
@@ -2563,7 +2563,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &626790683
+--- !u!114 &626790684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2572,13 +2572,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 626790679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611998831a74fa44b91ae61721420d5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9813a9f88619ccb4f8ff983417bc223d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pC: {fileID: 1206535247}
-  item01: {fileID: 554553852}
-  item02: {fileID: 1222558257}
-  desItem: {fileID: 1654990421}
+  items: {fileID: 1488278326}
   dData: {fileID: 11400000, guid: 00d47f52f3012004093393a679123adb, type: 2}
   targetTransform: {fileID: 1194632228}
 --- !u!1 &653879062
@@ -2706,15 +2703,15 @@ PrefabInstance:
       objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
     - target: {fileID: 800951890946831956, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
       propertyPath: m_Color.b
-      value: 0.031372532
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 800951890946831956, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
       propertyPath: m_Color.g
-      value: 0.9529412
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 800951890946831956, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
       propertyPath: m_Color.r
-      value: 0.3816264
+      value: 0.9529412
       objectReference: {fileID: 0}
     - target: {fileID: 2479100399792639711, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
       propertyPath: m_LocalScale.x
@@ -2772,6 +2769,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 5813300337384033447, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813300337384033447, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2811,7 +2816,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 0
 --- !u!1 &928770222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,7 +3707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1194513731}
   - component: {fileID: 1194513732}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: ThoughtBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3863,17 +3868,6 @@ MonoBehaviour:
   - {x: 2.4037266, y: -2.3576164, z: 0}
   - {x: 0.82277775, y: 2.6342828, z: 0}
   - {x: -0.15087414, y: 2.6342828, z: 0}
---- !u!114 &1206535247 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1973396408013149650, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
-  m_PrefabInstance: {fileID: 1522724664}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206535230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc43286fce2ff5409733462a74feb17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1212868684
 GameObject:
   m_ObjectHideFlags: 0
@@ -4444,6 +4438,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 5813300337384033447, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813300337384033447, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4483,7 +4485,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 0
 --- !u!4 &1470180945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9221700937678303343, guid: e97c6aed8314baa4d9744f43a30ceb52, type: 3}
@@ -4724,7 +4726,7 @@ GameObject:
   - component: {fileID: 1654990419}
   - component: {fileID: 1654990421}
   - component: {fileID: 1654990420}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: DesiredObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4997,7 +4999,7 @@ GameObject:
   - component: {fileID: 1706207464}
   - component: {fileID: 1706207463}
   - component: {fileID: 1706207462}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: ThoughtBubbleActivateRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5033,6 +5035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dData: {fileID: 11400000, guid: 00d47f52f3012004093393a679123adb, type: 2}
+  pData: {fileID: 11400000, guid: bd531fca99f8aca429ae53841c2c2014, type: 2}
 --- !u!58 &1706207463
 CircleCollider2D:
   m_ObjectHideFlags: 0

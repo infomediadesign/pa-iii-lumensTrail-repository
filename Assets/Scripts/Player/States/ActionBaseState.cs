@@ -12,5 +12,9 @@ public class ActionBaseState : BaseState
         stateType = BaseState.StateType.Action;
     }
 
-
+    public override void SwitchTo()
+    {
+        if (!sm.pData.actionStateSwitchAllowed) return;
+        base.SwitchTo();
+    }
 }

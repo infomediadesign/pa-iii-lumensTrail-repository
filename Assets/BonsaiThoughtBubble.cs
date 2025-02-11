@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BonsaiThoughtBubble : MonoBehaviour
 {
-    private Bonsai parent;
+    private CollectableReceiver parent;
 
     private SpriteRenderer spriteRenderer;
     private float targetAlpha;       
@@ -13,10 +13,11 @@ public class BonsaiThoughtBubble : MonoBehaviour
     private float fadeTime;          
     private bool isFading = false;
     [SerializeField] private DesignerPlayerScriptableObject dData;
+    [SerializeField] private ProgrammerPlayerScriptableObject pData;
 
     void Awake()
     {
-        parent = GetComponentInParent<Bonsai>();
+        parent = GetComponentInParent<CollectableReceiver>();
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         Color color = spriteRenderer.color;
         color.a = 0f;
@@ -56,11 +57,8 @@ public class BonsaiThoughtBubble : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartFade(1f, dData.thoughtBubbleFadeTime); // Fade-In mit 1 Sekunde Dauer
-        }
-        if (other.gameObject == parent.GetCurrentDesiredItem())
-        {
-            parent.ItemAccepted();
+            StartFade(1f, dData.thoughtBubbleFadeTime);
+            pData.inDropRange = true;
         }
     }
 
@@ -68,7 +66,8 @@ public class BonsaiThoughtBubble : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartFade(0f, dData.thoughtBubbleFadeTime); // Fade-Out mit 1 Sekunde Dauer
+            StartFade(0f, dData.thoughtBubbleFadeTime);
+            pData.inDropRange = false;
         } 
     }
 

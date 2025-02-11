@@ -24,6 +24,7 @@ public class CarryingState : ActionBaseState
 
     public override void OnEnter()
     {
+        sm.pData.actionStateSwitchAllowed = false;
         carriedObject = sm.im.carriedItem;
         carryHeight = Mathf.Abs(carriedObject.transform.position.y - sm.rb.transform.position.y);
         carriedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
