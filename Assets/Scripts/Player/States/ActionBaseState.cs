@@ -14,7 +14,6 @@ public class ActionBaseState : BaseState
 
     public override void SwitchTo()
     {
-        if (!sm.pData.actionStateSwitchAllowed) return;
         base.SwitchTo();
     }
 }

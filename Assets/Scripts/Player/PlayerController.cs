@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
             if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
                 receiver.DeliverItem(itemManager.carriedItem);
-                pData.actionStateSwitchAllowed = true;
                 playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
             }
             else

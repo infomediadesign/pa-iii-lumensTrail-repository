@@ -19,7 +19,6 @@ public class ProgrammerPlayerScriptableObject : ScriptableObject
     // [Unity.Collections.ReadOnly]
     //public StateMachine.StateKey stateKey = StateMachine.StateKey.Grounded;
     public bool inDropRange = false;
-    public bool actionStateSwitchAllowed = true;
 
     
     [Unity.Collections.ReadOnly]
