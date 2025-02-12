@@ -83,6 +83,8 @@ public class KekeAI : MonoBehaviour
         int platformLayer = 8;
         collisionMask = (1<<groundLayer) | (1<<wallLayer) | (1<<platformLayer);
 
+        target = GameObject.Find("Player").transform;
+
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
     }
 
@@ -133,7 +135,7 @@ public class KekeAI : MonoBehaviour
 
         CheckGrounded();
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] -rb.position).normalized;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+1] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
 
         //RaycastHit2D cliffCheck = Physics2D.Raycast(new Vector2(transform.position.x + coll.bounds.extents.x * Mathf.Sign(direction.x), transform.position.y), Vector2.down, coll.bounds.extents.y + jumpCheckOffset, collisionMask);
         //if (cliffCheck.collider != null)
@@ -183,7 +185,7 @@ public class KekeAI : MonoBehaviour
 
         if (jumpEnabled && isGrounded)
         {
-            if (((direction.y > jumpNodeHeightRequirement && !jumpBlocked) || (isOnCliff && !jumpBlocked) || (falls&&!jumpBlocked)) && JumpAndFall(out jumpingNotFalling, 4, falls))
+            if (((direction.y > jumpNodeHeightRequirement && !jumpBlocked) || (isOnCliff && !jumpBlocked) || (falls&&!jumpBlocked)) && JumpAndFall(out jumpingNotFalling, jumpFragments, falls))
             {
                 if (jumpingNotFalling)
                 {
@@ -341,7 +343,7 @@ public class KekeAI : MonoBehaviour
         if (shouldFall)
         {
             Vector2 jumpPoint = hitPoint;
-            if (HitsGround(0, fragment, true)) hitsGround = true;
+            if (HitsGround(0, 2, true)) hitsGround = true;
             if (jumpPoint != hitPoint)
             {
                 jumpingNotFalling = false;
@@ -356,8 +358,10 @@ public class KekeAI : MonoBehaviour
         float timeStep = 0.01f; // Time between each step
         Vector2 startPos = new Vector2(transform.position.x, transform.position.y + coll.bounds.extents.y);
         bool firstHit = false;
+        Vector2 jumpPoint = CalculateJumpPoint();
+        Vector2 offsetWaypoint = GetWayppointAtJumpPoint(jumpPoint);
 
-        for (int dpth = fragments; dpth > 0; dpth--)
+        for (int dpth = fragments; dpth >= 0; dpth--)
         {
             Vector2 prevPoint = startPos;
             points[0] = startPos;
@@ -382,7 +386,7 @@ public class KekeAI : MonoBehaviour
                     if (!(hit.point.y < hit.transform.position.y + hit.collider.bounds.extents.y) && givenForce + (gravity * t)<0)
                     {
                         Debug.Log("Collision detected at: " + newPoint);
-                        if ((!firstHit) || (firstHit && GetJumpPointOffset(newPoint) < GetJumpPointOffset(hitPoint) - jumpOffsetBuffer))
+                        if ((!firstHit) || (firstHit && GetWayPointOffset(newPoint, offsetWaypoint) < GetWayPointOffset(hitPoint, offsetWaypoint)))
                         {
                             hitPoint = newPoint;
                             firstHit = true;
@@ -404,18 +408,28 @@ public class KekeAI : MonoBehaviour
         return firstHit;
     }
 
-    private float GetJumpPointOffset(Vector2 jumpPoint)
+    private float GetWayPointOffset(Vector2 landingPoint, Vector2 waypoint)
     {
-        Vector2 waypoint = GetWayppointAtJumpPoint(jumpPoint);
-        return (Mathf.Abs(jumpPoint.y -waypoint.y));
+        return Vector2.Distance(waypoint, landingPoint);
     }
     
     private Vector2 GetWayppointAtJumpPoint(Vector2 jumpPoint)
     {
-        float jumpDistance = Mathf.Abs(transform.position.x - jumpPoint.x);
+        if (Mathf.Abs(target.position.x - transform.position.x) <= ((transform.position.x - jumpPoint.x)*2)) return target.position;
+        
+        for (int i = 2; i < path.vectorPath.Count; i++)
+        {
+            Vector2 waypoint = (Vector2)path.vectorPath[(int)path.vectorPath.Count/i];
+            if (Mathf.Abs(waypoint.x - transform.position.x) <= ((transform.position.x - jumpPoint.x)*2)) return waypoint;
+        }
+        return target.position;
+        
+        /* float jumpDistance = Mathf.Abs(transform.position.x - jumpPoint.x);
         float waypointDistance = Mathf.Abs(transform.position.x - ((Vector2)path.vectorPath[currentWaypoint]).x);
         int wayPointIndex = (int)(jumpDistance / waypointDistance)-1;
         Vector2 waypoint;
+
+
         if (wayPointIndex >= path.vectorPath.Count)
         {
             waypoint = (Vector2)path.vectorPath[path.vectorPath.Count - 1];
@@ -424,9 +438,19 @@ public class KekeAI : MonoBehaviour
         {
             waypoint = (Vector2)path.vectorPath[wayPointIndex];
         }
-        return waypoint;
-        
+        return waypoint; */
+
     }
+
+    private Vector2 CalculateJumpPoint()
+    {
+        float gravity = Physics2D.gravity.y * rb.gravityScale;
+        float timeOfFlight = (-2 * jumpForce) / gravity;
+        float xLand = transform.position.x + speed * timeOfFlight;
+        Vector2 landingPosition = new Vector2(xLand, transform.position.y);
+        return landingPosition;
+    }
+
     void OnDrawGizmos()
     {
         //draw Jump

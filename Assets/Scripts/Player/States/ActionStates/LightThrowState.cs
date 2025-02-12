@@ -13,6 +13,7 @@ public class LightThrowState : ActionBaseState
 
     public override void SwitchTo()
     {
+        if((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
