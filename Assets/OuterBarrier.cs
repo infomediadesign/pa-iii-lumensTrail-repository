@@ -5,20 +5,16 @@ using UnityEngine;
 public class OuterBarrier : MonoBehaviour
 {
     private CameraFollow cam;
-    private bool stopFollow = false;
-
+    [SerializeField] private bool leftBarrier = true;
+ 
     private void Start()
     {
         cam = FindObjectOfType<CameraFollow>();
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void OnBecameVisible()
     {
-        cam.SetStopFollowing(true);
+        if (leftBarrier) cam.SetStopFollowingLeft(true);
+        else cam.SetStopFollowingRight(true);
     }
 }

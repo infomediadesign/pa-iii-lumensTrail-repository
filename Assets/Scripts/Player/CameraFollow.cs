@@ -9,7 +9,8 @@ public class CameraFollow : MonoBehaviour
     public float followPlayerAtScreenPercentage = 80f;
     private Camera cam;
     private bool playerPos = false;
-    private bool stopFollowing = false;
+    private bool stopFollowingLeft = false;
+    private bool stopFollowingRight = false;
 
     private void Start()
     {
@@ -32,11 +33,19 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (stopFollowing) 
+        if (stopFollowingLeft || stopFollowingRight) 
         {
             Vector3 playerViewportPos = cam.WorldToViewportPoint(target.position);
-            bool isInCorrectHalf = playerViewportPos.x > 0.5f;
-            if (isInCorrectHalf) stopFollowing = false;
+            bool isInCorrectHalf;
+            if (stopFollowingLeft)
+            {
+                isInCorrectHalf = playerViewportPos.x > 0.5f;
+            }
+            else
+            {
+                isInCorrectHalf = playerViewportPos.x < 0.5f;
+            }
+            if (isInCorrectHalf) stopFollowingLeft = stopFollowingRight = false;
         }
 
         float desiredYPos;
@@ -63,13 +72,18 @@ public class CameraFollow : MonoBehaviour
             }
         }
 
-        if (stopFollowing) smoothedPosition.x = transform.position.x;
+        if (stopFollowingLeft || stopFollowingRight) smoothedPosition.x = transform.position.x;
         transform.position = smoothedPosition;
     }
 
-    public void SetStopFollowing(bool input)
+    public void SetStopFollowingLeft(bool input)
     {
-        this.stopFollowing = input;
+        this.stopFollowingLeft = input;
+    }
+
+    public void SetStopFollowingRight(bool input)
+    {
+        this.stopFollowingRight = input;
     }
 }
  
