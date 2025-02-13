@@ -53,7 +53,7 @@ MonoBehaviour:
   aboveHeadCarryGap: 0.29
   speedModWhileCarrying: 1
   stayActiveTime: 10
-  statueVelocityMultiplier: 2
+  statueVelocityMultiplier: 2.68
   trunkVelocityMultiplier: 0.5
   thoughtBubbleFadeTime: 70
   bonsaiMovingTime: 20

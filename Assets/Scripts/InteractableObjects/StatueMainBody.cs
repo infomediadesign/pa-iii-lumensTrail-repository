@@ -9,7 +9,6 @@ public class StatueMainBody : MonoBehaviour
     Rigidbody2D rb;
     private bool activated;
     [SerializeField] StatueMainBody otherStatue;
-    private float forceMultiplier;
 
     // Start is called before the first frame update
     void Start()
@@ -31,16 +30,8 @@ public class StatueMainBody : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
-        rb.velocity = lightWaveVelocity * forceMultiplier;
+        rb.velocity = lightWaveVelocity;
 
-    }
-
-    private void OnBecameInvisible()
-    {
-        if (!activated) return;
-        MovementBaseState.movementEnabled = true;
-        otherStatue.ActivateStatue();
-        Destroy(gameObject);
     }
 
     public void ActivateStatue()
@@ -49,8 +40,18 @@ public class StatueMainBody : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    public void SetForceMultiplier(float value)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        this.forceMultiplier = value;
+        if (collision.gameObject.tag == "LightThrowInteractable") 
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (!activated) return;
+            MovementBaseState.movementEnabled = true;
+            otherStatue.ActivateStatue();
+            this.gameObject.SetActive(false);
+        }
     }
 }
