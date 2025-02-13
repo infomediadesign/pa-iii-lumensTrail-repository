@@ -14,6 +14,7 @@ public class LightThrowState : ActionBaseState
     public override void SwitchTo()
     {
         if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
+        if((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
@@ -65,6 +66,7 @@ public class LightThrowState : ActionBaseState
     {
         PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
         MovementBaseState.movementEnabled = true;
+        sm.animator.SetBool("lightThrow", false);
     }
 
     /***
