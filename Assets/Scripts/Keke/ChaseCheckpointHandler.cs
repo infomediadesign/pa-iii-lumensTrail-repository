@@ -7,6 +7,7 @@ using UnityEngine;
 public class ChaseCheckpointHandler : MonoBehaviour
 {
     public bool active = false;
+    public bool lastCheckPointReached {get; private set;} = false;
     bool setTarget = false;
     public GameObject chaser;
     public float reachDistance = 1f;
@@ -58,6 +59,11 @@ public class ChaseCheckpointHandler : MonoBehaviour
         float distance = Vector2.Distance(chaser.transform.position, currentCheckpoint.Item1.position);
         if (distance <= reachDistance)
         {
+            if (currentCheckpoint.Item2 == childTransforms.Count-1)
+            {
+                active = false;
+                lastCheckPointReached = true;
+            }
             currentCheckpoint = new Tuple<Transform, int>(childTransforms[currentCheckpoint.Item2 + 1], currentCheckpoint.Item2 + 1);
             ai.target = currentCheckpoint.Item1;
         }

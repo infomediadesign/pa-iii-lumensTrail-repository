@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 public class KekeAI : MonoBehaviour
 {
 
-
+    public Animator animator;
     public enum KekeState {Following, Jumping, Falling}
     
     [Header("Designer Variables")]
@@ -49,7 +49,7 @@ public class KekeAI : MonoBehaviour
     
     public KekeState currentState = KekeState.Following;
     
-    public bool followEnabled = true;
+    public bool followEnabled = false;
     public bool jumpEnabled = true;
     private bool jumpBlocked = false;
     public bool directionLookEnabled = true;
@@ -84,6 +84,9 @@ public class KekeAI : MonoBehaviour
         collisionMask = (1<<groundLayer) | (1<<wallLayer) | (1<<platformLayer);
 
         target = GameObject.Find("Player").transform;
+        animator.SetFloat("yMovement", 0);
+        animator.SetFloat("xMovement", 0);
+        animator.SetBool("MovingRight", false);
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
     }
@@ -92,6 +95,7 @@ public class KekeAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!followEnabled) return;
         switch (currentState)
         {
             case KekeState.Following:
@@ -131,11 +135,18 @@ public class KekeAI : MonoBehaviour
         {
             return;
         }
+
+        
         
 
         CheckGrounded();
 
+        
+        animator.SetFloat("xMovement", rb.velocity.x);
+        animator.SetFloat("yMovement", 0);
+
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+1] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
+        
 
         //RaycastHit2D cliffCheck = Physics2D.Raycast(new Vector2(transform.position.x + coll.bounds.extents.x * Mathf.Sign(direction.x), transform.position.y), Vector2.down, coll.bounds.extents.y + jumpCheckOffset, collisionMask);
         //if (cliffCheck.collider != null)
@@ -144,10 +155,12 @@ public class KekeAI : MonoBehaviour
         if (direction.x > 0)
         {
             directionValue = 1f;
+            animator.SetBool("MovingRight", true);
             rb.velocity= new Vector2((Vector2.right * speed).x, rb.velocity.y);
         } else if (direction.x < 0)
         {
             directionValue = -1f;
+            animator.SetBool("MovingRight", false);
             rb.velocity= new Vector2((Vector2.left * speed).x, rb.velocity.y);
         }
 
@@ -237,6 +250,8 @@ public class KekeAI : MonoBehaviour
         
         Physics2D.IgnoreLayerCollision(kekelayer, platformLayer, true);
         collisionResolved = false;
+        animator.SetTrigger("jump");
+        fallTriggered = false;
     } 
 
     private IEnumerator JumpUnblock(float jumpUnblockTime)
@@ -245,18 +260,25 @@ public class KekeAI : MonoBehaviour
         jumpBlocked = false;
     }
 
-
+   
     bool collisionResolved = false;
+    bool fallTriggered = false;
     private void ExecuteJump()
     {
+        
         jumpTimer = jumpTimer + Time.deltaTime;
-
+        if (!fallTriggered && rb.velocity.y < 0)
+        {
+            fallTriggered = true;
+            animator.SetTrigger("fall");
+        }
         if (jumpTimer < jumpTime/2) return;
         if (!collisionResolved)
         {
             collisionResolved = true;
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Keke"), LayerMask.NameToLayer("Platform"), false);
         }
+        
 
         CheckGrounded();
         
@@ -265,7 +287,7 @@ public class KekeAI : MonoBehaviour
         {
             StartCoroutine(JumpUnblock(jumpUnblockTime));
             currentState = KekeState.Following;
-
+            animator.SetTrigger("landing");
         }
         
         
@@ -273,6 +295,7 @@ public class KekeAI : MonoBehaviour
 
     private void StartFalling()
     {
+        animator.SetTrigger("fall");
         fallThrough = ground;
         Physics2D.IgnoreCollision(coll, fallThrough.GetComponent<Collider2D>(), true);
         jumpBlocked = true;
@@ -301,6 +324,7 @@ public class KekeAI : MonoBehaviour
             currentState = KekeState.Following;
             Physics2D.IgnoreCollision(coll, fallThrough.GetComponent<Collider2D>(), false);
             fallThrough = null;
+            animator.SetTrigger("landing");
         }
     }
 
