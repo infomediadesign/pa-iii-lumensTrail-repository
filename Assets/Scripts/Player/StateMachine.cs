@@ -51,6 +51,7 @@ public class StateMachine : MonoBehaviour
 
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
+    public Animator animator;
 
     public PhysicsMaterial2D normal;
     public PhysicsMaterial2D slip;
@@ -79,6 +80,7 @@ public class StateMachine : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
         ltm = GetComponent<PlayerLightThrowManager>();
+        animator = GetComponent<Animator>();
         //states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this), new PickupState(this), new CarryingState(this) });
         
         movementStates.AddRange(new MovementBaseState[] { new StillState(this), new MovingState(this) });
