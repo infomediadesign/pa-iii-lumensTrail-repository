@@ -1876,7 +1876,7 @@ GameObject:
   - component: {fileID: 421742789}
   - component: {fileID: 421742791}
   - component: {fileID: 421742792}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: rangeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4055,7 +4055,7 @@ MonoBehaviour:
   - 5
   speedSegmentThree: 4
   inRange: 0
-  timerGoal: 60
+  timerGoal: 30
   transitionTime: 5
   gracePeriod: 3
   kekeAI: {fileID: 1795913516}
@@ -7291,9 +7291,9 @@ GameObject:
   - component: {fileID: 1795913517}
   - component: {fileID: 1795913516}
   - component: {fileID: 1795913515}
-  - component: {fileID: 1795913514}
   - component: {fileID: 1795913513}
   - component: {fileID: 1795913519}
+  - component: {fileID: 1795913520}
   m_Layer: 14
   m_Name: Keke
   m_TagString: Untagged
@@ -7329,41 +7329,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!70 &1795913514
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795913512}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 2048
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.25693777, y: -0.14883444}
-  m_Size: {x: 3.0132945, y: 1.5361319}
-  m_Direction: 1
 --- !u!50 &1795913515
 Rigidbody2D:
   serializedVersion: 4
@@ -7405,7 +7370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1582891392}
   target: {fileID: 278627228}
-  activationDistance: 50
+  activationDistance: 200.8
   speed: 4
   jumpForce: 9
   jumpUnblockTime: 0.2
@@ -7413,7 +7378,7 @@ MonoBehaviour:
   pathUpdateRate: 0.5
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.5
-  jumpCheckOffset: 0.1
+  jumpCheckOffset: 0.23
   dropCheckOffset: 30
   reachThreshold: 0.5
   currentState: 0
@@ -7424,7 +7389,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
-  coll: {fileID: 1795913514}
+  coll: {fileID: 0}
   jumpOffsetBuffer: 10
 --- !u!212 &1795913517
 SpriteRenderer:
@@ -7516,6 +7481,51 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &1795913520
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795913512}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.08829439, y: -0.22955023}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.1654258, y: 1.3643196}
+  m_EdgeRadius: 0
 --- !u!1 &1804337961
 GameObject:
   m_ObjectHideFlags: 0
