@@ -21,6 +21,7 @@ public class LightThrowState : ActionBaseState
     {
         lightThrowButtonHoldTimer = Time.time;
         PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
+        sm.animator.SetBool("lightThrow", true);
     }
 
     public override void OnUpdate()
@@ -32,6 +33,7 @@ public class LightThrowState : ActionBaseState
             {
                 // Calling the LightThrowManager to create an instance of the projectile
                 sm.ltm.LightThrow();
+                sm.animator.SetBool("lightThrow", false);
                 sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
@@ -44,6 +46,7 @@ public class LightThrowState : ActionBaseState
             }
             else
             {
+                sm.animator.SetBool("lightThrow", false);
                 sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }

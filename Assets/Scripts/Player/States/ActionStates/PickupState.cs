@@ -28,6 +28,7 @@ public class PickupState : ActionBaseState
 
     public override void OnEnter()
     {
+        sm.animator.SetBool("pickup", true);
         arcHeight = sm.dData.pickupArcHeight;
         duration = sm.dData.pickupArcSpeed;
         heightGap = sm.dData.aboveHeadCarryGap;
@@ -59,6 +60,7 @@ public class PickupState : ActionBaseState
     public override void OnExit()
     {
         MovementBaseState.movementEnabled = true;
+        sm.animator.SetBool("pickup", false);
     }
 
     private Vector2 CalculateArcPosition(Vector2 start, Vector2 end, float arcHeight, float t)

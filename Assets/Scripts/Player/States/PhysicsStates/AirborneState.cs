@@ -28,6 +28,7 @@ public class AirborneState : PhysicsBaseState
         gravityModifier = gravityModifier * sm.dData.fallGravityMultiplier;
         MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
         sm.rb.sharedMaterial = sm.slip;
+        sm.animator.SetBool("airborne", true);
     }
 
     public override void OnUpdate()
@@ -71,5 +72,7 @@ public class AirborneState : PhysicsBaseState
         gravityModifier = gravityModifier / sm.dData.fallGravityMultiplier;
         MovementBaseState.movementSpeedModifier /= sm.dData.airFrictionAmount;
         sm.rb.sharedMaterial = sm.normal;
+        sm.animator.SetBool("airborne", false);
+        sm.animator.SetFloat("verticalSpeed", 0);
     }
 }
