@@ -65,6 +65,7 @@ public class LightThrowState : ActionBaseState
     {
         PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
         MovementBaseState.movementEnabled = true;
+        sm.animator.SetBool("lightThrow", false);
     }
 
     /***
