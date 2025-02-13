@@ -49,6 +49,7 @@ public class JumpingState : PhysicsBaseState
         {
             sm.rb.AddForce(Vector2.down * sm.rb.velocity.y * (1 - sm.dData.jumpCutMultiplier), ForceMode2D.Impulse);
             sm.animator.SetBool("jumping", false);
+            sm.animator.SetFloat("verticalSpeed", 0);
             sm.SwitchToState(PhysicsBaseState.StateKey.Airborne);
         }
 
