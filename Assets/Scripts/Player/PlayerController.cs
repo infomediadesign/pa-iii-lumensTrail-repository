@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
             if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
                 receiver.DeliverItem(itemManager.carriedItem);
-                pData.actionStateSwitchAllowed = true;
                 playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
             }
             else
@@ -139,6 +138,10 @@ public class PlayerController : MonoBehaviour
                 if (canPickup)
                 {
                     itemManager.carriedItem = pickupItem;
+                    LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
+                    int layerToAdd = LayerMask.GetMask("Platform");
+                    itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
+                    itemManager.carriedItem.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
                     playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
                 }
             }

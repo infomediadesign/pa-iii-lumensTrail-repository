@@ -9,6 +9,7 @@ public class Bonsai : CollectableReceiver
     private Vector3 startPosition;
     private float walkingElapsedTime = 0f;
     private bool isWalking = false;
+    private Animator animator;
 
     protected override void Awake()
     {
@@ -16,6 +17,7 @@ public class Bonsai : CollectableReceiver
         startPosition = transform.position;
         targetPosition = targetTransform.position;
         targetPosition.y = transform.position.y;
+        this.animator = GetComponent<Animator>();
     }
 
     private new void Update()
@@ -41,6 +43,7 @@ public class Bonsai : CollectableReceiver
     protected override void ItemsDeliveredTrigger()
     {
         isWalking = true;
+        animator.SetBool("walking", true);
         this.GetComponent<Collider2D>().enabled = false;
     }
 
