@@ -39,8 +39,7 @@ public class KekeAI : MonoBehaviour
     public float jumpCheckOffset = 0.1f;
     public float dropCheckOffset = 30f;
     private bool pathDrops=false;
-
-
+    public float reachThreshold = 0.5f;
 
 
     [Header("Custom Behaviour")]
@@ -93,7 +92,11 @@ public class KekeAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!followEnabled) return;
+        if (!followEnabled) 
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            return;
+        }
         switch (currentState)
         {
             case KekeState.Following:
@@ -501,7 +504,10 @@ public class KekeAI : MonoBehaviour
 
     }
 
-    
+    public bool ReachedTarget()
+    {
+        return Vector2.Distance(transform.position, target.position) < reachThreshold;
+    }
 
     private void OnPathComplete(Pathfinding.Path p)
     {

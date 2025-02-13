@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -10,8 +11,8 @@ public class ChaseExecution : MonoBehaviour
 {
     private enum chaseStage {prestage1, stage1, prestage2, stage2, prestage3, stage3}
     
-    public Text timerText;
-    public Text startPrompt;
+    public TMP_Text timerText;
+    public TMP_Text startPrompt;
     
 
 
@@ -22,7 +23,7 @@ public class ChaseExecution : MonoBehaviour
     [ReadOnly(true)]
     public bool inRange;
     private float timer = 0;
-    public float timerGoal = 60f;
+    public float timerGoal = 30f;
 
     public float transitionTime = 5f;
     public float gracePeriod = 3f;
@@ -30,21 +31,27 @@ public class ChaseExecution : MonoBehaviour
 
     private PlayerInput input;
     private InputAction activate;
+    private Collider2D activationCollider;
     public KekeAI kekeAI;
     public ChaseRangeCheck rangeCheck;
     public Transform kekeTransform;
     public Transform playerTransform;
     public ChaseCheckpointHandler stageOnePoints;
-    public ChaseCheckpointHandler stageThreePoints;
+    public Transform[] stageThreePoints = new Transform[2];
+    public Transform stageThreeThreshold;
+    public GameObject stageThreeGoal;
+    public ChaseRangeCheck goalReached;    
+
+     
 
     private int stage = 0;
     void Start()
     {
         kekeAI.followEnabled = false;
         stageOnePoints.active = false;
-        stageThreePoints.active = false;
         input = playerTransform.gameObject.GetComponent<PlayerInput>();
         activate = input.actions["Interact"];
+        activationCollider = GetComponent<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -56,7 +63,7 @@ public class ChaseExecution : MonoBehaviour
         if (activate.IsPressed())
         {
             startPrompt.enabled = false;
-            collision.enabled = false;
+            activationCollider.enabled = false;
             OnActivateStageOne();
         }
     }
@@ -70,6 +77,7 @@ public class ChaseExecution : MonoBehaviour
     {
         stageOnePoints.active = true;
         kekeAI.followEnabled = true;
+        kekeAI.speed = speedSegmentOne;
         StartCoroutine(OnRunStageOne());
     }
 
@@ -80,10 +88,10 @@ public class ChaseExecution : MonoBehaviour
         if (!gracePeriodPassed)
         {
             MovementBaseState.movementEnabled = false;
-            timerText.enabled = true;
-            timerText.text = "Get Keke!";
+            startPrompt.enabled = true;
+            startPrompt.text = "Get Keke!";
             yield return new WaitForSeconds(gracePeriod);
-            timerText.enabled = false;
+            startPrompt.enabled = false;
             gracePeriodPassed = true;
             MovementBaseState.movementEnabled = true;
         }
@@ -102,11 +110,13 @@ public class ChaseExecution : MonoBehaviour
     }
     private IEnumerator SwitchToStageTwo(bool caught)
     {
-        timerText.enabled = true;
-        if (caught) timerText.text = "Caught Keke! Keke will now catch you!";
-        else timerText.text = "Keke was too slippery! Keke will now catch you!";
+        MovementBaseState.movementEnabled = false;
+        startPrompt.enabled = true;
+        if (caught) startPrompt.text = "Caught Keke! Keke will now catch you!";
+        else startPrompt.text = "Keke was too slippery! Keke will now catch you!";
         yield return new WaitForSeconds(transitionTime);
-        timerText.enabled = false;
+        startPrompt.enabled = false;
+        MovementBaseState.movementEnabled = true;
         OnActivateStageTwo();
     }
     void OnActivateStageTwo()
@@ -114,61 +124,95 @@ public class ChaseExecution : MonoBehaviour
         kekeAI.target = playerTransform;
         kekeAI.speed = speedSegmentTwo[0];
         gracePeriodPassed = false;
+        StartCoroutine(OnRunStageTwo());
+        
     }
 
     private IEnumerator StageTwoTimer()
     {
-        while (timer < timerGoal)
+        timerText.enabled = true;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timerGoal)
         {
-            yield return new WaitForSeconds(0.01f);
-            timer += 0.01f;
-            timerText.text = string.Format("{0:00.00}", timer);
-            if (timer > (timerGoal/3)*2) kekeAI.speed = speedSegmentTwo[2]; 
-            else if (timer > timerGoal/3) kekeAI.speed = speedSegmentTwo[1];
+            elapsedTime += Time.deltaTime;  // Increment by the time passed since last frame
+            timerText.text = string.Format("{0:00.00}", elapsedTime);
+
+            // Speed adjustments
+            if (elapsedTime > (timerGoal / 3) * 2) kekeAI.speed = speedSegmentTwo[2];
+            else if (elapsedTime > timerGoal / 3) kekeAI.speed = speedSegmentTwo[1];
+
+            yield return null;  // Wait until the next frame
         }
+
+        timerText.enabled = false;
     }
-    void OnRunStageTwo()
+    private IEnumerator OnRunStageTwo()
     {
         if (!gracePeriodPassed)
         {
-            MovementBaseState.movementEnabled = false;
-            timerText.enabled = true;
-            timerText.text = "Get Keke!";
+            startPrompt.enabled = true;
+            startPrompt.text = "Run from Keke!";
             yield return new WaitForSeconds(gracePeriod);
-            timerText.enabled = false;
+            startPrompt.enabled = false;
             gracePeriodPassed = true;
-            MovementBaseState.movementEnabled = true;
+            kekeAI.followEnabled = true;
+            StartCoroutine(StageTwoTimer());
         }
-        while (!(stageOnePoints.lastCheckPointReached || (rangeCheck.inRange && gracePeriodPassed)))
+        while (!(timer >= timerGoal || (rangeCheck.inRange && gracePeriodPassed)))
         {
             yield return null;
         }
-        if (rangeCheck.inRange) OnExitStageOne(true);
-        else OnExitStageOne();
+        if (rangeCheck.inRange) OnExitStageTwo(true);
+        else OnExitStageTwo();
     }
 
-    void OnExitStageTwo()
+    void OnExitStageTwo(bool caught = false)
     {
         kekeAI.followEnabled = false;
+        StartCoroutine(SwitchToStageThree(caught));
+    }
+
+    private IEnumerator SwitchToStageThree(bool caught)
+    {
+        MovementBaseState.movementEnabled = false;
+        startPrompt.enabled = true;
+        if (caught) startPrompt.text = "Keke caught you! Now follow Keke!";
+        else startPrompt.text = "You were too slippery! Now follow Keke!";
+        yield return new WaitForSeconds(transitionTime);
+        startPrompt.enabled = false;
+        MovementBaseState.movementEnabled = true;
+        OnActivateStageThree();
     }
 
     void OnActivateStageThree()
     {
         kekeAI.followEnabled = true;
-        stageThreePoints.active = true;
+        gracePeriodPassed = false;
+        kekeAI.speed = speedSegmentThree;
+        if (playerTransform.position.x < stageThreeThreshold.position.x) kekeAI.target = stageThreePoints[0];
+        else kekeAI.target = stageThreePoints[1];
+        StartCoroutine(OnRunStageThree());
     }
 
+    private IEnumerator OnRunStageThree()
+    {
+        while (!goalReached.inRange)
+        {
+            if (kekeAI.ReachedTarget())kekeAI.followEnabled = false;
+            yield return null;
+        }
+        OnExitStageThree();
+        
+    }
     void OnExitStageThree()
     {
         kekeAI.followEnabled = false;
-        stageThreePoints.active = false;
+        startPrompt.enabled = true;
+        startPrompt.text = "Boom!";
     }
 
     
-    void OnRunStageThree()
-    {
-
-    }
 
 
 
