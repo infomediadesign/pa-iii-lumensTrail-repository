@@ -138,6 +138,10 @@ public class PlayerController : MonoBehaviour
                 if (canPickup)
                 {
                     itemManager.carriedItem = pickupItem;
+                    LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
+                    int layerToAdd = LayerMask.GetMask("Platform");
+                    itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
+                    itemManager.carriedItem.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
                     playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
                 }
             }
