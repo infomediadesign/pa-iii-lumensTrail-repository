@@ -48,6 +48,7 @@ public class ChaseExecution : MonoBehaviour
     void Start()
     {
         kekeAI.followEnabled = false;
+        timerText.enabled = false;
         stageOnePoints.active = false;
         input = playerTransform.gameObject.GetComponent<PlayerInput>();
         activate = input.actions["Interact"];
@@ -190,8 +191,8 @@ public class ChaseExecution : MonoBehaviour
         kekeAI.followEnabled = true;
         gracePeriodPassed = false;
         kekeAI.speed = speedSegmentThree;
-        if (playerTransform.position.x < stageThreeThreshold.position.x) kekeAI.target = stageThreePoints[0];
-        else kekeAI.target = stageThreePoints[1];
+        if (playerTransform.position.x < stageThreeThreshold.position.x) kekeAI.target = stageThreePoints[1];
+        else kekeAI.target = stageThreePoints[0];
         StartCoroutine(OnRunStageThree());
     }
 

@@ -92,14 +92,17 @@ public class KekeAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!followEnabled) 
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            return;
-        }
+        
         switch (currentState)
         {
             case KekeState.Following:
+                if (!followEnabled && isGrounded) 
+                {
+                    rb.velocity = Vector2.zero;
+                    animator.SetFloat("xMovement", rb.velocity.x);
+                    animator.SetFloat("yMovement", 0);
+                    return;
+                }
                 if (TargetInDistance() && followEnabled)
                 {
                     PathFollow();
@@ -411,7 +414,7 @@ public class KekeAI : MonoBehaviour
                     if (!(hit.point.y < hit.transform.position.y + hit.collider.bounds.extents.y) && givenForce + (gravity * t)<0)
                     {
                         Debug.Log("Collision detected at: " + newPoint);
-                        if ((!firstHit) || (firstHit && GetWayPointOffset(newPoint, offsetWaypoint) < GetWayPointOffset(hitPoint, offsetWaypoint)))
+                        if ((hitPoint == Vector2.zero) || (firstHit && GetWayPointOffset(newPoint, offsetWaypoint) < GetWayPointOffset(hitPoint, offsetWaypoint)))
                         {
                             hitPoint = newPoint;
                             firstHit = true;
