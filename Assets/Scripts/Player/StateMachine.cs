@@ -52,6 +52,9 @@ public class StateMachine : MonoBehaviour
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
 
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D slip;
+
     /*public List<BaseState> states { get; private set; } = new List<BaseState>();*/
 
     public List<MovementBaseState> movementStates { get; private set; } = new List<MovementBaseState>();

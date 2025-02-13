@@ -22,6 +22,7 @@ public class JumpingState : PhysicsBaseState
         //if(sm.pData.isTouchingWall) wallFlag=true; //outdated, to be removed
 
         MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
+        sm.rb.sharedMaterial = sm.slip;
     }
 
     public override void OnUpdate()
@@ -67,5 +68,6 @@ public class JumpingState : PhysicsBaseState
     public override void OnExit()
     {
         MovementBaseState.movementSpeedModifier /= sm.dData.airFrictionAmount;
+        sm.rb.sharedMaterial = sm.normal;
     }
 }
