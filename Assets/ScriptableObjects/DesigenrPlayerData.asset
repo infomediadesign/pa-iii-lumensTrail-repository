@@ -46,7 +46,7 @@ MonoBehaviour:
   highlightTime: 6
   increasedLightRadiusTime: 5
   propellerFlowerActiveTime: 8
-  maxWindStrength: 50
+  maxWindStrength: 22
   pickupRange: 2
   pickupArcHeight: 0.75
   pickupArcSpeed: 0.55

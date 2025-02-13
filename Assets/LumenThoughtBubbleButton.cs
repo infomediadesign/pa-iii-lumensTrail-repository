@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonsaiDesiredObject : MonoBehaviour
+public class LumenThoughtBubbleButton : MonoBehaviour
 {
-    private BonsaiThoughtBubble parent;
+    private LumenThoughtBubble parent;
     private SpriteRenderer sr;
 
     void Start()
     {
-        parent = GetComponentInParent<BonsaiThoughtBubble>();
+        parent = GetComponentInParent<LumenThoughtBubble>();
         sr = GetComponent<SpriteRenderer>();
     }
 

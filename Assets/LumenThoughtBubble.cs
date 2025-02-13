@@ -1,30 +1,33 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class BonsaiThoughtBubble : MonoBehaviour
+public class LumenThoughtBubble : MonoBehaviour
 {
-    private Bonsai parent;
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector3 offset;
 
     private SpriteRenderer spriteRenderer;
-    private float targetAlpha;       
+    private SpriteRenderer childSR;
+    private float targetAlpha;    
     private float fadeDuration = 1f; 
     private float fadeTime;          
     private bool isFading = false;
-    [SerializeField] private DesignerPlayerScriptableObject dData;
 
-    void Awake()
+    void Start()
     {
-        parent = GetComponentInParent<Bonsai>();
-        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
         Color color = spriteRenderer.color;
-        color.a = 0f;
-        spriteRenderer.color = color;
+        color.a = 0;
+        this.spriteRenderer.color = color;
+        this.childSR = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
+        this.transform.position = target.transform.position + offset;   
+
         if (isFading)
         {
             fadeTime += Time.deltaTime;
@@ -44,32 +47,17 @@ public class BonsaiThoughtBubble : MonoBehaviour
         }
     }
 
-    private void StartFade(float newTargetAlpha, float duration)
+    public void SetButtonSprite(Sprite input) 
+    {
+        this.childSR.sprite = input;
+    }
+
+    public void StartFade(float newTargetAlpha, float duration)
     {
         targetAlpha = newTargetAlpha;
         fadeDuration = duration;
         fadeTime = 0f;
         isFading = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            StartFade(1f, dData.thoughtBubbleFadeTime); // Fade-In mit 1 Sekunde Dauer
-        }
-        if (other.gameObject == parent.GetCurrentDesiredItem())
-        {
-            parent.ItemAccepted();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            StartFade(0f, dData.thoughtBubbleFadeTime); // Fade-Out mit 1 Sekunde Dauer
-        } 
     }
 
     public float GetCurrentAlpha()
