@@ -25,8 +25,6 @@ public class KekeAI : MonoBehaviour
     public float jumpUnblockTime = 0.3f;
     public int jumpFragments = 4;
 
-
-
     
     [Header("Programmer Variables")]
     [Header("Pathfinding")]
