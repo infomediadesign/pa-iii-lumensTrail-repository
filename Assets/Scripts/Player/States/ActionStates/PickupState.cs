@@ -34,7 +34,7 @@ public class PickupState : ActionBaseState
         heightGap = sm.dData.aboveHeadCarryGap;
 
         carriedObject = sm.im.carriedItem;
-        float endHeight = sm.transform.position.y + sm.sr.bounds.size.y / 2 + carriedObject.GetComponent<SpriteRenderer>().bounds.size.y / 2 + heightGap;
+        float endHeight = sm.transform.position.y + sm.sr.bounds.size.y / 6 + carriedObject.GetComponent<SpriteRenderer>().bounds.size.y / 2 + heightGap;
         endPoint = new Vector2(sm.transform.position.x, endHeight);
         startPoint = carriedObject.transform.position;
         elapsedTime = 0;
