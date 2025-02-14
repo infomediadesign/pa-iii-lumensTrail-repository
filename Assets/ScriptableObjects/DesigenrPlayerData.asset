@@ -41,7 +41,7 @@ MonoBehaviour:
   lightWaveMovementDisabledTime: 0.6
   lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
-  maxImpulseRadius: 40
+  maxImpulseRadius: 15
   impulseSpeed: 0.5
   highlightTime: 6
   increasedLightRadiusTime: 5
