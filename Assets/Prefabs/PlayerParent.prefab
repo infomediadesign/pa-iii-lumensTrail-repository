@@ -267,6 +267,10 @@ PrefabInstance:
       value: -0.040151358
       objectReference: {fileID: 0}
     - target: {fileID: 3209810114469646120, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209810114469646120, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2
       objectReference: {fileID: 0}
@@ -281,6 +285,18 @@ PrefabInstance:
     - target: {fileID: 3960305606640982615, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_SortingOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075753191078408296, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075753191078408296, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 893f2318-afd2-4bd4-88d2-83891626b40f
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075753191078408296, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: Player/Interact[/Keyboard/f]
       objectReference: {fileID: 0}
     - target: {fileID: 4347503397879921913, guid: c8cf6fbe9a4cc5b4899db2bd995c1cb4, type: 3}
       propertyPath: m_Enabled
