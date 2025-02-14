@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-
     public Transform target;
     public float cameraSpeed = 1f;
     public Vector3 cameraOffset;
@@ -10,6 +9,8 @@ public class CameraFollow : MonoBehaviour
     public float followPlayerAtScreenPercentage = 80f;
     private Camera cam;
     private bool playerPos = false;
+    private bool stopFollowingLeft = false;
+    private bool stopFollowingRight = false;
 
     private void Start()
     {
@@ -32,12 +33,26 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (stopFollowingLeft || stopFollowingRight) 
+        {
+            Vector3 playerViewportPos = cam.WorldToViewportPoint(target.position);
+            bool isInCorrectHalf;
+            if (stopFollowingLeft)
+            {
+                isInCorrectHalf = playerViewportPos.x > 0.5f;
+            }
+            else
+            {
+                isInCorrectHalf = playerViewportPos.x < 0.5f;
+            }
+            if (isInCorrectHalf) stopFollowingLeft = stopFollowingRight = false;
+        }
+
         float desiredYPos;
         if (target.transform.position.y < cam.orthographicSize * (followPlayerAtScreenPercentage / 100))
         {
             desiredYPos = cameraOffset.y;
             playerPos = false;
-            
         }
         else
         {
@@ -57,7 +72,18 @@ public class CameraFollow : MonoBehaviour
             }
         }
 
+        if (stopFollowingLeft || stopFollowingRight) smoothedPosition.x = transform.position.x;
         transform.position = smoothedPosition;
+    }
+
+    public void SetStopFollowingLeft(bool input)
+    {
+        this.stopFollowingLeft = input;
+    }
+
+    public void SetStopFollowingRight(bool input)
+    {
+        this.stopFollowingRight = input;
     }
 }
  

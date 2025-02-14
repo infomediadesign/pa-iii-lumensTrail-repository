@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float lastTimeLightThrown;
     private float lastTimeLigthImpulse;
     private float pickupRadius;
+    private CollectableReceiver receiver;
 
     public Vector2 footBoxSize;
     public float castDistance;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
         lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
         playerStateMachine.im = itemManager;
+        receiver = FindObjectOfType<CollectableReceiver>();
 
         //to be designer stuff
         pickupRadius = dData.pickupRange;
@@ -120,10 +123,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickupItem(InputAction.CallbackContext context)
     {
+        if (receiver == null) return;
         if (context.performed)
         {
-            if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
+            if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
+                receiver.DeliverItem(itemManager.carriedItem);
                 playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
             }
             else
@@ -133,6 +138,10 @@ public class PlayerController : MonoBehaviour
                 if (canPickup)
                 {
                     itemManager.carriedItem = pickupItem;
+                    LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
+                    int layerToAdd = LayerMask.GetMask("Platform");
+                    itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
+                    itemManager.carriedItem.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
                     playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
                 }
             }

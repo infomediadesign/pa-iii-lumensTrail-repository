@@ -8,10 +8,12 @@ public class PropellerFlower : BaseInteractableObject
     [Header("If you don't know why they're 0, keep em 0!")] 
     [SerializeField] private float maxWindStrength;
     [SerializeField] private float propellerFlowerActiveTime;
+    private Animator animator;
 
     void Start()
     {
         base.Init();
+        animator = GetComponent<Animator>();
         // incase this specific flowers shall have another blowing height than all the others
         if (maxWindStrength == 0) maxWindStrength = dData.maxWindStrength;
         if (propellerFlowerActiveTime == 0) propellerFlowerActiveTime = dData.propellerFlowerActiveTime;
@@ -27,15 +29,15 @@ public class PropellerFlower : BaseInteractableObject
     {
         if (isActive) return;
         this.isActive = true;
+        animator.SetBool("active", true);
         activationTime = Time.time;
-        sr.color = Color.red;
         this.StartCoroutine(PropellerFlowerActive());
     }
 
     protected override void Deactivate()
     {
         this.isActive = false;
-        sr.color = Color.white;
+        animator.SetBool("active", false);
     }
 
     public void OnPlayerStayWindTrigger(Collider2D collision)
