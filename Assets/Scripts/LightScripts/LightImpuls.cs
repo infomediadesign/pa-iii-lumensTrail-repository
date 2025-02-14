@@ -42,7 +42,7 @@ public class LightImpuls : MonoBehaviour
             {
                 currentLerpTime += Time.deltaTime * dData.impulseSpeed;
                 float lerpValue = Mathf.Lerp(0, dData.maxImpulseRadius, currentLerpTime);
-
+                if (lerpValue >= dData.maxImpulseRadius / 4) animator.SetBool("lightImpulse", false);
                 // Setze die relative Skalierung, um die Verzerrung auszugleichen
                 transform.localScale = new Vector3(lerpValue * scaleFactorX, lerpValue * scaleFactorY, transform.localScale.z);
                 if (lerpValue > lt.pointLightOuterRadius) lt.pointLightOuterRadius = lerpValue;
