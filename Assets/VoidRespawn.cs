@@ -13,4 +13,9 @@ public class VoidRespawn : MonoBehaviour
             collision.transform.position = respawnPos.position;
         }
     }
+    
+    public void SetRespawnPoint(Transform input) 
+    {
+        this.respawnPos = input;
+    }
 }
