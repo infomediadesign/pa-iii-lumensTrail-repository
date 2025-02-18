@@ -2625,7 +2625,7 @@ MonoBehaviour:
   cameraSpeed: 5
   cameraOffset: {x: 0, y: 0, z: -1}
   maxDistance: 6
-  followPlayerAtScreenPercentage: 105
+  followPlayerAtScreenPercentage: 108
 --- !u!1001 &1172065592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5105,7 +5105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9221700937678303343, guid: e97c6aed8314baa4d9744f43a30ceb52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.32
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 9221700937678303343, guid: e97c6aed8314baa4d9744f43a30ceb52, type: 3}
       propertyPath: m_LocalPosition.z
