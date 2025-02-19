@@ -5400,7 +5400,7 @@ MonoBehaviour:
   target: {fileID: 881752143}
   activationDistance: 149.5
   speed: 2
-  jumpForce: 3
+  jumpForce: 5
   jumpUnblockTime: 0.3
   jumpFragments: 4
   pathUpdateRate: 0.5
