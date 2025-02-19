@@ -4926,7 +4926,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1802070649}
   - component: {fileID: 1802070648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "SteinGro\xDF_Asset_Angepasst"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
