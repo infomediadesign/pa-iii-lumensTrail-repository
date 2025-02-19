@@ -48,6 +48,8 @@ public class KekeAI : MonoBehaviour
     public KekeState currentState = KekeState.Following;
     
     public bool followEnabled = false;
+
+    private bool running = false;
     public bool jumpEnabled = true;
     private bool jumpBlocked = false;
     public bool directionLookEnabled = true;
@@ -94,18 +96,25 @@ public class KekeAI : MonoBehaviour
     void FixedUpdate()
     {
         
+        
+        
         switch (currentState)
         {
             case KekeState.Following:
-                if (!followEnabled && isGrounded) 
+                if (!followEnabled)
                 {
-                    rb.velocity = Vector2.zero;
-                    animator.SetFloat("xMovement", rb.velocity.x);
-                    animator.SetFloat("yMovement", 0);
+                    if (running && isGrounded)
+                    {
+                        running = false;
+                        rb.velocity = Vector2.zero;
+                        animator.SetFloat("xMovement", rb.velocity.x);
+                        animator.SetFloat("yMovement", 0);
+                    }
                     return;
                 }
                 if (TargetInDistance() && followEnabled)
                 {
+                    running = true;
                     PathFollow();
                 }
                 break;
