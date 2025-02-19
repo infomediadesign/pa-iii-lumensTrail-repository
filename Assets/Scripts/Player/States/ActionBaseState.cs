@@ -12,5 +12,8 @@ public class ActionBaseState : BaseState
         stateType = BaseState.StateType.Action;
     }
 
-
+    public override void SwitchTo()
+    {
+        base.SwitchTo();
+    }
 }

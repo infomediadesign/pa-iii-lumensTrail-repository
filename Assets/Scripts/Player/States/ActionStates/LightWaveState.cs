@@ -16,7 +16,7 @@ public class LightWaveState : ActionBaseState
 
     public override void SwitchTo()
     {
-        if((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.LightThrow) return;
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.LightThrow) return;
         base.SwitchTo();
     }
 

@@ -24,6 +24,7 @@ public class CarryingState : ActionBaseState
 
     public override void OnEnter()
     {
+        sm.animator.SetBool("isCarrying", true);
         carriedObject = sm.im.carriedItem;
         carryHeight = Mathf.Abs(carriedObject.transform.position.y - sm.rb.transform.position.y);
         carriedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -56,5 +57,6 @@ public class CarryingState : ActionBaseState
         carriedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
         sm.im.carriedItem = null;
         MovementBaseState.movementSpeedModifier /= speedMod;
+        sm.animator.SetBool("isCarrying", false);
     }
 }

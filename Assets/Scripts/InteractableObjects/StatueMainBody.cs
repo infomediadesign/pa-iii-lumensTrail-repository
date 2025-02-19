@@ -20,7 +20,10 @@ public class StatueMainBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (activated)
+        {
+            MovementBaseState.movementEnabled = false;
+        }
     }
 
     public void LightWaveHit(Vector2 lightWaveVelocity)
@@ -28,18 +31,27 @@ public class StatueMainBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
         rb.velocity = lightWaveVelocity;
-    }
 
-    private void OnBecameInvisible()
-    {
-        if (!activated) return;
-        otherStatue.ActivateStatue();
-        Destroy(gameObject);
     }
 
     public void ActivateStatue()
     {
         gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "LightThrowInteractable") 
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (!activated) return;
+            MovementBaseState.movementEnabled = true;
+            otherStatue.ActivateStatue();
+            this.gameObject.SetActive(false);
+        }
     }
 }
