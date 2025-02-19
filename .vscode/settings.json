@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "pa-iii-rotandrust-repository.sln"
+    "dotnet.defaultSolution": "pa-iii-lumensTrail-repository.sln"
 }
