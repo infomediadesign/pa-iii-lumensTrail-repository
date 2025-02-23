@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bonsai : CollectableReceiver
+public class BonsaiReceiver : CollectableReceiver
 {
     [SerializeField] private Transform targetTransform;
     private Vector3 targetPosition;
