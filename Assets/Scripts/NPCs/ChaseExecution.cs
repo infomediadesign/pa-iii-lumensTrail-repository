@@ -76,6 +76,8 @@ public class ChaseExecution : MonoBehaviour
 
     void OnActivateStageOne()
     {
+        ActionBaseState.LockAllActions();
+        kekeAI.gridGraph.Scan();
         stageOnePoints.active = true;
         kekeAI.followEnabled = true;
         kekeAI.speed = speedSegmentOne;

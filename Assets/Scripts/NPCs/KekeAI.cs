@@ -66,6 +66,11 @@ public class KekeAI : MonoBehaviour
     private float jumpTimer= 0;
 
     Seeker seeker;
+
+    [SerializeField] public GridGraph gridGraph;
+
+    public GameObject pathfinder;
+    
     Rigidbody2D rb;
 
     public Collider2D coll;
@@ -88,16 +93,14 @@ public class KekeAI : MonoBehaviour
         animator.SetFloat("xMovement", 0);
         animator.SetBool("MovingRight", false);
 
+        gridGraph = pathfinder.GetComponent<AstarPath>().graphs[0] as GridGraph;
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        
-        
-        
+    {        
         switch (currentState)
         {
             case KekeState.Following:

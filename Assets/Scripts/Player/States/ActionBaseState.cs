@@ -16,14 +16,16 @@ public class ActionBaseState : BaseState
 
     public override void SwitchTo()
     {
+        base.SwitchTo();
+    }
+    public override void OnEnter()
+    {
         if (!IsAllActionsUnlocked())
         {
             sm.ChangeState(StateKey.Idle);
             return;
         }
-        base.SwitchTo();
     }
-
     public static void LockAllActions()
     {
         allActionsUnlocked++;

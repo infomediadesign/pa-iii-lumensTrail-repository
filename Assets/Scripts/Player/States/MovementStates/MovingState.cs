@@ -18,7 +18,7 @@ public class MovingState : MovementBaseState
 
     public override void OnEnter()
     {
-        
+        base.OnEnter();
     }
 
     public override void OnUpdate()

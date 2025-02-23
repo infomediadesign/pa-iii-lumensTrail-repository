@@ -30,6 +30,7 @@ public class LightWaveState : ActionBaseState
         this.timer = 0;
         lightWaveFired = false;
         MovementBaseState.LockMovement();
+        base.OnEnter();
     }
 
     public override void OnUpdate()

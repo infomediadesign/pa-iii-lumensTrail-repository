@@ -24,6 +24,7 @@ public class JumpingState : PhysicsBaseState
         MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
         sm.rb.sharedMaterial = sm.slip;
         sm.animator.SetBool("jumping", true);
+        base.OnEnter();
     }
 
     public override void OnUpdate()

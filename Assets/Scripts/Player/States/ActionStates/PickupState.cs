@@ -40,6 +40,7 @@ public class PickupState : ActionBaseState
         elapsedTime = 0;
 
         MovementBaseState.LockMovement();
+        base.OnEnter();
     }
 
     public override void OnUpdate()

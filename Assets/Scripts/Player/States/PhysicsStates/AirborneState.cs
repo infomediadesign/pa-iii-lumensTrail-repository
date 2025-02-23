@@ -29,6 +29,7 @@ public class AirborneState : PhysicsBaseState
         MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
         sm.rb.sharedMaterial = sm.slip;
         sm.animator.SetBool("airborne", true);
+        base.OnEnter();
     }
 
     public override void OnUpdate()
