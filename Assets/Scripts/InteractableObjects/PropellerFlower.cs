@@ -9,11 +9,13 @@ public class PropellerFlower : BaseInteractableObject
     [SerializeField] private float maxWindStrength;
     [SerializeField] private float propellerFlowerActiveTime;
     private Animator animator;
+    private PropellerFlowerUpstreamFlow child;
 
     void Start()
     {
         base.Init();
         animator = GetComponent<Animator>();
+        child = transform.GetChild(0).GetComponent<PropellerFlowerUpstreamFlow>();
         // incase this specific flowers shall have another blowing height than all the others
         if (maxWindStrength == 0) maxWindStrength = dData.maxWindStrength;
         if (propellerFlowerActiveTime == 0) propellerFlowerActiveTime = dData.propellerFlowerActiveTime;
@@ -58,5 +60,15 @@ public class PropellerFlower : BaseInteractableObject
     {
         yield return new WaitForSeconds(dData.propellerFlowerActiveTime);
         this.Deactivate();
+    }
+
+    public void ChildActive() 
+    {
+        child.ActivateRenderer();
+    }
+
+    public void ChildDeactive() 
+    {
+        child.DeactivateRenderer();
     }
 }
