@@ -29,7 +29,7 @@ public class LightWaveState : ActionBaseState
         sm.rb.velocity = Vector2.zero;
         this.timer = 0;
         lightWaveFired = false;
-        MovementBaseState.movementEnabled = false;
+        MovementBaseState.LockMovement();
     }
 
     public override void OnUpdate()
@@ -56,6 +56,6 @@ public class LightWaveState : ActionBaseState
         // change color as soon as leaving state
         //light.color = lightOriginalColor;
         lightWaveFired = false;
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
     }  
 }

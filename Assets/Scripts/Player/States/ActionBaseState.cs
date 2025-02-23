@@ -6,6 +6,8 @@ public class ActionBaseState : BaseState
 {
     public enum StateKey { Idle = 0, PickUp = 1, Carrying = 2, LightThrow = 3, LightWave = 4 };
 
+    private static int allActionsUnlocked = 0;
+
     public ActionBaseState(StateMachine stateMachine) : base(stateMachine) 
     {
         ownState = StateKey.Idle; /*standartimplement to be sure*/
@@ -14,6 +16,25 @@ public class ActionBaseState : BaseState
 
     public override void SwitchTo()
     {
+        if (!IsAllActionsUnlocked())
+        {
+            sm.ChangeState(StateKey.Idle);
+            return;
+        }
         base.SwitchTo();
+    }
+
+    public static void LockAllActions()
+    {
+        allActionsUnlocked++;
+    }
+    public static void UnlockAllActions()
+    {
+        if (allActionsUnlocked > 0) allActionsUnlocked--;
+        else throw new System.Exception("UnlockAllActions called without LockAllActions");
+    }
+    public static bool IsAllActionsUnlocked()
+    {
+        return allActionsUnlocked == 0;
     }
 }

@@ -57,7 +57,7 @@ public class LightThrowState : ActionBaseState
          ***/
         if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
         {
-            MovementBaseState.movementEnabled = false;
+            MovementBaseState.LockMovement();
         }
 
     }
@@ -65,7 +65,7 @@ public class LightThrowState : ActionBaseState
     public override void OnExit()
     {
         PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
         sm.animator.SetBool("lightThrow", false);
     }
 

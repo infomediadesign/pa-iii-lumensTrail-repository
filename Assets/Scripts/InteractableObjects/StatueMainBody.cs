@@ -24,7 +24,7 @@ public class StatueMainBody : MonoBehaviour
     {
         if (activated)
         {
-            MovementBaseState.movementEnabled = false;
+            MovementBaseState.LockMovement();
         }
     }
 
@@ -51,7 +51,7 @@ public class StatueMainBody : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             if (!activated) return;
-            MovementBaseState.movementEnabled = true;
+            MovementBaseState.UnlockMovement();
             otherStatue.ActivateStatue();
             waitingRasselbande.SetActive(false);
             pathingRasselbande.SetActive(true);

@@ -39,7 +39,7 @@ public class PickupState : ActionBaseState
         startPoint = carriedObject.transform.position;
         elapsedTime = 0;
 
-        MovementBaseState.movementEnabled = false;
+        MovementBaseState.LockMovement();
     }
 
     public override void OnUpdate()
@@ -59,7 +59,7 @@ public class PickupState : ActionBaseState
 
     public override void OnExit()
     {
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
         sm.animator.SetBool("pickup", false);
     }
 
