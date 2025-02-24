@@ -18,12 +18,12 @@ public class MovingState : MovementBaseState
 
     public override void OnEnter()
     {
-        
+        base.OnEnter();
     }
 
     public override void OnUpdate()
     {
-        if (!movementEnabled) return;
+        if (!IsMovementUnlocked()) return;
 
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed * movementSpeedModifier;
         rigidbody.velocity = (Vector2.right * targetSpeed + Vector2.up * rigidbody.velocity);

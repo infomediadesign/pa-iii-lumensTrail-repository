@@ -23,6 +23,7 @@ public class LightThrowState : ActionBaseState
         lightThrowButtonHoldTimer = Time.time;
         PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
         sm.animator.SetBool("lightThrow", true);
+        base.OnEnter();
     }
 
     public override void OnUpdate()
@@ -55,17 +56,17 @@ public class LightThrowState : ActionBaseState
         /***
          * @attention: should probably be looked into, the charge is not really implemented, it just disables movement, as far as i can tell 
          ***/
-        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
+        /* if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
         {
-            MovementBaseState.movementEnabled = false;
-        }
+            MovementBaseState.LockMovement();
+        } */
 
     }
 
     public override void OnExit()
     {
         PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
-        MovementBaseState.movementEnabled = true;
+        //MovementBaseState.UnlockMovement();
         sm.animator.SetBool("lightThrow", false);
     }
 

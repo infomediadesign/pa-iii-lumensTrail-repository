@@ -9,6 +9,8 @@ public class StatueMainBody : MonoBehaviour
     Rigidbody2D rb;
     private bool activated;
     [SerializeField] StatueMainBody otherStatue;
+    [SerializeField] GameObject waitingRasselbande;
+    [SerializeField] GameObject pathingRasselbande;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +22,9 @@ public class StatueMainBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (activated)
+        if (activated && MovementBaseState.IsMovementUnlocked())
         {
-            MovementBaseState.movementEnabled = false;
+            MovementBaseState.LockMovement();
         }
     }
 
@@ -46,12 +48,15 @@ public class StatueMainBody : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             if (!activated) return;
-            MovementBaseState.movementEnabled = true;
+            MovementBaseState.UnlockMovement();
             otherStatue.ActivateStatue();
+            waitingRasselbande.SetActive(false);
+            pathingRasselbande.SetActive(true);
             this.gameObject.SetActive(false);
+
         }
     }
 }
