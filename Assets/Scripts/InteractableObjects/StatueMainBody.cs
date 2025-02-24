@@ -22,7 +22,7 @@ public class StatueMainBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (activated)
+        if (activated && MovementBaseState.IsMovementUnlocked())
         {
             MovementBaseState.LockMovement();
         }
