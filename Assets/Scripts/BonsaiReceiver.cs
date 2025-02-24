@@ -8,7 +8,7 @@ public class BonsaiReceiver : CollectableReceiver
     private Vector3 targetPosition;
     private Transform player;
     private Vector3 startPosition;
-    private float walkingElapsedTime = 0f;
+    //private float walkingElapsedTime = 0f;
     private bool isWalking = false;
     private bool hasPatted = false;
     private Animator animator;
