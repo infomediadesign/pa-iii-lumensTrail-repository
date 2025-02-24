@@ -99,5 +99,6 @@ public class DesignerPlayerScriptableObject : ScriptableObject
 
     [Space(10)]
     [Header("Bonsai")]
-    public float bonsaiMovingTime = 20f;
+    public float bonsaiMovingSpeed = 2f;
+    public float bonsaiLumenStandingDistance = 0.4f;
 }

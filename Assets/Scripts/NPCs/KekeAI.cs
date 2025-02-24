@@ -5,6 +5,7 @@ using UnityEngine;
 using Pathfinding;
 using System.Reflection;
 using Unity.VisualScripting;
+using System;
 
 public class KekeAI : MonoBehaviour
 {
@@ -47,6 +48,8 @@ public class KekeAI : MonoBehaviour
     public KekeState currentState = KekeState.Following;
     
     public bool followEnabled = false;
+
+    private bool running = false;
     public bool jumpEnabled = true;
     private bool jumpBlocked = false;
     public bool directionLookEnabled = true;
@@ -63,6 +66,11 @@ public class KekeAI : MonoBehaviour
     private float jumpTimer= 0;
 
     Seeker seeker;
+
+    [SerializeField] public GridGraph gridGraph;
+
+    public GameObject pathfinder;
+    
     Rigidbody2D rb;
 
     public Collider2D coll;
@@ -85,26 +93,31 @@ public class KekeAI : MonoBehaviour
         animator.SetFloat("xMovement", 0);
         animator.SetBool("MovingRight", false);
 
+        gridGraph = pathfinder.GetComponent<AstarPath>().graphs[0] as GridGraph;
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        
+    {        
         switch (currentState)
         {
             case KekeState.Following:
-                if (!followEnabled && isGrounded) 
+                if (!followEnabled)
                 {
-                    rb.velocity = Vector2.zero;
-                    animator.SetFloat("xMovement", rb.velocity.x);
-                    animator.SetFloat("yMovement", 0);
+                    if (running && isGrounded)
+                    {
+                        running = false;
+                        rb.velocity = Vector2.zero;
+                        animator.SetFloat("xMovement", rb.velocity.x);
+                        animator.SetFloat("yMovement", 0);
+                    }
                     return;
                 }
                 if (TargetInDistance() && followEnabled)
                 {
+                    running = true;
                     PathFollow();
                 }
                 break;
@@ -270,6 +283,7 @@ public class KekeAI : MonoBehaviour
     private void ExecuteJump()
     {
         
+        animator.SetFloat("yMovement", rb.velocity.y);
         jumpTimer = jumpTimer + Time.deltaTime;
         if (!fallTriggered && rb.velocity.y < 0)
         {
@@ -317,6 +331,8 @@ public class KekeAI : MonoBehaviour
 
     private void ExecuteFalling()
     {        
+        
+        
         jumpTimer = jumpTimer + Time.deltaTime;
         if (jumpTimer < jumpTime/2) return;
         
@@ -379,6 +395,8 @@ public class KekeAI : MonoBehaviour
         }
         return hitsGround;
     }   
+
+    private Vector2 jumpGoal;
     
     private bool HitsGround(float givenForce, int fragments = 1, bool jumping = false)
     {
@@ -388,8 +406,9 @@ public class KekeAI : MonoBehaviour
         bool firstHit = false;
         Vector2 jumpPoint = CalculateJumpPoint();
         Vector2 offsetWaypoint = GetWayppointAtJumpPoint(jumpPoint);
+        jumpGoal = offsetWaypoint;
 
-        for (int dpth = fragments; dpth >= 0; dpth--)
+        for (int dpth = fragments; dpth >= 1; dpth--)
         {
             Vector2 prevPoint = startPos;
             points[0] = startPos;
@@ -411,7 +430,7 @@ public class KekeAI : MonoBehaviour
                 {
                     if (jumping && hit.collider.gameObject == ground) continue;
                 
-                    if (!(hit.point.y < hit.transform.position.y + hit.collider.bounds.extents.y) && givenForce + (gravity * t)<0)
+                    if (givenForce + (gravity * t)<0)
                     {
                         Debug.Log("Collision detected at: " + newPoint);
                         if ((hitPoint == Vector2.zero) || (firstHit && GetWayPointOffset(newPoint, offsetWaypoint) < GetWayPointOffset(hitPoint, offsetWaypoint)))
@@ -426,10 +445,12 @@ public class KekeAI : MonoBehaviour
                         break; // Stop checking further if collision detected for this fragment
                     }
                 }
+                points = tempPoints;
                 
                 prevPoint = newPoint;
                 
             }
+            points = tempPoints;
             
         }
         
@@ -441,14 +462,18 @@ public class KekeAI : MonoBehaviour
         return Vector2.Distance(waypoint, landingPoint);
     }
     
+    List<Vector2> calculatedPoints = new List<Vector2>();
     private Vector2 GetWayppointAtJumpPoint(Vector2 jumpPoint)
     {
-        if (Mathf.Abs(target.position.x - transform.position.x) <= ((transform.position.x - jumpPoint.x)*2)) return target.position;
+        calculatedPoints.Clear();
+        if (Mathf.Abs(target.position.x - transform.position.x) <= (MathF.Abs(transform.position.x - jumpPoint.x)*2)) return target.position;
         
         for (int i = 2; i < path.vectorPath.Count; i++)
         {
+            if ((int)path.vectorPath.Count/i == 0) break;
             Vector2 waypoint = (Vector2)path.vectorPath[(int)path.vectorPath.Count/i];
-            if (Mathf.Abs(waypoint.x - transform.position.x) <= ((transform.position.x - jumpPoint.x)*2)) return waypoint;
+            calculatedPoints.Add(waypoint);
+            if (Mathf.Abs(waypoint.x - transform.position.x) <= (Mathf.Abs(transform.position.x - jumpPoint.x)*2)) return waypoint;
         }
         return target.position;
         
@@ -470,17 +495,32 @@ public class KekeAI : MonoBehaviour
 
     }
 
+    private Vector2 jumpCalculation;
     private Vector2 CalculateJumpPoint()
     {
         float gravity = Physics2D.gravity.y * rb.gravityScale;
         float timeOfFlight = (-2 * jumpForce) / gravity;
         float xLand = transform.position.x + speed * timeOfFlight;
         Vector2 landingPosition = new Vector2(xLand, transform.position.y);
+        jumpCalculation = landingPosition;
         return landingPosition;
     }
 
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.black;
+        foreach (Vector2 point in calculatedPoints)
+        {
+            Gizmos.DrawSphere(point, 0.3f);
+        }
+        //draw transform
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position, 0.3f);
+        Gizmos.DrawSphere(jumpGoal, 0.3f);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(jumpCalculation, 0.3f);
+
+        
         //draw Jump
         for (int i = 1; i < points.Length; i++)
         {

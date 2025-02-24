@@ -34,6 +34,7 @@ public class CarryingState : ActionBaseState
         //to be changed to design SO
         speedMod = sm.dData.speedModWhileCarrying;
         MovementBaseState.movementSpeedModifier *= speedMod;
+        base.OnEnter();
     }
 
     public override void OnUpdate()
