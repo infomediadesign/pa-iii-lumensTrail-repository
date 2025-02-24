@@ -13,6 +13,8 @@ public class LightThrowState : ActionBaseState
 
     public override void SwitchTo()
     {
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
+        if((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
@@ -20,6 +22,8 @@ public class LightThrowState : ActionBaseState
     {
         lightThrowButtonHoldTimer = Time.time;
         PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
+        sm.animator.SetBool("lightThrow", true);
+        base.OnEnter();
     }
 
     public override void OnUpdate()
@@ -31,6 +35,7 @@ public class LightThrowState : ActionBaseState
             {
                 // Calling the LightThrowManager to create an instance of the projectile
                 sm.ltm.LightThrow();
+                sm.animator.SetBool("lightThrow", false);
                 sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
@@ -43,6 +48,7 @@ public class LightThrowState : ActionBaseState
             }
             else
             {
+                sm.animator.SetBool("lightThrow", false);
                 sm.SwitchToState(ActionBaseState.StateKey.Idle);
             }
         }
@@ -50,17 +56,18 @@ public class LightThrowState : ActionBaseState
         /***
          * @attention: should probably be looked into, the charge is not really implemented, it just disables movement, as far as i can tell 
          ***/
-        if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
+        /* if (Time.time > lightThrowButtonHoldTimer + sm.dData.startChargingDelay && (PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Grounded)
         {
-            MovementBaseState.movementEnabled = false;
-        }
+            MovementBaseState.LockMovement();
+        } */
 
     }
 
     public override void OnExit()
     {
         PhysicsBaseState.gravityModifier /= sm.dData.lightThrowGravityMultiplier;
-        MovementBaseState.movementEnabled = true;
+        //MovementBaseState.UnlockMovement();
+        sm.animator.SetBool("lightThrow", false);
     }
 
     /***

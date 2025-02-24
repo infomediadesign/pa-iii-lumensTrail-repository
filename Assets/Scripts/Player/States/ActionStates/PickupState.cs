@@ -28,17 +28,19 @@ public class PickupState : ActionBaseState
 
     public override void OnEnter()
     {
+        sm.animator.SetBool("pickup", true);
         arcHeight = sm.dData.pickupArcHeight;
         duration = sm.dData.pickupArcSpeed;
         heightGap = sm.dData.aboveHeadCarryGap;
 
         carriedObject = sm.im.carriedItem;
-        float endHeight = sm.transform.position.y + sm.sr.bounds.size.y / 2 + carriedObject.GetComponent<SpriteRenderer>().bounds.size.y / 2 + heightGap;
+        float endHeight = sm.transform.position.y + sm.sr.bounds.size.y / 6 + carriedObject.GetComponent<SpriteRenderer>().bounds.size.y / 2 + heightGap;
         endPoint = new Vector2(sm.transform.position.x, endHeight);
         startPoint = carriedObject.transform.position;
         elapsedTime = 0;
 
-        MovementBaseState.movementEnabled = false;
+        MovementBaseState.LockMovement();
+        base.OnEnter();
     }
 
     public override void OnUpdate()
@@ -58,7 +60,8 @@ public class PickupState : ActionBaseState
 
     public override void OnExit()
     {
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
+        sm.animator.SetBool("pickup", false);
     }
 
     private Vector2 CalculateArcPosition(Vector2 start, Vector2 end, float arcHeight, float t)

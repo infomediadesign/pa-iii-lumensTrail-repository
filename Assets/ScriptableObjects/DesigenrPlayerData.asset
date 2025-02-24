@@ -31,8 +31,8 @@ MonoBehaviour:
   wallClingAirFreezeTime: 0.07
   lightThrowProjectileSpeed: 12
   lightThrowCooldown: 0.4
-  startChargingDelay: 0.5
-  switchToLightWaveTime: 1
+  startChargingDelay: 0.3
+  switchToLightWaveTime: 0.5
   lightThrowGravityMultiplier: 1
   lightWaveSpeed: 6
   lightWaveMaxTravelDistance: 5
@@ -41,19 +41,20 @@ MonoBehaviour:
   lightWaveMovementDisabledTime: 0.6
   lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
-  maxImpulseRadius: 40
+  maxImpulseRadius: 15
   impulseSpeed: 0.5
   highlightTime: 6
   increasedLightRadiusTime: 5
   propellerFlowerActiveTime: 8
-  maxWindStrength: 50
+  maxWindStrength: 22
   pickupRange: 2
   pickupArcHeight: 0.75
   pickupArcSpeed: 0.55
   aboveHeadCarryGap: 0.29
   speedModWhileCarrying: 1
   stayActiveTime: 10
-  statueVelocityMultiplier: 2
+  statueVelocityMultiplier: 2.68
   trunkVelocityMultiplier: 0.5
   thoughtBubbleFadeTime: 70
-  bonsaiMovingTime: 20
+  bonsaiMovingSpeed: 2
+  bonsaiLumenStandingDistance: 0.5

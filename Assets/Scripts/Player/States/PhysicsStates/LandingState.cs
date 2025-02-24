@@ -18,7 +18,7 @@ public class LandingState : PhysicsBaseState
 
     public override void OnEnter()
     {
-
+        base.OnEnter();
     }
 
     public override void OnUpdate()
@@ -33,6 +33,6 @@ public class LandingState : PhysicsBaseState
 
     public override void OnExit()
     {
-
+        
     }
 }
