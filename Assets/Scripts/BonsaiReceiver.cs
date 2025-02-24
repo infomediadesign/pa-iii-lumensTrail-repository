@@ -66,7 +66,7 @@ public class BonsaiReceiver : CollectableReceiver
     protected override void ItemsDeliveredTrigger()
     {
         animator.SetBool("standup", true);
-        MovementBaseState.movementEnabled = false;
+        MovementBaseState.LockMovement();
         this.GetComponent<Collider2D>().enabled = false;
     }
 
@@ -90,6 +90,6 @@ public class BonsaiReceiver : CollectableReceiver
         targetPosition.y = transform.position.y;
         this.isWalking = true;
         this.animator.SetBool("patting", false);
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
     }
 }
