@@ -12,20 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200aa197cc419664ebf054cb81da43b5, type: 3}
   m_Name: ProgrammerPlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  acceleration: 7
-  decceleration: 7
-  velPower: 0.9
-  dashForce: 20
-  frictionAmount: 0.6
-  airFrictionAmount: 0.5
-  isDashing: 0
-  dashingTime: 1
-  dashCooldown: 5
-  isGrounded: 0
-  isTouchingWall: 0
+  isGrounded: 1
   jumpButtonPressed: 0
-  jumpForce: 9
-  coyoteTime: 0.2
-  jumpCutMultiplier: 0.5
-  fallGravityMultiplier: 1.2
+  lightThrowButtonPressed: 0
+  groundCoyoteTimeCounter: 0.1
+  fallingVelocity: -4.7708983
+  inDropRange: 0
+  movementStateKey: 0
+  physicsStateKey: 0
+  actionStateKey: 0

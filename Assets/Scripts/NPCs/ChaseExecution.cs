@@ -76,6 +76,8 @@ public class ChaseExecution : MonoBehaviour
 
     void OnActivateStageOne()
     {
+        ActionBaseState.LockAllActions();
+        kekeAI.gridGraph.Scan();
         stageOnePoints.active = true;
         kekeAI.followEnabled = true;
         kekeAI.speed = speedSegmentOne;
@@ -88,13 +90,13 @@ public class ChaseExecution : MonoBehaviour
     {
         if (!gracePeriodPassed)
         {
-            MovementBaseState.movementEnabled = false;
+            MovementBaseState.LockMovement();
             startPrompt.enabled = true;
             startPrompt.text = "Get Keke!";
             yield return new WaitForSeconds(gracePeriod);
             startPrompt.enabled = false;
             gracePeriodPassed = true;
-            MovementBaseState.movementEnabled = true;
+            MovementBaseState.UnlockMovement();
         }
         while (!(stageOnePoints.lastCheckPointReached || (rangeCheck.inRange && gracePeriodPassed)))
         {
@@ -111,13 +113,13 @@ public class ChaseExecution : MonoBehaviour
     }
     private IEnumerator SwitchToStageTwo(bool caught)
     {
-        MovementBaseState.movementEnabled = false;
+        MovementBaseState.LockMovement();
         startPrompt.enabled = true;
         if (caught) startPrompt.text = "Caught Keke! Keke will now catch you!";
         else startPrompt.text = "Keke was too slippery! Keke will now catch you!";
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
         OnActivateStageTwo();
     }
     void OnActivateStageTwo()
@@ -176,13 +178,13 @@ public class ChaseExecution : MonoBehaviour
 
     private IEnumerator SwitchToStageThree(bool caught)
     {
-        MovementBaseState.movementEnabled = false;
+        MovementBaseState.LockMovement();
         startPrompt.enabled = true;
         if (caught) startPrompt.text = "Keke caught you! Now follow Keke!";
         else startPrompt.text = "You were too slippery! Now follow Keke!";
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
-        MovementBaseState.movementEnabled = true;
+        MovementBaseState.UnlockMovement();
         OnActivateStageThree();
     }
 
