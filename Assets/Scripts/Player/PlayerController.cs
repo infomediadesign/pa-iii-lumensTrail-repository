@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float lastTimeLigthImpulse;
     private float pickupRadius;
     private CollectableReceiver receiver;
+    private Animator animator;
 
     public Vector2 footBoxSize;
     public float castDistance;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = dData.generalGravityMultiplier;
         playerStateMachine.im = itemManager;
         receiver = FindObjectOfType<CollectableReceiver>();
+        animator = GetComponent<Animator>();
 
         //to be designer stuff
         pickupRadius = dData.pickupRange;
@@ -136,15 +138,21 @@ public class PlayerController : MonoBehaviour
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
                 if (canPickup)
                 {
+                    MovementBaseState.LockMovement();
                     itemManager.carriedItem = pickupItem;
                     LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
                     int layerToAdd = LayerMask.GetMask("Platform");
                     itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
                     itemManager.carriedItem.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
-                    playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
+                    animator.SetBool("pickup", true);
                 }
             }
         }
+    }
+
+    public void PickUpNow() 
+    {
+        playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
     }
 
     public void OnLightImpulse(InputAction.CallbackContext context)

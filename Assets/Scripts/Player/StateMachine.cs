@@ -104,6 +104,12 @@ public class StateMachine : MonoBehaviour
         //if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
     }
 
+    private void LateUpdate()
+    {
+        // currently only relevant for carrying state
+        currentActionState?.OnLateUpdate();
+    }
+
     public void SwitchToState(Enum stateKey)
     {
         if (stateKey.GetType() == typeof(MovementBaseState.StateKey))
