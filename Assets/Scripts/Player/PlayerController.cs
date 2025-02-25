@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
+                itemManager.carriedItem.transform.SetParent(GameObject.Find("Items").transform, true);
                 receiver.DeliverItem(itemManager.carriedItem);
                 playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
             }
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour
                 if (canPickup)
                 {
                     itemManager.carriedItem = pickupItem;
+                    pickupItem.transform.SetParent(this.transform, true);
                     LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
                     int layerToAdd = LayerMask.GetMask("Platform");
                     itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
