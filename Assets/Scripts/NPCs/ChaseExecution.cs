@@ -44,7 +44,7 @@ public class ChaseExecution : MonoBehaviour
 
      
 
-    private int stage = 0;
+    //private int stage = 0;
     void Start()
     {
         kekeAI.followEnabled = false;
