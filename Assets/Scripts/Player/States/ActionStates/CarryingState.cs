@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarryingState : ActionBaseState
@@ -37,10 +38,11 @@ public class CarryingState : ActionBaseState
         base.OnEnter();
     }
 
-    public override void OnUpdate()
+    public override void OnLateUpdate()
     {
        carriedObject.transform.position = new Vector2(transform.position.x, transform.position.y + carryHeight);
     }
+
 
     /**
      * @outdated: uses speedModifier instead

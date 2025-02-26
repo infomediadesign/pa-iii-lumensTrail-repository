@@ -41,7 +41,7 @@ MonoBehaviour:
   lightWaveMovementDisabledTime: 0.6
   lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
-  maxImpulseRadius: 15
+  maxImpulseRadius: 9
   impulseSpeed: 0.5
   highlightTime: 6
   increasedLightRadiusTime: 5
@@ -49,7 +49,7 @@ MonoBehaviour:
   maxWindStrength: 22
   pickupRange: 2
   pickupArcHeight: 0.75
-  pickupArcSpeed: 0.55
+  pickupArcSpeed: 0.4
   aboveHeadCarryGap: 0.29
   speedModWhileCarrying: 1
   stayActiveTime: 10
