@@ -8,14 +8,14 @@ public class LumenThoughtBubbleActivationCondition : MonoBehaviour
 
     void Start()
     {
-        //target.SetShowPromptNow(false);
+        target.SetShowPromptNow(false);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) 
         {
-            //target.SetShowPromptNow(true);
+            target.SetShowPromptNow(true);
         }
     }
 }
