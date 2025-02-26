@@ -1719,8 +1719,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.42, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -0.000030518, y: 210.16}
+  m_SizeDelta: {x: 1920, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549019859
 MonoBehaviour:
@@ -1776,7 +1776,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1805,7 +1805,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -155.38437, z: 98.6353, w: 163.49133}
+  m_margin: {x: 0, y: 1.6425476, z: -1.2910309, w: 0.5162964}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7279,6 +7279,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3843fc3f4deff44d816a77d8157704a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  target: {fileID: 0}
+  activationDistance: 50
+  speed: 2
+  jumpForce: 0.3
+  jumpUnblockTime: 0.3
+  jumpFragments: 4
+  pathUpdateRate: 0.5
+  nextWaypointDistance: 3
+  jumpNodeHeightRequirement: 0.5
+  jumpCheckOffset: 0.1
+  dropCheckOffset: 30
+  reachThreshold: 0.5
+  currentState: 0
+  followEnabled: 0
+  jumpEnabled: 1
+  directionLookEnabled: 1
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isGrounded: 0
+  pathfinder: {fileID: 0}
+  coll: {fileID: 0}
+  jumpOffsetBuffer: 2
 --- !u!212 &1795913517
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7769,8 +7793,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297.9, y: 160.16}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_AnchoredPosition: {x: -0.000030518, y: 160.16}
+  m_SizeDelta: {x: 1920, y: 49.9999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1975693394
 MonoBehaviour:
@@ -7826,7 +7850,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7855,7 +7879,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 582.35376, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.6401367, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
