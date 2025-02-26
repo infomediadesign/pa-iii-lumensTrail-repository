@@ -7,6 +7,7 @@ public class StatueWeakPoint : BaseInteractableObject
 {
     StatueMainBody parent;
     Rigidbody2D lightWaveRB;
+    [SerializeField] LumenThoughtBubbleActivation deactivateButtonPrompt;
 
     void Start()
     {
@@ -24,5 +25,6 @@ public class StatueWeakPoint : BaseInteractableObject
     {
         lightWaveRB = activationObject.GetComponent<Rigidbody2D>();
         parent.LightWaveHit(lightWaveRB.velocity * dData.statueVelocityMultiplier);
+        deactivateButtonPrompt.SetShowPromptNow(false);
     }
 }

@@ -94,7 +94,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
 
     [Space(15)]
     [Header("NPCs")]
-    public float thoughtBubbleFadeTime = 2f;
+    public float itemDeliveredFateTime = 3f;
 
     [Space(10)]
     [Header("Bonsai")]
