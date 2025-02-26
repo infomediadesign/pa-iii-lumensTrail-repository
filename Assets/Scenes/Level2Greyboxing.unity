@@ -6239,6 +6239,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
+--- !u!1 &1505869809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3795815388032669287, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
+  m_PrefabInstance: {fileID: 1505869808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1522529482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9221700937678303343, guid: 709bce92165c3fc49937221eae1337a3, type: 3}
@@ -7279,7 +7284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3843fc3f4deff44d816a77d8157704a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1795913519}
   target: {fileID: 0}
   activationDistance: 50
   speed: 2
@@ -7300,8 +7305,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
-  pathfinder: {fileID: 0}
-  coll: {fileID: 0}
+  pathfinder: {fileID: 1505869809}
+  coll: {fileID: 1795913520}
   jumpOffsetBuffer: 2
 --- !u!212 &1795913517
 SpriteRenderer:
@@ -7382,7 +7387,7 @@ Animator:
   m_GameObject: {fileID: 1795913512}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3003ebbab2f867d48945043cd8ca1e4e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
