@@ -5,7 +5,9 @@ using UnityEngine;
 public class KekeReceiver : CollectableReceiver
 {
     public Animator kekeAnimator;
-    public Transform chaseStartPosition;
+    public ChaseExecution chaseExecution;
+
+    public ItemManager itemManager;
     
     protected override void Awake()
     {
@@ -19,7 +21,8 @@ public class KekeReceiver : CollectableReceiver
 
     protected override void ItemsDeliveredTrigger()
     {
-
+        kekeAnimator.SetTrigger("standup");
+        itemManager.items = null;
     }
 
 
@@ -27,5 +30,10 @@ public class KekeReceiver : CollectableReceiver
     {
         base.OnCollisionEnter2D(collision);
         kekeAnimator.SetTrigger("eating");
+    }
+
+    public void OnStanding()
+    {
+        chaseExecution.enabled = true;
     }
 }
