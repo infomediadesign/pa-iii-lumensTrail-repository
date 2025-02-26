@@ -1,5 +1,5 @@
 using System.Collections;
-using UnityEditor.Tilemaps;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private float lastTimeLightThrown;
     private float lastTimeLigthImpulse;
     private float pickupRadius;
+    private CollectableReceiver receiver;
+    private Animator animator;
 
     public Vector2 footBoxSize;
     public float castDistance;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
         lastTimeLigthImpulse = -dData.impulseCooldown;
         rb.gravityScale = dData.generalGravityMultiplier;
         playerStateMachine.im = itemManager;
+        receiver = FindObjectOfType<CollectableReceiver>();
+        animator = GetComponent<Animator>();
 
         //to be designer stuff
         pickupRadius = dData.pickupRange;
@@ -120,34 +124,35 @@ public class PlayerController : MonoBehaviour
 
     public void OnPickupItem(InputAction.CallbackContext context)
     {
+        if (receiver == null) return;
         if (context.performed)
         {
-            this.PerformPickUp();
-        }
-    }
-
-    private void PerformPickUp()
-    {
-        if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying)
-        {
-            playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
-        }
-        else
-        {
-            bool canPickup = true;
-            GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-            if (canPickup)
+            if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
-                itemManager.carriedItem = pickupItem;
-                playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
+                receiver.DeliverItem(itemManager.carriedItem);
+                playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
+            }
+            else
+            {
+                bool canPickup = true;
+                GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
+                if (canPickup)
+                {
+                    MovementBaseState.LockMovement();
+                    itemManager.carriedItem = pickupItem;
+                    LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
+                    int layerToAdd = LayerMask.GetMask("Platform");
+                    itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
+                    itemManager.carriedItem.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
+                    animator.SetBool("pickup", true);
+                }
             }
         }
     }
 
-    public void TriggerPickupManually()
+    public void PickUpNow() 
     {
-
-        this.PerformPickUp();
+        playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
     }
 
     public void OnLightImpulse(InputAction.CallbackContext context)

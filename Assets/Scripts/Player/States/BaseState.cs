@@ -33,6 +33,8 @@ public abstract class BaseState
         // this code can be overwritten in the derived classes
     }
 
+    public virtual void OnLateUpdate() {}
+
     /*public virtual void OnMove()
     {
         float targetSpeed = sm.horizontalMovement * sm.dData.moveSpeed;
@@ -43,9 +45,6 @@ public abstract class BaseState
 
         sm.rb.velocity = (Vector2.right * targetSpeed + Vector2.up * sm.rb.velocity);
     }*/
-
-
-
 
     public virtual void OnExit()
     {

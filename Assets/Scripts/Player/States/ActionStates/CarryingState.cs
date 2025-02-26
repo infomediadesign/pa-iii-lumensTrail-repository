@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarryingState : ActionBaseState
@@ -24,6 +25,7 @@ public class CarryingState : ActionBaseState
 
     public override void OnEnter()
     {
+        sm.animator.SetBool("isCarrying", true);
         carriedObject = sm.im.carriedItem;
         carryHeight = Mathf.Abs(carriedObject.transform.position.y - sm.rb.transform.position.y);
         carriedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -33,12 +35,14 @@ public class CarryingState : ActionBaseState
         //to be changed to design SO
         speedMod = sm.dData.speedModWhileCarrying;
         MovementBaseState.movementSpeedModifier *= speedMod;
+        base.OnEnter();
     }
 
-    public override void OnUpdate()
+    public override void OnLateUpdate()
     {
        carriedObject.transform.position = new Vector2(transform.position.x, transform.position.y + carryHeight);
     }
+
 
     /**
      * @outdated: uses speedModifier instead
@@ -56,5 +60,6 @@ public class CarryingState : ActionBaseState
         carriedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
         sm.im.carriedItem = null;
         MovementBaseState.movementSpeedModifier /= speedMod;
+        sm.animator.SetBool("isCarrying", false);
     }
 }

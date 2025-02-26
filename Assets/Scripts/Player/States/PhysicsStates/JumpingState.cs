@@ -22,6 +22,9 @@ public class JumpingState : PhysicsBaseState
         //if(sm.pData.isTouchingWall) wallFlag=true; //outdated, to be removed
 
         MovementBaseState.movementSpeedModifier *= sm.dData.airFrictionAmount;
+        sm.rb.sharedMaterial = sm.slip;
+        sm.animator.SetBool("jumping", true);
+        base.OnEnter();
     }
 
     public override void OnUpdate()
@@ -42,15 +45,18 @@ public class JumpingState : PhysicsBaseState
 
 
         //if (wallFlag && !sm.pData.isTouchingWall) wallFlag=false; //outdated and to be removed
-
+        sm.animator.SetFloat("verticalSpeed", sm.rb.velocity.y);
         if (sm.rb.velocity.y > 0 && !sm.pData.jumpButtonPressed)
         {
             sm.rb.AddForce(Vector2.down * sm.rb.velocity.y * (1 - sm.dData.jumpCutMultiplier), ForceMode2D.Impulse);
+            sm.animator.SetBool("jumping", false);
+            sm.animator.SetFloat("verticalSpeed", 0);
             sm.SwitchToState(PhysicsBaseState.StateKey.Airborne);
         }
 
         if (sm.rb.velocity.y <= 0)
         {
+            sm.animator.SetBool("jumping", false);
             sm.SwitchToState(PhysicsBaseState.StateKey.Airborne);
         }
 
@@ -67,5 +73,6 @@ public class JumpingState : PhysicsBaseState
     public override void OnExit()
     {
         MovementBaseState.movementSpeedModifier /= sm.dData.airFrictionAmount;
+        sm.rb.sharedMaterial = sm.normal;
     }
 }

@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -108,7 +108,442 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a5b3170c2ac0174f8792563abfbbb50
+      internalID: -1035564652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6c848631b38934ca1bbb5479732df1
+      internalID: -1963000182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f54caab907acc640a8a3433350812f1
+      internalID: -1382047349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a1b4f82fcd116c4eaaf705305089127
+      internalID: -2122465021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 340eedb97ff6acc49b5cd1f2299e4834
+      internalID: -1858622905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b926bca9d12ea64483f215d4d5a748f
+      internalID: -723315295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0260fc258c3d9204c9d7e1982c6585d7
+      internalID: -307970554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 651f9a62c1ca49643acec4df425017c0
+      internalID: 1685706497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d881492069e154f439c4c758e72609b1
+      internalID: 1750584542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_13
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de9f3344c570e542a4e70a54291d7b9
+      internalID: 1274990218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b99958f73bee5d24c97f9a2c113112f7
+      internalID: -713375503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_19
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0aae66316d413846998e126cfab5f13
+      internalID: -2089131558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_20
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7917f543aff5b0746aab41bdc108891c
+      internalID: 875057123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_21
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fd9ed225f9e4642b208615fe739266
+      internalID: 410798416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Animation_rechts_22
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dc128d148b83134d9fe0e637cc98a6e
+      internalID: -190346110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +554,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rasselbande_Animation_rechts_0: -1035564652
+      Rasselbande_Animation_rechts_1: -1963000182
+      Rasselbande_Animation_rechts_10: -307970554
+      Rasselbande_Animation_rechts_11: 1685706497
+      Rasselbande_Animation_rechts_12: 1750584542
+      Rasselbande_Animation_rechts_13: 1274990218
+      Rasselbande_Animation_rechts_14: 83295945
+      Rasselbande_Animation_rechts_15: 1586425666
+      Rasselbande_Animation_rechts_16: -371953473
+      Rasselbande_Animation_rechts_17: -1653005239
+      Rasselbande_Animation_rechts_18: -713375503
+      Rasselbande_Animation_rechts_19: -2089131558
+      Rasselbande_Animation_rechts_2: -1382047349
+      Rasselbande_Animation_rechts_20: 875057123
+      Rasselbande_Animation_rechts_21: 410798416
+      Rasselbande_Animation_rechts_22: -190346110
+      Rasselbande_Animation_rechts_3: -2122465021
+      Rasselbande_Animation_rechts_4: -1858622905
+      Rasselbande_Animation_rechts_5: 237565927
+      Rasselbande_Animation_rechts_6: -1214590023
+      Rasselbande_Animation_rechts_7: 541458834
+      Rasselbande_Animation_rechts_8: 410616090
+      Rasselbande_Animation_rechts_9: -723315295
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

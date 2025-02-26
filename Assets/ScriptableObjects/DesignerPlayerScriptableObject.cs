@@ -1,4 +1,3 @@
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DesignerPlayerData", menuName = "ScriptableObjects/DesignerPlayerScriptableObject")]
@@ -99,5 +98,6 @@ public class DesignerPlayerScriptableObject : ScriptableObject
 
     [Space(10)]
     [Header("Bonsai")]
-    public float bonsaiMovingTime = 20f;
+    public float bonsaiMovingSpeed = 2f;
+    public float bonsaiLumenStandingDistance = 0.4f;
 }

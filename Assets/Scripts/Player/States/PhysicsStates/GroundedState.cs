@@ -20,6 +20,7 @@ public class GroundedState : PhysicsBaseState
     public override void OnEnter()
     {
         MovementBaseState.movementSpeedModifier *= sm.dData.frictionAmount;
+        
     }
 
     public override void OnUpdate()

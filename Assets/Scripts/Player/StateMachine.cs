@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditorInternal.VersionControl.ListControl;
 
 public class StateMachine : MonoBehaviour
 {
@@ -51,6 +50,10 @@ public class StateMachine : MonoBehaviour
 
     public DesignerPlayerScriptableObject dData;
     public ProgrammerPlayerScriptableObject pData;
+    public Animator animator;
+
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D slip;
 
     /*public List<BaseState> states { get; private set; } = new List<BaseState>();*/
 
@@ -76,6 +79,7 @@ public class StateMachine : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
         ltm = GetComponent<PlayerLightThrowManager>();
+        animator = GetComponent<Animator>();
         //states.AddRange(new BaseState[] { new GroundedState(this), new JumpingState(this), new AirborneState(this), new LandingState(this), new AttackingState(this), new DashState(this), new WallClingState(this), new LightThrowState(this), new LightWaveState(this), new PickupState(this), new CarryingState(this) });
         
         movementStates.AddRange(new MovementBaseState[] { new StillState(this), new MovingState(this) });
@@ -98,6 +102,12 @@ public class StateMachine : MonoBehaviour
         currentActionState?.OnUpdate();
 
         //if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
+    }
+
+    private void LateUpdate()
+    {
+        // currently only relevant for carrying state
+        currentActionState?.OnLateUpdate();
     }
 
     public void SwitchToState(Enum stateKey)
