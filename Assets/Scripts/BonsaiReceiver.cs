@@ -59,7 +59,6 @@ public class BonsaiReceiver : CollectableReceiver
                 }
                 else this.DestroyReceiver();
             }
-            else Debug.Log(Vector3.Distance(transform.position, targetPosition));
         }
     }
 
