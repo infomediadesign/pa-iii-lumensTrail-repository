@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThoughtBubbleDesiredObject : MonoBehaviour
 {
+    /*
     private ThoughtBubble parent;
     private SpriteRenderer sr;
 
@@ -25,4 +26,5 @@ public class ThoughtBubbleDesiredObject : MonoBehaviour
         color.a = parent.GetCurrentAlpha();
         this.sr.color = color;
     }
+    */
 }
