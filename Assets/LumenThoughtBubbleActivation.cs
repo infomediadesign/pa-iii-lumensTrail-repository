@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LumenThoughtBubbleActivation : MonoBehaviour
 {
+    
     LumenThoughtBubble bubble;
     public bool showPromptNow = true;
-    [SerializeField] private Sprite buttonSprite;
+    [SerializeField] private BubbleEnum activationType;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,8 +15,7 @@ public class LumenThoughtBubbleActivation : MonoBehaviour
         if (collision.CompareTag("Player")) 
         {
             bubble = collision.transform.parent.GetChild(1).GetComponent<LumenThoughtBubble>();
-            bubble.SetButtonSprite(buttonSprite);
-            bubble.StartFade(1f, 2f);
+            bubble.ActivateBubble(this.activationType);
         }
     }
 
@@ -25,14 +25,14 @@ public class LumenThoughtBubbleActivation : MonoBehaviour
         if (collision.CompareTag("Player")) 
         {
             bubble = collision.transform.parent.GetChild(1).GetComponent<LumenThoughtBubble>();
-            bubble.StartFade(0f, 2f);
+            bubble.DeactivateBubble();
         }
     }
-
+    
     public void DeactivatePrompt() 
     {
         this.GetComponent<Collider2D>().enabled = false;
-        FindObjectOfType<LumenThoughtBubble>().StartFade(0f, 2f);
+        FindObjectOfType<LumenThoughtBubble>().DeactivateBubble();
     }
 
     public void SetShowPromptNow(bool input) 
