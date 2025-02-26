@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
             {
                 bool canPickup = true;
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-                if (canPickup)
+                if (canPickup && itemManager.carriedItem == null)
                 {
                     MovementBaseState.LockMovement();
                     itemManager.carriedItem = pickupItem;
