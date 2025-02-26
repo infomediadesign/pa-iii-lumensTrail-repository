@@ -28,7 +28,6 @@ public class PickupState : ActionBaseState
 
     public override void OnEnter()
     {
-        sm.animator.SetBool("pickup", true);
         arcHeight = sm.dData.pickupArcHeight;
         duration = sm.dData.pickupArcSpeed;
         heightGap = sm.dData.aboveHeadCarryGap;
@@ -39,7 +38,6 @@ public class PickupState : ActionBaseState
         startPoint = carriedObject.transform.position;
         elapsedTime = 0;
 
-        MovementBaseState.LockMovement();
         base.OnEnter();
     }
 
