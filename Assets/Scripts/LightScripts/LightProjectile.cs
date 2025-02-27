@@ -19,8 +19,13 @@ public class LightProjectile : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         // Get directional vector by subtracting current position from mouse pointer position
         Vector3 moveDirVec3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        moveDirVec3.z = 0f;
         // moving projectile
-        rb.velocity = new Vector2(moveDirVec3.x, moveDirVec3.y).normalized * dData.lightThrowProjectileSpeed;
+        Vector2 moveDir = new Vector2(moveDirVec3.x, moveDirVec3.y).normalized;
+        rb.velocity = moveDir * dData.lightThrowProjectileSpeed;
+        
+        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle - 45f);   
     }
 
     private void OnBecameInvisible()
