@@ -19,6 +19,12 @@ public class SwingingActivation : MonoBehaviour
     {
         playerController = playerParent.GetComponentInChildren<PlayerController>();
     }
+
+    public void OnDisableSwing()
+    {
+        lumenThoughtBubbleActivation.enabled = false;
+        this.enabled = false;
+    }
     
     public void OnSwingingStart(InputAction.CallbackContext context)
     {
