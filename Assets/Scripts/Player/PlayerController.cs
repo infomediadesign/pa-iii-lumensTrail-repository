@@ -130,13 +130,14 @@ public class PlayerController : MonoBehaviour
             if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
                 receiver.DeliverItem(itemManager.carriedItem);
+                receiver.GetComponentInChildren<ThoughtBubble>().SetItemDeliveredFadeTrue();
                 playerStateMachine.SwitchToState(ActionBaseState.StateKey.Idle);
             }
             else
             {
-                bool canPickup = true;
+                bool canPickup = false;
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-                if (canPickup)
+                if (canPickup && itemManager.carriedItem == null)
                 {
                     MovementBaseState.LockMovement();
                     itemManager.carriedItem = pickupItem;

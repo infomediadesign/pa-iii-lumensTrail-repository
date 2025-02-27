@@ -50,7 +50,7 @@ public class AirborneState : PhysicsBaseState
         //sm.rb.AddForce(Vector2.down * fastFallingMultiplier, ForceMode2D.Impulse);
         
         sm.pData.fallingVelocity = sm.rb.velocity.y;
-
+        sm.animator.SetFloat("verticalSpeed", sm.rb.velocity.y);
 
         /*
          * @outdated and to be removed

@@ -3,65 +3,75 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
+public enum BubbleEnum 
+{
+    LMB,
+    LMB_HOLD,
+    RMB,
+    KEY_E
+}
 public class LumenThoughtBubble : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
+    private Vector3 offset;
 
     private SpriteRenderer spriteRenderer;
-    private SpriteRenderer childSR;
-    private float targetAlpha;    
-    private float fadeDuration = 1f; 
-    private float fadeTime;          
-    private bool isFading = false;
+    private Animator animator;
 
     void Start()
     {
+        this.animator = GetComponent<Animator>();
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        Color color = spriteRenderer.color;
-        color.a = 0;
-        this.spriteRenderer.color = color;
-        this.childSR = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        this.SetAlphaZero();
+        offset = transform.localPosition;
     }
 
     private void Update()
     {
         this.transform.position = target.transform.position + offset;   
+    }
 
-        if (isFading)
+    public void ActivateBubble(BubbleEnum input) 
+    {
+        switch (input) 
         {
-            fadeTime += Time.deltaTime;
-            float currentAlpha = spriteRenderer.color.a;
-            float alpha = Mathf.Lerp(currentAlpha, targetAlpha, fadeTime / fadeDuration);
-
-            Color color = spriteRenderer.color;
-            color.a = alpha;
-            spriteRenderer.color = color;
-
-            if (Mathf.Abs(color.a - targetAlpha) < 0.01f)
-            {
-                color.a = targetAlpha;
-                spriteRenderer.color = color;
-                isFading = false;
-            }
+            case BubbleEnum.LMB:
+                this.animator.SetBool("LMB", true);
+                break;
+            case BubbleEnum.LMB_HOLD:
+                this.animator.SetBool("LMB_hold", true);
+                break;
+            case BubbleEnum.RMB:
+                this.animator.SetBool("RMB", true);
+                break;
+            case BubbleEnum.KEY_E:
+                this.animator.SetBool("Key_E", true);
+                break;
+            default:
+                Debug.Log("Baaaaka");
+                break;
         }
     }
 
-    public void SetButtonSprite(Sprite input) 
+    public void DeactivateBubble() 
     {
-        this.childSR.sprite = input;
+        this.animator.SetBool("LMB", false);
+        this.animator.SetBool("LMB_hold", false);
+        this.animator.SetBool("RMB", false);
+        this.animator.SetBool("Key_E", false);
     }
 
-    public void StartFade(float newTargetAlpha, float duration)
+    public void SetAlphaOne() 
     {
-        targetAlpha = newTargetAlpha;
-        fadeDuration = duration;
-        fadeTime = 0f;
-        isFading = true;
+        Color color = spriteRenderer.color;
+        color.a = 1;
+        this.spriteRenderer.color = color;
     }
 
-    public float GetCurrentAlpha()
+    public void SetAlphaZero()
     {
-        return this.spriteRenderer.color.a;
+        Color color = spriteRenderer.color;
+        color.a = 0;
+        this.spriteRenderer.color = color;
     }
 }

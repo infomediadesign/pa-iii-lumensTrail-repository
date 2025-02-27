@@ -29,11 +29,13 @@ public class ActionBaseState : BaseState
     public static void LockAllActions()
     {
         allActionsUnlocked++;
+        CursorManager.SetDisabledCursor();
     }
     public static void UnlockAllActions()
     {
         if (allActionsUnlocked > 0) allActionsUnlocked--;
         else throw new System.Exception("UnlockAllActions called without LockAllActions");
+        CursorManager.SetNormalCursor();
     }
     public static bool IsAllActionsUnlocked()
     {
