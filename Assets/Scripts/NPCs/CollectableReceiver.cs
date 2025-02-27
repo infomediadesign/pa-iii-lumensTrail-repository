@@ -74,11 +74,14 @@ public abstract class CollectableReceiver : MonoBehaviour
     {
         if (collision.gameObject == carriedObject && delivering)
         {
-            this.transform.GetChild(0).GetComponent<ThoughtBubble>().SetItemDeliveredFadeTrue();
+            this.transform.GetComponentInChildren<ThoughtBubble>().SetItemDeliveredFadeTrue();
+            /*
             carriedObject.GetComponent<Collider2D>().enabled = false;
             carriedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             carriedObject.GetComponent<SpriteRenderer>().enabled = false;
             carriedObject.transform.position = endPoint;
+            */
+            Destroy(carriedObject);
             this.delivering = false;
             this.deliveredItems++;
             if (deliveredItems == totalItems) this.ItemsDeliveredTrigger();
