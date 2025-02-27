@@ -25,7 +25,7 @@ public class LightProjectile : MonoBehaviour
         rb.velocity = moveDir * dData.lightThrowProjectileSpeed;
         
         float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle - 45f);   
+        transform.rotation = Quaternion.Euler(0f, 0f, angle - 45f);  
     }
 
     private void OnBecameInvisible()
