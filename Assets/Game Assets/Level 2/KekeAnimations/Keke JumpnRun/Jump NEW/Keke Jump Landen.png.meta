@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 756a5c620b9388a4993ebacfe0590a55
+guid: c224fa7c11e61aa43bde4e23029e8c2a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Keke Jump in der Luft_0
+      name: Keke Jump Landen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3082ee5db9cfeb43bf10d5d34bfc638
-      internalID: -1249246216
+      spriteID: 6a53801d06af8614d9c2bf149ee6c54d
+      internalID: -773525178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump in der Luft_1
+      name: Keke Jump Landen_1
       rect:
         serializedVersion: 2
         x: 512
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 191744f4e704d5140a1c2b314fe4b33e
-      internalID: 1578388815
+      spriteID: 260c68c2860bd7c479b3f18b5b55f215
+      internalID: -1238883348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump in der Luft_2
+      name: Keke Jump Landen_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8d9d64c1f33a5c4ebb11bb6e4af7ccb
-      internalID: 783098927
+      spriteID: 46547b032ba10da43a32675e9163d56b
+      internalID: 495587312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump in der Luft_3
+      name: Keke Jump Landen_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 029d60043d8d0384b8b8b2455654d481
-      internalID: 1285355849
+      spriteID: 83827ef867bc76145b7a3405de719644
+      internalID: -2055116438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump in der Luft_4
+      name: Keke Jump Landen_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -208,134 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aedbb8ce5bb1db24eb3dfd0cc8f94849
-      internalID: 1400607581
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump in der Luft_5
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38fa1fa1425b33a43b00e97153ff4429
-      internalID: 352672049
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump in der Luft_6
-      rect:
-        serializedVersion: 2
-        x: 3072
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ca9c0197cd7dc84b9da84b35fb4dc25
-      internalID: 1368466954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump in der Luft_7
-      rect:
-        serializedVersion: 2
-        x: 3584
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f68b82a2957d3d7478010214f63fbd72
-      internalID: 1866555358
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump in der Luft_8
-      rect:
-        serializedVersion: 2
-        x: 4096
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c09f1cff71d2aa42ae4d3a8e8acb323
-      internalID: -1782217145
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump in der Luft_9
-      rect:
-        serializedVersion: 2
-        x: 4608
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83f69e3bed881a84da4a7c0c76e5e924
-      internalID: -681769888
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump in der Luft_10
-      rect:
-        serializedVersion: 2
-        x: 5120
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd41d8741faf5e64fa1b68031a49df3d
-      internalID: -211072321
+      spriteID: 62305b914457c2446ad857c3f164830a
+      internalID: 1962349099
       vertices: []
       indices: 
       edges: []
@@ -351,17 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Keke Jump in der Luft_0: -1249246216
-      Keke Jump in der Luft_1: 1578388815
-      Keke Jump in der Luft_10: -211072321
-      Keke Jump in der Luft_2: 783098927
-      Keke Jump in der Luft_3: 1285355849
-      Keke Jump in der Luft_4: 1400607581
-      Keke Jump in der Luft_5: 352672049
-      Keke Jump in der Luft_6: 1368466954
-      Keke Jump in der Luft_7: 1866555358
-      Keke Jump in der Luft_8: -1782217145
-      Keke Jump in der Luft_9: -681769888
+      Keke Jump Landen_0: -773525178
+      Keke Jump Landen_1: -1238883348
+      Keke Jump Landen_2: 495587312
+      Keke Jump Landen_3: -2055116438
+      Keke Jump Landen_4: 1962349099
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
