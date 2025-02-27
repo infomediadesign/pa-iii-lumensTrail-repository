@@ -8,6 +8,8 @@ public class KekeReceiver : CollectableReceiver
     public ChaseExecution chaseExecution;
 
     public ItemManager itemManager;
+
+    public LumenThoughtBubbleActivation lumenThoughtBubbleActivation;
     
     protected override void Awake()
     {

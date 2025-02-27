@@ -16,7 +16,7 @@ MonoBehaviour:
   jumpButtonPressed: 0
   lightThrowButtonPressed: 0
   groundCoyoteTimeCounter: 0.1
-  fallingVelocity: -4.7708983
+  fallingVelocity: -7.0260477
   inDropRange: 0
   movementStateKey: 0
   physicsStateKey: 0

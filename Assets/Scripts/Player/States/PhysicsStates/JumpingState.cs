@@ -11,7 +11,7 @@ public class JumpingState : PhysicsBaseState
 
     public override void SwitchTo()
     {
-        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState == PhysicsBaseState.StateKey.Airborne) return;
+        if ((PhysicsBaseState.StateKey)sm.currentPhysicsState.ownState != PhysicsBaseState.StateKey.Grounded) return;
         if ((ActionBaseState.StateKey)sm.currentActionState.ownState == ActionBaseState.StateKey.LightWave) return; //should disable jumping during lightwave charge
         base.SwitchTo();
     }
