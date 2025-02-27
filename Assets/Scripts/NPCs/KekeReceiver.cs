@@ -11,8 +11,6 @@ public class KekeReceiver : CollectableReceiver
     public ItemManager itemManager;
 
     public LumenThoughtBubbleActivation lumenThoughtBubbleActivation;
-
-    public BreakGroundTrigger trigger;
     
     protected override void Awake()
     {
@@ -28,7 +26,6 @@ public class KekeReceiver : CollectableReceiver
     {
         kekeAnimator.SetTrigger("standup");
         itemManager.items = null;
-        trigger.triggerActive = true;
     }
 
 
