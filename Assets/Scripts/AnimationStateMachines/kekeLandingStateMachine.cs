@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class kekeStandingUpStateMachine : StateMachineBehaviour
+public class resetLandingState : StateMachineBehaviour
 {
     [SerializeField] private float offset = -0.5f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
-       animator.gameObject.transform.position = new Vector2(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y-offset);
+        animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y-offset);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,9 +20,8 @@ public class kekeStandingUpStateMachine : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("standup");
-        animator.gameObject.transform.position = new Vector2(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y+offset);
-        animator.gameObject.GetComponentInParent<KekeReceiver>().OnStanding();
+        animator.ResetTrigger("landing");
+        animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y+offset);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
