@@ -12,6 +12,7 @@ public class LightImpuls : MonoBehaviour
     private Vector3 targetScale;
     private float currentLerpTime;
     private Light2D lt;
+    private float colliderRadius;
     private float ltOuterRadiusOriginal;
     private float ltOuterRadiusMax;
     private bool reduceLightRadius = false;
@@ -25,6 +26,7 @@ public class LightImpuls : MonoBehaviour
         isActive = false;
         currentLerpTime = 0;
         lt = GetComponentInParent<Light2D>();
+        colliderRadius = GetComponent<CircleCollider2D>().radius;
         ltOuterRadiusOriginal = lt.pointLightOuterRadius;
     }
 
@@ -43,7 +45,7 @@ public class LightImpuls : MonoBehaviour
                 float lerpValue = Mathf.Lerp(0, dData.maxImpulseRadius, currentLerpTime);
                 // Setze die relative Skalierung, um die Verzerrung auszugleichen
                 transform.localScale = new Vector3(lerpValue * scaleFactorX, lerpValue * scaleFactorY, transform.localScale.z);
-                if (lerpValue > lt.pointLightOuterRadius) lt.pointLightOuterRadius = lerpValue;
+                if (lerpValue > lt.pointLightOuterRadius / colliderRadius) lt.pointLightOuterRadius = lerpValue * colliderRadius;
             }
             else
             {
