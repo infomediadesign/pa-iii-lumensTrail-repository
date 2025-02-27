@@ -212,6 +212,11 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+    public bool GetIsFacingRight() 
+    {
+        return this.isFacingRight;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
