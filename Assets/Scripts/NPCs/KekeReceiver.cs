@@ -6,7 +6,7 @@ using UnityEngine;
 public class KekeReceiver : CollectableReceiver
 {
     public Animator kekeAnimator;
-    public ChaseExecution chaseExecution;
+    public GameObject chaseExecution;
 
     public ItemManager itemManager;
 
@@ -37,6 +37,6 @@ public class KekeReceiver : CollectableReceiver
 
     public void OnStanding()
     {
-        chaseExecution.enabled = true;
+        chaseExecution.SetActive(true);
     }
 }
