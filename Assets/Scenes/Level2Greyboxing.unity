@@ -4419,7 +4419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2820283446211117651, guid: 28c97e14a3b230e449a224310d97a7b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.81
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 2820283446211117651, guid: 28c97e14a3b230e449a224310d97a7b0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4734,6 +4734,7 @@ MonoBehaviour:
   stageThreeThreshold: {fileID: 1992911295}
   stageThreeGoal: {fileID: 1537377662}
   goalReached: {fileID: 1537377663}
+  swingingActivation: {fileID: 0}
 --- !u!4 &1108247990
 Transform:
   m_ObjectHideFlags: 0
@@ -5931,6 +5932,43 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 395533440}
   m_SourcePrefab: {fileID: 100100000, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
+--- !u!1 &1336986520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4152356113403179825, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
+  m_PrefabInstance: {fileID: 1658402898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!251 &1336986525
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336986520}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 150
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!114 &1336986526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336986520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a90b593f7304d642a5c7e3345e5cab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformDeactiveTime: 0.5
 --- !u!1001 &1341987572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7234,10 +7272,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.124
       objectReference: {fileID: 0}
+    - target: {fileID: 8155695539464888381, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4152356113403179825, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1336986526}
+    - targetCorrespondingSourceObject: {fileID: 4152356113403179825, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1336986525}
   m_SourcePrefab: {fileID: 100100000, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
 --- !u!1 &1678903042
 GameObject:
@@ -7850,7 +7898,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sie m\xF6chte mit dir Fangen spielen!"
+  m_text: She wants to play tag with you!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea89751031e234d428a347b8138ed4c1, type: 2}
   m_sharedMaterial: {fileID: 3005526987931858022, guid: ea89751031e234d428a347b8138ed4c1, type: 2}
@@ -8077,11 +8125,11 @@ PrefabInstance:
       objectReference: {fileID: 1174196763}
     - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.06
+      value: -6.31
       objectReference: {fileID: 0}
     - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.92
+      value: -3.53
       objectReference: {fileID: 0}
     - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
       propertyPath: m_LocalPosition.z
