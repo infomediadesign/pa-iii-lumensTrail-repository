@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LumenThoughtBubbleButton : MonoBehaviour
 {
+    /*
     private LumenThoughtBubble parent;
     private SpriteRenderer sr;
 
@@ -24,5 +25,5 @@ public class LumenThoughtBubbleButton : MonoBehaviour
         Color color = this.sr.color;
         color.a = parent.GetCurrentAlpha();
         this.sr.color = color;
-    }
+    }*/
 }

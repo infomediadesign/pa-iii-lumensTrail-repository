@@ -33,7 +33,6 @@ public class StatueMainBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
         rb.velocity = lightWaveVelocity;
-
     }
 
     public void ActivateStatue()
@@ -56,7 +55,6 @@ public class StatueMainBody : MonoBehaviour
             waitingRasselbande.SetActive(false);
             pathingRasselbande.SetActive(true);
             this.gameObject.SetActive(false);
-
         }
     }
 }
