@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalMovement;
     private bool isFacingRight = true;
     private bool isMoving = false;
+    private bool lightThrowCharge = false;
     private float lastTimeLightThrown;
     private float lastTimeLigthImpulse;
     private float pickupRadius;
@@ -47,6 +48,28 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
+
+        if (lightThrowCharge)
+        {
+            if (Time.time < lastTimeLightThrown + dData.switchToLightWaveTime && !pData.lightThrowButtonPressed)
+            {
+                playerStateMachine.SwitchToState(ActionBaseState.StateKey.LightThrow);
+                lightThrowCharge = false;
+            }
+            else if (Time.time > lastTimeLightThrown + dData.switchToLightWaveTime) 
+            {
+                if (pData.isGrounded) 
+                {
+                    playerStateMachine.SwitchToState(ActionBaseState.StateKey.LightWave);
+                    lightThrowCharge = false;
+                }
+                else 
+                {
+                    lightThrowCharge = false;
+                }
+                
+            }
+        }
 
         /*
          * @info: When configuring jumping, uncomment line below otherwise please turn off to not mess with other code
@@ -114,7 +137,7 @@ public class PlayerController : MonoBehaviour
             pData.lightThrowButtonPressed = true;
             if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
             lastTimeLightThrown = Time.time;
-            playerStateMachine.SwitchToState(ActionBaseState.StateKey.LightThrow);
+            lightThrowCharge = true;
         }
         else if (context.canceled) 
         {
@@ -137,7 +160,7 @@ public class PlayerController : MonoBehaviour
             {
                 bool canPickup = false;
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-                if (canPickup)
+                if (canPickup && itemManager.carriedItem == null)
                 {
                     MovementBaseState.LockMovement();
                     itemManager.carriedItem = pickupItem;
@@ -187,6 +210,11 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    public bool GetIsFacingRight() 
+    {
+        return this.isFacingRight;
     }
 
     private void OnDrawGizmos()
