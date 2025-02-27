@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class SwingingActivation : MonoBehaviour
 {
     public GameObject playerParent;
+    [SerializeField] private Transform playerTransform;
     private PlayerController playerController;
     public GameObject lumenSwing;
     public TestRotationSwing swingAction;
@@ -50,7 +51,7 @@ public class SwingingActivation : MonoBehaviour
         {
             swinging = false;
             playerParent.SetActive(true);
-            playerParent.transform.position = lumenSwing.transform.position;
+            playerTransform.position = lumenSwing.transform.position;
             lumenSwing.SetActive(false);
             swingAction.enabled = false;
             lumenThoughtBubbleActivation.enabled = true;
@@ -64,7 +65,7 @@ public class SwingingActivation : MonoBehaviour
         {
             swinging = false;
             playerParent.SetActive(true);
-            playerParent.transform.position = lumenSwing.transform.position;
+            playerTransform.position = lumenSwing.transform.position;
             lumenSwing.SetActive(false);
             swingAction.enabled = false;
             lumenThoughtBubbleActivation.enabled = true;
