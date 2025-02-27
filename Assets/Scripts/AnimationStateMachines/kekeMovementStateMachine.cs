@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class resetFallingState : StateMachineBehaviour
+public class kekeMovementStateMachine : StateMachineBehaviour
 {
-    
-    [SerializeField] float offset = -0.3f;
+    [SerializeField]private float offset = 0.25f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y-offset);
+        animator.gameObject.transform.position = new Vector2(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y-offset);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,8 +20,7 @@ public class resetFallingState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("fall");
-        animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y+offset);
+       animator.gameObject.transform.position = new Vector2(animator.gameObject.transform.position.x, animator.gameObject.transform.position.y+offset);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

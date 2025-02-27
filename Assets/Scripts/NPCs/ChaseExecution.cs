@@ -33,14 +33,14 @@ public class ChaseExecution : MonoBehaviour
     private InputAction activate;
     private Collider2D activationCollider;
     public KekeAI kekeAI;
-    public ChaseRangeCheck rangeCheck;
+    public RangeCheck rangeCheck;
     public Transform kekeTransform;
     public Transform playerTransform;
     public ChaseCheckpointHandler stageOnePoints;
     public Transform[] stageThreePoints = new Transform[2];
     public Transform stageThreeThreshold;
     public GameObject stageThreeGoal;
-    public ChaseRangeCheck goalReached;    
+    public RangeCheck goalReached;    
 
      
 

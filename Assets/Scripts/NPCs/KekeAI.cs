@@ -38,6 +38,11 @@ public class KekeAI : MonoBehaviour
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.5f;
     public float jumpCheckOffset = 0.1f;
+
+    public float groundedCheckDistance = 0.1f;
+    private float castDistance;
+
+    public Vector2 footBoxSize;
     public float dropCheckOffset = 30f;
     private bool pathDrops=false;
     public float reachThreshold = 0.5f;
@@ -92,6 +97,8 @@ public class KekeAI : MonoBehaviour
         animator.SetFloat("yMovement", 0);
         animator.SetFloat("xMovement", 0);
         animator.SetBool("MovingRight", false);
+
+        castDistance = groundedCheckDistance + coll.bounds.extents.y;
 
         gridGraph = pathfinder.GetComponent<AstarPath>().graphs[0] as GridGraph;
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
@@ -350,7 +357,7 @@ public class KekeAI : MonoBehaviour
 
     private void CheckGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, coll.bounds.size, 0, Vector2.down, jumpCheckOffset, collisionMask);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position - transform.up * castDistance, footBoxSize, 0, Vector2.down, groundedCheckDistance, collisionMask);
         isGrounded = (hit.collider != null && rb.velocity.y <= 0);
         if (isGrounded)
         {
@@ -543,6 +550,8 @@ public class KekeAI : MonoBehaviour
          Vector2 pointC = new Vector2(this.transform.position.x + this.coll.bounds.extents.x * directionValue, transform.position.y - (coll.bounds.extents.y + jumpCheckOffset));
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(pointA, pointC);
+
+        Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
 
 
     }
