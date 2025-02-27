@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c87a4850e66a2e5418a23b1faca6f713
+guid: 592a446091ca5264d81764452d45e978
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Keke Jump Ansatz_0
+      name: Keke Jump Luft 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 443bd9051b6e88b4486ffc885b3d4bef
-      internalID: 1203130228
+      spriteID: bbc3c6fbe4540144dacf502820951078
+      internalID: -236000878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump Ansatz_1
+      name: Keke Jump Luft 1_1
       rect:
         serializedVersion: 2
         x: 512
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb906fab32f80e448a2b44b7a55798ea
-      internalID: 1984780181
+      spriteID: c6dd9a7373232b642856de10d8119787
+      internalID: 16215396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump Ansatz_2
+      name: Keke Jump Luft 1_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e49c55e198d4d74468a3ff94b4283239
-      internalID: -1512031942
+      spriteID: dcbf489a1a4c77448b651dba386449ee
+      internalID: -1855999149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keke Jump Ansatz_3
+      name: Keke Jump Luft 1_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -187,50 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3af28764866cdeb468dcec2329e7cd8f
-      internalID: 470636211
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump Ansatz_4
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 63b49278565c15e44a782e084f9f19df
-      internalID: -444454517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keke Jump Ansatz_5
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 471639506ed7aab4abbdd05122e5b463
-      internalID: -176722686
+      spriteID: c3eae2348a2514f4dbbdc867b19cc87e
+      internalID: 813338702
       vertices: []
       indices: 
       edges: []
@@ -246,12 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Keke Jump Ansatz_0: 1203130228
-      Keke Jump Ansatz_1: 1984780181
-      Keke Jump Ansatz_2: -1512031942
-      Keke Jump Ansatz_3: 470636211
-      Keke Jump Ansatz_4: -444454517
-      Keke Jump Ansatz_5: -176722686
+      Keke Jump Luft 1_0: -236000878
+      Keke Jump Luft 1_1: 16215396
+      Keke Jump Luft 1_2: -1855999149
+      Keke Jump Luft 1_3: 813338702
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
