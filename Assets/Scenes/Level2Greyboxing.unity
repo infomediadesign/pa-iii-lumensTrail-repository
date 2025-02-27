@@ -1988,7 +1988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &549019858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4681,7 +4681,7 @@ MonoBehaviour:
   stageThreeThreshold: {fileID: 1992911295}
   stageThreeGoal: {fileID: 1537377662}
   goalReached: {fileID: 1537377663}
-  swingingActivation: {fileID: 0}
+  swingingActivation: {fileID: 1897860411}
 --- !u!4 &1108247990
 Transform:
   m_ObjectHideFlags: 0
@@ -6997,7 +6997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1621372741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7585,6 +7585,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8591504322536030955, guid: 014b0de834cd4de479acab33ceace287, type: 3}
   m_PrefabInstance: {fileID: 2056319282}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1897860411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1489810209066127289, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
+  m_PrefabInstance: {fileID: 1658402898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c095d42a7d1ed40947e11d24962193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1912591321 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9221700937678303343, guid: 709bce92165c3fc49937221eae1337a3, type: 3}
@@ -7805,7 +7816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1975693393
 RectTransform:
   m_ObjectHideFlags: 0
