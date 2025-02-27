@@ -167,6 +167,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2479100399792639711}
     m_Modifications:
+    - target: {fileID: 1854803134243921170, guid: db7929be44003364896edbdf33a9d0b7, type: 3}
+      propertyPath: activationType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2262952487133136439, guid: db7929be44003364896edbdf33a9d0b7, type: 3}
       propertyPath: m_Name
       value: LumenThoughtBubbleActivation
