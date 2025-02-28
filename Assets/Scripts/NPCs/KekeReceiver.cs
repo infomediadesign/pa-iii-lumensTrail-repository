@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KekeReceiver : CollectableReceiver
 {
     public Animator kekeAnimator;
-    public ChaseExecution chaseExecution;
+    public GameObject chaseExecution;
 
     public ItemManager itemManager;
+
+    public LumenThoughtBubbleActivation lumenThoughtBubbleActivation;
     
     protected override void Awake()
     {
@@ -34,6 +37,6 @@ public class KekeReceiver : CollectableReceiver
 
     public void OnStanding()
     {
-        chaseExecution.enabled = true;
+        chaseExecution.SetActive(true);
     }
 }

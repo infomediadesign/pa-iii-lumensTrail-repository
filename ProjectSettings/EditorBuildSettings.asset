@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2Greyboxing.unity
     guid: 8dc0d30315a211b408143660892225f9
+  - enabled: 1
+    path: Assets/Scenes/Level 3 Greyboxing.unity
+    guid: e6d2b519631678f4ca3add66f517eb83
   m_configObjects: {}
