@@ -36,12 +36,12 @@ MonoBehaviour:
   lightThrowGravityMultiplier: 1
   lightWaveSpeed: 6
   lightWaveMaxTravelDistance: 5
-  lightWaveStartingSizeMultiplier: 0.4
-  lightWaveMaxSizeAtDistance: 4
-  lightWaveMovementDisabledTime: 0.6
+  lightWaveStartingSizeMultiplier: 1
+  lightWaveMaxSizeAtDistance: 0
+  lightWaveMovementDisabledTime: 0.7
   lightWaveColliderSize: {x: 0.5, y: 0.5}
   impulseCooldown: 10
-  maxImpulseRadius: 9
+  maxImpulseRadius: 6
   impulseSpeed: 0.5
   highlightTime: 6
   increasedLightRadiusTime: 5
@@ -55,6 +55,6 @@ MonoBehaviour:
   stayActiveTime: 10
   statueVelocityMultiplier: 2.68
   trunkVelocityMultiplier: 0.5
-  thoughtBubbleFadeTime: 70
+  itemDeliveredFateTime: 3
   bonsaiMovingSpeed: 2
   bonsaiLumenStandingDistance: 0.5

@@ -7335,6 +7335,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: {fileID: 631813044}
   dData: {fileID: 11400000, guid: 00d47f52f3012004093393a679123adb, type: 2}
+  kekeAnimator: {fileID: 0}
+  chaseExecution: {fileID: 0}
+  itemManager: {fileID: 0}
+  lumenThoughtBubbleActivation: {fileID: 0}
 --- !u!1 &1804337961
 GameObject:
   m_ObjectHideFlags: 0
@@ -7799,11 +7803,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4043413246302406066, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.00000004362319
+      value: 0.000000033825636
       objectReference: {fileID: 0}
     - target: {fileID: 4043413246302406066, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 11.710011
+      value: 9.08
       objectReference: {fileID: 0}
     - target: {fileID: 4660026741978770259, guid: 931443c813c97134090ec09a6361b2c9, type: 3}
       propertyPath: m_LocalScale.x

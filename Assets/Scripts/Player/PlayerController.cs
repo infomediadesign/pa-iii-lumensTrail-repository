@@ -162,13 +162,8 @@ public class PlayerController : MonoBehaviour
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
                 if (canPickup && itemManager.carriedItem == null)
                 {
-                    MovementBaseState.LockMovement();
                     itemManager.carriedItem = pickupItem;
-                    LayerMask mask = itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers;
-                    int layerToAdd = LayerMask.GetMask("Platform");
-                    itemManager.carriedItem.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
-                    itemManager.carriedItem.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
-                    animator.SetBool("pickup", true);
+                    playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
                 }
             }
         }
@@ -176,7 +171,7 @@ public class PlayerController : MonoBehaviour
 
     public void PickUpNow() 
     {
-        playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
+        pData.pickupAnimationGo = true;
     }
 
     public void OnLightImpulse(InputAction.CallbackContext context)
@@ -185,15 +180,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.time < lastTimeLigthImpulse + dData.impulseCooldown) return;
             lastTimeLigthImpulse = Time.time;
-            LightImpuls lI = GetComponentInChildren<LightImpuls>();
-            if (lI != null) lI.LightImpulse();
-            else Debug.Log("LightImpulse Component is null");
+            animator.SetBool("lightImpulse", true);
         }
     }
 
     private void IsGrounded()
     {
-        if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
+        if (Physics2D.OverlapBox(transform.position - transform.up * castDistance, footBoxSize, 0, groundLayer))
         {
             pData.isGrounded = true;
             pData.groundCoyoteTimeCounter = dData.coyoteTime;
@@ -210,6 +203,11 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    public bool GetIsFacingRight() 
+    {
+        return this.isFacingRight;
     }
 
     private void OnDrawGizmos()

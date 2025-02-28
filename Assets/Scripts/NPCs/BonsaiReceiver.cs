@@ -84,7 +84,6 @@ public class BonsaiReceiver : CollectableReceiver
 
     public void SetEndPos() 
     {
-        Debug.Log("Hallo");
         targetPosition = targetTransform.position;
         targetPosition.y = transform.position.y;
         this.isWalking = true;
