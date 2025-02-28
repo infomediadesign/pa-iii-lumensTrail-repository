@@ -29,7 +29,7 @@ public class TestRotationSwing : MonoBehaviour
     public float dragForce = 0.3f;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey("d"))
         {

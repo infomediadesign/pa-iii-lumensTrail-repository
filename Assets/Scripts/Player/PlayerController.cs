@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
 
     private void IsGrounded()
     {
-        if (Physics2D.BoxCast(transform.position, footBoxSize, 0, -transform.up, castDistance, groundLayer))
+        if (Physics2D.OverlapBox(transform.position - transform.up * castDistance, footBoxSize, 0, groundLayer))
         {
             pData.isGrounded = true;
             pData.groundCoyoteTimeCounter = dData.coyoteTime;

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4080079725349104769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2357292, y: 0.02817559, z: 0}
   m_LocalScale: {x: 1.2000002, y: 1.2000002, z: 1.2000002}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -221,6 +221,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.5
   jumpCheckOffset: 0.5
+  footBoxSize: {x: 0, y: 0}
   dropCheckOffset: 30
   reachThreshold: 0.5
   currentState: 0
@@ -321,7 +322,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23572922, y: -0.028175592}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -351,6 +352,7 @@ MonoBehaviour:
   kekeAnimator: {fileID: 5733664109377795018}
   chaseExecution: {fileID: 0}
   itemManager: {fileID: 0}
+  lumenThoughtBubbleActivation: {fileID: 0}
 --- !u!1 &6688021692624259628
 GameObject:
   m_ObjectHideFlags: 0
