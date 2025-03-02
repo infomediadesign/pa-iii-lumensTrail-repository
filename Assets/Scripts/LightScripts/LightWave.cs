@@ -21,14 +21,12 @@ public class LightWave : MonoBehaviour
         pl = GetComponent<Light2D>();
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<CapsuleCollider2D>();
-        // Get directional vector by subtracting current position from mouse pointer position
-        Vector3 moveDirVec3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        // calculating angle of mouse
-        float angle = Mathf.Atan2(moveDirVec3.y, moveDirVec3.x) * Mathf.Rad2Deg;
+        
+        bool isFacingRight = FindObjectOfType<PlayerController>().GetIsFacingRight();
         float directionalFloat;
-        // setting directionFloat to 1 or -1 depending on angle so wave goes in correct direction
-        if (angle < 90 && angle > -90) directionalFloat = 1;
+        if (isFacingRight) directionalFloat = 1;
         else directionalFloat = -1;
+        
         // moving light wave
         rb.velocity = Vector2.right * directionalFloat * dData.lightWaveSpeed;
         // Reduced size at start
