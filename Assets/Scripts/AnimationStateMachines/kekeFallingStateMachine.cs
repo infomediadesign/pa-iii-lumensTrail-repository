@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class resetFallingState : StateMachineBehaviour
 {
+    
+    [SerializeField] float offset = -0.3f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+       animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y-offset);
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,6 +22,7 @@ public class resetFallingState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("fall");
+        animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y+offset);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -33,14 +33,16 @@ public class ChaseExecution : MonoBehaviour
     private InputAction activate;
     private Collider2D activationCollider;
     public KekeAI kekeAI;
-    public ChaseRangeCheck rangeCheck;
+    public RangeCheck rangeCheck;
     public Transform kekeTransform;
     public Transform playerTransform;
     public ChaseCheckpointHandler stageOnePoints;
     public Transform[] stageThreePoints = new Transform[2];
     public Transform stageThreeThreshold;
     public GameObject stageThreeGoal;
-    public ChaseRangeCheck goalReached;    
+    public RangeCheck goalReached;
+
+    public SwingingActivation swingingActivation;    
 
      
 
@@ -49,6 +51,7 @@ public class ChaseExecution : MonoBehaviour
     {
         kekeAI.followEnabled = false;
         timerText.enabled = false;
+        startPrompt.enabled = false;
         stageOnePoints.active = false;
         input = playerTransform.gameObject.GetComponent<PlayerInput>();
         activate = input.actions["Interact"];
@@ -76,6 +79,7 @@ public class ChaseExecution : MonoBehaviour
 
     void OnActivateStageOne()
     {
+        swingingActivation.OnDisableSwing();
         ActionBaseState.LockAllActions();
         kekeAI.gridGraph.Scan();
         stageOnePoints.active = true;
@@ -92,7 +96,7 @@ public class ChaseExecution : MonoBehaviour
         {
             MovementBaseState.LockMovement();
             startPrompt.enabled = true;
-            startPrompt.text = "Get Keke!";
+            startPrompt.text = "Go";
             yield return new WaitForSeconds(gracePeriod);
             startPrompt.enabled = false;
             gracePeriodPassed = true;
@@ -115,8 +119,8 @@ public class ChaseExecution : MonoBehaviour
     {
         MovementBaseState.LockMovement();
         startPrompt.enabled = true;
-        if (caught) startPrompt.text = "Caught Keke! Keke will now catch you!";
-        else startPrompt.text = "Keke was too slippery! Keke will now catch you!";
+        if (caught) startPrompt.text = "Great! You caught her! Now she will chase you!";
+        else startPrompt.text = "Too bad, she was just too fast! Now she will chase you!";
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
         MovementBaseState.UnlockMovement();
@@ -139,7 +143,8 @@ public class ChaseExecution : MonoBehaviour
         while (elapsedTime < timerGoal)
         {
             elapsedTime += Time.deltaTime;  // Increment by the time passed since last frame
-            timerText.text = string.Format("{0:00.00}", elapsedTime);
+            int viewedTimer = (int) elapsedTime + 1;
+            timerText.text = viewedTimer.ToString();
 
             // Speed adjustments
             if (elapsedTime > (timerGoal / 3) * 2) kekeAI.speed = speedSegmentTwo[2];
@@ -155,7 +160,7 @@ public class ChaseExecution : MonoBehaviour
         if (!gracePeriodPassed)
         {
             startPrompt.enabled = true;
-            startPrompt.text = "Run from Keke!";
+            startPrompt.text = "Go";
             yield return new WaitForSeconds(gracePeriod);
             startPrompt.enabled = false;
             gracePeriodPassed = true;
@@ -173,6 +178,7 @@ public class ChaseExecution : MonoBehaviour
     void OnExitStageTwo(bool caught = false)
     {
         kekeAI.followEnabled = false;
+        timerText.enabled = false;
         StartCoroutine(SwitchToStageThree(caught));
     }
 
@@ -180,8 +186,8 @@ public class ChaseExecution : MonoBehaviour
     {
         MovementBaseState.LockMovement();
         startPrompt.enabled = true;
-        if (caught) startPrompt.text = "Keke caught you! Now follow Keke!";
-        else startPrompt.text = "You were too slippery! Now follow Keke!";
+        if (caught) startPrompt.text = "It will work next time";
+        else startPrompt.text = "Wow, you were very skillful!";
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
         MovementBaseState.UnlockMovement();
@@ -190,6 +196,8 @@ public class ChaseExecution : MonoBehaviour
 
     void OnActivateStageThree()
     {
+        startPrompt.text = "Where is she going now?";
+        startPrompt.enabled = true;
         kekeAI.followEnabled = true;
         gracePeriodPassed = false;
         kekeAI.speed = speedSegmentThree;
@@ -212,7 +220,9 @@ public class ChaseExecution : MonoBehaviour
     {
         kekeAI.followEnabled = false;
         startPrompt.enabled = true;
-        startPrompt.text = "Boom!";
+        FindObjectOfType<BreakGroundTrigger>().triggerActive = true;
+        ActionBaseState.UnlockAllActions();
+        //startPrompt.text = "Boom!";
     }
 
     
