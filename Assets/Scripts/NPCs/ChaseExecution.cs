@@ -221,6 +221,7 @@ public class ChaseExecution : MonoBehaviour
         kekeAI.followEnabled = false;
         startPrompt.enabled = true;
         FindObjectOfType<BreakGroundTrigger>().triggerActive = true;
+        ActionBaseState.UnlockAllActions();
         //startPrompt.text = "Boom!";
     }
 
