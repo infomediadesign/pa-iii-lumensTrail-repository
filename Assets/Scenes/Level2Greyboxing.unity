@@ -620,7 +620,8 @@ PrefabInstance:
       value: PickupItem (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3320015362457143514, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
@@ -1846,6 +1847,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerActive: 0
+  playerInTrigger: 0
+  kekeInPlace: 0
   col: {fileID: 504640356}
 --- !u!95 &510239430
 Animator:
@@ -5247,7 +5250,8 @@ PrefabInstance:
       value: PickupItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3320015362457143514, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
@@ -6176,7 +6180,8 @@ PrefabInstance:
       value: PickupItem (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3320015362457143514, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e508f0c8cd13ad347833f321c9e152ff, type: 3}
