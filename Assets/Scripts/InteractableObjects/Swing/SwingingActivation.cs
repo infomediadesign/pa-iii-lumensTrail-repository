@@ -40,7 +40,7 @@ public class SwingingActivation : MonoBehaviour
                 swingAction.enabled = true;
                 swinging = true;
                 lumenThoughtBubbleActivation.DeactivatePrompt();
-                lumenThoughtBubbleActivation.enabled = false;
+                //lumenThoughtBubbleActivation.enabled = false;
             }
         }
     }
@@ -54,7 +54,8 @@ public class SwingingActivation : MonoBehaviour
             playerTransform.position = lumenSwing.transform.position;
             lumenSwing.SetActive(false);
             swingAction.enabled = false;
-            lumenThoughtBubbleActivation.enabled = true;
+            lumenThoughtBubbleActivation.ActivatePrompt();
+            //lumenThoughtBubbleActivation.enabled = true;
         }
         
     }
@@ -68,7 +69,8 @@ public class SwingingActivation : MonoBehaviour
             playerTransform.position = lumenSwing.transform.position;
             lumenSwing.SetActive(false);
             swingAction.enabled = false;
-            lumenThoughtBubbleActivation.enabled = true;
+            //lumenThoughtBubbleActivation.enabled = true;
+            lumenThoughtBubbleActivation.ActivatePrompt();
             playerController.OnJump(context);
         }
     }
