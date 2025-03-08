@@ -81,6 +81,7 @@ public class ChaseExecution : MonoBehaviour
     {
         swingingActivation.OnDisableSwing();
         ActionBaseState.LockAllActions();
+        playerTransform.GetComponent<PlayerController>().inChase = true;
         kekeAI.gridGraph.Scan();
         stageOnePoints.active = true;
         kekeAI.followEnabled = true;
@@ -191,6 +192,7 @@ public class ChaseExecution : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
         MovementBaseState.UnlockMovement();
+        playerTransform.GetComponent<PlayerController>().inChase = false;
         OnActivateStageThree();
     }
 

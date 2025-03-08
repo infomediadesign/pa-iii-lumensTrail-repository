@@ -33,7 +33,7 @@ public class SwingingActivation : MonoBehaviour
         Debug.Log(rangeCheck.inRange);
         if (context.performed)
         {        
-            if (!swinging && rangeCheck.inRange)
+            if (!swinging && rangeCheck.inRange && playerController.itemManager.carriedItem == null && !playerController.inChase)
             {
                 playerParent.SetActive(false);
                 lumenSwing.SetActive(true);
