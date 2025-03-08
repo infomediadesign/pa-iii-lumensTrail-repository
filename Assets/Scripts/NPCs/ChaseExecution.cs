@@ -203,6 +203,7 @@ public class ChaseExecution : MonoBehaviour
         kekeAI.speed = speedSegmentThree;
         if (playerTransform.position.x < stageThreeThreshold.position.x) kekeAI.target = stageThreePoints[1];
         else kekeAI.target = stageThreePoints[0];
+        FindObjectOfType<BreakGroundTrigger>().triggerActive = true;
         StartCoroutine(OnRunStageThree());
     }
 
@@ -210,7 +211,11 @@ public class ChaseExecution : MonoBehaviour
     {
         while (!goalReached.inRange)
         {
-            if (kekeAI.ReachedTarget())kekeAI.followEnabled = false;
+            if (kekeAI.ReachedTarget()) 
+            { 
+                kekeAI.followEnabled = false;
+                FindObjectOfType<BreakGroundTrigger>().kekeInPlace = true;
+            }
             yield return null;
         }
         OnExitStageThree();
@@ -220,7 +225,6 @@ public class ChaseExecution : MonoBehaviour
     {
         kekeAI.followEnabled = false;
         startPrompt.enabled = true;
-        FindObjectOfType<BreakGroundTrigger>().triggerActive = true;
         ActionBaseState.UnlockAllActions();
         //startPrompt.text = "Boom!";
     }
