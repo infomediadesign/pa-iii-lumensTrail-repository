@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float castDistance;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
+    [HideInInspector] public bool inChase = false;
 
     private void Awake()
     {

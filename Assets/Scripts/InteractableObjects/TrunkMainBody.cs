@@ -37,5 +37,7 @@ public class TrunkMainBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
         rb.velocity = lightWaveVelocity * trunkVelocityMultiplier;
+        GetComponent<PlatformEffector2D>().enabled = true;
+        GetComponent<FallThroughPlatform>().enabled = true;
     }
 }
