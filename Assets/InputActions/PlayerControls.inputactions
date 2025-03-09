@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "33f1f46d-bbc9-40ef-8dd4-d5beaf3ec7b8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -193,6 +202,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c0be058c-68c4-4510-a663-35f8f4f1d534",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "027c5f39-ab0e-43fc-b70d-40bac842a3c9",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
@@ -243,6 +263,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "LightImpulse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c496882-7d64-4afb-a489-a4186f9dba31",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
