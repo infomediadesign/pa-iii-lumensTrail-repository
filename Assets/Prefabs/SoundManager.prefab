@@ -59,4 +59,5 @@ MonoBehaviour:
     sounds: []
   - name: LIGHTIMPULSE
     sounds: []
+  audioMixer: {fileID: 24100000, guid: e977fdbf61583ee44925245c14a6d400, type: 2}
   playMusicOnAwake: 0
