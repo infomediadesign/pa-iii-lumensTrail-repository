@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,181 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Cursor_Animation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2e27f5c512c29049a115cf11ee2ea5d
+      internalID: -1814219650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cursor_Animation_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f725fe4171a828a4bbba181dc6819880
+      internalID: -1753704817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cursor_Animation_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 892077bb5c47ac440a580979d359e0cf
+      internalID: 2136076184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cursor_Animation_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ec1ca7fe5a75624ba766365dfbfe874
+      internalID: 1846476558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cursor_Animation_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5643bdba0c43ced49a6148633c7a26fa
+      internalID: 1822297143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cursor_Animation_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 256, y: 0}
+        - {x: 0, y: 256}
+        - {x: -256, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0e58b7b8f5890246a6922add71860e4
+      internalID: -69186440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +293,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cursor_Animation_0: -1814219650
+      Cursor_Animation_1: -1753704817
+      Cursor_Animation_2: 2136076184
+      Cursor_Animation_3: 1846476558
+      Cursor_Animation_4: 1822297143
+      Cursor_Animation_5: -69186440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

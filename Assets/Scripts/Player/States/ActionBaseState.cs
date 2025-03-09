@@ -16,6 +16,8 @@ public class ActionBaseState : BaseState
 
     public override void SwitchTo()
     {
+        // reason why in OnEnter()?
+        if (!IsAllActionsUnlocked()) return;
         base.SwitchTo();
     }
     public override void OnEnter()
