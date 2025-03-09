@@ -10,40 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Level2KekeTable_en
+  m_Name: KekeTable_de
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
+    m_Code: de
   m_SharedData: {fileID: 11400000, guid: b42dc500a5451fd41912756e35f522d7, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
   - m_Id: 411982376960
-    m_Localized: She wants to play tag with you!
+    m_Localized: "Sie m\xF6chte mit dir Fangen spielen!"
     m_Metadata:
       m_Items: []
   - m_Id: 494182346752
-    m_Localized: Go
+    m_Localized: Los
     m_Metadata:
       m_Items: []
   - m_Id: 665280589824
-    m_Localized: Great! You caught her! Now she will chase you!
+    m_Localized: 'Super! Du hast sie erwischt! Jetzt wird sie dich fangen! '
     m_Metadata:
       m_Items: []
   - m_Id: 902107770880
-    m_Localized: Too bad, she was just too fast! Now she will chase you!
+    m_Localized: Verdammt, sie war einfach zu schnell! Jetzt wird sie dich fangen!
     m_Metadata:
       m_Items: []
   - m_Id: 1235903066112
-    m_Localized: It will work next time
+    m_Localized: "Das n\xE4chste mal wirds klappen"
     m_Metadata:
       m_Items: []
   - m_Id: 1352999645184
-    m_Localized: Wow, you were very skillful!
+    m_Localized: Wow, du bist sehr talentiert!
     m_Metadata:
       m_Items: []
   - m_Id: 1595245867008
-    m_Localized: Where is she going now?
+    m_Localized: Wo geht sie denn jetzt hin?
     m_Metadata:
       m_Items: []
   references:

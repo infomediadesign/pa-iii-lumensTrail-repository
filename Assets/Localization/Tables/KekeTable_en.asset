@@ -9,48 +9,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Level2KekeTable Shared Data
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: KekeTable_en
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Level2KekeTable
-  m_TableCollectionNameGuidString: b42dc500a5451fd41912756e35f522d7
-  m_Entries:
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b42dc500a5451fd41912756e35f522d7, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
   - m_Id: 411982376960
-    m_Key: she_wants_to_play
+    m_Localized: She wants to play tag with you!
     m_Metadata:
       m_Items: []
   - m_Id: 494182346752
-    m_Key: go
+    m_Localized: Go
     m_Metadata:
       m_Items: []
   - m_Id: 665280589824
-    m_Key: caught_her
+    m_Localized: Great! You caught her! Now she will chase you!
     m_Metadata:
       m_Items: []
   - m_Id: 902107770880
-    m_Key: sliped_away
+    m_Localized: Too bad, she was just too fast! Now she will chase you!
     m_Metadata:
       m_Items: []
   - m_Id: 1235903066112
-    m_Key: caught_you
+    m_Localized: It will work next time
     m_Metadata:
       m_Items: []
   - m_Id: 1352999645184
-    m_Key: couldnt_caught_you
+    m_Localized: Wow, you were very skillful!
     m_Metadata:
       m_Items: []
   - m_Id: 1595245867008
-    m_Key: where_she_going
+    m_Localized: Where is she going now?
     m_Metadata:
       m_Items: []
-  m_Metadata:
-    m_Items: []
-  m_KeyGenerator:
-    rid: 6315261857695268889
   references:
     version: 2
-    RefIds:
-    - rid: 6315261857695268889
-      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
-      data:
-        m_CustomEpoch: 1741539587562
+    RefIds: []

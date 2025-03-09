@@ -32,7 +32,7 @@ MonoBehaviour:
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 302a54bd908284a4fb637c180b03d8b2
-    m_Address: Level2KekeTable_en
+    m_Address: KekeTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

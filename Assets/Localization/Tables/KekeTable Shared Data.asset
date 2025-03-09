@@ -9,43 +9,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Level2KekeTable_de
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: KekeTable Shared Data
   m_EditorClassIdentifier: 
-  m_LocaleId:
-    m_Code: de
-  m_SharedData: {fileID: 11400000, guid: b42dc500a5451fd41912756e35f522d7, type: 2}
-  m_Metadata:
-    m_Items: []
-  m_TableData:
+  m_TableCollectionName: KekeTable
+  m_TableCollectionNameGuidString: b42dc500a5451fd41912756e35f522d7
+  m_Entries:
   - m_Id: 411982376960
-    m_Localized: "Sie m\xF6chte mit dir Fangen spielen!"
+    m_Key: she_wants_to_play
     m_Metadata:
       m_Items: []
   - m_Id: 494182346752
-    m_Localized: Los
+    m_Key: go
     m_Metadata:
       m_Items: []
   - m_Id: 665280589824
-    m_Localized: 'Super! Du hast sie erwischt! Jetzt wird sie dich fangen! '
+    m_Key: caught_her
     m_Metadata:
       m_Items: []
   - m_Id: 902107770880
-    m_Localized: Verdammt, sie war einfach zu schnell! Jetzt wird sie dich fangen!
+    m_Key: sliped_away
     m_Metadata:
       m_Items: []
   - m_Id: 1235903066112
-    m_Localized: "Das n\xE4chste mal wirds klappen"
+    m_Key: caught_you
     m_Metadata:
       m_Items: []
   - m_Id: 1352999645184
-    m_Localized: Wow, du bist sehr talentiert!
+    m_Key: couldnt_caught_you
     m_Metadata:
       m_Items: []
   - m_Id: 1595245867008
-    m_Localized: Wo geht sie denn jetzt hin?
+    m_Key: where_she_going
     m_Metadata:
       m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6315261857695268889
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6315261857695268889
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1741539587562
