@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 
 public class ChaseExecution : MonoBehaviour
@@ -13,9 +16,11 @@ public class ChaseExecution : MonoBehaviour
     
     public TMP_Text timerText;
     public TMP_Text startPrompt;
+
+    public LocalizeStringEvent stringEvent;
+    private LocalizedString localizedString;
+    [SerializeField] private TableReference localizationTable;
     
-
-
     public float speedSegmentOne;
     public float[] speedSegmentTwo = new float[3];
     public float speedSegmentThree;
@@ -56,6 +61,8 @@ public class ChaseExecution : MonoBehaviour
         input = playerTransform.gameObject.GetComponent<PlayerInput>();
         activate = input.actions["Interact"];
         activationCollider = GetComponent<Collider2D>();
+        localizedString = new LocalizedString();
+        SetLocalizedString("she_wants_to_play");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -97,7 +104,7 @@ public class ChaseExecution : MonoBehaviour
         {
             MovementBaseState.LockMovement();
             startPrompt.enabled = true;
-            startPrompt.text = "Go";
+            SetLocalizedString("go");
             yield return new WaitForSeconds(gracePeriod);
             startPrompt.enabled = false;
             gracePeriodPassed = true;
@@ -120,8 +127,8 @@ public class ChaseExecution : MonoBehaviour
     {
         MovementBaseState.LockMovement();
         startPrompt.enabled = true;
-        if (caught) startPrompt.text = "Great! You caught her! Now she will chase you!";
-        else startPrompt.text = "Too bad, she was just too fast! Now she will chase you!";
+        if (caught) SetLocalizedString("caught_her");
+        else SetLocalizedString("sliped_away");
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
         MovementBaseState.UnlockMovement();
@@ -161,7 +168,7 @@ public class ChaseExecution : MonoBehaviour
         if (!gracePeriodPassed)
         {
             startPrompt.enabled = true;
-            startPrompt.text = "Go";
+            SetLocalizedString("go");
             yield return new WaitForSeconds(gracePeriod);
             startPrompt.enabled = false;
             gracePeriodPassed = true;
@@ -187,8 +194,8 @@ public class ChaseExecution : MonoBehaviour
     {
         MovementBaseState.LockMovement();
         startPrompt.enabled = true;
-        if (caught) startPrompt.text = "It will work next time";
-        else startPrompt.text = "Wow, you were very skillful!";
+        if (caught) SetLocalizedString("caught_you");
+        else SetLocalizedString("couldnt_caught_you");
         yield return new WaitForSeconds(transitionTime);
         startPrompt.enabled = false;
         MovementBaseState.UnlockMovement();
@@ -198,7 +205,7 @@ public class ChaseExecution : MonoBehaviour
 
     void OnActivateStageThree()
     {
-        startPrompt.text = "Where is she going now?";
+        SetLocalizedString("where_she_going");
         startPrompt.enabled = true;
         kekeAI.followEnabled = true;
         gracePeriodPassed = false;
@@ -241,5 +248,16 @@ public class ChaseExecution : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void SetLocalizedString(string key)
+    {
+        if (stringEvent == null) return;
+
+        localizedString.TableReference = localizationTable;
+        localizedString.TableEntryReference = key;
+
+        stringEvent.StringReference = localizedString;
+        stringEvent.RefreshString();
     }
 }

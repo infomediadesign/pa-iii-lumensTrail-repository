@@ -4809,6 +4809,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 549019859}
   startPrompt: {fileID: 1975693394}
+  stringEvent: {fileID: 1975693396}
+  localizationTable:
+    m_TableCollectionName: KekeTable
   speedSegmentOne: 4
   speedSegmentTwo:
   - 3
@@ -7397,7 +7400,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1815985994415344279, guid: 1e36abe787a4eb7458f99ef151c31b36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.8
+      value: 66.43
       objectReference: {fileID: 0}
     - target: {fileID: 1815985994415344279, guid: 1e36abe787a4eb7458f99ef151c31b36, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8208,6 +8211,7 @@ GameObject:
   - component: {fileID: 1975693393}
   - component: {fileID: 1975693395}
   - component: {fileID: 1975693394}
+  - component: {fileID: 1975693396}
   m_Layer: 5
   m_Name: KekePrompt(F)
   m_TagString: Untagged
@@ -8254,7 +8258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: She wants to play tag with you!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea89751031e234d428a347b8138ed4c1, type: 2}
   m_sharedMaterial: {fileID: 3005526987931858022, guid: ea89751031e234d428a347b8138ed4c1, type: 2}
@@ -8331,6 +8335,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975693392}
   m_CullTransparentMesh: 1
+--- !u!114 &1975693396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975693392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:b42dc500a5451fd41912756e35f522d7
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1975693394}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1992911294
 GameObject:
   m_ObjectHideFlags: 0
