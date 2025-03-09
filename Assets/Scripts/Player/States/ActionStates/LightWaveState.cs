@@ -28,12 +28,12 @@ public class LightWaveState : ActionBaseState
         lightOriginalColor = light.color;
         light.color = Color.blue;
         */
+        base.OnEnter();
         sm.rb.velocity = Vector2.zero;
         this.timer = 0;
         lightWaveFired = false;
         sm.animator.SetBool("lightWave", true);
         MovementBaseState.LockMovement();
-        base.OnEnter();
     }
 
     public override void OnUpdate()

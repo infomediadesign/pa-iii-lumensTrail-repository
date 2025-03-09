@@ -35,6 +35,11 @@ public class LumenThoughtBubbleActivation : MonoBehaviour
         FindObjectOfType<LumenThoughtBubble>().DeactivateBubble();
     }
 
+    public void ActivatePrompt() 
+    {
+        this.GetComponent<Collider2D>().enabled = true;
+    }
+
     public void SetShowPromptNow(bool input) 
     {
         this.showPromptNow = input;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Audio;
 
 public enum SoundType
 {
@@ -19,8 +20,10 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] soundList;
     private static SoundManager instance;
-    private AudioSource musicAudioSoruce;
+    private AudioSource musicAudioSource;
     private AudioSource sfxAudioSource;
+    [SerializeField] private AudioMixer audioMixer;
+
     [Tooltip("Play the first Sound File in the Background Music tab on Game Start")]
     [SerializeField] private bool playMusicOnAwake = false;
 
@@ -41,8 +44,12 @@ public class SoundManager : MonoBehaviour
         if (!Application.isPlaying) return;
 
         sfxAudioSource = gameObject.AddComponent<AudioSource>();
-        musicAudioSoruce = gameObject.AddComponent<AudioSource>();
-        musicAudioSoruce.loop = true;
+        AudioMixerGroup[] groups = audioMixer.FindMatchingGroups("SFX");
+        sfxAudioSource.outputAudioMixerGroup = groups[0];
+        musicAudioSource = gameObject.AddComponent<AudioSource>();
+        groups = audioMixer.FindMatchingGroups("Music");
+        musicAudioSource.outputAudioMixerGroup = groups[0];
+        musicAudioSource.loop = true;
         if (playMusicOnAwake) SoundManager.PlayMusic(0, 1);
     }
 
@@ -54,14 +61,14 @@ public class SoundManager : MonoBehaviour
             Debug.Log("Index bigger than background music array size");
             return;
         }
-        instance.musicAudioSoruce.clip = clips[index];
-        instance.musicAudioSoruce.volume = volume;
-        instance.musicAudioSoruce.Play();
+        instance.musicAudioSource.clip = clips[index];
+        instance.musicAudioSource.volume = volume;
+        instance.musicAudioSource.Play();
     }
 
     public static void StopMusic()
     {
-        instance.musicAudioSoruce.Stop();
+        instance.musicAudioSource.Stop();
     }
 
     public static void PlaySound(SoundType sound, float volume = 1)

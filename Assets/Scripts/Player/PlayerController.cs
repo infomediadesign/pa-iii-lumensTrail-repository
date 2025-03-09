@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float castDistance;
     public LayerMask groundLayer;
     public LayerMask wallLayer;
+    [HideInInspector] public bool inChase = false;
 
     private void Awake()
     {
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !PauseMenu.isPaused)
         {
             pData.jumpButtonPressed = true;
             if (pData.groundCoyoteTimeCounter > 0)
@@ -105,17 +106,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Debug.Log("Attack");
-        }
-    }
-
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !PauseMenu.isPaused)
         {
             isMoving = true;
             horizontalMovement = context.ReadValue<Vector2>().x;
@@ -132,14 +125,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnLightThrow(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !PauseMenu.isPaused)
         {
             pData.lightThrowButtonPressed = true;
             if (Time.time < lastTimeLightThrown + dData.lightThrowCooldown) return;
             lastTimeLightThrown = Time.time;
             lightThrowCharge = true;
         }
-        else if (context.canceled) 
+        else if (context.canceled && !PauseMenu.isPaused) 
         {
             pData.lightThrowButtonPressed = false;
         }
@@ -148,7 +141,7 @@ public class PlayerController : MonoBehaviour
     public void OnPickupItem(InputAction.CallbackContext context)
     {
         if (receiver == null) return;
-        if (context.performed)
+        if (context.performed && !PauseMenu.isPaused)
         {
             if ((ActionBaseState.StateKey)playerStateMachine.currentActionState.ownState == ActionBaseState.StateKey.Carrying && pData.inDropRange == true)
             {
@@ -176,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnLightImpulse(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !PauseMenu.isPaused)
         {
             if (Time.time < lastTimeLigthImpulse + dData.impulseCooldown) return;
             lastTimeLigthImpulse = Time.time;
