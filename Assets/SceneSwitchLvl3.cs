@@ -10,7 +10,7 @@ public class SceneSwitchLvl3 : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
     }
 }
