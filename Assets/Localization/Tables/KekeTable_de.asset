@@ -19,31 +19,31 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 411982376960
-    m_Localized: "Sie m\xF6chte mit dir Fangen spielen!"
+    m_Localized: Sie will mit dir Fangen spielen!
     m_Metadata:
       m_Items: []
   - m_Id: 494182346752
-    m_Localized: Los
+    m_Localized: Los!
     m_Metadata:
       m_Items: []
   - m_Id: 665280589824
-    m_Localized: 'Super! Du hast sie erwischt! Jetzt wird sie dich fangen! '
+    m_Localized: 'Super! Du hast sie erwischt! Jetzt wird sie dich jagen! '
     m_Metadata:
       m_Items: []
   - m_Id: 902107770880
-    m_Localized: Verdammt, sie war einfach zu schnell! Jetzt wird sie dich fangen!
+    m_Localized: Schade, sie war einfach zu schnell! Jetzt wird sie dich jagen!
     m_Metadata:
       m_Items: []
   - m_Id: 1235903066112
-    m_Localized: "Das n\xE4chste mal wirds klappen"
+    m_Localized: "N\xE4chstes Mal klappt es bestimmt"
     m_Metadata:
       m_Items: []
   - m_Id: 1352999645184
-    m_Localized: Wow, du bist sehr talentiert!
+    m_Localized: Wow, du warst sehr geschickt!
     m_Metadata:
       m_Items: []
   - m_Id: 1595245867008
-    m_Localized: Wo geht sie denn jetzt hin?
+    m_Localized: Wo will sie denn jetzt hin?
     m_Metadata:
       m_Items: []
   references:
