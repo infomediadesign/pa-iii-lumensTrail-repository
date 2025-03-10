@@ -8,6 +8,7 @@ public class LightProjectile : MonoBehaviour
 {
     private float projectileTravelTimeStart;
     public DesignerPlayerScriptableObject dData;
+    [SerializeField] private ProgrammerPlayerScriptableObject pData;
     private Rigidbody2D rb;
     private Light2D pl;
     private SpriteRenderer sr;
@@ -18,7 +19,7 @@ public class LightProjectile : MonoBehaviour
         pl = GetComponent<Light2D>();
         sr = GetComponent<SpriteRenderer>();
         // Get directional vector by subtracting current position from mouse pointer position
-        Vector3 moveDirVec3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector3 moveDirVec3 = pData.mousePositionOnLightThrow - transform.position;
         moveDirVec3.z = 0f;
         // moving projectile
         Vector2 moveDir = new Vector2(moveDirVec3.x, moveDirVec3.y).normalized;

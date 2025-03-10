@@ -42,7 +42,7 @@ public class PickupState : ActionBaseState
         LayerMask mask = carriedObject.GetComponent<Collider2D>().excludeLayers;
         int layerToAdd = LayerMask.GetMask("Platform");
         carriedObject.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
-        carriedObject.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
+        if (carriedObject.gameObject.transform.childCount > 0) carriedObject.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
         sm.animator.SetBool("pickup", true);
 
         base.OnEnter();
