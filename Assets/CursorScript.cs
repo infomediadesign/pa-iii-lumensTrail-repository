@@ -12,7 +12,7 @@ public class CursorManager : MonoBehaviour
     void Start()
     {
         if (instance == null) instance = this;
-        hotSpot = new UnityEngine.Vector2(normalCursorTex.width / 2, normalCursorTex.height / 2);
+        hotSpot = new UnityEngine.Vector2(/*normalCursorTex.width / 2*/ 0, /*normalCursorTex.height / 2 */ 0);
         Cursor.SetCursor(normalCursorTex, hotSpot, CursorMode.Auto);
     }
 
