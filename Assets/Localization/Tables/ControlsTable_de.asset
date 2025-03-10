@@ -39,15 +39,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 385596010496
-    m_Localized: LICHT WERFEN
+    m_Localized: LICHT-WURF
     m_Metadata:
       m_Items: []
   - m_Id: 450855186432
-    m_Localized: LICHT WELLE
+    m_Localized: LICHT-WELLE
     m_Metadata:
       m_Items: []
   - m_Id: 550088224768
-    m_Localized: LICHT IMPULS
+    m_Localized: LICHT-IMPULS
     m_Metadata:
       m_Items: []
   references:
