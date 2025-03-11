@@ -8,6 +8,7 @@ public class LocalizationManager : MonoBehaviour
 
     public static LocalizationManager instance { get; private set; }
     private bool active = false;
+    [HideInInspector] public int currentLocaleID;
 
     private void Awake()
     {
@@ -34,6 +35,8 @@ public class LocalizationManager : MonoBehaviour
         active = true;
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_localeID];
+        FindObjectOfType<ALMenu>()?.SwitchButtonSprites(_localeID);
+        this.currentLocaleID = _localeID;
         active = false;
     }
 }

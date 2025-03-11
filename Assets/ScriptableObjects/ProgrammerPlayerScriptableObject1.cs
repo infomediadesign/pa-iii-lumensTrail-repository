@@ -21,6 +21,8 @@ public class ProgrammerPlayerScriptableObject : ScriptableObject
     public bool inDropRange = false;
     public bool pickupAnimationGo = false;
 
+    public Vector3 mousePositionOnLightThrow;
+
     
     [Unity.Collections.ReadOnly]
     public MovementBaseState.StateKey movementStateKey = MovementBaseState.StateKey.Still;
