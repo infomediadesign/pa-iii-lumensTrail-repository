@@ -66,7 +66,13 @@ public class BonsaiReceiver : CollectableReceiver
     {
         animator.SetBool("standup", true);
         MovementBaseState.LockMovement();
+        PhysicsBaseState.LockJumping();
         this.GetComponent<Collider2D>().enabled = false;
+    }
+
+    protected override void SingleItemDeliveredTriger()
+    {
+        this.animator.SetTrigger("eatingTrigger");
     }
 
     private void OnBecameInvisible()
@@ -89,5 +95,6 @@ public class BonsaiReceiver : CollectableReceiver
         this.isWalking = true;
         this.animator.SetBool("patting", false);
         MovementBaseState.UnlockMovement();
+        PhysicsBaseState.UnlockJumping();
     }
 }
