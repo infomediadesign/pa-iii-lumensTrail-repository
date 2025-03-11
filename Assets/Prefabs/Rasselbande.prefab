@@ -415,7 +415,7 @@ Transform:
   m_GameObject: {fileID: 5565409611408615184}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.94600224, y: -0.064, z: 0}
+  m_LocalPosition: {x: -0.9, y: -0.064, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -736,6 +736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2251973675555229643}
+  - component: {fileID: 5471770812592975952}
   m_Layer: 0
   m_Name: Rasselbande
   m_TagString: Untagged
@@ -762,6 +763,18 @@ Transform:
   - {fileID: 1146918554411091259}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5471770812592975952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488419164102038067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85af921842825c840a11bd7138a79039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9079960603056560033
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,7 +806,7 @@ Transform:
   m_GameObject: {fileID: 9079960603056560033}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9, y: 0.04, z: -0.15}
+  m_LocalPosition: {x: -0.9, y: -0.064, z: -0.15}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -896,6 +909,8 @@ MonoBehaviour:
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.5
   jumpCheckOffset: 0.1
+  groundedCheckDistance: 0.1
+  footBoxSize: {x: 0, y: 0}
   dropCheckOffset: 30
   reachThreshold: 0.5
   currentState: 0
