@@ -7688,6 +7688,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LumenThoughtBubbleActivation
       objectReference: {fileID: 0}
+    - target: {fileID: 5319582490551386611, guid: db7929be44003364896edbdf33a9d0b7, type: 3}
+      propertyPath: m_Radius
+      value: 0.23006134
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319582490551386611, guid: db7929be44003364896edbdf33a9d0b7, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.24042544
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319582490551386611, guid: db7929be44003364896edbdf33a9d0b7, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.3205813
+      objectReference: {fileID: 0}
     - target: {fileID: 8114911875130221987, guid: db7929be44003364896edbdf33a9d0b7, type: 3}
       propertyPath: m_LocalScale.x
       value: 11.3154745
