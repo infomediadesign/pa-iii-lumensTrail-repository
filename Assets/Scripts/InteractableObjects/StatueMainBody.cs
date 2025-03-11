@@ -58,10 +58,8 @@ public class StatueMainBody : MonoBehaviour
             otherStatue.ActivateStatue();
             foreach (RasselbandeStartWalking bande in allRasselbande) 
             {
-                bande.SetIsWalkingTrue();
+                bande.SetStatueDownTrue();
             }
-            //waitingRasselbande.SetActive(false);
-            //pathingRasselbande.SetActive(true);
             this.gameObject.SetActive(false);
         }
     }

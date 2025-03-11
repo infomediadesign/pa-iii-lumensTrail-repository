@@ -100,4 +100,9 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Bonsai")]
     public float bonsaiMovingSpeed = 2f;
     public float bonsaiLumenStandingDistance = 0.4f;
+
+    [Space(10)]
+    [Header("Rasselbande")]
+    public float rasselbandeMovingSpeed = 1.5f;
+    public float rasselbandeJumpForceMultiply = 5f;
 }
