@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class ALMenu : MonoBehaviour
 {
@@ -20,6 +21,15 @@ public class ALMenu : MonoBehaviour
     private float incrementRate = 5f;
     private float maxVolume = 100f;
     private float minVolume = 0f;
+
+    [SerializeField] private Sprite activeButton;
+    [SerializeField] private Sprite activeButtonHover;
+    [SerializeField] private Sprite inactiveButton;
+    [SerializeField] private Sprite inactiveButtonHover;
+
+    [SerializeField] private Button enButton;
+    [SerializeField] private Button geButton;
+
 
     void Start()
     {
@@ -85,5 +95,39 @@ public class ALMenu : MonoBehaviour
     private float VolumeConvert(float volume)
     {
         return (volume + conversionRate) * conversionMultiply;
+    }
+
+    public void SwitchButtonSprites(int _localeID)
+    {
+        SpriteState enButtonState = enButton.spriteState;
+        SpriteState geButtonState = geButton.spriteState;
+        switch(_localeID)
+        {
+            case 0:
+                enButton.gameObject.GetComponent<Image>().sprite = activeButton;
+                enButtonState.highlightedSprite = activeButtonHover;
+                enButton.spriteState = enButtonState;
+
+                geButton.gameObject.GetComponent<Image>().sprite = inactiveButton;
+                geButtonState.highlightedSprite = inactiveButtonHover;
+                geButton.spriteState = geButtonState;
+                break;  
+            case 1:
+                geButton.gameObject.GetComponent<Image>().sprite = activeButton;
+                geButtonState.highlightedSprite = activeButtonHover;
+                geButton.spriteState = geButtonState;
+
+                enButton.gameObject.GetComponent<Image>().sprite = inactiveButton;
+                enButtonState.highlightedSprite = inactiveButtonHover;
+                enButton.spriteState = enButtonState;
+                break;
+            default:
+                break;
+        }
+    }
+
+    void OnEnable()
+    {
+        SwitchButtonSprites(FindObjectOfType<LocalizationManager>().currentLocaleID);
     }
 }

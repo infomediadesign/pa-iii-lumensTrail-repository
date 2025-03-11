@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dData: {fileID: 11400000, guid: 00d47f52f3012004093393a679123adb, type: 2}
+  pData: {fileID: 11400000, guid: bd531fca99f8aca429ae53841c2c2014, type: 2}
 --- !u!114 &-5127769704109910478
 MonoBehaviour:
   m_ObjectHideFlags: 0
