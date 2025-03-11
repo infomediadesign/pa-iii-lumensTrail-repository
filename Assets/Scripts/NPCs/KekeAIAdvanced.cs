@@ -6,6 +6,8 @@ using Pathfinding;
 using System.Reflection;
 using Unity.VisualScripting;
 using System;
+using System.ComponentModel;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class KekeAIAdvanced : MonoBehaviour
 {
@@ -82,7 +84,7 @@ public class KekeAIAdvanced : MonoBehaviour
 
 
     
-    private PolygonCollider2D maxJumpCollider;
+    [SerializeField] private PolygonCollider2D maxJumpCollider;
     private GameObject maxJumpColliderObject;
     
     [SerializeField] private float maxJumpHeight = 5f;
@@ -91,6 +93,8 @@ public class KekeAIAdvanced : MonoBehaviour
     [SerializeField] private float maxFallHeight = 20f;
     [SerializeField] private int polygonColliderTopBottomPoints = 10;
     [SerializeField] private float maxSpeedX = 4f;
+
+    public Transform targetPoint;
      
     
     // Start is called before the first frame update
@@ -111,21 +115,12 @@ public class KekeAIAdvanced : MonoBehaviour
         animator.SetBool("MovingRight", false);
 
         castDistance = groundedCheckDistance + coll.bounds.extents.y; */
-
-
-
-        maxJumpColliderObject = new GameObject("MaxJumpCollider");
-        maxJumpColliderObject.transform.parent = this.transform;
-        maxJumpColliderObject.transform.localPosition = Vector3.zero;
-        maxJumpCollider = maxJumpColliderObject.AddComponent<PolygonCollider2D>();
-
+        maxJumpColliderObject = maxJumpCollider.gameObject;
         maxJumpStartSpeed = Mathf.Sqrt(2 * maxJumpHeight * Mathf.Abs(Physics2D.gravity.y));
         
         Vector2[] points = GetMaxJumpColliderPoints();
         maxJumpCollider.SetPath(0, points);
         gizmoColliderPolygon = points;
-
-
 
         /* gridGraph = pathfinder.GetComponent<AstarPath>().graphs[0] as GridGraph;
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate); */
@@ -133,7 +128,8 @@ public class KekeAIAdvanced : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        gizmoJumpVelocity = CalculateMinJumpVelocities(targetPoint.position);
+        gizmoJumpTarget = targetPoint.position;
     }
 
     private Vector2[] GetMaxJumpColliderPoints()
@@ -201,40 +197,42 @@ public class KekeAIAdvanced : MonoBehaviour
         Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, transform.position.y - targetPoint.y);
         float tLand = GetBiggestAgainstKey(tLandTup.Item1, tLandTup.Item2, tMax);
 
-        float vx = (targetPoint.x - transform.position.x) / tLand;
+        float vx = Math.Abs((targetPoint.x - transform.position.x) / tLand);
         if (vx > maxSpeedX)
         {
             vx = maxSpeedX;
-            tLand = (targetPoint.x - transform.position.x) / vx;
+            tLand = Math.Abs((targetPoint.x - transform.position.x) / vx);
             vy = (float)((targetPoint.y - transform.position.y + 0.5 * gravity * tLand * tLand) / tLand);
             if (vy > maxJumpStartSpeed)
             {
                 throw new System.Exception("Jump Point not in Range");
             }
         }
+        if (targetPoint.x < transform.position.x) vx = -vx;
         Vector2 velocity = new Vector2(vx, vy);
         return velocity;
     }
 
     private Vector2 CalculateVelocitiesLowerTarget(Vector2 targetPoint)
     {
+        float gravity = Math.Abs(Physics2D.gravity.y);
         float vx = maxSpeedX;
-        float tLand = (targetPoint.x - transform.position.x) / vx;
-        float vy = (float)((targetPoint.y - transform.position.y + 0.5 * Physics2D.gravity.y * tLand * tLand) / tLand);
+        float tLand = Math.Abs((targetPoint.x - transform.position.x) / vx);
+        float vy = (float)((targetPoint.y - transform.position.y + 0.5 * gravity * tLand * tLand) / tLand);
         
         float yClamp = vy;
         vy = (vy > maxJumpStartSpeed) ? maxJumpStartSpeed : (vy < 0) ? 0 : vy;
         if (vy != yClamp)
         {
-            Tuple<float, float> tLandTup = MNF(-(0.5f * Physics2D.gravity.y), vy, transform.position.y - targetPoint.y);
+            Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, transform.position.y - targetPoint.y);
             tLand = GetBiggestAgainstKey(tLandTup.Item1, tLandTup.Item2, 0);
-            vx = (targetPoint.x - transform.position.x) / tLand;
+            vx = Math.Abs((targetPoint.x - transform.position.x) / tLand);
             if (vx > maxSpeedX)
             {
                 throw new System.Exception("Jump Point not in Range");
             }
         }
-        
+        if (targetPoint.x < transform.position.x) vx = -vx;
         Vector2 velocity = new Vector2(vx, vy);
         return velocity;
     }
@@ -297,6 +295,34 @@ public class KekeAIAdvanced : MonoBehaviour
         {
             Gizmos.DrawLine(new Vector2(gizmoColliderPolygon[i].x+transform.position.x, gizmoColliderPolygon[i].y+transform.position.y), new Vector2(gizmoColliderPolygon[i + 1].x + transform.position.x, gizmoColliderPolygon[i + 1].y + transform.position.y));
         }
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(gizmoJumpTarget, 0.1f);
+        
+        
+        List<Vector2> jumpPoints = new List<Vector2>();
+        for (int i = 0; i < 500; i++)
+        {
+            float speed = gizmoJumpVelocity.x;
+            float time = (float)i / (float)50f;
+            float x = speed*time;
+            float y = (gizmoJumpVelocity.y * time) + (0.5f * Physics2D.gravity.y * time * time);
+            
+            Vector2 jumpPoint = new Vector2(
+                x,y
+            );
+            jumpPoints.Add(jumpPoint);
+            
+        }
+
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < jumpPoints.Count-1; i++)
+        {
+            Vector2 startPoint = new Vector2(transform.position.x + jumpPoints[i].x, transform.position.y + jumpPoints[i].y);
+            Vector2 endPoint = new Vector2(transform.position.x + jumpPoints[i+1].x, transform.position.y + jumpPoints[i+1].y);
+            Gizmos.DrawLine(startPoint, endPoint);
+        }
+
     }
 
     // Update is called once per frame
