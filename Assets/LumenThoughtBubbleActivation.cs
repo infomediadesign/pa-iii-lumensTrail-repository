@@ -5,11 +5,11 @@ using UnityEngine;
 public class LumenThoughtBubbleActivation : MonoBehaviour
 {
     
-    LumenThoughtBubble bubble;
+    protected LumenThoughtBubble bubble;
     public bool showPromptNow = true;
-    [SerializeField] private BubbleEnum activationType;
+    [SerializeField] protected BubbleEnum activationType;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!showPromptNow) return;
         if (collision.CompareTag("Player")) 
@@ -19,7 +19,7 @@ public class LumenThoughtBubbleActivation : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (!showPromptNow) return;
         if (collision.CompareTag("Player")) 
