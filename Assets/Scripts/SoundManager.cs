@@ -9,10 +9,11 @@ public enum SoundType
     BACKGROUNDMUSIC,
     WALKING,
     JUMPING,
-    FALLING,
+    LANDING,
     LIGHTTHROW,
     LIGHTWAVE,
-    LIGHTIMPULSE
+    LIGHTIMPULSE,
+    PICKUP
 }
 
 [ExecuteInEditMode]
