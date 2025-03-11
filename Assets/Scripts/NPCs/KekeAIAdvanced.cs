@@ -87,7 +87,7 @@ public class KekeAIAdvanced : MonoBehaviour
     
     [SerializeField] private float maxJumpHeight = 5f;
     private float maxJumpStartSpeed;
-    [SerializeField] private float maxJumpColliderHeightOffset = 0.5f;
+    [SerializeField] private float minJumpArcHeightOffset = 0.5f;
     [SerializeField] private float maxFallHeight = 20f;
     [SerializeField] private int polygonColliderTopBottomPoints = 10;
     [SerializeField] private float maxSpeedX = 4f;
@@ -131,13 +131,18 @@ public class KekeAIAdvanced : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate); */
     }
 
+    void FixedUpdate()
+    {
+        
+    }
+
     private Vector2[] GetMaxJumpColliderPoints()
     {
         float gravity = Math.Abs(Physics2D.gravity.y);
         Vector2[] points = new Vector2[polygonColliderTopBottomPoints*2];
         float xStart = transform.position.x;
         float yStart = transform.position.y;
-        float vy = Mathf.Sqrt(2 * gravity * (maxJumpHeight - maxJumpColliderHeightOffset));
+        float vy = Mathf.Sqrt(2 * gravity * (maxJumpHeight - minJumpArcHeightOffset));
 
         float tMax = vy / gravity;
         float yMax = maxJumpStartSpeed * tMax - 0.5f * gravity * tMax * tMax;
@@ -154,33 +159,7 @@ public class KekeAIAdvanced : MonoBehaviour
             {
                 throw new System.Exception("Unable to calculate tY");
             }
-            float tY = 0;
-            if (tYTup.Item1 > tMax)
-            {
-                if (tYTup.Item2 > tMax)
-                {
-                    if (tYTup.Item1 > tYTup.Item2)
-                    {
-                        tY = tYTup.Item1;
-                    }
-                    else 
-                    {
-                        tY = tYTup.Item2;
-                    }
-                }
-                else
-                {
-                    tY = tYTup.Item1;
-                }
-            }
-            else if (tYTup.Item2 > tMax)
-            {
-                tY = tYTup.Item2;
-            }
-            else 
-            {
-                throw new System.Exception("Unable to calculate tMin");
-            }
+            float tY = GetBiggestAgainstKey(tYTup.Item1, tYTup.Item2, tMax);
 
             ytValues[i+1] = new Tuple<float, float>(y, tY);
         }
@@ -198,6 +177,68 @@ public class KekeAIAdvanced : MonoBehaviour
         return points;
     }
 
+    private Vector2 CalculateMinJumpVelocities(Vector2 targetPoint)
+    {
+        Vector2 velocity;
+        if (targetPoint.y + minJumpArcHeightOffset > transform.position.y)
+        {
+            velocity = CalculateVelocitiesHigherTarget(targetPoint);
+        }
+        else
+        {
+            velocity = CalculateVelocitiesLowerTarget(targetPoint);
+        }
+        return velocity;
+    }
+    private Vector2 CalculateVelocitiesHigherTarget(Vector2 targetPoint)
+    {
+        float gravity = Math.Abs(Physics2D.gravity.y);
+        float yMax = targetPoint.y + minJumpArcHeightOffset;
+
+        float vy = Mathf.Sqrt(2 * gravity * (yMax - transform.position.y));
+        float tMax = vy / gravity;
+
+        Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, transform.position.y - targetPoint.y);
+        float tLand = GetBiggestAgainstKey(tLandTup.Item1, tLandTup.Item2, tMax);
+
+        float vx = (targetPoint.x - transform.position.x) / tLand;
+        if (vx > maxSpeedX)
+        {
+            vx = maxSpeedX;
+            tLand = (targetPoint.x - transform.position.x) / vx;
+            vy = (float)((targetPoint.y - transform.position.y + 0.5 * gravity * tLand * tLand) / tLand);
+            if (vy > maxJumpStartSpeed)
+            {
+                throw new System.Exception("Jump Point not in Range");
+            }
+        }
+        Vector2 velocity = new Vector2(vx, vy);
+        return velocity;
+    }
+
+    private Vector2 CalculateVelocitiesLowerTarget(Vector2 targetPoint)
+    {
+        float vx = maxSpeedX;
+        float tLand = (targetPoint.x - transform.position.x) / vx;
+        float vy = (float)((targetPoint.y - transform.position.y + 0.5 * Physics2D.gravity.y * tLand * tLand) / tLand);
+        
+        float yClamp = vy;
+        vy = (vy > maxJumpStartSpeed) ? maxJumpStartSpeed : (vy < 0) ? 0 : vy;
+        if (vy != yClamp)
+        {
+            Tuple<float, float> tLandTup = MNF(-(0.5f * Physics2D.gravity.y), vy, transform.position.y - targetPoint.y);
+            tLand = GetBiggestAgainstKey(tLandTup.Item1, tLandTup.Item2, 0);
+            vx = (targetPoint.x - transform.position.x) / tLand;
+            if (vx > maxSpeedX)
+            {
+                throw new System.Exception("Jump Point not in Range");
+            }
+        }
+        
+        Vector2 velocity = new Vector2(vx, vy);
+        return velocity;
+    }
+
     private Tuple<float, float> MNF(float a, float b, float c)
     {
         float discriminant = b * b - 4 * a * c;
@@ -212,6 +253,41 @@ public class KekeAIAdvanced : MonoBehaviour
         return new Tuple<float, float>(x1, x2);
     }
 
+    private float GetBiggestAgainstKey(float a, float b, float key)
+    {
+        float result = 0;
+        if (a > key)
+            {
+                if (b > key)
+                {
+                    if (a > b)
+                    {
+                        result = a;
+                    }
+                    else 
+                    {
+                        result = b;
+                    }
+                }
+                else
+                {
+                    result = a;
+                }
+            }
+            else if (b > key)
+            {
+                result = b;
+            }
+            else 
+            {
+                throw new System.Exception("Unable to calculate Max");
+            }
+            return result;
+    }
+    
+    
+    Vector2 gizmoJumpTarget;
+    Vector2 gizmoJumpVelocity;
     Vector2[] gizmoColliderPolygon;
     void OnDrawGizmos()
     {
