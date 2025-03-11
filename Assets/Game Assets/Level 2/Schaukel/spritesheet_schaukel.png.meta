@@ -1,0 +1,517 @@
+fileFormatVersion: 2
+guid: 8b54472c565cf7943a7729d488cf9dc3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spritesheet_schaukel_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb5df71fd59ee164d9458d8e3b16a740
+      internalID: -1841530317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d4ceb13d96f1d1459d4dae15350da51
+      internalID: -416218244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97837b02a3d292342b4ece7008cac30c
+      internalID: 753985453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f87d39046ef7ff54e97ef66c6389675a
+      internalID: -1235908027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f33eaa23653aac49addf67bfa1615f0
+      internalID: -1720548559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88458e34ce2e0d843a0666ad634ad44b
+      internalID: -233912291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_6
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7b319b9a5088cd48bde5030a799534f
+      internalID: -1087586839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_7
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdc5e70246a5b4340ae776025a63b511
+      internalID: 1553599181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_8
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9b1aa10cd35aaa4f912eccfb362cf5d
+      internalID: 1458513495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_9
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a15bdcbe68c30044f98ef989cd41751b
+      internalID: 1175031491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_10
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d2f9497ae4dc7948b6e060600efae24
+      internalID: -1991281130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_11
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644931192cae6604ebd5c04f69ab2456
+      internalID: 156226412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_schaukel_12
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -128}
+        - {x: 128, y: 0}
+        - {x: 0, y: 128}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5948bd0b356699546bc50b1cef457850
+      internalID: 227614722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      spritesheet_schaukel_0: -1841530317
+      spritesheet_schaukel_1: -416218244
+      spritesheet_schaukel_10: -1991281130
+      spritesheet_schaukel_11: 156226412
+      spritesheet_schaukel_12: 227614722
+      spritesheet_schaukel_2: 753985453
+      spritesheet_schaukel_3: -1235908027
+      spritesheet_schaukel_4: -1720548559
+      spritesheet_schaukel_5: -233912291
+      spritesheet_schaukel_6: -1087586839
+      spritesheet_schaukel_7: 1553599181
+      spritesheet_schaukel_8: 1458513495
+      spritesheet_schaukel_9: 1175031491
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

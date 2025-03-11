@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Wall
+  - LightThrowInteractable
+  - LightWaveInteractable
   layers:
   - Default
   - TransparentFX
@@ -11,19 +15,19 @@ TagManager:
   - 
   - Water
   - UI
+  - Ground
+  - Wall
+  - Platform
+  - PathingBlock
+  - 
+  - Player
+  - InteractableObjects
+  - Item
+  - Keke
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ThoughtBubbleRadius
   - 
   - 
   - 
@@ -38,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: hide
+    uniqueID: 2323145281
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

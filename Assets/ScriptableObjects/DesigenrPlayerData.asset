@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a5d9ce42ac5e541b55f3eb95208eda, type: 3}
+  m_Name: DesigenrPlayerData
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  acceleration: 5
+  decceleration: 5
+  frictionAmount: 0.6
+  velPower: 1
+  generalGravityMultiplier: 1.7
+  fallGravityMultiplier: 2.2
+  fastFallingMultiplier: 0
+  coyoteTime: 0.1
+  airFrictionAmount: 0.4
+  jumpForce: 9
+  jumpCutMultiplier: 0.5
+  dashForce: 25
+  dashingTime: 0.3
+  dashCooldown: 1.74
+  wallClingSlideGravityReduction: 1.59
+  wallClingAirFreezeTime: 0.07
+  lightThrowProjectileSpeed: 12
+  lightThrowCooldown: 0.4
+  startChargingDelay: 0.3
+  switchToLightWaveTime: 0.5
+  lightThrowGravityMultiplier: 1
+  lightWaveSpeed: 6
+  lightWaveMaxTravelDistance: 5
+  lightWaveStartingSizeMultiplier: 1
+  lightWaveMaxSizeAtDistance: 0
+  lightWaveMovementDisabledTime: 0.7
+  lightWaveColliderSize: {x: 0.5, y: 0.5}
+  impulseCooldown: 5
+  maxImpulseRadius: 9
+  impulseSpeed: 0.5
+  highlightTime: 4
+  increasedLightRadiusTime: 5
+  propellerFlowerActiveTime: 8
+  maxWindStrength: 22
+  pickupRange: 2
+  pickupArcHeight: 0.75
+  pickupArcSpeed: 0.4
+  aboveHeadCarryGap: 0.29
+  speedModWhileCarrying: 1
+  stayActiveTime: 10
+  statueVelocityMultiplier: 2.68
+  trunkVelocityMultiplier: 0.5
+  itemDeliveredFateTime: 3
+  bonsaiMovingSpeed: 2
+  bonsaiLumenStandingDistance: 0.5
