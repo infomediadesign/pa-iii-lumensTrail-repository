@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &94644825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &130385506
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &149851354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &281927709
 Transform:
   m_ObjectHideFlags: 0
@@ -901,7 +901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &578729792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1187,7 +1187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &811815626
 Transform:
   m_ObjectHideFlags: 0
@@ -1424,7 +1424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &952276440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2000,7 +2000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1192528192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,8 +2362,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2345567141923363285, guid: b146dd41ab0c6c744a4ab0bb3abe1e7c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5126850079479197151, guid: b146dd41ab0c6c744a4ab0bb3abe1e7c, type: 3}
+      propertyPath: ps
+      value: 
+      objectReference: {fileID: 1933806133}
     - target: {fileID: 7811947661729884047, guid: b146dd41ab0c6c744a4ab0bb3abe1e7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -2657,7 +2661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1519319983
 Transform:
   m_ObjectHideFlags: 0
@@ -3069,7 +3073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1743432965
 Rigidbody2D:
   serializedVersion: 4
@@ -3152,6 +3156,71 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: 11.71}
   m_DampingRatio: 0.6
   m_Frequency: 0
+--- !u!1001 &1750958444
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4338433335391894767, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_Name
+      value: PlayerParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.7899737
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.2929332
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.08886009
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714869456251318831, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591504322536030955, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591504322536030955, guid: 014b0de834cd4de479acab33ceace287, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.66
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 014b0de834cd4de479acab33ceace287, type: 3}
 --- !u!1 &1769634689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,7 +3460,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -8346,7 +8415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2136268544
 Transform:
   m_ObjectHideFlags: 0
@@ -8382,6 +8451,7 @@ SceneRoots:
   - {fileID: 281927709}
   - {fileID: 1743432967}
   - {fileID: 130385507}
+  - {fileID: 1750958444}
   - {fileID: 1350112824}
   - {fileID: 578729793}
   - {fileID: 952276442}
