@@ -43,7 +43,7 @@ MonoBehaviour:
   impulseCooldown: 5
   maxImpulseRadius: 9
   impulseSpeed: 0.5
-  highlightTime: 6
+  highlightTime: 4
   increasedLightRadiusTime: 5
   propellerFlowerActiveTime: 8
   maxWindStrength: 22
