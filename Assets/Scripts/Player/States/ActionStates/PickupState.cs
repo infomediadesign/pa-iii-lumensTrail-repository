@@ -39,6 +39,7 @@ public class PickupState : ActionBaseState
         elapsedTime = 0;
 
         MovementBaseState.LockMovement();
+        PhysicsBaseState.LockJumping();
         LayerMask mask = carriedObject.GetComponent<Collider2D>().excludeLayers;
         int layerToAdd = LayerMask.GetMask("Platform");
         carriedObject.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
@@ -67,6 +68,7 @@ public class PickupState : ActionBaseState
     public override void OnExit()
     {
         MovementBaseState.UnlockMovement();
+        PhysicsBaseState.UnlockJumping();
         sm.animator.SetBool("pickup", false);
         sm.pData.pickupAnimationGo = false;
     }
