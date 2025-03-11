@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,11 +13,14 @@ public class StatueMainBody : MonoBehaviour
     [SerializeField] GameObject waitingRasselbande;
     [SerializeField] GameObject pathingRasselbande;
 
+    private RasselbandeStartWalking[] allRasselbande;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         activated = false;
+        allRasselbande = FindObjectsOfType<RasselbandeStartWalking>();
     }
 
     // Update is called once per frame
@@ -52,8 +56,10 @@ public class StatueMainBody : MonoBehaviour
             if (!activated) return;
             MovementBaseState.UnlockMovement();
             otherStatue.ActivateStatue();
-            waitingRasselbande.SetActive(false);
-            pathingRasselbande.SetActive(true);
+            foreach (RasselbandeStartWalking bande in allRasselbande) 
+            {
+                bande.SetStatueDownTrue();
+            }
             this.gameObject.SetActive(false);
         }
     }
