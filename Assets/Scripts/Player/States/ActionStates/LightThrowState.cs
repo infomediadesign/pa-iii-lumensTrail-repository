@@ -21,6 +21,7 @@ public class LightThrowState : ActionBaseState
     public override void OnEnter()
     {
         PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
+        sm.pData.mousePositionOnLightThrow = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         sm.animator.SetBool("lightThrow", true);
         base.OnEnter();
     }
