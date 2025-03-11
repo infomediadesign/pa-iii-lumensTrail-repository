@@ -40,8 +40,10 @@ public class ItemManager : MonoBehaviour
 
     public GameObject GetNearestPickupItem(Transform playerPos, float pickupRadius, bool facingRight, ref bool pickup)
     {
+        pickup = true;
         GameObject returnItem = null;
         float returnDistance = pickupRadius;
+        this.UpdateItemList();
         foreach (var item in items)
         {
             if (Vector2.Distance(item.transform.position, playerPos.position) > pickupRadius) continue;
@@ -63,5 +65,15 @@ public class ItemManager : MonoBehaviour
         }
         if (returnItem == null) pickup = false;
         return returnItem;
+    }
+
+    public void UpdateItemList() 
+    {
+        for (int i = 0; i < items.Count; i++) 
+        {
+            if (items[i] == null) {
+                items.RemoveAt(i);
+            }
+        }
     }
 }

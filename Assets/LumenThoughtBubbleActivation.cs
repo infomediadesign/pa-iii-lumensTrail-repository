@@ -4,35 +4,40 @@ using UnityEngine;
 
 public class LumenThoughtBubbleActivation : MonoBehaviour
 {
-    LumenThoughtBubble bubble;
+    
+    protected LumenThoughtBubble bubble;
     public bool showPromptNow = true;
-    [SerializeField] private Sprite buttonSprite;
+    [SerializeField] protected BubbleEnum activationType;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (!showPromptNow) return;
         if (collision.CompareTag("Player")) 
         {
             bubble = collision.transform.parent.GetChild(1).GetComponent<LumenThoughtBubble>();
-            bubble.SetButtonSprite(buttonSprite);
-            bubble.StartFade(1f, 2f);
+            bubble.ActivateBubble(this.activationType);
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (!showPromptNow) return;
         if (collision.CompareTag("Player")) 
         {
             bubble = collision.transform.parent.GetChild(1).GetComponent<LumenThoughtBubble>();
-            bubble.StartFade(0f, 2f);
+            bubble.DeactivateBubble();
         }
     }
-
+    
     public void DeactivatePrompt() 
     {
         this.GetComponent<Collider2D>().enabled = false;
-        FindObjectOfType<LumenThoughtBubble>().StartFade(0f, 2f);
+        FindObjectOfType<LumenThoughtBubble>().DeactivateBubble();
+    }
+
+    public void ActivatePrompt() 
+    {
+        this.GetComponent<Collider2D>().enabled = true;
     }
 
     public void SetShowPromptNow(bool input) 

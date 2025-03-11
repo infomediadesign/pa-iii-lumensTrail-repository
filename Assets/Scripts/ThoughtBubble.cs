@@ -3,66 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum NPCBubbleEnum 
+{
+    FRUIT,
+    BRIDGE
+}
+
 public class ThoughtBubble : MonoBehaviour
 {
     private CollectableReceiver parent;
-
     private SpriteRenderer spriteRenderer;
-    private float targetAlpha;       
-    private float fadeDuration = 1f; 
-    private float fadeTime;          
-    private bool isFading = false;
     private bool itemDeliveredFade = false;
+
+    [SerializeField] private NPCBubbleEnum activationType;
     [SerializeField] private DesignerPlayerScriptableObject dData;
     [SerializeField] private ProgrammerPlayerScriptableObject pData;
+
+    private Animator animator;
+
 
     void Awake()
     {
         parent = GetComponentInParent<CollectableReceiver>();
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        Color color = spriteRenderer.color;
-        color.a = 0f;
-        spriteRenderer.color = color;
+        this.SetAlphaZero();
+        this.animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
-    void Update()
+    public void ActivateBubble(NPCBubbleEnum input) 
     {
-        if (isFading)
+        switch (input) 
         {
-            fadeTime += Time.deltaTime;
-            float currentAlpha = spriteRenderer.color.a;
-            float alpha = Mathf.Lerp(currentAlpha, targetAlpha, fadeTime / fadeDuration);
-
-            Color color = spriteRenderer.color;
-            color.a = alpha;
-            spriteRenderer.color = color;
-
-            if (Mathf.Abs(color.a - targetAlpha) < 0.01f)
-            {
-                color.a = targetAlpha;
-                spriteRenderer.color = color;
-                isFading = false;
-                if (itemDeliveredFade)
-                {
-                    StartCoroutine(ItemDeliveredFadeWait());
-                }
-            }
+            case NPCBubbleEnum.FRUIT:
+                this.animator.SetBool("Fruit", true);
+                break;
+            case NPCBubbleEnum.BRIDGE:
+                this.animator.SetBool("Bridge", true);
+                break;
+            default:
+                Debug.Log("Baaaaka");
+                break;
         }
     }
 
-    private void StartFade(float newTargetAlpha, float duration)
+    public void DeactivateBubble() 
     {
-        targetAlpha = newTargetAlpha;
-        fadeDuration = duration;
-        fadeTime = 0f;
-        isFading = true;
+        this.animator.SetBool("Fruit", false);
+        this.animator.SetBool("Bridge", false);
+    }
+
+    public void SetAlphaOne() 
+    {
+        Color color = spriteRenderer.color;
+        color.a = 1;
+        this.spriteRenderer.color = color;
+    }
+
+    public void SetAlphaZero()
+    {
+        Color color = spriteRenderer.color;
+        color.a = 0;
+        this.spriteRenderer.color = color;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (!itemDeliveredFade) StartFade(1f, dData.thoughtBubbleFadeTime);
+            if (!itemDeliveredFade) this.ActivateBubble(this.activationType);
             pData.inDropRange = true;
         }
     }
@@ -71,27 +79,23 @@ public class ThoughtBubble : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!itemDeliveredFade) StartFade(0f, dData.thoughtBubbleFadeTime);
+            if (!itemDeliveredFade) this.DeactivateBubble();
             pData.inDropRange = false;
         } 
-    }
-
-    public float GetCurrentAlpha()
-    {
-        return this.spriteRenderer.color.a;
     }
 
     public void SetItemDeliveredFadeTrue()
     {
         this.itemDeliveredFade = true;
-        this.StartFade(0f, dData.thoughtBubbleFadeTime);
+        this.DeactivateBubble();
+        StartCoroutine(ItemDeliveredFadeWait());
     }
 
     private IEnumerator ItemDeliveredFadeWait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(dData.itemDeliveredFateTime);
         if (parent.GetDeliveredItems() == parent.GetTotalItems()) this.gameObject.SetActive(false); 
         itemDeliveredFade = false;
-        if (pData.inDropRange) StartFade(1f, dData.thoughtBubbleFadeTime);
+        if (pData.inDropRange) this.ActivateBubble(this.activationType);
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class BaseInteractableObject : MonoBehaviour
 {
     [SerializeField] protected DesignerPlayerScriptableObject dData;
+
+    [SerializeField] protected ParticleSystem ps;
     protected bool isActive;
     protected bool isGlowing;
     protected SpriteRenderer sr;
@@ -50,6 +52,10 @@ public class BaseInteractableObject : MonoBehaviour
             this.glowOnTime = Time.time;
             this.orginColor = this.sr.color;
             this.sr.color = Color.yellow;
+            var main = ps.main;
+            main.duration = dData.highlightTime;
+            ps.Play();
+
             this.StartCoroutine(Glowing());
         }
     }
@@ -58,11 +64,12 @@ public class BaseInteractableObject : MonoBehaviour
     {
         this.isGlowing = false;
         this.sr.color = orginColor;
+        ps.Stop();
     }
 
     protected IEnumerator Glowing()
     {
-        yield return new WaitForSeconds(dData.highlightTime);
+        yield return new WaitForSeconds(dData.highlightTime+1);
         this.GlowOff();
     }
 

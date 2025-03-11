@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2823200384080272870}
   - component: {fileID: 3572620186876804478}
   - component: {fileID: 8320748189608573184}
+  - component: {fileID: 9076629211376647488}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -155,3 +156,17 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: -1}
   maxDistance: 6
   followPlayerAtScreenPercentage: 80
+--- !u!114 &9076629211376647488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928282167631649150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba838f71a261e44ead19c32007ca690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalCursorTex: {fileID: 2800000, guid: 631b9dc4c3b09b541b65456fef5e1dac, type: 3}
+  disabledCursorTex: {fileID: 2800000, guid: e23a9a753065084468a045daa8791ef2, type: 3}

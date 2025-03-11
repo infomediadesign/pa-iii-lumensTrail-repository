@@ -14,14 +14,14 @@ public class LightThrowState : ActionBaseState
     public override void SwitchTo()
     {
         if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
-        if((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
     public override void OnEnter()
     {
-        lightThrowButtonHoldTimer = Time.time;
         PhysicsBaseState.gravityModifier *= sm.dData.lightThrowGravityMultiplier;
+        sm.pData.mousePositionOnLightThrow = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         sm.animator.SetBool("lightThrow", true);
         base.OnEnter();
     }
@@ -29,29 +29,7 @@ public class LightThrowState : ActionBaseState
     public override void OnUpdate()
     {
         // Checking if enough time has passed to switch to light wave mechanic
-        if (Time.time < lightThrowButtonHoldTimer + sm.dData.switchToLightWaveTime)
-        {
-            if (!sm.pData.lightThrowButtonPressed)
-            {
-                // Calling the LightThrowManager to create an instance of the projectile
-                sm.ltm.LightThrow();
-                sm.animator.SetBool("lightThrow", false);
-                sm.SwitchToState(ActionBaseState.StateKey.Idle);
-            }
-        }
-        else
-        {
-            if (sm.pData.isGrounded)
-            {
-                // after the time passed, automatically switch to light wave state
-                sm.SwitchToState(ActionBaseState.StateKey.LightWave);
-            }
-            else
-            {
-                sm.animator.SetBool("lightThrow", false);
-                sm.SwitchToState(ActionBaseState.StateKey.Idle);
-            }
-        }
+        sm.SwitchToState(ActionBaseState.StateKey.Idle);
 
         /***
          * @attention: should probably be looked into, the charge is not really implemented, it just disables movement, as far as i can tell 

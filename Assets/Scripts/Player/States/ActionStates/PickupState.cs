@@ -28,7 +28,6 @@ public class PickupState : ActionBaseState
 
     public override void OnEnter()
     {
-        sm.animator.SetBool("pickup", true);
         arcHeight = sm.dData.pickupArcHeight;
         duration = sm.dData.pickupArcSpeed;
         heightGap = sm.dData.aboveHeadCarryGap;
@@ -40,11 +39,18 @@ public class PickupState : ActionBaseState
         elapsedTime = 0;
 
         MovementBaseState.LockMovement();
+        LayerMask mask = carriedObject.GetComponent<Collider2D>().excludeLayers;
+        int layerToAdd = LayerMask.GetMask("Platform");
+        carriedObject.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
+        if (carriedObject.gameObject.transform.childCount > 0) carriedObject.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
+        sm.animator.SetBool("pickup", true);
+
         base.OnEnter();
     }
 
     public override void OnUpdate()
     {
+        if (!sm.pData.pickupAnimationGo) return;
         elapsedTime += Time.deltaTime;
         float t = Mathf.Clamp01(elapsedTime / duration);
 
@@ -62,6 +68,7 @@ public class PickupState : ActionBaseState
     {
         MovementBaseState.UnlockMovement();
         sm.animator.SetBool("pickup", false);
+        sm.pData.pickupAnimationGo = false;
     }
 
     private Vector2 CalculateArcPosition(Vector2 start, Vector2 end, float arcHeight, float t)

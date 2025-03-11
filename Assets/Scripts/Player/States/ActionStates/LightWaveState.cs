@@ -16,21 +16,24 @@ public class LightWaveState : ActionBaseState
 
     public override void SwitchTo()
     {
-        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.LightThrow) return;
+        if ((ActionBaseState.StateKey)sm.currentActionState.ownState != ActionBaseState.StateKey.Idle) return;
         base.SwitchTo();
     }
 
     public override void OnEnter()
     {
+        /*
         light = sm.GetComponent<Light2D>();
         if (light == null) Debug.Log("Light is null");
         lightOriginalColor = light.color;
         light.color = Color.blue;
+        */
+        base.OnEnter();
         sm.rb.velocity = Vector2.zero;
         this.timer = 0;
         lightWaveFired = false;
+        sm.animator.SetBool("lightWave", true);
         MovementBaseState.LockMovement();
-        base.OnEnter();
     }
 
     public override void OnUpdate()
@@ -39,11 +42,11 @@ public class LightWaveState : ActionBaseState
         {
             if (!sm.pData.lightThrowButtonPressed)
             {
-                sm.ltm.LightWave();
+                sm.animator.SetBool("lightWave", false);
                 timer = Time.time;
                 this.lightWaveFired = true;
                 // so light instantly returns to original color, instead of when player leaves the state
-                this.light.color = this.lightOriginalColor;
+                //this.light.color = this.lightOriginalColor;
             }
         }
         else

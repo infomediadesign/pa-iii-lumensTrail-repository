@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ee5302a912645e4684a986b48ad5bd6
+guid: 7e22c3aa8b6d53b4f96bcd9d7387d199
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efde5d273fbee7146ac9b58b44c99306
-      internalID: -1038596593
+      spriteID: 4d320f1735b911e4b810bfd4ab0acfc0
+      internalID: 769473434
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54fa3f12ce813df4ba5ee1bb8a656940
-      internalID: 141748754
+      spriteID: 1c673afdecc62cf4da00e699c04dc2eb
+      internalID: 657712654
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be14be6bc7f506e4aafc42fff9ab6420
-      internalID: -755257306
+      spriteID: b3b340d94f961384cac1eb5b4bffce3b
+      internalID: 757596147
       vertices: []
       indices: 
       edges: []
@@ -183,9 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Propellerblume_Drehen_0: -1038596593
-      Propellerblume_Drehen_1: 141748754
-      Propellerblume_Drehen_2: -755257306
+      Propellerblume_Drehen_0: 769473434
+      Propellerblume_Drehen_1: 657712654
+      Propellerblume_Drehen_2: 757596147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

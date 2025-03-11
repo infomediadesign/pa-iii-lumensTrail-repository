@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditorInternal.VersionControl.ListControl;
 
 public class StateMachine : MonoBehaviour
 {
@@ -103,6 +102,12 @@ public class StateMachine : MonoBehaviour
         currentActionState?.OnUpdate();
 
         //if (!hasLeftWallClState && !pData.isTouchingWall) hasLeftWallClState = true;
+    }
+
+    private void LateUpdate()
+    {
+        // currently only relevant for carrying state
+        currentActionState?.OnLateUpdate();
     }
 
     public void SwitchToState(Enum stateKey)

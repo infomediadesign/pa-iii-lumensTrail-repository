@@ -8,6 +8,7 @@ public class TrunkMainBody : MonoBehaviour
     Rigidbody2D rb;
     private bool activated;
     private TrunkStump stump;
+    [SerializeField] private float trunkVelocityMultiplier;
 
     void Start()
     {
@@ -35,6 +36,8 @@ public class TrunkMainBody : MonoBehaviour
         stump.transform.SetParent(null);
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
-        rb.velocity = lightWaveVelocity;
+        rb.velocity = lightWaveVelocity * trunkVelocityMultiplier;
+        GetComponent<PlatformEffector2D>().enabled = true;
+        GetComponent<FallThroughPlatform>().enabled = true;
     }
 }

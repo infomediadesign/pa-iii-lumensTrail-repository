@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 70dd915081f90004b9db1ca5bddee494
+guid: dbdef0cf336ac3c43b69ff6f7ab0c745
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30ceb3c1f9ee23a40982d49c6ff5acf2
-      internalID: 898939998
+      spriteID: b64bb324c0285a74e9912f630d90b22b
+      internalID: 78258837
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c47caa10400852041a7aee93babf0aec
-      internalID: -1360259922
+      spriteID: 8d388a5c656750247a3aff603b226da1
+      internalID: 25917582
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 632c7a0ff1096a44998cf3f6cb8eeb10
-      internalID: 359107096
+      spriteID: 61e92448f770bd445ae64ba6d95dab3a
+      internalID: 1181955253
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb7c5919c4530c442a15b68c33f7e89d
-      internalID: -1975613069
+      spriteID: 6ea09966308e2704e9e676c533c0d21b
+      internalID: -391707304
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Propellerblume_Animation_\xD6ffnen_0": 898939998
-      "Propellerblume_Animation_\xD6ffnen_1": -1360259922
-      "Propellerblume_Animation_\xD6ffnen_2": 359107096
-      "Propellerblume_Animation_\xD6ffnen_3": -1975613069
+      "Propellerblume_Animation_\xD6ffnen_0": 78258837
+      "Propellerblume_Animation_\xD6ffnen_1": 25917582
+      "Propellerblume_Animation_\xD6ffnen_2": 1181955253
+      "Propellerblume_Animation_\xD6ffnen_3": -391707304
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
