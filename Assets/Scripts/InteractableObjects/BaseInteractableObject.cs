@@ -67,9 +67,9 @@ public class BaseInteractableObject : MonoBehaviour
             StartCoroutine(FadeEffect(0f, glowLightIntensity, 1f));
             this.isGlowing = true;
             this.glowOnTime = Time.time;
-            var main = ps.main;
-            main.duration = dData.highlightTime;
-            ps.Play();
+            //var main = ps.main;
+            //main.duration = dData.highlightTime;
+            //ps.Play();
             this.StartCoroutine(Glowing());
         }
     }
@@ -78,7 +78,7 @@ public class BaseInteractableObject : MonoBehaviour
     {
         this.isGlowing = false;
         StartCoroutine(FadeEffect(glowLightIntensity, 0f, 1f));
-        ps.Stop();
+        //ps.Stop();
     }
 
     protected IEnumerator Glowing()
