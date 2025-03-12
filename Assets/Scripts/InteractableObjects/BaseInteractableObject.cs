@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BaseInteractableObject : MonoBehaviour
 {
     [SerializeField] protected DesignerPlayerScriptableObject dData;
 
     [SerializeField] protected ParticleSystem ps;
+    [SerializeField] protected Light2D spotLight;
+    private float glowLightIntensity;
     protected bool isActive;
     protected bool isGlowing;
     protected SpriteRenderer sr;
     protected float glowOnTime;
-    protected Color orginColor;
     void Start()
     {
         
@@ -20,8 +23,10 @@ public class BaseInteractableObject : MonoBehaviour
     protected void Init()
     {
         this.sr = GetComponent<SpriteRenderer>();
+        this.glowLightIntensity = dData.highlightLightIntensity;
         this.isActive = false;
         this.isGlowing = false;
+        this.spotLight.intensity = 0f;
     }
 
     void Update()
@@ -29,6 +34,17 @@ public class BaseInteractableObject : MonoBehaviour
         
     }
 
+    IEnumerator FadeEffect(float startValue, float endValue, float duration) 
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            this.spotLight.intensity = Mathf.Lerp(startValue, endValue, t);
+            yield return null;
+        }
+    }
     public virtual void Activate()
     {
 
@@ -48,14 +64,12 @@ public class BaseInteractableObject : MonoBehaviour
     {
         if (!isGlowing)
         {
+            StartCoroutine(FadeEffect(0f, glowLightIntensity, 1f));
             this.isGlowing = true;
             this.glowOnTime = Time.time;
-            this.orginColor = this.sr.color;
-            this.sr.color = Color.yellow;
             var main = ps.main;
             main.duration = dData.highlightTime;
             ps.Play();
-
             this.StartCoroutine(Glowing());
         }
     }
@@ -63,7 +77,7 @@ public class BaseInteractableObject : MonoBehaviour
     protected virtual void GlowOff()
     {
         this.isGlowing = false;
-        this.sr.color = orginColor;
+        StartCoroutine(FadeEffect(glowLightIntensity, 0f, 1f));
         ps.Stop();
     }
 
