@@ -121,7 +121,7 @@ public class KekeAIAdvanced : MonoBehaviour
     private LayerMask jumpPointMask;
     private LayerMask collisionMask;
     private LayerMask surfacesMask;
-    private GameObject standingGround;
+    [SerializeField, ReadOnly(true)] private GameObject standingGround;
 
     public enum KekeState {Idle, Following, Jumping, Landing, Falling}
     public KekeState currentState = KekeState.Following;

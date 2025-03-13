@@ -216,21 +216,19 @@ public class ChaseExecution : MonoBehaviour
 
     private IEnumerator OnRunStageThree()
     {
-        while (!goalReached.inRange)
+        
+        while (!kekeAI.ReachedTarget())
         {
-            if (kekeAI.ReachedTarget()) 
-            { 
-                kekeAI.OnPathfindingDisable();
-                FindObjectOfType<BreakGroundTrigger>().kekeInPlace = true;
-            }
             yield return null;
         }
+        kekeAI.OnPathfindingDisable();
+        FindObjectOfType<BreakGroundTrigger>().kekeInPlace = true;
         OnExitStageThree();
+        
         
     }
     void OnExitStageThree()
     {
-        kekeAI.OnPathfindingDisable();
         startPrompt.enabled = true;
         ActionBaseState.UnlockAllActions();
         //startPrompt.text = "Boom!";
