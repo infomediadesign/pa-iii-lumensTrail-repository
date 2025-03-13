@@ -663,12 +663,16 @@ public class KekeAIAdvanced : MonoBehaviour
         coll.enabled = false;
         gizmoJumpVelocity = jumpVelocities;
         gizmoJumpTarget = jumpTargetPoint.position;
+        animator.SetFloat("yMovement", rb.velocity.y);
+        animator.SetFloat("xMovement", rb.velocity.x);
+        animator.SetTrigger("jump");
     }
 
     private void OnExecuteJump()
     {
         jumpTimer = jumpTimer - Time.deltaTime;
         Vector2 footPoint = new Vector2(transform.position.x, transform.position.y - coll.bounds.extents.y);
+        animator.SetFloat("yMovement", rb.velocity.y);
         if (jumpTimer < 0 || footPoint == (Vector2)jumpTargetPoint.position)
         {
             coll.enabled = true;
