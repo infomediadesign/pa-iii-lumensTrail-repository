@@ -50,6 +50,11 @@ public abstract class CollectableReceiver : MonoBehaviour
         
     }
 
+    protected virtual void SingleItemDeliveredTriger()
+    {
+
+    }
+
     public void DeliverItem(GameObject carriedItem)
     {
         this.elapsedTime = 0;
@@ -84,6 +89,7 @@ public abstract class CollectableReceiver : MonoBehaviour
             Destroy(carriedObject);
             this.delivering = false;
             this.deliveredItems++;
+            this.SingleItemDeliveredTriger();
             if (deliveredItems == totalItems) this.ItemsDeliveredTrigger();
         }
     }
