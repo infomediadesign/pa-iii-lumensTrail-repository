@@ -9,12 +9,15 @@ public class KekeReceiver : CollectableReceiver
     public GameObject chaseExecution;
 
     public ItemManager itemManager;
+    public KekeAIAdvanced kekeAI;
 
     public LumenThoughtBubbleActivation lumenThoughtBubbleActivation;
     
     protected override void Awake()
     {
         base.Awake();
+        kekeAI = GetComponent<KekeAIAdvanced>();
+        kekeAI.OnPathfindingDisable();
     }
 
     private new void Update()
@@ -32,6 +35,7 @@ public class KekeReceiver : CollectableReceiver
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+        if (!(collision.gameObject == carriedObject && delivering)) return;
         kekeAnimator.SetTrigger("eating");
     }
 
