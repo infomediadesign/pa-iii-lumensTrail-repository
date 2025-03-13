@@ -10,7 +10,7 @@ using System.ComponentModel;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine.InputSystem.XR.Haptics;
 
-public class KekeAIAdvanced : MonoBehaviour
+public class KekeAIAdvancedJumpShowcase : MonoBehaviour
 {
 
    /*  public Animator animator;
@@ -198,7 +198,7 @@ public class KekeAIAdvanced : MonoBehaviour
         seeker = GetComponent<Seeker>();
         castDistance = groundedCheckDistance + coll.bounds.extents.y;
 
-        OnPathfindingEnable();
+        //OnPathfindingEnable();
 
 
         //InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
@@ -209,7 +209,7 @@ public class KekeAIAdvanced : MonoBehaviour
 
 
 
-    void FixedUpdate()
+    /* void FixedUpdate()
     {        
         if (activateDebuggingView)
         {
@@ -260,7 +260,7 @@ public class KekeAIAdvanced : MonoBehaviour
                 WhileLanding();
                 break;
         }
-    } 
+    }  */
     
     void DebugMaxJumpValues()
     {
@@ -275,7 +275,7 @@ public class KekeAIAdvanced : MonoBehaviour
 
     /**
     * @FunctionSection: Showcase FixedUpdate 
-    *
+    */
     void FixedUpdate()
     {
         if (activateDebuggingView)
