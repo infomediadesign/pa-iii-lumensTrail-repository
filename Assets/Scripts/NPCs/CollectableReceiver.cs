@@ -8,10 +8,10 @@ using UnityEngine.InputSystem;
 public abstract class CollectableReceiver : MonoBehaviour
 {
     [SerializeField] private GameObject items;
-    private GameObject carriedObject;
+    protected GameObject carriedObject;
     private int totalItems;
     private int deliveredItems;
-    private bool delivering = false;
+    protected bool delivering = false;
 
     private float elapsedTime = 0;
     private float duration = 1f;

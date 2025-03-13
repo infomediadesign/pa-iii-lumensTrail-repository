@@ -9,6 +9,7 @@ using System;
 using System.ComponentModel;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine.InputSystem.XR.Haptics;
+using System.Linq;
 
 public class KekeAIAdvanced : MonoBehaviour
 {
@@ -91,10 +92,12 @@ public class KekeAIAdvanced : MonoBehaviour
     [Header("Designer Variables")]
     [SerializeField] private float maxJumpHeight = 5f;
     private float maxJumpStartSpeed;
+    private float maxJumpColliderSpeed;
     [SerializeField] private float minJumpArcHeightOffset = 0.5f;
     [SerializeField] private float maxFallHeight = 20f;
     [SerializeField] private int polygonColliderTopBottomPoints = 10;
     [SerializeField] private float maxSpeedX = 4f;
+    [SerializeField] private bool tracePathReversed = false;
 
     
     [Header("Debugging View Values")]
@@ -118,7 +121,7 @@ public class KekeAIAdvanced : MonoBehaviour
     private LayerMask jumpPointMask;
     private LayerMask collisionMask;
     private LayerMask surfacesMask;
-    private GameObject standingGround;
+    [SerializeField, ReadOnly(true)] private GameObject standingGround;
 
     public enum KekeState {Idle, Following, Jumping, Landing, Falling}
     public KekeState currentState = KekeState.Following;
@@ -174,10 +177,7 @@ public class KekeAIAdvanced : MonoBehaviour
         castDistance = groundedCheckDistance + coll.bounds.extents.y; */
         maxJumpColliderObject = maxJumpCollider.gameObject;
         maxJumpStartSpeed = Mathf.Sqrt(2 * maxJumpHeight * Mathf.Abs(Physics2D.gravity.y));
-        
-        Vector2[] points = GetMaxJumpColliderPoints();
-        maxJumpCollider.SetPath(0, points);
-        gizmoColliderPolygon = points;
+        SetMaxJumpValues();
 
         possibleTargetsWithPlatforms = new List<Tuple<Collider2D, GameObject>>();
         coll = GetComponent<Collider2D>();
@@ -198,8 +198,6 @@ public class KekeAIAdvanced : MonoBehaviour
         seeker = GetComponent<Seeker>();
         castDistance = groundedCheckDistance + coll.bounds.extents.y;
 
-        OnPathfindingEnable();
-
 
         //InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
 
@@ -207,13 +205,11 @@ public class KekeAIAdvanced : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate); */
     }
 
-
-
     void FixedUpdate()
     {        
         if (activateDebuggingView)
         {
-            InvokeRepeating("DebugMaxJumpValues", 0f, 1f);
+            InvokeRepeating("SetMaxJumpValues", 0f, 1f);
             debuggingActive = true;
         }
         else 
@@ -264,16 +260,25 @@ public class KekeAIAdvanced : MonoBehaviour
         }
     } 
     
-    void DebugMaxJumpValues()
+    void SetMaxJumpValues()
     {
-        maxJumpColliderObject = maxJumpCollider.gameObject;
-        maxJumpStartSpeed = Mathf.Sqrt(2 * maxJumpHeight * Mathf.Abs(Physics2D.gravity.y));
+        maxJumpColliderSpeed = Mathf.Sqrt(2 * (maxJumpHeight - minJumpArcHeightOffset) * Mathf.Abs(Physics2D.gravity.y));
         
         Vector2[] points = GetMaxJumpColliderPoints();
         maxJumpCollider.SetPath(0, points);
         gizmoColliderPolygon = points;
     }
 
+    public void SetMaxSpeedX(float speed)
+    {
+        maxSpeedX = speed;
+        SetMaxJumpValues();
+    }
+    public void SetMaxJumpHeight(float height)
+    {
+        maxJumpHeight = height;
+        SetMaxJumpValues();
+    } 
 
     /**
     * @FunctionSection: Showcase FixedUpdate 
@@ -299,22 +304,13 @@ public class KekeAIAdvanced : MonoBehaviour
     /**/
 
 
-    void OnEnable()
-    {
-        OnPathfindingEnable();
-    }
-    void OnDisable()
-    {
-        OnPathfindingDisable();
-    }
-
     /**
     * @FunctionSection: Pathfinding Routines
     **/
     public void OnPathfindingEnable()
     {
         followEnabled = true;
-        animator.SetBool("pathfindingEnabled", true);
+        animator.ResetTrigger("pathfindingDisabled");
         gridGraph.Scan();
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
         InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
@@ -323,7 +319,7 @@ public class KekeAIAdvanced : MonoBehaviour
     public void OnPathfindingDisable()
     {
         followEnabled = false;
-        animator.SetBool("pathfindingEnabled", false);
+        animator.SetTrigger("pathfindingDisabled");
         CancelInvoke("UpdatePath");
         CancelInvoke("InvokeJump");
     }
@@ -336,12 +332,16 @@ public class KekeAIAdvanced : MonoBehaviour
             seeker.StartPath(rb.position, pathFindingTarget.position, OnPathComplete);
         }
     }
-    void InvokeJump()
+    private void InvokeJump()
     {
         if (possibleTargetsWithPlatforms == null || possibleTargetsWithPlatforms.Count == 0 || (currentState != KekeState.Following && currentState != KekeState.Idle)) return;
-        
-        
-        foreach (var pathPointV3 in path.vectorPath)
+        var checkedPath = path.vectorPath;
+        if (tracePathReversed)
+        {
+            checkedPath.AsEnumerable().Reverse();
+        }
+
+        foreach (var pathPointV3 in checkedPath)
         {
             Vector2 pathPoint = (Vector2)pathPointV3;
             
@@ -409,7 +409,7 @@ public class KekeAIAdvanced : MonoBehaviour
         float vy = Mathf.Sqrt(2 * gravity * (maxJumpHeight - minJumpArcHeightOffset));
 
         float tMax = vy / gravity;
-        float yMax = maxJumpStartSpeed * tMax - 0.5f * gravity * tMax * tMax;
+        float yMax = maxJumpColliderSpeed * tMax - 0.5f * gravity * tMax * tMax;
         float yMin = 0 - maxFallHeight;
 
         Tuple<float, float>[] ytValues = new Tuple<float, float>[polygonColliderTopBottomPoints];
@@ -563,6 +563,7 @@ public class KekeAIAdvanced : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(transform.position - transform.up * castDistance, footBoxSize, 0, Vector2.down, groundedCheckDistance, collisionMask);
         isGrounded = (hit.collider != null && rb.velocity.y <= 0);
+        animator.SetBool("grounded", isGrounded);
         if (isGrounded)
         {
             standingGround = hit.collider.gameObject;
@@ -584,7 +585,7 @@ public class KekeAIAdvanced : MonoBehaviour
         animator.SetFloat("xMovement", rb.velocity.x);
         animator.SetFloat("yMovement", 0);
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+1] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+3] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
 
         if (direction.x > 0)
         {
@@ -684,6 +685,7 @@ public class KekeAIAdvanced : MonoBehaviour
         animator.SetFloat("yMovement", rb.velocity.y);
         animator.SetFloat("xMovement", rb.velocity.x);
         animator.SetBool("jumping", true);
+        animator.SetBool("grounded", false);
     }
 
     private void OnExecuteJump()
