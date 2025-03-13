@@ -37,7 +37,7 @@ public class ChaseExecution : MonoBehaviour
     private PlayerInput input;
     private InputAction activate;
     private Collider2D activationCollider;
-    public KekeAI kekeAI;
+    public KekeAIAdvanced kekeAI;
     public RangeCheck rangeCheck;
     public Transform kekeTransform;
     public Transform playerTransform;
@@ -54,7 +54,6 @@ public class ChaseExecution : MonoBehaviour
     //private int stage = 0;
     void Start()
     {
-        kekeAI.followEnabled = false;
         timerText.enabled = false;
         startPrompt.enabled = false;
         stageOnePoints.active = false;
@@ -89,10 +88,9 @@ public class ChaseExecution : MonoBehaviour
         swingingActivation.OnDisableSwing();
         ActionBaseState.LockAllActions();
         playerTransform.GetComponent<PlayerController>().inChase = true;
-        kekeAI.gridGraph.Scan();
         stageOnePoints.active = true;
-        kekeAI.followEnabled = true;
-        kekeAI.speed = speedSegmentOne;
+        kekeAI.OnPathfindingEnable();
+        kekeAI.SetMaxSpeedX(speedSegmentOne);
         StartCoroutine(OnRunStageOne());
     }
 
@@ -119,7 +117,7 @@ public class ChaseExecution : MonoBehaviour
     }
     void OnExitStageOne(bool caught = false)
     {
-        kekeAI.followEnabled = false;
+        kekeAI.OnPathfindingDisable();
         stageOnePoints.active = false;
         StartCoroutine(SwitchToStageTwo(caught));
     }
@@ -136,8 +134,8 @@ public class ChaseExecution : MonoBehaviour
     }
     void OnActivateStageTwo()
     {
-        kekeAI.target = playerTransform;
-        kekeAI.speed = speedSegmentTwo[0];
+        kekeAI.pathFindingTarget = playerTransform;
+        kekeAI.SetMaxSpeedX(speedSegmentTwo[0]);
         gracePeriodPassed = false;
         StartCoroutine(OnRunStageTwo());
         
@@ -155,8 +153,8 @@ public class ChaseExecution : MonoBehaviour
             timerText.text = viewedTimer.ToString();
 
             // Speed adjustments
-            if (elapsedTime > (timerGoal / 3) * 2) kekeAI.speed = speedSegmentTwo[2];
-            else if (elapsedTime > timerGoal / 3) kekeAI.speed = speedSegmentTwo[1];
+            if (elapsedTime > (timerGoal / 3) * 2) kekeAI.SetMaxSpeedX(speedSegmentTwo[2]);
+            else if (elapsedTime > timerGoal / 3) kekeAI.SetMaxSpeedX(speedSegmentTwo[1]);
 
             yield return null;  // Wait until the next frame
         }
@@ -172,7 +170,7 @@ public class ChaseExecution : MonoBehaviour
             yield return new WaitForSeconds(gracePeriod);
             startPrompt.enabled = false;
             gracePeriodPassed = true;
-            kekeAI.followEnabled = true;
+            kekeAI.OnPathfindingEnable();
             StartCoroutine(StageTwoTimer());
         }
         while (!(timer >= timerGoal || (rangeCheck.inRange && gracePeriodPassed)))
@@ -185,7 +183,7 @@ public class ChaseExecution : MonoBehaviour
 
     void OnExitStageTwo(bool caught = false)
     {
-        kekeAI.followEnabled = false;
+        kekeAI.OnPathfindingDisable();
         timerText.enabled = false;
         StartCoroutine(SwitchToStageThree(caught));
     }
@@ -207,32 +205,30 @@ public class ChaseExecution : MonoBehaviour
     {
         SetLocalizedString("where_she_going");
         startPrompt.enabled = true;
-        kekeAI.followEnabled = true;
+        kekeAI.OnPathfindingEnable();
         gracePeriodPassed = false;
-        kekeAI.speed = speedSegmentThree;
-        if (playerTransform.position.x < stageThreeThreshold.position.x) kekeAI.target = stageThreePoints[1];
-        else kekeAI.target = stageThreePoints[0];
+        kekeAI.SetMaxSpeedX(speedSegmentThree);
+        if (playerTransform.position.x < stageThreeThreshold.position.x) kekeAI.pathFindingTarget = stageThreePoints[1];
+        else kekeAI.pathFindingTarget = stageThreePoints[0];
         FindObjectOfType<BreakGroundTrigger>().triggerActive = true;
         StartCoroutine(OnRunStageThree());
     }
 
     private IEnumerator OnRunStageThree()
     {
-        while (!goalReached.inRange)
+        
+        while (!kekeAI.ReachedTarget())
         {
-            if (kekeAI.ReachedTarget()) 
-            { 
-                kekeAI.followEnabled = false;
-                FindObjectOfType<BreakGroundTrigger>().kekeInPlace = true;
-            }
             yield return null;
         }
+        kekeAI.OnPathfindingDisable();
+        FindObjectOfType<BreakGroundTrigger>().kekeInPlace = true;
         OnExitStageThree();
+        
         
     }
     void OnExitStageThree()
     {
-        kekeAI.followEnabled = false;
         startPrompt.enabled = true;
         ActionBaseState.UnlockAllActions();
         //startPrompt.text = "Boom!";
