@@ -3242,7 +3242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6146621768918636785, guid: 6631ab2f3a2327743815fb813e506b36, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6674412747539336003, guid: 6631ab2f3a2327743815fb813e506b36, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4883,7 +4883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &952276441
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5882,6 +5882,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1070508891554585784, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
+      propertyPath: heuristic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1070508891554585784, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
+      propertyPath: data.dataString
+      value: UEsDBBQAAAgIAAAIIewTVRkRdwIAADAFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty4jAQ/BVK5w1lm0fC3nYdQvaQhArZysUXYY2xClly6REgKf59R7KNHZYLcs/0zHRr7C/Cpakht0qvNGdPigH5OSL+TH6M+uAjHOlOyQ3/hC7nnTNb+iQacl6p5Qrx2NOMqsBqnv+SO+GTIwSd5IXS1ZLtIFXGGoQLKgxgSCvr2RKhrxE54t/NwlNOeEpu/ekTT4todMZjDtKC7lMns/Ekmd7Fk7uWEY2ju8j/5i2x4TmZC1rVwLyInr5Ixrc+eTpv6XE0ngSCRKFtbjT2snIlBDftnMSe6uBDSmvjUCUmME5RdxjO55fAd6X1Gobkl6IwYFtTND3dc432NVXJb9V4WlGzb2b8oML5Pot5I6Mp+vRf/CYO4UKr6rHrG0e+hy15vn+lp5waOzB9CN9/H9zJAxV7uhXwXoJ8ViutnGQYtNp5qjOQ3PePF2lpCfm+x5tRr0BX9953d9zdsNdwDuqPqeDVNjg/bYCNUMHvsBig8W7+4MBhbUxbAlE/xV8Db3Q33K828MC1sRhqVUo/3lY57VPJMnjm1TibKi0hwO3QNUgq7GmNZez1FV7FBm2vIg/Uv0lt8zbWvSBXlAD3+VF0FVqrw+WyTKkOT2DKF2cFl9AP7QPP6FOqpGw2bOhJR9s4XdB8QNs5zr6vFkkWk4Juo2k0u90yypKbZJpMF5NZvo3josgjRsLucYk6qVg3g7b24K3JvrjEPes+MKOVpnXYdqbpYcU/KzWwnMtCbXINIF+aCpfBQWMTfC/ZknE0aAPWchnum3xlRKh8Dyy7FMqC0uXRapr1VTJS8w9lPZKRNHxRMuLhyy6vNXxwOPjmXbEzOf8DUEsDBBQAAAgIAAAIIez1Ly/mbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSkaVxWmKSgYmBqXlSSmKKka6RiZGJpbFpcpKhYVpaskGKUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAAAIIewTVRkRdwIAADAFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAIIez1Ly/mbQAAAHgAAAAJACQAAAAAAAAAAAAAAMQCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAfAMAAAAA
+      objectReference: {fileID: 0}
     - target: {fileID: 1312117561094902669, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.22
@@ -6100,7 +6108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3932170607480208043, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -15458,7 +15466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2105008435
 Transform:
   m_ObjectHideFlags: 0
