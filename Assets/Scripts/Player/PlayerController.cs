@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private float pickupRadius;
     private CollectableReceiver receiver;
     private Animator animator;
-
     public Vector2 footBoxSize;
     public float castDistance;
     public LayerMask groundLayer;
