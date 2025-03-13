@@ -248,9 +248,11 @@ public class KekeAIAdvanced : MonoBehaviour
                     }
                     return;
                 }
+                AdjustDirectionLook();
                 OnFollowPath();
                 break;
             case KekeState.Jumping:
+                AdjustDirectionLook();
                 OnExecuteJump();
                 break;
             case KekeState.Falling:
@@ -296,12 +298,23 @@ public class KekeAIAdvanced : MonoBehaviour
     } 
     /**/
 
+
+    void OnEnable()
+    {
+        OnPathfindingEnable();
+    }
+    void OnDisable()
+    {
+        OnPathfindingDisable();
+    }
+
     /**
     * @FunctionSection: Pathfinding Routines
     **/
     public void OnPathfindingEnable()
     {
         followEnabled = true;
+        animator.SetBool("pathfindingEnabled", true);
         gridGraph.Scan();
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
         InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
@@ -310,6 +323,7 @@ public class KekeAIAdvanced : MonoBehaviour
     public void OnPathfindingDisable()
     {
         followEnabled = false;
+        animator.SetBool("pathfindingEnabled", false);
         CancelInvoke("UpdatePath");
         CancelInvoke("InvokeJump");
     }
@@ -632,7 +646,11 @@ public class KekeAIAdvanced : MonoBehaviour
         {
             currentWaypoint++;
         }
+        
+    }
 
+    private void AdjustDirectionLook()
+    {
         if (directionLookEnabled)
         {
             if (rb.velocity.x > 0.05f)
@@ -663,12 +681,16 @@ public class KekeAIAdvanced : MonoBehaviour
         coll.enabled = false;
         gizmoJumpVelocity = jumpVelocities;
         gizmoJumpTarget = jumpTargetPoint.position;
+        animator.SetFloat("yMovement", rb.velocity.y);
+        animator.SetFloat("xMovement", rb.velocity.x);
+        animator.SetBool("jumping", true);
     }
 
     private void OnExecuteJump()
     {
         jumpTimer = jumpTimer - Time.deltaTime;
         Vector2 footPoint = new Vector2(transform.position.x, transform.position.y - coll.bounds.extents.y);
+        animator.SetFloat("yMovement", rb.velocity.y);
         if (jumpTimer < 0 || footPoint == (Vector2)jumpTargetPoint.position)
         {
             coll.enabled = true;
@@ -676,6 +698,7 @@ public class KekeAIAdvanced : MonoBehaviour
             if (isGrounded)
             {
                 currentState = KekeState.Landing;
+                animator.SetBool("landing", true);
             } 
             else
             {
@@ -690,12 +713,17 @@ public class KekeAIAdvanced : MonoBehaviour
         if (isGrounded)
         {
             currentState = KekeState.Landing;
+            animator.SetBool("landing", true);
         } 
     }
 
     private void WhileLanding()
     {
-        currentState = KekeState.Following;
+        rb.velocity = Vector2.zero;
+        if(!animator.GetBool("landing"))
+        {
+            currentState = KekeState.Following;
+        }
     }
     
 
