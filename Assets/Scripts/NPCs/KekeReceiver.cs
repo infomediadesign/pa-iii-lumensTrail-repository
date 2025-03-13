@@ -35,7 +35,6 @@ public class KekeReceiver : CollectableReceiver
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (!(collision.gameObject == carriedObject && delivering)) return;
         kekeAnimator.SetTrigger("eating");
     }
 

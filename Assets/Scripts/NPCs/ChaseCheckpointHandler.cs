@@ -12,7 +12,7 @@ public class ChaseCheckpointHandler : MonoBehaviour
     public GameObject chaser;
     public float reachDistance = 1f;
 
-    private KekeAI ai;
+    private KekeAIAdvanced ai;
 
     [SerializeField, ReadOnly(true)]
     private List<Transform> childTransforms = new List<Transform>();
@@ -28,7 +28,7 @@ public class ChaseCheckpointHandler : MonoBehaviour
         childTransforms.Remove(transform);
         currentCheckpoint = new Tuple<Transform, int>(childTransforms[0], 0);
 
-        ai = chaser.GetComponent<KekeAI>();
+        ai = chaser.GetComponent<KekeAIAdvanced>();
 
     }
 
@@ -43,7 +43,7 @@ public class ChaseCheckpointHandler : MonoBehaviour
         {
             if (!setTarget)
             {
-              ai.target = currentCheckpoint.Item1;
+              ai.pathFindingTarget = currentCheckpoint.Item1;
               setTarget = true;
             }
             checkReachedCurrent();
@@ -65,7 +65,7 @@ public class ChaseCheckpointHandler : MonoBehaviour
                 lastCheckPointReached = true;
             }
             currentCheckpoint = new Tuple<Transform, int>(childTransforms[currentCheckpoint.Item2 + 1], currentCheckpoint.Item2 + 1);
-            ai.target = currentCheckpoint.Item1;
+            ai.pathFindingTarget = currentCheckpoint.Item1;
         }
     }
 }

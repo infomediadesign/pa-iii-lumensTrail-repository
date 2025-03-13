@@ -54,7 +54,6 @@ public class ChaseExecution : MonoBehaviour
     //private int stage = 0;
     void Start()
     {
-        kekeAI.OnPathfindingDisable();
         timerText.enabled = false;
         startPrompt.enabled = false;
         stageOnePoints.active = false;

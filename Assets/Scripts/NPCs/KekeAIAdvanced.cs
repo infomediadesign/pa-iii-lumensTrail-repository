@@ -310,7 +310,7 @@ public class KekeAIAdvanced : MonoBehaviour
     public void OnPathfindingEnable()
     {
         followEnabled = true;
-        animator.SetBool("pathfindingEnabled", true);
+        animator.ResetTrigger("pathfindingDisabled");
         gridGraph.Scan();
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
         InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
@@ -319,7 +319,7 @@ public class KekeAIAdvanced : MonoBehaviour
     public void OnPathfindingDisable()
     {
         followEnabled = false;
-        animator.SetBool("pathfindingEnabled", false);
+        animator.SetTrigger("pathfindingDisabled");
         CancelInvoke("UpdatePath");
         CancelInvoke("InvokeJump");
     }
@@ -563,6 +563,7 @@ public class KekeAIAdvanced : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(transform.position - transform.up * castDistance, footBoxSize, 0, Vector2.down, groundedCheckDistance, collisionMask);
         isGrounded = (hit.collider != null && rb.velocity.y <= 0);
+        animator.SetBool("grounded", isGrounded);
         if (isGrounded)
         {
             standingGround = hit.collider.gameObject;
@@ -584,7 +585,7 @@ public class KekeAIAdvanced : MonoBehaviour
         animator.SetFloat("xMovement", rb.velocity.x);
         animator.SetFloat("yMovement", 0);
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+1] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+3] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
 
         if (direction.x > 0)
         {
@@ -684,6 +685,7 @@ public class KekeAIAdvanced : MonoBehaviour
         animator.SetFloat("yMovement", rb.velocity.y);
         animator.SetFloat("xMovement", rb.velocity.x);
         animator.SetBool("jumping", true);
+        animator.SetBool("grounded", false);
     }
 
     private void OnExecuteJump()
