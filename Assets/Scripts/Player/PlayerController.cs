@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private float pickupRadius;
     private CollectableReceiver receiver;
     private Animator animator;
-
     public Vector2 footBoxSize;
     public float castDistance;
     public LayerMask groundLayer;
@@ -201,6 +200,19 @@ public class PlayerController : MonoBehaviour
     public bool GetIsFacingRight() 
     {
         return this.isFacingRight;
+    }
+
+    public void CutsceneWalking()
+    {
+        this.horizontalMovement = 1;
+        this.isFacingRight = true;
+        playerStateMachine.SwitchToState(MovementBaseState.StateKey.Moving);
+    }
+
+    public void CutsceneStopWalking()
+    {
+        this.horizontalMovement = 0;
+        playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
     }
 
     private void OnDrawGizmos()
