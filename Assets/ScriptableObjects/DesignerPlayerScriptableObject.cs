@@ -63,6 +63,7 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     public float impulseSpeed = 3f;
     public float highlightTime = 6f;
     public float increasedLightRadiusTime = 5f;
+    public float highlightLightIntensity = 2f;
 
     [Space(15)]
     [Header("Interactable Objects")]
@@ -100,4 +101,9 @@ public class DesignerPlayerScriptableObject : ScriptableObject
     [Header("Bonsai")]
     public float bonsaiMovingSpeed = 2f;
     public float bonsaiLumenStandingDistance = 0.4f;
+
+    [Space(10)]
+    [Header("Rasselbande")]
+    public float rasselbandeMovingSpeed = 1.5f;
+    public float rasselbandeJumpForceMultiply = 5f;
 }

@@ -84,6 +84,29 @@ public class SoundManager : MonoBehaviour
         instance.sfxAudioSource.PlayOneShot(randomClip, volume);
     }
 
+    public static void PlaySoundLoop(SoundType sound, float volume = 1)
+    {
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        if (clips == null || clips.Length == 0)
+        {
+            Debug.Log("No sounds for selected SoundType");
+            return;
+        }
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        instance.sfxAudioSource.clip = randomClip;
+        instance.sfxAudioSource.Play();
+    }
+
+    public static void SetSFXClipNull()
+    {
+        instance.sfxAudioSource.clip = null;
+    }
+
+    public static void SwitchSoundLoop(bool input)
+    {
+        instance.sfxAudioSource.loop = input;
+    }
+
 #if UNITY_EDITOR
     private void OnEnable()
     {
