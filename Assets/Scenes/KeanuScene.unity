@@ -3242,7 +3242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6146621768918636785, guid: 6631ab2f3a2327743815fb813e506b36, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6674412747539336003, guid: 6631ab2f3a2327743815fb813e506b36, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4875,57 +4875,15 @@ GameObject:
   m_Component:
   - component: {fileID: 952276442}
   - component: {fileID: 952276441}
-  - component: {fileID: 952276440}
   - component: {fileID: 952276443}
+  - component: {fileID: 952276444}
   m_Layer: 0
   m_Name: KekeAdvancedTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &952276440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952276439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546f0836fed51424b8285705d6c7b9f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJumpCollider: {fileID: 928136188}
-  maxJumpHeight: 5
-  minJumpArcHeightOffset: 0.5
-  maxFallHeight: 20
-  polygonColliderTopBottomPoints: 10
-  maxSpeedX: 4
-  jumpTargetPoint: {fileID: 0}
-  activateDebuggingView: 0
-  pathFindingTarget: {fileID: 0}
-  followEnabled: 1
-  activationDistance: 0
-  jumpCheckRate: 0.2
-  pathUpdateRate: 0.5
-  pathCheckCircleRadius: 0.5
-  currentState: 1
-  pathfinder: {fileID: 0}
-  coll: {fileID: 0}
-  animator: {fileID: 0}
-  isGrounded: 0
-  jumpVelocity: {x: 0, y: 0}
-  jumpTimeTotal: 0
-  jumpTimer: 0
-  nextWaypointDistance: 3
-  jumpNodeHeightRequirement: 0.5
-  jumpCheckOffset: 0.1
-  groundedCheckDistance: 0.1
-  footBoxSize: {x: 0, y: 0}
-  dropCheckOffset: 30
-  reachThreshold: 0.5
-  directionLookEnabled: 1
+  m_IsActive: 1
 --- !u!212 &952276441
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5029,6 +4987,48 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &952276444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952276439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45df0f429f084e4387ac76de695b390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxJumpCollider: {fileID: 928136188}
+  maxJumpHeight: 5
+  minJumpArcHeightOffset: 0.5
+  maxFallHeight: 20
+  polygonColliderTopBottomPoints: 10
+  maxSpeedX: 4
+  jumpTargetPoint: {fileID: 1024634157}
+  activateDebuggingView: 0
+  pathFindingTarget: {fileID: 0}
+  followEnabled: 1
+  activationDistance: 0
+  jumpCheckRate: 0.2
+  pathUpdateRate: 0.2
+  pathCheckCircleRadius: 1
+  currentState: 1
+  pathfinder: {fileID: 0}
+  coll: {fileID: 0}
+  animator: {fileID: 0}
+  isGrounded: 0
+  jumpVelocity: {x: 0, y: 0}
+  jumpTimeTotal: 0
+  jumpTimer: 0
+  nextWaypointDistance: 3
+  jumpNodeHeightRequirement: 0.5
+  jumpCheckOffset: 0.1
+  groundedCheckDistance: 0.1
+  footBoxSize: {x: 0, y: 0}
+  dropCheckOffset: 30
+  reachThreshold: 0.5
+  directionLookEnabled: 1
 --- !u!4 &962342736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9221700937678303343, guid: 709bce92165c3fc49937221eae1337a3, type: 3}
@@ -5657,7 +5657,7 @@ Transform:
   m_GameObject: {fileID: 1024634155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.07, y: -0.35, z: 0}
+  m_LocalPosition: {x: 23.5, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6097,6 +6097,10 @@ PrefabInstance:
     - target: {fileID: 3932170607480208043, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
       propertyPath: m_Name
       value: Pathfinding
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932170607480208043, guid: ee0b201956105ed4db8e019cbcf2cd35, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -9389,9 +9393,9 @@ MonoBehaviour:
   joint: {fileID: 1743432968}
   swingbody: {fileID: 1598341948}
   jointBody: {fileID: 1743432965}
-  animator: {fileID: 372971985}
-  growthRate: 4
-  decayRate: 2
+  animator: {fileID: 0}
+  growthRate: 1
+  decayRate: 0.1
   swingForce: 1.5
   dragForce: 0.3
 --- !u!4 &1743432967
@@ -15454,7 +15458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2105008435
 Transform:
   m_ObjectHideFlags: 0
