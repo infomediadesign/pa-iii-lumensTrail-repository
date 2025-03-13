@@ -10,7 +10,7 @@ using System.ComponentModel;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine.InputSystem.XR.Haptics;
 
-public class KekeAIAdvanced : MonoBehaviour
+public class KekeAIAdvancedJumpShowcase : MonoBehaviour
 {
 
    /*  public Animator animator;
@@ -100,27 +100,24 @@ public class KekeAIAdvanced : MonoBehaviour
     [Header("Debugging View Values")]
     [ReadOnly(true)] public List<Tuple<Collider2D, GameObject>> possibleTargetsWithPlatforms;
 
-    [SerializeField] private Transform jumpTargetPoint;
-    [SerializeField] private bool activateDebuggingView = false;
-    private bool debuggingActive = false;
+    
+    
+    public Transform targetPoint;
 
     
     [Header("Pathfinding")]
-    public Transform pathFindingTarget;
     private Pathfinding.Path path;
     private int currentWaypoint = 0;
     private Seeker seeker;
-    [SerializeField] private bool followEnabled = true;
-    [SerializeField] private float activationDistance = 0f;
     [SerializeField] private float jumpCheckRate = 0.2f;
-    [SerializeField] private float pathUpdateRate = 0.2f;
+    [SerializeField] private float pathUpdateRate = 0.5f;
     [SerializeField] private float pathCheckCircleRadius = 1f;
     private LayerMask jumpPointMask;
     private LayerMask collisionMask;
     private LayerMask surfacesMask;
     private GameObject standingGround;
 
-    public enum KekeState {Idle, Following, Jumping, Landing, Falling}
+    public enum KekeState {Idle, Following, Jumping, Landing}
     public KekeState currentState = KekeState.Following;
 
 
@@ -134,11 +131,7 @@ public class KekeAIAdvanced : MonoBehaviour
     public Animator animator;
     
 
-    [Header("Physics")]
-    [SerializeField, ReadOnly(true)] private bool isGrounded;
-    [SerializeField, ReadOnly(true)] private Vector2 jumpVelocity;
-    [SerializeField, ReadOnly(true)] private float jumpTimeTotal;
-    [SerializeField, ReadOnly(true)] private float jumpTimer;
+    private bool isGrounded;
     public float nextWaypointDistance = 3f;
     private int directionValue = 1;
     public float jumpNodeHeightRequirement = 0.5f;
@@ -180,8 +173,6 @@ public class KekeAIAdvanced : MonoBehaviour
         gizmoColliderPolygon = points;
 
         possibleTargetsWithPlatforms = new List<Tuple<Collider2D, GameObject>>();
-        coll = GetComponent<Collider2D>();
-        rb = GetComponent<Rigidbody2D>();
 
         int groundLayer = 6;
         int wallLayer = 7;
@@ -191,138 +182,14 @@ public class KekeAIAdvanced : MonoBehaviour
         jumpPointMask = 1<<jumpPointLayer;
         surfacesMask = (1<<groundLayer) | (1<<platformLayer);
 
-        animator.SetFloat("yMovement", 0);
-        animator.SetFloat("xMovement", 0);
-        animator.SetBool("MovingRight", false);
-        gridGraph = pathfinder.GetComponent<AstarPath>().graphs[0] as GridGraph;
-        seeker = GetComponent<Seeker>();
-        castDistance = groundedCheckDistance + coll.bounds.extents.y;
-
-        OnPathfindingEnable();
-
-
         //InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
 
         /* gridGraph = pathfinder.GetComponent<AstarPath>().graphs[0] as GridGraph;
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate); */
     }
 
-
-
-    void FixedUpdate()
-    {        
-        if (activateDebuggingView)
-        {
-            InvokeRepeating("DebugMaxJumpValues", 0f, 1f);
-            debuggingActive = true;
-        }
-        else 
-        {
-            if (debuggingActive)
-            {
-                CancelInvoke("DebugMaxJumpValues");
-                debuggingActive = false;
-            }
-        }
-        switch (currentState)
-        {
-            case KekeState.Idle:
-                if (followEnabled)
-                {
-                    if (isGrounded)
-                    {
-                        currentState = KekeState.Following;
-                    }
-                    return;
-                }
-                rb.velocity = Vector2.zero;
-                animator.SetFloat("xMovement", rb.velocity.x);
-                animator.SetFloat("yMovement", 0);
-                break;
-            case KekeState.Following:
-                if (!followEnabled || !TargetInDistance())
-                {
-                    if (isGrounded)
-                    {
-                        currentState = KekeState.Idle;
-                    }
-                    return;
-                }
-                OnFollowPath();
-                break;
-            case KekeState.Jumping:
-                OnExecuteJump();
-                break;
-            case KekeState.Falling:
-                WhileFalling();
-                break;
-            case KekeState.Landing:
-                WhileLanding();
-                break;
-        }
-    } 
     
-    void DebugMaxJumpValues()
-    {
-        maxJumpColliderObject = maxJumpCollider.gameObject;
-        maxJumpStartSpeed = Mathf.Sqrt(2 * maxJumpHeight * Mathf.Abs(Physics2D.gravity.y));
-        
-        Vector2[] points = GetMaxJumpColliderPoints();
-        maxJumpCollider.SetPath(0, points);
-        gizmoColliderPolygon = points;
-    }
-
-
-    /**
-    * @FunctionSection: Showcase FixedUpdate 
-    *
-    void FixedUpdate()
-    {
-        if (activateDebuggingView)
-        {
-            InvokeRepeating("DebugMaxJumpValues", 0f, 1f);
-            debuggingActive = true;
-        }
-        else 
-        {
-            if (debuggingActive)
-            {
-                CancelInvoke("DebugMaxJumpValues");
-                debuggingActive = false;
-            }
-        }
-       gizmoJumpVelocity = CalculateMinJumpVelocities(jumpTargetPoint.position);
-       gizmoJumpTarget = jumpTargetPoint.position;
-    } 
-    /**/
-
-    /**
-    * @FunctionSection: Pathfinding Routines
-    **/
-    public void OnPathfindingEnable()
-    {
-        followEnabled = true;
-        gridGraph.Scan();
-        InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
-        InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
-    }
-
-    public void OnPathfindingDisable()
-    {
-        followEnabled = false;
-        CancelInvoke("UpdatePath");
-        CancelInvoke("InvokeJump");
-    }
-
-    private void UpdatePath()
-    {
-
-        if (followEnabled && TargetInDistance() && seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, pathFindingTarget.position, OnPathComplete);
-        }
-    }
-    void InvokeJump()
+    /* void InvokeJump()
     {
         if (possibleTargetsWithPlatforms == null || possibleTargetsWithPlatforms.Count == 0 || (currentState != KekeState.Following && currentState != KekeState.Idle)) return;
         
@@ -335,63 +202,26 @@ public class KekeAIAdvanced : MonoBehaviour
             {
                 var hit = Physics2D.OverlapCircle(pathPoint, pathCheckCircleRadius, surfacesMask);
                 if (hit == null) continue;
-                if (possibleTarget.Item2 == standingGround) continue;
-                if (hit.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                if (hit.gameObject == possibleTarget.Item2 && possibleTarget.Item2 != standingGround)
                 {
-                    var pointHit = Physics2D.OverlapCircle(pathPoint, pathCheckCircleRadius, jumpPointMask);
-                    if (pointHit == null) continue;
-                    if (pointHit == possibleTarget.Item1)
-                    {
-                        jumpTargetPoint = possibleTarget.Item1.transform;
-                        OnStartJump(possibleTarget.Item1.transform.position);
-                        return;
-                    }
-                }
-                else
-                {
-                    if (hit.gameObject == possibleTarget.Item2)
-                    {
-                        jumpTargetPoint = possibleTarget.Item1.transform;
-                        OnStartJump(possibleTarget.Item1.transform.position);
-                        return;
-                    }
+                    StartJump(possibleTarget.Item1.transform.position);
                 }
             }
         }
-    }
+    } */
 
-    private bool TargetInDistance()
+    void FixedUpdate()
     {
-        if (activationDistance == 0) return true;
-        return Vector2.Distance(transform.position, pathFindingTarget.transform.position) < activationDistance;
-    }
-    public bool ReachedTarget()
-    {
-        return Vector2.Distance(transform.position, pathFindingTarget.position) < reachThreshold;
+        gizmoJumpVelocity = CalculateMinJumpVelocities(targetPoint.position);
+        gizmoJumpTarget = targetPoint.position;
     }
 
-    private void OnPathComplete(Pathfinding.Path p)
-    {
-        if (!p.error)
-        {
-            path = p;
-            currentWaypoint = 0;
-        }
-    }
-    
-
-    
-
-
-    /**
-    * @FunctionSection: Calculations for Jump Prediction
-    **/
     private Vector2[] GetMaxJumpColliderPoints()
     {
         float gravity = Math.Abs(Physics2D.gravity.y);
         Vector2[] points = new Vector2[polygonColliderTopBottomPoints*2];
-        float xStart = 0;
-        float yStart = 0;
+        float xStart = transform.position.x;
+        float yStart = transform.position.y;
         float vy = Mathf.Sqrt(2 * gravity * (maxJumpHeight - minJumpArcHeightOffset));
 
         float tMax = vy / gravity;
@@ -442,56 +272,52 @@ public class KekeAIAdvanced : MonoBehaviour
     }
     private Vector2 CalculateVelocitiesHigherTarget(Vector2 targetPoint)
     {
-        Vector2 footPoint = new Vector2(transform.position.x, transform.position.y - coll.bounds.extents.y);
         float gravity = Math.Abs(Physics2D.gravity.y);
         float yMax = targetPoint.y + minJumpArcHeightOffset;
 
-        float vy = Mathf.Sqrt(2 * gravity * (yMax - footPoint.y));
+        float vy = Mathf.Sqrt(2 * gravity * (yMax - transform.position.y));
         float tMax = vy / gravity;
 
-        Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, footPoint.y - targetPoint.y);
+        Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, transform.position.y - targetPoint.y);
         float tLand = GetBiggestAgainstKey(tLandTup.Item1, tLandTup.Item2, tMax);
 
-        float vx = Math.Abs((targetPoint.x - footPoint.x) / tLand);
+        float vx = Math.Abs((targetPoint.x - transform.position.x) / tLand);
         if (vx > maxSpeedX)
         {
             vx = maxSpeedX;
-            tLand = Math.Abs((targetPoint.x - footPoint.x) / vx);
-            vy = (float)((targetPoint.y - footPoint.y + 0.5 * gravity * tLand * tLand) / tLand);
+            tLand = Math.Abs((targetPoint.x - transform.position.x) / vx);
+            vy = (float)((targetPoint.y - transform.position.y + 0.5 * gravity * tLand * tLand) / tLand);
             if (vy > maxJumpStartSpeed)
             {
                 throw new System.Exception("Jump Point not in Range");
             }
         }
-        if (targetPoint.x < footPoint.x) vx = -vx;
+        if (targetPoint.x < transform.position.x) vx = -vx;
         Vector2 velocity = new Vector2(vx, vy);
-        jumpTimeTotal = tLand;
         return velocity;
     }
 
     private Vector2 CalculateVelocitiesLowerTarget(Vector2 targetPoint)
     {
-        Vector2 footPoint = new Vector2(transform.position.x, transform.position.y - coll.bounds.extents.y);
         float gravity = Math.Abs(Physics2D.gravity.y);
         float vx = maxSpeedX;
-        float tLand = Math.Abs((targetPoint.x - footPoint.x) / vx);
-        float vy = (float)((targetPoint.y - footPoint.y + 0.5 * gravity * tLand * tLand) / tLand);
+        float tLand = Math.Abs((targetPoint.x - transform.position.x) / vx);
+        float vy = (float)((targetPoint.y - transform.position.y + 0.5 * gravity * tLand * tLand) / tLand);
         
         float yClamp = vy;
         vy = (vy > maxJumpStartSpeed) ? maxJumpStartSpeed : (vy < 0) ? 0 : vy;
         if (vy != yClamp)
         {
-            Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, footPoint.y - targetPoint.y);
+            Tuple<float, float> tLandTup = MNF(-(0.5f * gravity), vy, transform.position.y - targetPoint.y);
             tLand = GetBiggestAgainstKey(tLandTup.Item1, tLandTup.Item2, 0);
-            vx = Math.Abs((targetPoint.x - footPoint.x) / tLand);
+            vx = Math.Abs((targetPoint.x - transform.position.x) / tLand);
             if (vx > maxSpeedX)
             {
                 throw new System.Exception("Jump Point not in Range");
             }
         }
-        if (targetPoint.x < footPoint.x) vx = -vx;
+        if (targetPoint.x < transform.position.x) vx = -vx;
         Vector2 velocity = new Vector2(vx, vy);
-        jumpTimeTotal = tLand;
         return velocity;
     }
 
@@ -541,163 +367,126 @@ public class KekeAIAdvanced : MonoBehaviour
             return result;
     }
     
-
-    /**
-    * @FunctionSection: State Handling 
-    **/
-    private void CheckGrounded()
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position - transform.up * castDistance, footBoxSize, 0, Vector2.down, groundedCheckDistance, collisionMask);
-        isGrounded = (hit.collider != null && rb.velocity.y <= 0);
-        if (isGrounded)
+   private void CheckGrounded()
         {
-            standingGround = hit.collider.gameObject;
-        }
-        else
-        {
-            standingGround = null;
-        }
-    }
-    private void OnFollowPath()
-    {
-        if (path == null) return;
-
-        if (currentWaypoint >= path.vectorPath.Count) return;
-
-        CheckGrounded();
-        if (!isGrounded) return;
-
-        animator.SetFloat("xMovement", rb.velocity.x);
-        animator.SetFloat("yMovement", 0);
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+1] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
-
-        if (direction.x > 0)
-        {
-            directionValue = 1;
-            animator.SetBool("MovingRight", true);
-            rb.velocity= new Vector2((Vector2.right * maxSpeedX).x, rb.velocity.y);
-        } else if (direction.x < 0)
-        {
-            directionValue = -1;
-            animator.SetBool("MovingRight", false);
-            rb.velocity= new Vector2((Vector2.left * maxSpeedX).x, rb.velocity.y);
-        }
-
-
-        bool isOnCliff = false;
-        RaycastHit2D cliffCheck = Physics2D.Raycast(new Vector2(transform.position.x + coll.bounds.extents.x * directionValue, transform.position.y), Vector2.down, coll.bounds.extents.y + jumpCheckOffset, collisionMask);
-        if (cliffCheck.collider == null)
-        { 
-                rb.velocity = new Vector2(0, rb.velocity.y);
-                isOnCliff = true;
-            
-        }
-        /* if (path.vectorPath[currentWaypoint+2] != null)
-        {
-            pathDrops = ((Vector2)path.vectorPath[currentWaypoint+2]).y < transform.position.y;
-        } else {
-            pathDrops = false;
-        }
-
-
-        // }
-        // else
-        // {
-            // rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-        // }
-
-        // Vector2 force = direction * speed;
-        bool jumpingNotFalling = true;
-        bool falls = pathDrops && ground.layer == LayerMask.NameToLayer("Platform");
-
-        if (jumpEnabled && isGrounded)
-        {
-            if (((direction.y > jumpNodeHeightRequirement && !jumpBlocked) || (isOnCliff && !jumpBlocked) || (falls&&!jumpBlocked)) && JumpAndFall(out jumpingNotFalling, jumpFragments, falls))
-            {
-                if (jumpingNotFalling)
-                {
-                    StartJump();
-                }
-                else
-                {
-                    StartFalling();
-                }
-            }
-        } */
-        
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-        if (distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
-
-        if (directionLookEnabled)
-        {
-            if (rb.velocity.x > 0.05f)
-            {
-                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else if (rb.velocity.x < -0.05f)
-            {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-        }
-    }
-
-    private void OnStartJump(Vector2 targetPoint)
-    {
-        Vector2 jumpVelocities;
-        try
-        {
-            jumpVelocities = CalculateMinJumpVelocities(targetPoint);
-        } catch (System.Exception e) {
-            Debug.Log(e.Message);
-            return;
-        }
-        currentState = KekeState.Jumping;
-        rb.velocity = jumpVelocities;
-        jumpVelocity = jumpVelocities;
-        jumpTimer = jumpTimeTotal;
-        coll.enabled = false;
-        gizmoJumpVelocity = jumpVelocities;
-        gizmoJumpTarget = jumpTargetPoint.position;
-    }
-
-    private void OnExecuteJump()
-    {
-        jumpTimer = jumpTimer - Time.deltaTime;
-        Vector2 footPoint = new Vector2(transform.position.x, transform.position.y - coll.bounds.extents.y);
-        if (jumpTimer < 0 || footPoint == (Vector2)jumpTargetPoint.position)
-        {
-            coll.enabled = true;
-            CheckGrounded();
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position - transform.up * castDistance, footBoxSize, 0, Vector2.down, groundedCheckDistance, collisionMask);
+            isGrounded = (hit.collider != null && rb.velocity.y <= 0);
             if (isGrounded)
             {
-                currentState = KekeState.Landing;
-            } 
+                standingGround = hit.collider.gameObject;
+            }
             else
             {
-                currentState = KekeState.Falling;
+                standingGround = null;
             }
         }
-    }
-
-    private void WhileFalling()
-    {
-        CheckGrounded();
-        if (isGrounded)
+    private void PathFollow()
         {
-            currentState = KekeState.Landing;
-        } 
-    }
+            if (path == null)
+            {
+                return;
+            }
 
-    private void WhileLanding()
-    {
-        currentState = KekeState.Following;
-    }
-    
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                return;
+            }
+
+
+
+
+            CheckGrounded();
+
+
+            animator.SetFloat("xMovement", rb.velocity.x);
+            animator.SetFloat("yMovement", 0);
+
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint+1] -(Vector2)path.vectorPath[currentWaypoint]).normalized;
+
+
+            //RaycastHit2D cliffCheck = Physics2D.Raycast(new Vector2(transform.position.x + coll.bounds.extents.x * Mathf.Sign(direction.x), transform.position.y), Vector2.down, coll.bounds.extents.y + jumpCheckOffset, collisionMask);
+            //if (cliffCheck.collider != null)
+            //{
+                // rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+            if (direction.x > 0)
+            {
+                directionValue = 1;
+                animator.SetBool("MovingRight", true);
+                rb.velocity= new Vector2((Vector2.right * maxSpeedX).x, rb.velocity.y);
+            } else if (direction.x < 0)
+            {
+                directionValue = -1;
+                animator.SetBool("MovingRight", false);
+                rb.velocity= new Vector2((Vector2.left * maxSpeedX).x, rb.velocity.y);
+            }
+
+
+            bool isOnCliff = false;
+            RaycastHit2D cliffCheck = Physics2D.Raycast(new Vector2(transform.position.x + coll.bounds.extents.x * directionValue, transform.position.y), Vector2.down, coll.bounds.extents.y + jumpCheckOffset, collisionMask);
+            if (cliffCheck.collider == null)
+            { 
+                // RaycastHit2D dropCheck = Physics2D.Raycast(new Vector2(transform.position.x + coll.bounds.extents.x * directionValue, transform.position.y), Vector2.down, coll.bounds.extents.y + dropCheckOffset, collisionMask);
+
+
+                // if (!(pathDrops && dropCheck.collider != null))
+                // {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    isOnCliff = true;
+                // }
+            }
+            /* if (path.vectorPath[currentWaypoint+2] != null)
+            {
+                pathDrops = ((Vector2)path.vectorPath[currentWaypoint+2]).y < transform.position.y;
+            } else {
+                pathDrops = false;
+            }
+
+
+           // }
+           // else
+           // {
+                // rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+          // }
+
+            // Vector2 force = direction * speed;
+            bool jumpingNotFalling = true;
+            bool falls = pathDrops && ground.layer == LayerMask.NameToLayer("Platform");
+
+            if (jumpEnabled && isGrounded)
+            {
+                if (((direction.y > jumpNodeHeightRequirement && !jumpBlocked) || (isOnCliff && !jumpBlocked) || (falls&&!jumpBlocked)) && JumpAndFall(out jumpingNotFalling, jumpFragments, falls))
+                {
+                    if (jumpingNotFalling)
+                    {
+                        StartJump();
+                    }
+                    else
+                    {
+                        StartFalling();
+                    }
+                }
+            } */
+            // //movement
+            // rb.AddForce(force);
+
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+            if (distance < nextWaypointDistance)
+            {
+                currentWaypoint++;
+            }
+
+            if (directionLookEnabled)
+            {
+                if (rb.velocity.x > 0.05f)
+                {
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+                else if (rb.velocity.x < -0.05f)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+            }
+        }
 
 
     Vector2 gizmoJumpTarget;
@@ -706,20 +495,11 @@ public class KekeAIAdvanced : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 0.05f);
         Gizmos.DrawLine(new Vector2(transform.position.x + gizmoColliderPolygon[0].x, transform.position.y + gizmoColliderPolygon[0].y), new Vector2(transform.position.x + gizmoColliderPolygon[gizmoColliderPolygon.Length - 1].x, transform.position.y + gizmoColliderPolygon[gizmoColliderPolygon.Length - 1].y));
         for (int i = 0; i < gizmoColliderPolygon.Length-1; i++)
         {
             Gizmos.DrawLine(new Vector2(gizmoColliderPolygon[i].x+transform.position.x, gizmoColliderPolygon[i].y+transform.position.y), new Vector2(gizmoColliderPolygon[i + 1].x + transform.position.x, gizmoColliderPolygon[i + 1].y + transform.position.y));
         }
-
-        Gizmos.color = Color.yellow;
-        Vector2 pointA = new Vector2(this.transform.position.x + this.coll.bounds.extents.x * directionValue, transform.position.y);
-        Vector2 pointC = new Vector2(this.transform.position.x + this.coll.bounds.extents.x * directionValue, transform.position.y - (coll.bounds.extents.y + jumpCheckOffset));
-        Gizmos.DrawLine(pointA, pointC);
-
-        Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
-
 
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(gizmoJumpTarget, 0.1f);
@@ -730,7 +510,6 @@ public class KekeAIAdvanced : MonoBehaviour
         {
             float speed = gizmoJumpVelocity.x;
             float time = (float)i / (float)50f;
-            if (time > jumpTimeTotal) break;
             float x = speed*time;
             float y = (gizmoJumpVelocity.y * time) + (0.5f * Physics2D.gravity.y * time * time);
             
@@ -742,21 +521,11 @@ public class KekeAIAdvanced : MonoBehaviour
         }
 
         Gizmos.color = Color.yellow;
-        Vector2 footPoint = new Vector2(transform.position.x, transform.position.y - coll.bounds.extents.y);
         for (int i = 0; i < jumpPoints.Count-1; i++)
         {
-            Vector2 startPoint = new Vector2(footPoint.x + jumpPoints[i].x, footPoint.y + jumpPoints[i].y);
-            Vector2 endPoint = new Vector2(footPoint.x + jumpPoints[i+1].x, footPoint.y + jumpPoints[i+1].y);
+            Vector2 startPoint = new Vector2(transform.position.x + jumpPoints[i].x, transform.position.y + jumpPoints[i].y);
+            Vector2 endPoint = new Vector2(transform.position.x + jumpPoints[i+1].x, transform.position.y + jumpPoints[i+1].y);
             Gizmos.DrawLine(startPoint, endPoint);
-        }
-
-        Gizmos.color = Color.cyan;
-        if (followEnabled)
-        {
-            foreach (var waypoint in path.vectorPath)
-            {
-                Gizmos.DrawWireSphere((Vector2)waypoint, pathCheckCircleRadius);
-            }
         }
 
     }
