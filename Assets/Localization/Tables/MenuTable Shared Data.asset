@@ -43,6 +43,14 @@ MonoBehaviour:
     m_Key: main_menu
     m_Metadata:
       m_Items: []
+  - m_Id: 1437809966592000
+    m_Key: the_end
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437872864374784
+    m_Key: thanks_for_playing
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
