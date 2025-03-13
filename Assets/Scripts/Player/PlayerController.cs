@@ -202,6 +202,19 @@ public class PlayerController : MonoBehaviour
         return this.isFacingRight;
     }
 
+    public void CutsceneWalking()
+    {
+        this.horizontalMovement = 1;
+        this.isFacingRight = true;
+        playerStateMachine.SwitchToState(MovementBaseState.StateKey.Moving);
+    }
+
+    public void CutsceneStopWalking()
+    {
+        this.horizontalMovement = 0;
+        playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, footBoxSize);
