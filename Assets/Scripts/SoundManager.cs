@@ -22,17 +22,18 @@ public enum SoundType
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] soundList;
-    [SerializeField] private AudioClip[] Level1Music;
-    [SerializeField] private AudioClip[] Level2Music;
+    [SerializeField] private AudioClip[] Level12Music;
+    [SerializeField] private AudioClip[] Level2Chase;
     [SerializeField] private AudioClip[] Level3AMusic;
     [SerializeField] private AudioClip[] Level3BMusic;
     private int level3index = 0;
     private int level12index = 0;
     private bool level3IsATrack = false;
-    private int currentLevel = 1;
+    public static int currentLevel = 1;
     private static SoundManager instance;
     private AudioSource musicAudioSource;
-    private AudioSource sfxAudioSource;
+    private AudioSource sfxLAudioSource;
+    private AudioSource sfxNLAudioSource;
     [SerializeField] private AudioMixer audioMixer;
 
     [Tooltip("Play the first Sound File in the Background Music tab on Game Start")]
@@ -54,19 +55,25 @@ public class SoundManager : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        sfxAudioSource = gameObject.AddComponent<AudioSource>();
+        sfxLAudioSource = gameObject.AddComponent<AudioSource>();
         AudioMixerGroup[] groups = audioMixer.FindMatchingGroups("SFX");
-        sfxAudioSource.outputAudioMixerGroup = groups[0];
+        sfxLAudioSource.outputAudioMixerGroup = groups[0];
+
+        sfxNLAudioSource = gameObject.AddComponent<AudioSource>();
+        groups = audioMixer.FindMatchingGroups("SFX");
+        sfxNLAudioSource.outputAudioMixerGroup = groups[0];
+
         musicAudioSource = gameObject.AddComponent<AudioSource>();
         groups = audioMixer.FindMatchingGroups("Music");
         musicAudioSource.outputAudioMixerGroup = groups[0];
+
         musicAudioSource.loop = false;
         if (playMusicOnAwake) SoundManager.PlayLevel12Music();
     }
 
     private void Update()
     {
-        if (instance.currentLevel < 2)
+        if (currentLevel == 0)
         {
             if (instance.level12index == 1)
             {
@@ -74,6 +81,24 @@ public class SoundManager : MonoBehaviour
                 {
                     SoundManager.PlayLevel12Music();
                 }
+            }
+        }
+        else if (currentLevel == 1)
+        {
+            if (instance.level12index == 1)
+            {
+                if (!instance.musicAudioSource.isPlaying)
+                {
+                    SoundManager.PlayChaseMusic();
+                }
+            }
+        }
+        else 
+        {
+            if (!instance.musicAudioSource.isPlaying) 
+            {
+                SoundManager.PlayLevel3Music();
+                Debug.Log("Now");
             }
         }
     }
@@ -93,75 +118,84 @@ public class SoundManager : MonoBehaviour
 
     public static void PlayLevel12Music()
     {
-        switch(instance.currentLevel)
-        {
-            case 0:
-                if (instance.level12index == 0)
+        if (instance.level12index == 0)
                 {
-                    instance.musicAudioSource.clip = instance.Level1Music[instance.level12index];
+                    instance.musicAudioSource.clip = instance.Level12Music[instance.level12index];
                     instance.level12index++;
                     instance.musicAudioSource.loop = false;
                     instance.musicAudioSource.Play();
+                    Debug.Log(instance.musicAudioSource.clip.name);
                 }
                 else 
                 {
-                    instance.musicAudioSource.clip = instance.Level1Music[instance.level12index];
+                    instance.musicAudioSource.clip = instance.Level12Music[instance.level12index];
                     instance.level12index--;
                     instance.musicAudioSource.loop = true;
-                    instance.currentLevel++;
                     instance.musicAudioSource.Play();
+                    Debug.Log(instance.musicAudioSource.clip.name);
                 }
-                break;
-            case 1:
-                if (instance.level12index == 0)
+    }
+
+    public static void StartChaseMusic()
+    {
+        instance.level12index = 0;
+        currentLevel = 1;
+        SoundManager.PlayChaseMusic();
+    }
+
+    private static void PlayChaseMusic()
+    {
+        if (instance.level12index == 0)
                 {
-                    instance.musicAudioSource.clip = instance.Level2Music[instance.level12index];
+                    instance.musicAudioSource.clip = instance.Level2Chase[instance.level12index];
                     instance.level12index++;
                     instance.musicAudioSource.loop = false;
                     instance.musicAudioSource.Play();
+                    Debug.Log(instance.musicAudioSource.clip.name);
                 }
                 else 
                 {
-                    instance.musicAudioSource.clip = instance.Level2Music[instance.level12index];
+                    instance.musicAudioSource.clip = instance.Level2Chase[instance.level12index];
                     instance.level12index--;
                     instance.musicAudioSource.loop = true;
-                    instance.currentLevel++;
                     instance.musicAudioSource.Play();
+                    Debug.Log(instance.musicAudioSource.clip.name);
                 }
-                break;
-            default:
-                break;
-        }
     }
 
     public static void PlayLevel3Music()
     {
+        instance.musicAudioSource.loop = false;
         if (!instance.level3IsATrack) 
         {
             instance.musicAudioSource.clip = instance.Level3AMusic[instance.level3index];
             instance.level3index++;
             instance.level3IsATrack = true;
-            if (instance.level3index >= 2) instance.level3index = 0;
+            if (instance.level3index >= 3) instance.level3index = 0;
             instance.musicAudioSource.Play();
+            Debug.Log(instance.musicAudioSource.clip.name);
         }
         else 
         {
-            int aOrB = UnityEngine.Random.Range(0, 1);
-            if (aOrB == 0) 
+            int aOrB = UnityEngine.Random.Range(0, 9);
+            Debug.Log(aOrB);
+            if (aOrB % 2 == 0) 
             {
                 instance.musicAudioSource.clip = instance.Level3AMusic[instance.level3index];
                 instance.level3index++;
                 instance.level3IsATrack = true;
-                if (instance.level3index >= 2) instance.level3index = 0;
+                if (instance.level3index >= 3) instance.level3index = 0;
                 instance.musicAudioSource.Play();
+                Debug.Log(instance.musicAudioSource.clip.name);
             }
             else 
             {
                 instance.musicAudioSource.clip = instance.Level3BMusic[instance.level3index];
                 instance.level3index++;
                 instance.level3IsATrack = false;
-                if (instance.level3index >= 2) instance.level3index = 0;
+                if (instance.level3index >= 3) instance.level3index = 0;
                 instance.musicAudioSource.Play();
+                Debug.Log(instance.musicAudioSource.clip.name);
             }
         }
     }
@@ -180,7 +214,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.sfxAudioSource.PlayOneShot(randomClip, volume);
+        instance.sfxLAudioSource.PlayOneShot(randomClip, volume);
     }
 
     public static void PlaySoundLoop(SoundType sound, float volume = 1)
@@ -192,18 +226,53 @@ public class SoundManager : MonoBehaviour
             return;
         }
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.sfxAudioSource.clip = randomClip;
-        instance.sfxAudioSource.Play();
+        instance.sfxLAudioSource.clip = randomClip;
+        instance.sfxLAudioSource.Play();
+    }
+
+    public static void PlaySoundNL(SoundType sound, float volume = 1)
+    {
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        if (clips == null || clips.Length == 0)
+        {
+            Debug.Log("No sounds for selected SoundType");
+            return;
+        }
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        instance.sfxNLAudioSource.PlayOneShot(randomClip, volume);
+    }
+
+    public static void PlaySoundLoopNL(SoundType sound, float volume = 1)
+    {
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        if (clips == null || clips.Length == 0)
+        {
+            Debug.Log("No sounds for selected SoundType");
+            return;
+        }
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        instance.sfxNLAudioSource.clip = randomClip;
+        instance.sfxNLAudioSource.Play();
     }
 
     public static void SetSFXClipNull()
     {
-        instance.sfxAudioSource.clip = null;
+        instance.sfxLAudioSource.clip = null;
+    }
+
+    public static void SetSFXNLClipNull()
+    {
+        instance.sfxNLAudioSource.clip = null;
     }
 
     public static void SwitchSoundLoop(bool input)
     {
-        instance.sfxAudioSource.loop = input;
+        instance.sfxLAudioSource.loop = input;
+    }
+
+    public static void SwitchSoundLoopNL(bool input)
+    {
+        instance.sfxNLAudioSource.loop = input;
     }
 
 #if UNITY_EDITOR

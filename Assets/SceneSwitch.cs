@@ -12,6 +12,12 @@ public class SceneSwitch : MonoBehaviour
         if (collision.CompareTag("Player")) 
         {
             MovementBaseState.movementSpeedModifier = 1;
+            if (sceneIndex == 2) SoundManager.PlayLevel12Music();
+            else if (sceneIndex == 3) 
+            {
+                SoundManager.PlayLevel3Music();
+                SoundManager.currentLevel = 2;
+            }
             SceneManager.LoadScene(sceneIndex);
         }
     }
