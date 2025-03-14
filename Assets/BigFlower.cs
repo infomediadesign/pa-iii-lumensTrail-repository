@@ -27,7 +27,7 @@ public class BigFlower : MonoBehaviour
         topPart.SetActive(false);
     }
 
-    public float duration = 2f; // Zeit in Sekunden
+    public float duration = 1f; // Zeit in Sekunden
     private float elapsedTime = 0f;
 
     void Update()
@@ -39,14 +39,16 @@ public class BigFlower : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 float t = elapsedTime / duration; 
 
-                player.transform.localPosition = new Vector2(Mathf.Lerp(startX, endX, t), player.transform.localPosition.y);
-                Debug.Log(player.transform.localPosition.x);
+                player.transform.position = new Vector2(Mathf.Lerp(startX, endX, t), player.transform.position.y);
+                Debug.Log(player.transform.position.x);
             }
             else
             {
                 movingToEnd = !movingToEnd; // Richtung umkehren
                 movingPlayer = false;
-                elapsedTime = 0f; // Zeit zurücksetzen
+                animator.SetTrigger("elevate");
+                player.GetComponent<Animator>().SetFloat("horizontalSpeed", 0);
+                player.gameObject.SetActive(false);
             }
         }
     }
@@ -57,52 +59,22 @@ public class BigFlower : MonoBehaviour
         {
             movingPlayer = true;
             player.GetComponent<PlayerInput>().enabled = false;
-            startX = player.transform.localPosition.x;
+            startX = player.transform.position.x;
             endX = flower.transform.position.x;
-            Debug.Log(player.transform.localPosition.x);
+            animator.SetTrigger("openUp");
+            player.GetComponent<Animator>().SetFloat("horizontalSpeed", 1);
+            Debug.Log(startX);
+            Debug.Log(endX);
         }
     }
 
     private bool CheckInRange()
     {
-        float check = flower.transform.position.x - player.transform.localPosition.x + player.transform.parent.transform.position.x;
-        Debug.Log(player.transform.localPosition + " and " + flower.transform.position);
+        float check = flower.transform.position.x - player.transform.position.x;
+        Debug.Log(player.transform.position + " and " + flower.transform.position);
         Debug.Log(check);
         return check < inRangeDistance && check > -inRangeDistance;
     }
-
-    /*
-    IEnumerator MovePlayerToFlower() 
-    {
-        
-
-        if (flowerX - playerX < 0)
-        {
-            player.GetComponent<PlayerController>().FlipPlayerCharacter();
-        }
-
-        player.GetComponent<Animator>().SetFloat("horizontalSpeed", playerSpeed);
-
-        while (true)
-        {
-            float distCovered = (Time.time - startTime) * playerSpeed;
-            float fractionOfTravel = distCovered / travelLength;
-
-            player.transform.localPosition = new Vector2(Mathf.Lerp(playerX, flowerX, fractionOfTravel), player.transform.position.y);
-
-            if (fractionOfTravel >= 1f) break;
-
-            yield return null;
-        }
-        while (!flowerOpen)
-        {
-            Debug.Log("WaitingForFlower");
-        }
-        animator.SetTrigger("elevate");
-        yield return null;
-        player.GetComponent<Animator>().SetFloat("horizontalSpeed", 0);
-        player.gameObject.SetActive(false);
-    }*/
 
     public void FlowerOpen()
     {
