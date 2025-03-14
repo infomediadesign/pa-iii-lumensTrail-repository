@@ -28,7 +28,23 @@ public class TestRotationSwing : MonoBehaviour
     public float swingForce = 1.5f;
     public float dragForce = 0.3f;
 
+    private bool easterEggCounting = false;
+    private float easterEggTimer = 0f;
+
     // Update is called once per frame
+
+    void Update()
+    {
+        if (easterEggCounting)
+        {
+            if (Time.time > easterEggTimer + 45)
+            {
+                dragForce = 30f;
+                easterEggCounting = false;
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         if (Input.GetKey("d"))
@@ -91,5 +107,18 @@ public class TestRotationSwing : MonoBehaviour
 
 
         Debug.Log(leverValue);
+    }
+
+    void OnEnable()
+    {
+        easterEggCounting = true;
+        easterEggTimer = Time.time;
+    }
+
+    void OnDisable()
+    {
+        easterEggCounting = false;
+        easterEggTimer = 0f;
+        dragForce = 4f;
     }
 }
