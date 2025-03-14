@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class BigFlower : MonoBehaviour
 {
@@ -10,15 +11,15 @@ public class BigFlower : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject flower;
     [SerializeField] private GameObject topPart;
+    [SerializeField] private Light2D spotLight;
     [SerializeField] private DesignerPlayerScriptableObject dData;
     private Animator animator;
     public float inRangeDistance = 3f;
     private bool movingPlayer = false;
-    private bool playerInPosition = false;
-    private bool flowerOpen = false;
+    private bool reduceLightRadius = false;
 
-    public float startX;
-    public float endX;
+    private float startX;
+    private float endX;
     private bool movingToEnd = true;
 
     void Start()
@@ -38,8 +39,8 @@ public class BigFlower : MonoBehaviour
             {
                 elapsedTime += Time.deltaTime;
                 float t = elapsedTime / duration; 
-
                 player.transform.position = new Vector2(Mathf.Lerp(startX, endX, t), player.transform.position.y);
+                spotLight.pointLightOuterRadius = Mathf.Lerp(3, 9, t);
                 Debug.Log(player.transform.position.x);
             }
             else
@@ -49,6 +50,21 @@ public class BigFlower : MonoBehaviour
                 animator.SetTrigger("elevate");
                 player.GetComponent<Animator>().SetFloat("horizontalSpeed", 0);
                 player.gameObject.SetActive(false);
+                elapsedTime = 0;
+            }
+        }
+
+        if (reduceLightRadius)
+        {
+            if (elapsedTime < duration) 
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / duration; 
+                spotLight.pointLightOuterRadius = Mathf.Lerp(9, 3, t);
+            }
+            else
+            {
+                reduceLightRadius = false;
             }
         }
     }
@@ -61,10 +77,12 @@ public class BigFlower : MonoBehaviour
             player.GetComponent<PlayerInput>().enabled = false;
             startX = player.transform.position.x;
             endX = flower.transform.position.x;
+            if (endX - startX < 0) player.GetComponent<PlayerController>().FlipPlayerCharacter();
             animator.SetTrigger("openUp");
             player.GetComponent<Animator>().SetFloat("horizontalSpeed", 1);
-            Debug.Log(startX);
-            Debug.Log(endX);
+            LumenThoughtBubbleActivation bubble = flower.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>();
+            if (bubble != null) bubble.DeactivatePrompt();
+
         }
     }
 
@@ -76,17 +94,17 @@ public class BigFlower : MonoBehaviour
         return check < inRangeDistance && check > -inRangeDistance;
     }
 
-    public void FlowerOpen()
-    {
-        flowerOpen = true;
-    }
-
     public void ActivateTopCollision()
     {
         topPart.SetActive(true);
         player.SetActive(true);
-        if (player.GetComponent<PlayerController>().GetIsFacingRight()) {}
+        player.transform.position = topPart.transform.GetChild(0).transform.position;
+        if (player.GetComponent<PlayerController>().GetIsFacingRight()) 
+        {
+            player.GetComponent<PlayerController>().FlipPlayerCharacter();
+        }
         player.GetComponent<PlayerInput>().enabled = true;
+        reduceLightRadius = true;
     }
 
 
