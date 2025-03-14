@@ -39,6 +39,6 @@ public class TrunkMainBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
         rb.velocity = lightWaveVelocity * trunkVelocityMultiplier;
-        
+        SoundManager.PlaySoundNL(SoundType.BAUMSTAMM, 2);
     }
 }

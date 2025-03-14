@@ -311,7 +311,6 @@ public class KekeAIAdvanced : MonoBehaviour
     {
         followEnabled = true;
         animator.ResetTrigger("pathfindingDisabled");
-        gridGraph.Scan();
         InvokeRepeating("UpdatePath", 0f, pathUpdateRate);
         InvokeRepeating("InvokeJump", 0f, jumpCheckRate);
     }

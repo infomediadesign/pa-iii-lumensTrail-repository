@@ -37,6 +37,7 @@ public class StatueMainBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
         rb.velocity = lightWaveVelocity;
+        SoundManager.PlaySoundNL(SoundType.STATUENSPITZE, 3);
     }
 
     public void ActivateStatue()

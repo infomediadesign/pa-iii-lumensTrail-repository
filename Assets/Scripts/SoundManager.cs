@@ -44,7 +44,7 @@ public class SoundManager : MonoBehaviour
     private int level3index = 0;
     private int level12index = 0;
     private bool level3IsATrack = false;
-    public static int currentLevel = 1;
+    public static int currentLevel = 0;
     private static SoundManager instance;
     private AudioSource musicAudioSource;
     private AudioSource sfxLAudioSource;

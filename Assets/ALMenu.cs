@@ -9,11 +9,11 @@ public class ALMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
 
-    private float masterVolume = 100;
+    private static float masterVolume = 100;
     [SerializeField] private TMP_Text masterVolumeText;
-    private float musicVolume = 100;
+    private static float musicVolume = 100;
     [SerializeField] private TMP_Text musicVolumeText;
-    private float sfxVolume = 100;
+    private static float sfxVolume = 100;
     [SerializeField] private TMP_Text sfxVolumeText;
 
     private float conversionRate = -100f;

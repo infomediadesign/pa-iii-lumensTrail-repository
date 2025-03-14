@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlaySoundStayNL : StateMachineBehaviour
 {
     [SerializeField] private SoundType sound;
-    [SerializeField, Range(0, 1)] private float volume = 1f;
+    [SerializeField] private float volume = 1f;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
