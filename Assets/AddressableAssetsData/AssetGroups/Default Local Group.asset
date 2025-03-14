@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: e5d9362b523d39b409fdf683f473207d
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: e0320a25d111dd642b01e5d277e84bdc
+    m_Address: Assets/Materials/LitAlpha.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7d592145eee730d4f930e28924f0108f, type: 2}
   m_SchemaSet:

@@ -12,6 +12,7 @@ public class CutSceneTriggerPart1 : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerInput>().enabled = false;
+            SoundManager.ResetMusic();
             cutsceneActive = true;
         }
     }
