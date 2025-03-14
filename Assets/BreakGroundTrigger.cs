@@ -40,6 +40,7 @@ public class BreakGroundTrigger : MonoBehaviour
     public void CollisionOff() 
     {
         col.enabled = false;
+        MovementBaseState.UnlockMovement();
     }
 
     public void SpriteOff() 
