@@ -1,14 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using Pathfinding;
-using System.Reflection;
-using Unity.VisualScripting;
 using System;
 using System.ComponentModel;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using UnityEngine.InputSystem.XR.Haptics;
 using System.Linq;
 
 public class KekeAIAdvanced : MonoBehaviour
