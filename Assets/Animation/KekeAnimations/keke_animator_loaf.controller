@@ -48,6 +48,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5607283580783362829
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b46dad1d51bde42af46a542398957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: 8
+  volume: 1
+--- !u!114 &-4911376379505350769
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b46dad1d51bde42af46a542398957c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: 9
+  volume: 1
 --- !u!1101 &-2509025531143781407
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -115,6 +143,7 @@ AnimatorState:
   - {fileID: 6495810374835606735}
   m_StateMachineBehaviours:
   - {fileID: 4430687386575873003}
+  - {fileID: 8720901523170486856}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -178,6 +207,7 @@ AnimatorState:
   - {fileID: 800697333580972841}
   m_StateMachineBehaviours:
   - {fileID: -8991357729532286926}
+  - {fileID: -5607283580783362829}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -292,6 +322,7 @@ AnimatorState:
   - {fileID: 6716570400981029899}
   m_StateMachineBehaviours:
   - {fileID: -7844883215628235553}
+  - {fileID: -4911376379505350769}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -306,3 +337,17 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &8720901523170486856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9676c91f8a0f6c24388fa80959a29e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: 10
+  volume: 1

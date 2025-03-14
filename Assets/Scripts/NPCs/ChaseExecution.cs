@@ -98,6 +98,7 @@ public class ChaseExecution : MonoBehaviour
         kekeAI.OnPathfindingEnable();
         kekeAI.SetMaxSpeedX(speedSegmentOne);
         StartCoroutine(OnRunStageOne());
+        SoundManager.StartChaseMusic();
     }
 
 
