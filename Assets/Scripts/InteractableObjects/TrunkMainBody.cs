@@ -26,6 +26,8 @@ public class TrunkMainBody : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeAll;
                 this.gameObject.layer = 8;
                 stump.DeactivateCollider();
+                GetComponent<PlatformEffector2D>().enabled = true;
+                GetComponent<FallThroughPlatform>().enabled = true;
                 this.activated = false;
             }
         }
@@ -37,7 +39,6 @@ public class TrunkMainBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         activated = true;
         rb.velocity = lightWaveVelocity * trunkVelocityMultiplier;
-        GetComponent<PlatformEffector2D>().enabled = true;
-        GetComponent<FallThroughPlatform>().enabled = true;
+        SoundManager.PlaySoundNL(SoundType.BAUMSTAMM, 2);
     }
 }

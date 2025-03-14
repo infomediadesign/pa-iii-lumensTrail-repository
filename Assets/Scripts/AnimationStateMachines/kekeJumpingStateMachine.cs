@@ -20,7 +20,6 @@ public class resetJumpingState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("jump");
         animator.transform.position = new Vector2(animator.transform.position.x, animator.transform.position.y+offset);
    
     }

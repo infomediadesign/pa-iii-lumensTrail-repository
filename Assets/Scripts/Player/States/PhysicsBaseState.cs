@@ -9,6 +9,7 @@ public class PhysicsBaseState : BaseState
 
     public static float gravityModifier = 1;
     private static int enableGravity = 0;
+    private static int jumpingEnabled = 0; 
     protected readonly float standartGravity;
     protected Rigidbody2D rigidbody;
     
@@ -17,6 +18,12 @@ public class PhysicsBaseState : BaseState
         ownState = StateKey.Grounded; /*standartimplement to be sure*/
         standartGravity = sm.dData.generalGravityMultiplier;
         stateType = BaseState.StateType.Physics;
+    }
+
+    public override void SwitchTo()
+    {
+        if (!IsJumpingUnlocked()) return;
+        base.SwitchTo();
     }
 
     public override void OnEnter()
@@ -43,6 +50,18 @@ public class PhysicsBaseState : BaseState
         return gravityModifier == 0;
     }
 
+    public static void LockJumping()
+    {
+        jumpingEnabled++;
+    }
+    public static void UnlockJumping()
+    {
+        if (jumpingEnabled > 0) jumpingEnabled--;
+        else throw new System.Exception("Movement was already unlocked");
+    }
 
-
+    public static bool IsJumpingUnlocked()
+    {
+        return jumpingEnabled == 0;
+    }
 }
