@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
     }
     
 
-    private void FlipPlayerCharacter()
+    public void FlipPlayerCharacter()
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
