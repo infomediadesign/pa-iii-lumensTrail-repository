@@ -8,4 +8,9 @@ public class OnClick : MonoBehaviour
     {
         SoundManager.PlaySoundNL(SoundType.UICLICK, 1);
     }
+
+    public void ResetMusic()
+    {
+        SoundManager.ResetMusic();
+    }
 }

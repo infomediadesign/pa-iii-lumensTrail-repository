@@ -158,6 +158,15 @@ public class SoundManager : MonoBehaviour
         SoundManager.PlayChaseMusic();
     }
 
+    public static void ResetMusic()
+    {
+        instance.level12index = 0;
+        instance.level3index = 0;
+        currentLevel = 0;
+        instance.level3IsATrack = false;
+        SoundManager.PlayLevel12Music();
+    }
+
     private static void PlayChaseMusic()
     {
         if (instance.level12index == 0)
