@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LitAlpha
+  m_Name: "LitAlphaGro\xDF"
   m_Shader: {fileID: -6465566751694194690, guid: a4d74301be85e2b41b4a69a44595921b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: b1aba9d5704859d47bd0d014f2c7f37b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 94de9a27aa30b0b479532f20800f94c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -71,10 +71,10 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _LightingCutoff: 0.47
-    - _NormalStrength: 0.79
+    - _NormalStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ShadowBrightness: 0.81
+    - _ShadowBrightness: 0.843
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
