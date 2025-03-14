@@ -31,8 +31,10 @@ public class ChaseExecution : MonoBehaviour
     public float timerGoal = 30f;
 
     public float transitionTime = 5f;
-    public float gracePeriod = 3f;
+    public float gracePeriod = 5f;
     private bool gracePeriodPassed;
+
+    
 
     private PlayerInput input;
     private InputAction activate;
@@ -46,6 +48,8 @@ public class ChaseExecution : MonoBehaviour
     public Transform stageThreeThreshold;
     public GameObject stageThreeGoal;
     public RangeCheck goalReached;
+
+    [SerializeField] private LumenThoughtBubbleActivation thoughtBubble;
 
     public SwingingActivation swingingActivation;    
 
@@ -62,14 +66,14 @@ public class ChaseExecution : MonoBehaviour
         activationCollider = GetComponent<Collider2D>();
         localizedString = new LocalizedString();
         SetLocalizedString("she_wants_to_play");
+        thoughtBubble.showPromptNow = true;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        startPrompt.enabled = true;
-    }
+    
+
     void OnTriggerStay2D(Collider2D collision)
     {
+        startPrompt.enabled = true;
         if (activate.IsPressed())
         {
             startPrompt.enabled = false;
@@ -85,6 +89,8 @@ public class ChaseExecution : MonoBehaviour
 
     void OnActivateStageOne()
     {
+        thoughtBubble.DeactivatePrompt();
+        kekeAI.gridGraph.Scan();
         swingingActivation.OnDisableSwing();
         ActionBaseState.LockAllActions();
         playerTransform.GetComponent<PlayerController>().inChase = true;
@@ -98,16 +104,27 @@ public class ChaseExecution : MonoBehaviour
 
     private IEnumerator OnRunStageOne()
     {
-        if (!gracePeriodPassed)
+        MovementBaseState.LockMovement();
+        startPrompt.enabled = true;
+        float gracePeriodTimer = 0f;
+        while (gracePeriodTimer < gracePeriod)
         {
-            MovementBaseState.LockMovement();
-            startPrompt.enabled = true;
-            SetLocalizedString("go");
-            yield return new WaitForSeconds(gracePeriod);
-            startPrompt.enabled = false;
-            gracePeriodPassed = true;
-            MovementBaseState.UnlockMovement();
+            gracePeriodTimer += Time.deltaTime;
+            startPrompt.text = ((int)gracePeriod - (int)gracePeriodTimer).ToString();
+            yield return null;
+            
         }
+        SetLocalizedString("go");
+        gracePeriodPassed = true;
+        MovementBaseState.UnlockMovement();
+        while (gracePeriodTimer < 3f)
+        {
+            gracePeriodTimer += Time.deltaTime;
+            yield return null;
+            
+        }
+        startPrompt.enabled = false;
+        
         while (!(stageOnePoints.lastCheckPointReached || (rangeCheck.inRange && gracePeriodPassed)))
         {
             yield return null;
@@ -149,7 +166,7 @@ public class ChaseExecution : MonoBehaviour
         while (elapsedTime < timerGoal)
         {
             elapsedTime += Time.deltaTime;  // Increment by the time passed since last frame
-            int viewedTimer = (int) elapsedTime + 1;
+            int viewedTimer = (int) timerGoal - (int) elapsedTime;
             timerText.text = viewedTimer.ToString();
 
             // Speed adjustments
@@ -160,25 +177,41 @@ public class ChaseExecution : MonoBehaviour
         }
 
         timerText.enabled = false;
+        OnExitStageTwo();
     }
     private IEnumerator OnRunStageTwo()
     {
-        if (!gracePeriodPassed)
+        startPrompt.enabled = true;
+        float gracePeriodTimer = 0f;
+        while (gracePeriodTimer < gracePeriod)
         {
-            startPrompt.enabled = true;
-            SetLocalizedString("go");
-            yield return new WaitForSeconds(gracePeriod);
-            startPrompt.enabled = false;
-            gracePeriodPassed = true;
-            kekeAI.OnPathfindingEnable();
-            StartCoroutine(StageTwoTimer());
+            gracePeriodTimer += Time.deltaTime;
+            startPrompt.text = ((int)gracePeriod - (int)gracePeriodTimer).ToString();
+            yield return null;
+            
         }
+        SetLocalizedString("go");
+        gracePeriodPassed = true;
+        kekeAI.OnPathfindingEnable();
+        StartCoroutine(StageTwoTimer());
+        gracePeriodTimer = 0f;
+        while (gracePeriodTimer < 3f)
+        {
+            gracePeriodTimer += Time.deltaTime;
+            yield return null;
+            
+        }
+        startPrompt.enabled = false;
+        
         while (!(timer >= timerGoal || (rangeCheck.inRange && gracePeriodPassed)))
         {
             yield return null;
         }
-        if (rangeCheck.inRange) OnExitStageTwo(true);
-        else OnExitStageTwo();
+        if (rangeCheck.inRange) 
+        {
+            OnExitStageTwo(true);
+        }
+        
     }
 
     void OnExitStageTwo(bool caught = false)
