@@ -23,6 +23,7 @@ public class BreakGroundTrigger : MonoBehaviour
         {
             animator.SetBool("break", true);
             triggerActive = false;
+            SoundManager.PlaySoundNL(SoundType.BREAKABLEBODEN, 1);
         }
     }
 
