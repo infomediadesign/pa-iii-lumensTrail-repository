@@ -41,7 +41,7 @@ public class ActionBaseState : BaseState
         {
             CursorManager.SetNormalCursor();
         } catch (Exception e) {
-            Debug.Log(e.Message);
+                Debug.Log(e.Message);
         }
     }
     public static bool IsAllActionsUnlocked()
