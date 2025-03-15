@@ -342,7 +342,7 @@ public class KekeAIAdvanced : MonoBehaviour
             {
                 var hit = Physics2D.OverlapCircle(pathPoint, pathCheckCircleRadius, surfacesMask);
                 if (hit == null) continue;
-                if (possibleTarget.Item2 == standingGround) continue;
+                if (possibleTarget.Item2 == standingGround || standingGround == null) continue;
                 if (hit.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     var pointHit = Physics2D.OverlapCircle(pathPoint, pathCheckCircleRadius, jumpPointMask);
