@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             {
                 bool canPickup = false;
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-                if (canPickup && itemManager.carriedItem == null)
+                if (canPickup && itemManager.carriedItem == null && pData.isGrounded)
                 {
                     itemManager.carriedItem = pickupItem;
                     playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);

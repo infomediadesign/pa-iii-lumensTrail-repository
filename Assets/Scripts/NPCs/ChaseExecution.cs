@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Tables;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class ChaseExecution : MonoBehaviour
@@ -155,10 +156,11 @@ public class ChaseExecution : MonoBehaviour
         kekeAI.pathFindingTarget = playerTransform;
         kekeAI.SetMaxSpeedX(speedSegmentTwo[0]);
         gracePeriodPassed = false;
+        stageTwoActive = true;
         StartCoroutine(OnRunStageTwo());
         
     }
-
+    private bool stageTwoActive = false;
     private IEnumerator StageTwoTimer()
     {
         timerText.enabled = true;
@@ -178,7 +180,10 @@ public class ChaseExecution : MonoBehaviour
         }
 
         timerText.enabled = false;
-        OnExitStageTwo();
+        if (stageTwoActive)
+        { 
+            OnExitStageTwo();
+        }
     }
     private IEnumerator OnRunStageTwo()
     {
@@ -210,13 +215,17 @@ public class ChaseExecution : MonoBehaviour
         }
         if (rangeCheck.inRange) 
         {
-            OnExitStageTwo(true);
+            if (stageTwoActive)
+            { 
+                OnExitStageTwo(true);
+            }
         }
         
     }
 
     void OnExitStageTwo(bool caught = false)
     {
+        stageTwoActive = false;
         kekeAI.OnPathfindingDisable();
         timerText.enabled = false;
         StartCoroutine(SwitchToStageThree(caught));
