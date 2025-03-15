@@ -717,6 +717,7 @@ public class KekeAIAdvanced : MonoBehaviour
         rb.velocity = Vector2.zero;
         if(!animator.GetBool("landing"))
         {
+            UpdatePath();
             currentState = KekeState.Following;
         }
     }
