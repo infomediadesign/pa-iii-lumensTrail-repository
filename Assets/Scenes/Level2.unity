@@ -7287,7 +7287,7 @@ MonoBehaviour:
   inRange: 0
   timerGoal: 20
   transitionTime: 5
-  gracePeriod: 5.9
+  gracePeriod: 4.5
   kekeAI: {fileID: 1795913519}
   rangeCheck: {fileID: 421742792}
   kekeTransform: {fileID: 1795913518}
