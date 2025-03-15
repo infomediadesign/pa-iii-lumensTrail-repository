@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
         playerStateMachine.im = itemManager;
         receiver = FindObjectOfType<CollectableReceiver>();
         animator = GetComponent<Animator>();
+        MovementBaseState.UnlockMovement();
+        ActionBaseState.UnlockAllActions();
 
         //to be designer stuff
         pickupRadius = dData.pickupRange;
