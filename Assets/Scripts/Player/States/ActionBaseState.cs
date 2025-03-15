@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,12 @@ public class ActionBaseState : BaseState
     public static void UnlockAllActions()
     {
         if (allActionsUnlocked > 0) allActionsUnlocked--;
-        CursorManager.SetNormalCursor();
+        try
+        {
+            CursorManager.SetNormalCursor();
+        } catch (Exception e) {
+            Debug.Log(e.Message);
+        }
     }
     public static bool IsAllActionsUnlocked()
     {
