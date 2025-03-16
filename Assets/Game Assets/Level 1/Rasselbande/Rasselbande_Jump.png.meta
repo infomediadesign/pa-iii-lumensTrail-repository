@@ -1,0 +1,577 @@
+fileFormatVersion: 2
+guid: 58602ab3a702d044aa6ef71430bae714
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Rasselbande_Jump_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b46b04ea24f25f4a80d51bcb2f6f9b5
+      internalID: -647854839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3209f9c0cdd5fb2458b4841a39b76b89
+      internalID: -1760281215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c375139ae39550c44a5d33a4fad10e25
+      internalID: -332847111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767c59c254d53a34aa97b0187c7889e5
+      internalID: -1785951973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: faf08497006304645ab5cff147bdc1e7
+      internalID: 61106638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cff18a0ca294f14a8e9dbd873cc8f8f
+      internalID: 659384701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_6
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c896119524a64f40a5f50adcf642e20
+      internalID: -1333777461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_7
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea07bd887779c645a4847701367a5d0
+      internalID: 1849465824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_8
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: edcbc33b0d1a776408e811ea4856bd2f
+      internalID: -351171582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_9
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4853e71c3607deb4ca8d002342772940
+      internalID: -325648961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_10
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bcce27880876b3418a182a0b339349a
+      internalID: -1473529333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_11
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87d4c7446c4d6fd469666655fd93463c
+      internalID: -1746847153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_12
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ce3fc2418778ae4da1192e41a3e939c
+      internalID: -1625178559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_13
+      rect:
+        serializedVersion: 2
+        x: 3328
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a215e44d93e494c8ca6d25e0951ced
+      internalID: 1533924186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rasselbande_Jump_14
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 256
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      physicsShape:
+      - - {x: 0, y: -155}
+        - {x: 128, y: 0}
+        - {x: 0, y: 155}
+        - {x: -128, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69d6c08369d11524793daa58dbf9a575
+      internalID: 387429838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Rasselbande_Jump_0: -647854839
+      Rasselbande_Jump_1: -1760281215
+      Rasselbande_Jump_10: -1473529333
+      Rasselbande_Jump_11: -1746847153
+      Rasselbande_Jump_12: -1625178559
+      Rasselbande_Jump_13: 1533924186
+      Rasselbande_Jump_14: 387429838
+      Rasselbande_Jump_2: -332847111
+      Rasselbande_Jump_3: -1785951973
+      Rasselbande_Jump_4: 61106638
+      Rasselbande_Jump_5: 659384701
+      Rasselbande_Jump_6: -1333777461
+      Rasselbande_Jump_7: 1849465824
+      Rasselbande_Jump_8: -351171582
+      Rasselbande_Jump_9: -325648961
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
