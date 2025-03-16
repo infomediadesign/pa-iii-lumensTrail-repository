@@ -46,6 +46,14 @@ MonoBehaviour:
     m_Localized: "HAUPTMEN\xDC"
     m_Metadata:
       m_Items: []
+  - m_Id: 1437809966592000
+    m_Localized: ENDE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437872864374784
+    m_Localized: "VIELEN DANK F\xDCRS SPIELEN"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private float pickupRadius;
     private CollectableReceiver receiver;
     private Animator animator;
-
     public Vector2 footBoxSize;
     public float castDistance;
     public LayerMask groundLayer;
@@ -41,6 +40,8 @@ public class PlayerController : MonoBehaviour
         playerStateMachine.im = itemManager;
         receiver = FindObjectOfType<CollectableReceiver>();
         animator = GetComponent<Animator>();
+        MovementBaseState.UnlockMovement();
+        ActionBaseState.UnlockAllActions();
 
         //to be designer stuff
         pickupRadius = dData.pickupRange;
@@ -153,7 +154,7 @@ public class PlayerController : MonoBehaviour
             {
                 bool canPickup = false;
                 GameObject pickupItem = itemManager.GetNearestPickupItem(transform, pickupRadius, isFacingRight, ref canPickup);
-                if (canPickup && itemManager.carriedItem == null)
+                if (canPickup && itemManager.carriedItem == null && pData.isGrounded)
                 {
                     itemManager.carriedItem = pickupItem;
                     playerStateMachine.SwitchToState(ActionBaseState.StateKey.PickUp);
@@ -192,7 +193,7 @@ public class PlayerController : MonoBehaviour
     }
     
 
-    private void FlipPlayerCharacter()
+    public void FlipPlayerCharacter()
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
@@ -201,6 +202,19 @@ public class PlayerController : MonoBehaviour
     public bool GetIsFacingRight() 
     {
         return this.isFacingRight;
+    }
+
+    public void CutsceneWalking()
+    {
+        this.horizontalMovement = 1;
+        this.isFacingRight = true;
+        playerStateMachine.SwitchToState(MovementBaseState.StateKey.Moving);
+    }
+
+    public void CutsceneStopWalking()
+    {
+        this.horizontalMovement = 0;
+        playerStateMachine.SwitchToState(MovementBaseState.StateKey.Still);
     }
 
     private void OnDrawGizmos()

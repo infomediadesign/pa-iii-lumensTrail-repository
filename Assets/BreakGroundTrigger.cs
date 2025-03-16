@@ -23,6 +23,7 @@ public class BreakGroundTrigger : MonoBehaviour
         {
             animator.SetBool("break", true);
             triggerActive = false;
+            SoundManager.PlaySoundNL(SoundType.BREAKABLEBODEN, 1);
         }
     }
 
@@ -39,6 +40,7 @@ public class BreakGroundTrigger : MonoBehaviour
     public void CollisionOff() 
     {
         col.enabled = false;
+        MovementBaseState.UnlockMovement();
     }
 
     public void SpriteOff() 

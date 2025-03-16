@@ -8,10 +8,10 @@ using UnityEngine.InputSystem;
 public abstract class CollectableReceiver : MonoBehaviour
 {
     [SerializeField] private GameObject items;
-    private GameObject carriedObject;
+    protected GameObject carriedObject;
     private int totalItems;
     private int deliveredItems;
-    private bool delivering = false;
+    protected bool delivering = false;
 
     private float elapsedTime = 0;
     private float duration = 1f;
@@ -50,6 +50,11 @@ public abstract class CollectableReceiver : MonoBehaviour
         
     }
 
+    protected virtual void SingleItemDeliveredTriger()
+    {
+
+    }
+
     public void DeliverItem(GameObject carriedItem)
     {
         this.elapsedTime = 0;
@@ -84,6 +89,7 @@ public abstract class CollectableReceiver : MonoBehaviour
             Destroy(carriedObject);
             this.delivering = false;
             this.deliveredItems++;
+            this.SingleItemDeliveredTriger();
             if (deliveredItems == totalItems) this.ItemsDeliveredTrigger();
         }
     }

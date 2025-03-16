@@ -8,13 +8,18 @@ public class KekeReceiver : CollectableReceiver
     public Animator kekeAnimator;
     public GameObject chaseExecution;
 
+    [SerializeField] private GameObject chaseSprite;
+
     public ItemManager itemManager;
+    public KekeAIAdvanced kekeAI;
 
     public LumenThoughtBubbleActivation lumenThoughtBubbleActivation;
     
     protected override void Awake()
     {
         base.Awake();
+        kekeAI = GetComponent<KekeAIAdvanced>();
+        kekeAI.OnPathfindingDisable();
     }
 
     private new void Update()
@@ -38,5 +43,7 @@ public class KekeReceiver : CollectableReceiver
     public void OnStanding()
     {
         chaseExecution.SetActive(true);
+        chaseSprite.SetActive(true);
+        kekeAnimator.gameObject.SetActive(false);
     }
 }

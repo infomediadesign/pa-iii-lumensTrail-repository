@@ -39,10 +39,15 @@ public class PickupState : ActionBaseState
         elapsedTime = 0;
 
         MovementBaseState.LockMovement();
+        PhysicsBaseState.LockJumping();
         LayerMask mask = carriedObject.GetComponent<Collider2D>().excludeLayers;
         int layerToAdd = LayerMask.GetMask("Platform");
         carriedObject.GetComponent<Collider2D>().excludeLayers |= layerToAdd;
-        if (carriedObject.gameObject.transform.childCount > 0) carriedObject.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>().DeactivatePrompt();
+        if (carriedObject.gameObject.transform.childCount > 0) 
+        {
+            LumenThoughtBubbleActivation fruit = carriedObject.gameObject.transform.GetChild(0).GetComponent<LumenThoughtBubbleActivation>();
+            if (fruit != null) fruit.DeactivatePrompt();
+        }
         sm.animator.SetBool("pickup", true);
 
         base.OnEnter();
@@ -67,6 +72,7 @@ public class PickupState : ActionBaseState
     public override void OnExit()
     {
         MovementBaseState.UnlockMovement();
+        PhysicsBaseState.UnlockJumping();
         sm.animator.SetBool("pickup", false);
         sm.pData.pickupAnimationGo = false;
     }
