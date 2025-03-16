@@ -7,7 +7,7 @@ public class OuterBarrier : MonoBehaviour
     private CameraFollow cam;
     [SerializeField] private bool leftBarrier = true;
  
-    private void Start()
+    private void Awake()
     {
         cam = FindObjectOfType<CameraFollow>();
     }

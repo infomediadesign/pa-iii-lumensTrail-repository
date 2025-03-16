@@ -39,7 +39,6 @@ public class RasselbandeStartWalking : MonoBehaviour
     public void SetStatueDownTrue() 
     {
         this.statueDown = true;
-        Debug.Log(this.transform.childCount);
         if (this.transform.childCount > 0) this.transform.GetChild(0).gameObject.SetActive(false);
     }
 

@@ -2035,6 +2035,14 @@ PrefabInstance:
       propertyPath: activationType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4039059468650045666, guid: b65d759a1667c39418980e9266584e1c, type: 3}
+      propertyPath: m_Radius
+      value: 6.973851
+      objectReference: {fileID: 0}
+    - target: {fileID: 4039059468650045666, guid: b65d759a1667c39418980e9266584e1c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.9111277
+      objectReference: {fileID: 0}
     - target: {fileID: 5852319161066879311, guid: b65d759a1667c39418980e9266584e1c, type: 3}
       propertyPath: m_LocalScale.x
       value: 3

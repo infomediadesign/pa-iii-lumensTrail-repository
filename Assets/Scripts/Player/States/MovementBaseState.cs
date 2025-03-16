@@ -24,7 +24,6 @@ public class MovementBaseState : BaseState
     public static void UnlockMovement()
     {
         if (movementEnabled > 0) movementEnabled--;
-        else throw new System.Exception("Movement was already unlocked");
     }
 
     public static bool IsMovementUnlocked()
