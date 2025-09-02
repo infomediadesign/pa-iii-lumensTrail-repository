@@ -2,11 +2,10 @@
 This project, "Lumen's Trail", was created by Team SunlitStudios, consisting of 3rd semester Game Development students at SRH Heidelberg. The assignment was to create a 2D platformer game using the Unity game engine. The Executable for the Game can be downloaded here: https://lord-brandon.itch.io/lumens-trail
 
 The team consists of the following members:
-
-Designers: Nino Tkalec, Athena Neumann, Asucan Ayten
-Artists: Nauras Sharaf, Paula Seemann, Anastasia Vaganov
-Programmers: Brandon Zobernig, Keanu Grespan
-Music & SFX: Timoth (external), Athena Neumann
+- Designers: Nino Tkalec, Athena Neumann, Asucan Ayten
+- Artists: Nauras Sharaf, Paula Seemann, Anastasia Vaganov
+- Programmers: Brandon Zobernig, Keanu Grespan
+- Music & SFX: Timoth (external), Athena Neumann
 ---
 
 ## Development Process
