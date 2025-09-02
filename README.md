@@ -32,7 +32,7 @@ The entire production of this game prototype took place over the span of one sem
 
 ## This Project has won the following awards at the universities Werkschau:
 - Most Potential (3rd Place)
-- Best Tech
+- Best Tech (1st Place)
 ---
 
 Considering that the entire project was developed within just six months and including a total re-work of the project after the initial kockoff phase, the team is proud of what has been accomplished. All major personal and team goals have been met and the end product exceeded our initial expectations. 
