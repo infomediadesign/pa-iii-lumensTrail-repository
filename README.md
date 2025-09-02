@@ -1,5 +1,5 @@
 # Lumen's Trail – 3rd Semester Project
-This project, "Lumen's Trail", was created by Team SunlitStudios, consisting of 3rd semester Game Development students at SRH Heidelberg. The assignment was to create a 2D platformer game using the Unity game engine. The Executable for the Game can be downloaded here: https://lord-brandon.itch.io/lumens-trail
+This project, "Lumen's Trail", was created by Team SunlitStudios, consisting of 3rd semester Game Development students at SRH Heidelberg. The assignment was to create a 2D platformer game using the Unity game engine. The executable for the game can be downloaded here: https://lord-brandon.itch.io/lumens-trail
 
 The team consists of the following members:
 - Designers: Asucan Ayten, Athena Neumann, Nino Tkalec
